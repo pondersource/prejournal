@@ -29,5 +29,9 @@ foreach ($matched as $date => $pair) {
   if (isset($matched[$date][0]) && isset($matched[$date][1]) && $matched[$date][0] != -$matched[$date][1]) {
     var_dump($date);
     var_dump($pair);
+    exit();
+  } else {
+    echo "OK " . $date . " " . (isset($matched[$date][0]) ? $matched[$date][0] : "null") . " " . (isset($matched[$date][1]) ? $matched[$date][1] : "null") . "\n";
   }
+   
 }
