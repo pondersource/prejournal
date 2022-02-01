@@ -2,18 +2,21 @@
 
 function parseDate($str) {
   $parts = explode("-", $str);
-  return date(DATE_ATOM, mktime(0, 0, 0, $parts[1], $parts[0], $parts[2]));
+  return date("Y/m/d", mktime(0, 0, 0, $parts[1], $parts[0], $parts[2]));
 }
 
+function normalizeAccountName($str) {
+  return preg_replace('/\s+/', ' ', str_replace("*", " ", trim($str)));
+}
 function parseAccount2($obj) {
   if (strlen($obj["tegenrekeningnummer"]) > 0) {
     return $obj["tegenrekeningnummer"];
   }
   if ($obj["globaleTransactiecode"] == "BEA") {
-    return trim(substr($obj["omschrijving"], 1, 22));
+    return normalizeAccountName(substr($obj["omschrijving"], 1, 22));
   }
   if ($obj["globaleTransactiecode"] == "COR") {
-    return trim(substr($obj["omschrijving"], 1, 22));
+    return normalizeAccountName(substr($obj["omschrijving"], 1, 22));
   }
   if ($obj["globaleTransactiecode"] == "RNT") {
     return "ASN Bank Rente";
@@ -27,17 +30,21 @@ function parseAccount2($obj) {
     }
   }
   if ($obj["globaleTransactiecode"] == "GEA") {
-    return "Geldautomaat " . trim(substr($obj["omschrijving"], 1, 22));
+    return normalizeAccountName("Geldautomaat " . normalizeAccountName(substr($obj["omschrijving"], 1, 22)));
   }
   if ($obj["globaleTransactiecode"] == "KST") {
-    return "Kosten " . substr($obj["omschrijving"], 1, strlen($obj["omschrijving"]) - 2);
+    return normalizeAccountName("Kosten " . substr($obj["omschrijving"], 1, strlen($obj["omschrijving"]) - 2));
   }
   if ($obj["globaleTransactiecode"] == "DIV") {
-    return "Diversen " . substr($obj["omschrijving"], 1, strlen($obj["omschrijving"]) - 2);
+    return normalizeAccountName("Diversen " . substr($obj["omschrijving"], 1, strlen($obj["omschrijving"]) - 2));
   }
   var_dump($obj);
   exit();
   return "UNKNOWN " . $obj["globaleTransactiecode"];
+}
+
+function parseDescription($obj) {
+  return str_replace("*", " ", $obj["globaleTransactiecode"] . "  " . $obj["omschrijving"]);
 }
 
 function importAsnCsv($filename) {
@@ -72,12 +79,9 @@ function importAsnCsv($filename) {
       for ($i = 0; $i < count($cells); $i++) {
         $obj[$ASN_BANK_CSV_COLUMNS[$i]] = trim($cells[$i]);
       }
-      echo(json_encode([
-        "date" => parseDate($obj["boekingsdatum"]),
-        "account1" => $obj["opdrachtgeversrekening"],
-        "account2" => parseAccount2($obj),
-        "amount" => floatval($obj["transactiebedrag"])
-      ]) . "\n");
+      echo(parseDate($obj["boekingsdatum"]) . "  " . parseDescription($obj) . "\n");
+      echo("  " . $obj["opdrachtgeversrekening"] . "  " . $obj["transactiebedrag"] . "\n");
+      echo("  " . parseAccount2($obj) . "\n\n");
     }
   }
 }
