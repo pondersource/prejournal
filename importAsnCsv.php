@@ -47,6 +47,13 @@ function parseDescription($obj) {
   return str_replace("*", " ", $obj["globaleTransactiecode"] . "  " . $obj["omschrijving"]);
 }
 
+function printTransaction($params) {
+  echo($params["date"] . "  " . $params["comment"] . "\n");
+  echo("  " . $params["account1"] . "  " . $params["amount"] . "  =" . $params["balanceAfter"] . "\n");
+  echo("  " . $params["account2"] . "\n\n");
+
+}
+
 function importAsnCsv($filename) {
   // This list uses the exact names as documented in Dutch
   // at https://www.asnbank.nl/web/file?uuid=fc28db9c-d91e-4a2c-bd3a-30cffb057e8b&owner=6916ad14-918d-4ea8-80ac-f71f0ff1928e&contentid=852
@@ -79,9 +86,14 @@ function importAsnCsv($filename) {
       for ($i = 0; $i < count($cells); $i++) {
         $obj[$ASN_BANK_CSV_COLUMNS[$i]] = trim($cells[$i]);
       }
-      echo(parseDate($obj["boekingsdatum"]) . "  " . parseDescription($obj) . "\n");
-      echo("  " . $obj["opdrachtgeversrekening"] . "  " . $obj["transactiebedrag"] . "\n");
-      echo("  " . parseAccount2($obj) . "\n\n");
+      printTransaction([
+        "date" => parseDate($obj["boekingsdatum"]),
+        "comment" => parseDescription($obj),
+        "account1" => $obj["opdrachtgeversrekening"],
+        "account2" => parseAccount2($obj),
+        "amount" => floatval($obj["transactiebedrag"]),
+        "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"])
+      ]);
     }
   }
 }
