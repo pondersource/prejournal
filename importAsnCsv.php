@@ -1,6 +1,6 @@
 <?php
-
 require_once("./utils.php");
+
 function parseDate($obj) {
   $parts = explode("-", $obj["journaaldatum"]);
   $day = $parts[0];
