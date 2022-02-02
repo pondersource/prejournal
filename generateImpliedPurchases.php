@@ -14,9 +14,9 @@ foreach ($journal["entries"] as $entry) {
       if ($pos !== false) {
           printTransaction([
             "date" => $entry["date"],
-            "comment" => "Implied transaction (" . $match . ")",
+            "comment" => "Implied purchase (" . $match . ")",
             "account1" => $entry["account2"],
-            "account2" => "expenses:".$budget,
+            "account2" => "assets:".$budget,
             "amount" => $entry["amount"],
           ]);
           $matched = true;
