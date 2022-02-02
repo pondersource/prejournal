@@ -18,16 +18,21 @@ function printTransaction($params) {
   echo("  " . $params["account2"] . "\n\n");
 }
 
-function readJournal($filename) {
+function readJournal($filename, $openingBalance = true) {
   $lines = explode("\n", file_get_contents($filename));
   $line1Parts = explode("  ", trim($lines[1]));
-  $ret = [
-    "openingBalanceDate" => explode(" ", $lines[0])[0],
-    "accountName" => substr($line1Parts[0], 1, strlen($line1Parts[0]) -2),
-    "openingBalance" => floatval($line1Parts[1]),
-    "entries" => [],
-  ];
-  for ($i=3; $i < count($lines) - 2; $i += 4) {
+  $i = 0;
+  $ret = [];
+  if ($openingBalance) {
+      $ret = [
+        "openingBalanceDate" => explode(" ", $lines[0])[0],
+        "accountName" => substr($line1Parts[0], 1, strlen($line1Parts[0]) -2),
+        "openingBalance" => floatval($line1Parts[1]),
+        "entries" => [],
+      ];
+      $i=3;
+  }
+  for (; $i < count($lines) - 2;) {
     $headLine = trim($lines[$i]);
     $lineOneParts = explode("  ", trim($lines[$i + 1]));
     $lineTwo = trim($lines[$i + 2]);
@@ -40,6 +45,10 @@ function readJournal($filename) {
       "amount" => floatval($lineOneParts[1]),
       "balanceAfter" => floatval(substr($lineOneParts[2], 1)),
     ]);
+    $i += 3;
+    while ($i < count($lines) && strlen($lines[$i]) == 0) {
+      $i++;
+    }
   }
   return $ret;
 }

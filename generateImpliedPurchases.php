@@ -14,7 +14,7 @@ foreach ($journal["entries"] as $entry) {
       if ($pos !== false) {
           printTransaction([
             "date" => $entry["date"],
-            "comment" => "Implied purchase (" . $match . ")",
+            "comment" => $entry["comment"],
             "account1" => $entry["account2"],
             "account2" => "assets:".$budget,
             "amount" => $entry["amount"],
