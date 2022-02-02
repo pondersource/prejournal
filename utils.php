@@ -5,9 +5,16 @@ function printOpeningBalance($params) {
   echo("  (" . $params["account1"] . ")  " . $params["balance"] . "\n\n");
 }
 
+
+// date - string
+// comment - string
+// account1 - string
+// account2 - string
+// amount - float
+// balanceAfter? - float
 function printTransaction($params) {
   echo($params["date"] . "  " . $params["comment"] . "\n");
-  echo("  " . $params["account1"] . "  " . $params["amount"] . "  =" . $params["balanceAfter"] . "\n");
+  echo("  " . $params["account1"] . "  " . $params["amount"] . (isset($params["balanceAfter"]) ? $params["balanceAfter"] : "") . "\n");
   echo("  " . $params["account2"] . "\n\n");
 }
 
@@ -35,4 +42,8 @@ function readJournal($filename) {
     ]);
   }
   return $ret;
+}
+
+function readSuppliers($filename) {
+  return json_decode(file_get_contents($filename));
 }
