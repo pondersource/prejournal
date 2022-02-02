@@ -16,7 +16,7 @@ foreach ($journal["entries"] as $entry) {
             "date" => $entry["date"],
             "comment" => "Implied transaction (" . $match . ")",
             "account1" => $entry["account2"],
-            "account2" => $budget,
+            "account2" => "expenses:".$budget,
             "amount" => $entry["amount"],
           ]);
           $matched = true;
