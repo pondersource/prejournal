@@ -18,4 +18,12 @@ for ($j=0; $j < count($journals[1]["entries"]); $j++) {
   array_push($matched[$thisDate], $journals[1]["entries"][$j]);
 }
 
-var_dump($matched);
+for ($j=0; $j < count($journals[0]["entries"]); $j++) {
+  $thisDate = $journals[0]["entries"][$j]["date"];
+  if (!isset($matched[$thisDate])) {
+    $matched[$thisDate] = [];
+  }
+  foreach($matched[$thisDate] as $compare) {
+    echo $thisDate . " Compare " . $journals[0]["entries"][$j]["amount"] . "?=" . $compare["amount"] . "\n";
+  }
+}

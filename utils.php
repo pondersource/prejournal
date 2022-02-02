@@ -35,6 +35,7 @@ function readJournal($filename, $openingBalance = true) {
   for (; $i < count($lines) - 2;) {
     $headLine = trim($lines[$i]);
     $lineOneParts = explode("  ", trim($lines[$i + 1]));
+    var_dump($lineOneParts);
     $lineTwo = trim($lines[$i + 2]);
     $splitComment = strpos($headLine, " ");
     array_push($ret["entries"], [
@@ -43,7 +44,7 @@ function readJournal($filename, $openingBalance = true) {
       "account1" => $lineOneParts[0],
       "account2" => $lineTwo,
       "amount" => floatval($lineOneParts[1]),
-      "balanceAfter" => floatval(substr($lineOneParts[2], 1)),
+      "balanceAfter" => (count($lineOneParts) >= 3 ? floatval(substr($lineOneParts[2], 1)) : null),
     ]);
     $i += 3;
     while ($i < count($lines) && strlen($lines[$i]) == 0) {
