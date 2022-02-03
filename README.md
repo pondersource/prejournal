@@ -1,5 +1,5 @@
-# world-ledger
-An experiment in pre-journal bookkeeping
+# prejournal
+An experiment in pre-journal bookkeeping. See https://prejournal.org
 
 ```sh
 php importAsnCsv.php asn-checking-account-statement.csv > asn-checking.journal
