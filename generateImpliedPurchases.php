@@ -3,7 +3,7 @@ require_once("./utils.php");
 
 // ...
 $journal = readJournal($argv[1]);
-$suppliers = readSuppliers($argv[2]);
+$suppliers = readJson($argv[2]);
 foreach ($journal["entries"] as $entry) {
     $matched = false;
     foreach ($suppliers as $match => $budget) {
