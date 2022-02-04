@@ -7,7 +7,7 @@
     "John Doe:equipment:laptop": true,
     "John Doe:groceries": true
   },
-  "labels": {
+   "labels": {
     "NL91ACME0417164300": "bank:checking"
   }
 }
