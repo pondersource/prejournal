@@ -43,7 +43,14 @@ foreach($chains as $date => $d) {
       if(!isset($report["positive"][$to])) {
         echo "To expenses:".getLabel($to, $report)."\n";
       } else if ($report["positive"][$to] === true) {
-        echo "To assets:".getLabel($to, $report)."\n";
+        // echo "To depreciates?:".$config["monthlyDepreciation"][$to];
+        if (isset($config["monthlyDepreciation"][$to])) {
+          if ($amount < $config["monthlyDepreciation"][$to]) {
+              echo "To expenses:".getLabel($to, $report)."\n";
+          } else {
+              echo "To assets:".getLabel($to, $report)."\n";
+          }
+        }
       } else if ($report["positive"][$to] === false) {
         echo "To liabilities:".getLabel($to, $report)."\n";
       }
