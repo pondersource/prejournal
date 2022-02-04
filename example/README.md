@@ -10,4 +10,4 @@ php generateJournal.php main.journal config.json report.json | hledger -f - prin
 hledger -f 2022.journal close >> 2022.journal
 ```
 
-Expected output: see [2022.journal](./2022.journal).
+Expected output: see [2022.journal](https://github.com/federatedbookkeeping/prejournal/blob/main/example/2022.journal).
