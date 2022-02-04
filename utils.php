@@ -18,6 +18,45 @@ function printTransaction($params) {
   echo("  " . $params["account2"] . "\n\n");
 }
 
+function readAreg($filename) {
+  $ret = [];
+  $lines = explode("\n", file_get_contents($filename));
+  $first = true;
+  foreach ($lines as $line) {
+    if ($first) {
+      $first = false;
+      continue;
+    }
+    if (strlen($line) === 0) {
+      continue;
+    }
+    $cursor = strpos($line, " ");
+    $dateStr = substr($line, 0, $cursor);
+
+    $rest = trim(substr($line, $cursor));
+    $cursor = strrpos($rest, " ");
+    $newBalanceStr = substr($rest, $cursor + 1);
+
+    $rest = trim(substr($rest, 0, $cursor));
+    $cursor = strrpos($rest, " ");
+    $amountStr = substr($rest, $cursor + 1);
+
+    $rest = trim(substr($rest, 0, $cursor));
+    $cursor = strrpos($rest, "  ");
+    $contraAccountStr = substr($rest, $cursor + 2);
+
+    $descriptionStr = trim(substr($rest, 0, $cursor));
+    array_push($ret, [
+      "date" => $dateStr,
+      "newBalance" => $newBalanceStr,
+      "amount" => $amountStr,
+      "contraAccount" => $contraAccountStr,
+      "description" => $descriptionStr,
+    ]);
+  }
+  return $ret;
+}
+
 function readJournal($filename, $openingBalance = true) {
   $lines = explode("\n", file_get_contents($filename));
   $line1Parts = explode("  ", trim($lines[1]));
