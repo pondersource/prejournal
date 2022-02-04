@@ -17,6 +17,9 @@ function parseAccount2($obj) {
   if (strlen($obj["contraAccountNumber"]) > 0) {
     return $obj["contraAccountNumber"];
   }
+  if (strlen($obj["contraAccountName"]) > 0) {
+    return $obj["contraAccountName"];
+  }
   if ($obj["globalTransactionCode"] == "BEA") {
     return normalizeAccountName(substr($obj["description"], 1, 22));
   }

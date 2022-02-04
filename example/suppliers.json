@@ -1,5 +1,11 @@
 {
-  "ALBERT HEIJN": "Groceries",
-  "CCV MICMAC COMPUTERS E": "Equipment:Laptop",
-  "THE GREAT SOFTWARE COMPANY LIMITED-AAL/Bookiez salary": "Salary:Bookiez"
+  "@me": "John Doe",
+  "accounts": {
+    "GB29NWBK60161331926819": "the great software company limited"
+  },
+  "goods": {
+    "ALBERT HEIJN": "Groceries",
+    "CCV MICMAC COMPUTERS E": "Equipment:Laptop",
+    "THE GREAT SOFTWARE COMPANY LIMITED-AAL/Bookiez salary": "Salary Entitlement:Bookiez"
+  }
 }
