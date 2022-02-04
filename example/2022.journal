@@ -54,3 +54,19 @@
     expenses:depreciation             20.00
     assets:equipment:laptop
 
+2022-12-19 closing balances
+    assets:bank:checking                    -184.53 = 0.00
+    assets:equipment:laptop                 -579.00 = 0.00
+    expenses:depreciation                   -220.00 = 0.00
+    expenses:groceries                       -16.47 = 0.00
+    income:salary:bookiez                   1000.00 = 0.00
+    equity:opening/closing balances
+
+2022-12-20 opening balances
+    assets:bank:checking                     184.53 = 184.53
+    assets:equipment:laptop                  579.00 = 579.00
+    expenses:depreciation                    220.00 = 220.00
+    expenses:groceries                        16.47 = 16.47
+    income:salary:bookiez                  -1000.00 = -1000.00
+    equity:opening/closing balances
+
