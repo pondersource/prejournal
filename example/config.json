@@ -1,0 +1,19 @@
+{
+  "montlyDepreciation": {
+    "NL91ACME0417164300": 0,
+
+    "ALBERT HEIJN 2202": 0,
+    "John Doe:ALBERT HEIJN 2202": 0,
+
+    "CCV MICMAC COMPUTERS E": 0,
+    "John Doe:CCV MICMAC COMPUTERS E": 0,
+
+    "GB29NWBK60161331926819": 0,
+    "the great software company limited": 0,
+    "John Doe:the great software company limited": 0,
+
+    "John Doe:salary:bookiez": -1000,
+    "John Doe:equipment:laptop": 20,
+    "John Doe:groceries": 20
+  }
+}

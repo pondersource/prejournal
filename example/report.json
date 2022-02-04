@@ -1,0 +1,13 @@
+{
+  "system": "John Doe",
+  "depreciationPeriod": "month",
+  "reportPeriod": "year",
+  "positive": {
+    "NL91ACME0417164300": true,
+    "John Doe:equipment:laptop": true,
+    "John Doe:groceries": true
+  },
+  "labels": {
+    "NL91ACME0417164300": "bank:checking"
+  }
+}
