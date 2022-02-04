@@ -1,7 +1,7 @@
 {
   "system": "John Doe",
-  "depreciationPeriod": "month",
-  "reportPeriod": "year",
+  "depreciationPeriod": "1 month",
+  "reportPeriod": "2022",
   "positive": {
     "NL91ACME0417164300": true,
     "John Doe:equipment:laptop": true,

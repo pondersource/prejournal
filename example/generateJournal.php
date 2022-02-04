@@ -26,35 +26,85 @@ function getLabel($accountName, $report) {
   return $tmp;
 }
 
+function multiplyPeriod($amount, $period) {
+  if ($period == "1 month") {
+    return $amount;
+  }
+  if ($period == "1 year") {
+    return 12 * $amount;
+  }
+  if ($period == "1 week") {
+    return 12 * $amount / 52;
+  }
+  if ($period == "1 day") {
+    return 12 * $amount / 365;
+  }
+  if ($period == "1 hour") {
+    return 12 * $amount / (365 * 24);
+  }
+  if ($period == "1 minute") {
+    return 12 * $amount / (365 * 24 * 60);
+  }
+  if ($period == "1 second") {
+    return 12 * $amount / (365 * 24 * 3600);
+  }
+}
+function generateDepreciationTransactions($dateStr, $asset, $total, $step, $depreciationPeriod, $reportPeriod) {
+  $thisDate = date('Y-m-d', strtotime("+".$depreciationPeriod, strtotime($dateStr)));
+  $left = $total;
+  do {
+    printTransaction([
+      "date" => $thisDate,
+      "account1" => "expenses:depreciation",
+      "account2" => $asset,
+      "amount" => min($step, $left),
+      "comment" => "Depreciation"
+    ]);
+    $thisDate = date('Y-m-d', strtotime("+".$depreciationPeriod, strtotime($thisDate)));
+    $left -= $step;
+  } while ($left > 0 && str_starts_with($thisDate, $reportPeriod));
+}
 foreach($chains as $date => $d) {
   foreach($chains[$date] as $amount => $a) {
     foreach ($chains[$date][$amount] as $sequence) {
+      // date - string
+      // comment - string
+      // account1 - string
+      // account2 - string
+      // amount - float
+      // balanceAfter? - float
+      $transaction = [
+        "date" => $date,
+        "comment" => "Generated",
+        "amount" => $amount
+      ];
       $from = $sequence[0];
 
       $to = $sequence[count($sequence)-1];
-      echo "Date:".$date."\n";
       if(!isset($report["positive"][$from])) {
-        echo "From income:".getLabel($from, $report)."\n";
+        $transaction["account2"] = "income:".getLabel($from, $report);
       } else if($report["positive"][$from] === true) {
-          echo "From assets:".getLabel($from, $report)."\n";
+        $transaction["account2"] = "assets:".getLabel($from, $report);
       } else if($report["positive"][$from] === false) {
-        echo "From liabilities:".getLabel($from, $report)."\n";
+        $transaction["account2"] = "liabilities:".getLabel($from, $report);
       }
       if(!isset($report["positive"][$to])) {
-        echo "To expenses:".getLabel($to, $report)."\n";
+        $transaction["account1"] = "expenses:".getLabel($to, $report);
       } else if ($report["positive"][$to] === true) {
-        // echo "To depreciates?:".$config["monthlyDepreciation"][$to];
         if (isset($config["monthlyDepreciation"][$to])) {
-          if ($amount < $config["monthlyDepreciation"][$to]) {
-              echo "To expenses:".getLabel($to, $report)."\n";
+          if ($amount < multiplyPeriod($config["monthlyDepreciation"][$to], $report["depreciationPeriod"])) {
+            $transaction["account1"] = "expenses:".getLabel($to, $report);
           } else {
-              echo "To assets:".getLabel($to, $report)."\n";
+            $transaction["account1"] = "assets:".getLabel($to, $report);
+            if($config["monthlyDepreciation"][$to] > 0) {
+              generateDepreciationTransactions($date, "assets:".getLabel($to, $report), $amount, $config["monthlyDepreciation"][$to], $report["depreciationPeriod"], $report["reportPeriod"]);
+            }
           }
         }
       } else if ($report["positive"][$to] === false) {
-        echo "To liabilities:".getLabel($to, $report)."\n";
+        $transaction["account1"] = "liabilities:".getLabel($to, $report);
       }
-      echo "Amount:".$amount."\n";
+      printTransaction($transaction);
     }
   }
 }
