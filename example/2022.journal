@@ -1,47 +1,56 @@
-2022/1/16 supermarket
-  assets:bank:checking  -16.47
-  expenses:groceries
+2022-01-16 Generated
+    expenses:groceries             16.47
+    assets:bank:checking
 
-2022/1/19 laptop (book value 750 euros)
-  assets:bank:checking  -799
-  assets:equipment:laptop
-  expenses:depreciation  49
+2022-01-19 Generated
+    assets:equipment:laptop          799.00
+    assets:bank:checking
 
-2022/1/25 salary
-  assets:bank:checking  1000
-  income:salary
+2022-01-25 Generated
+    assets:bank:checking          1000.00
+    income:salary:bookiez
 
-2022/2/19 laptop depreciation 1 (rest value 350 euros after 20 months)
-  assets:equipment:laptop
-  expenses:depreciation  20
-2022/3/19 laptop depreciation 2 (rest value 350 euros after 20 months)
-  assets:equipment:laptop
-  expenses:depreciation  20
-2022/4/19 laptop depreciation 3 (rest value 350 euros after 20 months)
-  assets:equipment:laptop
-  expenses:depreciation  20
-2022/5/19 laptop depreciation 4 (rest value 350 euros after 20 months)
-  assets:equipment:laptop
-  expenses:depreciation  20
-2022/6/19 laptop depreciation 5 (rest value 350 euros after 20 months)
-  assets:equipment:laptop
-  expenses:depreciation  20
-2022/7/19 laptop depreciation 6 (rest value 350 euros after 20 months)
-  assets:equipment:laptop
-  expenses:depreciation  20
-2022/8/19 laptop depreciation 7 (rest value 350 euros after 20 months)
-  assets:equipment:laptop
-  expenses:depreciation  20
-2022/9/19 laptop depreciation 8 (rest value 350 euros after 20 months)
-  assets:equipment:laptop
-  expenses:depreciation  20
-2022/10/19 laptop depreciation 9 (rest value 350 euros after 20 months)
-  assets:equipment:laptop
-  expenses:depreciation  20
-2022/11/19 laptop depreciation 10 (rest value 350 euros after 20 months)
-  assets:equipment:laptop
-  expenses:depreciation  20
-2022/12/19 laptop depreciation 11 (rest value 350 euros after 20 months)
-  assets:equipment:laptop
-  expenses:depreciation  20
+2022-02-19 Depreciation
+    expenses:depreciation             20.00
+    assets:equipment:laptop
+
+2022-03-19 Depreciation
+    expenses:depreciation             20.00
+    assets:equipment:laptop
+
+2022-04-19 Depreciation
+    expenses:depreciation             20.00
+    assets:equipment:laptop
+
+2022-05-19 Depreciation
+    expenses:depreciation             20.00
+    assets:equipment:laptop
+
+2022-06-19 Depreciation
+    expenses:depreciation             20.00
+    assets:equipment:laptop
+
+2022-07-19 Depreciation
+    expenses:depreciation             20.00
+    assets:equipment:laptop
+
+2022-08-19 Depreciation
+    expenses:depreciation             20.00
+    assets:equipment:laptop
+
+2022-09-19 Depreciation
+    expenses:depreciation             20.00
+    assets:equipment:laptop
+
+2022-10-19 Depreciation
+    expenses:depreciation             20.00
+    assets:equipment:laptop
+
+2022-11-19 Depreciation
+    expenses:depreciation             20.00
+    assets:equipment:laptop
+
+2022-12-19 Depreciation
+    expenses:depreciation             20.00
+    assets:equipment:laptop
 
