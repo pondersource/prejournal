@@ -1,4 +1,4 @@
-Here is an example:
+Here is an example (required [PHP](https://www.php.net/) and [hledger](https://hledger.org/)):
 ```
 git clone https://github.com/federatedbookkeeping/prejournal
 cd prejournal
