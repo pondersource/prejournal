@@ -14,22 +14,39 @@ There are five elements to the Prejournal model:
 
 In standard bookkeeping, the invoices and bank statements are source document, and from there, the journal is generated. In the journal, accounts are divided into assets, liabilities, expenses, income, and equity. Prejournal makes no such division, although the idea is that a standard journal can be generated from the prejournal model, so that we can still export our data to the language that accountants understand (hence the name).
 
-For instance: I work for ACME Corp and buy a laptop from a computer shop, paying with my personal debit card. I then submit the expense and now ACME Corp owes me the money I spent at the computer shop.
+For instance: Joe works for ACME Corp and buys a laptop from a computer shop, paying with his personal debit card. He then submits the expense and now ACME Corp owes Joe the money he spent at the computer shop.
 
 With the invoice, the computer moves from the shop to ACME Corp.
-With the payment, the money moves from my bank account (the capacitor between me and my bank) to the computer shop's bank account.
-With the settlement, ACME Corp accepts my expense, and commits to owing me the reimbursement.
+With the payment, the money moves from Joe's bank account (the capacitor between Joe and my bank) to the computer shop's bank account.
+With the settlement, ACME Corp accepts Joe's expense, and commits to owing Joe the reimbursement.
 
 Components:
 1. ACME Corp
-2. me
-3. my bank
+2. Joe
+3. Joe's bank
 4. computer shop
 5. computer shop's bank
 
 ![diagram](https://user-images.githubusercontent.com/408412/154058670-70949077-9365-4047-9abf-4220c7d3c548.jpg)
 
 In the diagram the settlement takes a shortcut, not going through the two banks. I still don't know exactly how to model this. Work in progress! :)
+When exporting this to [plain text accounting (PTA)](https://plaintextaccounting.org) journal format for ACME Corp, the journal entry would be something like:
+```
+1/1/2022 Laptop (expensed by Joe)
+  assets:computer equipment  USD 1000
+  liabilities:accounts payable:Joe
+```
+
+And when generating the PTA books for Joe, it would be something like:
+```
+1/1/2022 Laptop (expensed for work)
+  assets:bank:checking         USD -1000
+  assets:accounts receivable:ACME Corp
+```
+
+Depending on which component (ACME Corp or Joe) you generate the journal for, the journal looks different. The same would happen if you generate the books for different departments, sub-departments and projects of an organisation. Or if you merge two bookkeeping systems of a company and its suppplier, for instance if this supplier was acquired.
+
+That's why GAAP journals can not really be considered as a database model, they are already better understood as query results, and the underlying data model should be something that sits inbetween the source documents and the journal: "prejournal". :)
 
 
 
