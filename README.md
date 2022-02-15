@@ -44,7 +44,7 @@ And when generating the PTA books for Joe, it would be something like:
   assets:accounts receivable:ACME Corp
 ```
 
-Depending on which component (ACME Corp or Joe) you generate the journal for, the journal looks different. The same would happen if you generate the books for different departments, sub-departments and projects of an organisation. Or if you merge two bookkeeping systems of a company and its suppplier, for instance if this supplier was acquired.
+Depending on which component (ACME Corp or Joe) you generate the journal for, the journal looks different. The same would happen if you generate the books for different departments, sub-departments and projects of an organisation. Or if you merge two bookkeeping systems of a company and its supplier, for instance if this supplier was acquired.
 
 That's why GAAP journals can not really be considered as a database model, they are already better understood as query results, and the underlying data model should be something that sits inbetween the source documents and the journal: "prejournal". :)
 
