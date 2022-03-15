@@ -14,7 +14,7 @@
   $pwhash = pg_escape_string(password_hash($_SERVER['PHP_AUTH_PW'], PASSWORD_BCRYPT, [ 'cost' => 10 ]));
   echo $username;
   echo $pwhash;
-  $query = "SELECT pwhashbcryptocost10 FROM users WHERE username = '${username}'";
+  $query = "SELECT pwhashbcryptcost10 FROM users WHERE username = '${username}'";
   echo $query;
   $result = pg_query($conn, $query);
   echo "result:";
