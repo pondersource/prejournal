@@ -16,7 +16,7 @@
     array($username, $pwhash));
   echo "result:";
   var_dump($result);
-
+  echo pg_num_rows($result);
   $arr = pg_fetch_array($result, 0, PGSQL_NUM);
   echo "array:";
   var_dump($arr);
