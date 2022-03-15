@@ -14,6 +14,10 @@
   $pwhash = password_hash($_SERVER['PHP_AUTH_PW'], PASSWORD_BCRYPT, [ 'cost' => 10 ]);
   $result = pg_query_params($conn, 'SELECT * FROM users WHERE username = $1 AND pwhashbcryptcost10 = $2',
     array($username, $pwhash));
+  echo "result:";
+  var_dump($result);
+
   $arr = pg_fetch_array($result, 0, PGSQL_NUM);
+  echo "array:"
   var_dump($arr);
 ?>
