@@ -10,12 +10,13 @@
   }
   echo "hello world";
   $conn  = pg_connect($_ENV["DATABASE_URL"]);
-  $username = $_SERVER['PHP_AUTH_USER'];
-  $pwhash = password_hash($_SERVER['PHP_AUTH_PW'], PASSWORD_BCRYPT, [ 'cost' => 10 ]);
+  $username = pg_escape_string($_SERVER['PHP_AUTH_USER']);
+  $pwhash = pg_escape_string(password_hash($_SERVER['PHP_AUTH_PW'], PASSWORD_BCRYPT, [ 'cost' => 10 ]));
+  echo $username;
   echo $pwhash;
 
-  $result = pg_query_params($conn, 'SELECT * FROM users WHERE username = $1 AND pwhashbcryptcost10 = $2',
-    array($username, $pwhash));
+
+  $result = pg_query($conn, "SELECT * FROM users WHERE username = '${username}' AND pwhashbcryptcost10 = '${pwhash}'");
   echo "result:";
   var_dump($result);
   echo pg_num_rows($result);
