@@ -5,7 +5,7 @@
 // Not necessary when running on Heroku or as a Nextcloud app
 $dotEnvPath = __DIR__ . '/../.env';
 if (is_readable($dotEnvPath)) {
-    output("loading .env file");
+    // output("loading .env file");
     $lines = file($dotEnvPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
         if (strpos(trim($line), '#') === 0) {
@@ -41,14 +41,17 @@ function getDbConn() {
 }
 
 function validateUser($username, $passwordGiven) {
+  // output("Validating user $username $passwordGiven");
   $conn  = getDbConn();
   $query = "SELECT id, passwordhash FROM users WHERE username = $1";
   $result = pg_query_params($conn, $query, [ $username ]);
   $arr = pg_fetch_array($result, 0, PGSQL_NUM);
-  if (pg_num_rows($conn, $result) == 1) {
-    $id = $arr[0];
+  if (pg_num_rows($result) == 1) {
+    $id = intval($arr[0]);
     $passwordHash = $arr[1];
+    // var_dump($arr);
     $conclusion = password_verify($passwordGiven, $passwordHash);
+    // var_dump($conclusion);
     if ($conclusion) {
       return [
         "id" => $id,
@@ -68,7 +71,7 @@ function createUser($username, $passwordGiven) {
 }
 
 function getCommand() {
-   return $_SERVER["argv"]; 
+   return array_slice($_SERVER["argv"], 1);
 }
 
 function output($str) {

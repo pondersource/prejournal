@@ -3,6 +3,15 @@ An experiment in pre-journal bookkeeping.
 
 Like the [Resources-Events-Agents (REA)](http://mikorizal.org/Fromprivateownershipaccountingtocommonsaccoun.html) model, this is an alternative bookkeeping model. Alternative to dual entry / "generally accepted accounting principles" bookkeeping, that is. It takes a bird's eye view of the economic network, instead of an organisation-centric view.
 
+# Usage (CLI)
+
+The code is made platform independent through `src/platform.php`. To execute on the command line, try for instance:
+
+* create a .env file with `DATABASE_URL` (Postgres), `PREJOURNAL_USERNAME` and `PREJOURNAL_PASSWORD`
+* Load `./schema.sql` into the database
+* Run `php src/index.php register <username> <password>`
+* Run `php src/index.php hello`
+
 # In a nutshell
 
 There are five elements to the Prejournal model:
