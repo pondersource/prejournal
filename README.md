@@ -12,6 +12,9 @@ The code is made platform independent through `src/platform.php`. To execute on 
 * Run `php src/index.php register <username> <password>`
 * Run `php src/index.php hello`
 
+# Database schema (version 1)
+The database stores movements which can be invoices or payments. See [schema.sql](./schema.sql).
+
 # In a nutshell
 
 There are five elements to the Prejournal model:
