@@ -11,13 +11,10 @@ create table components (
 
 create table movements (
   id serial primary key,
+  type varchar, /* 'invoice', 'payment' */
   fromComponent int,
   toComponent int,
   timestamp_ timestamp,
-  amount float
-);
-
-create table links (
-  cause int,
-  effect int
+  amount float,
+  agreementId int /* ties e.g. an invoice to a payment */
 );
