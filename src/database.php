@@ -33,3 +33,25 @@ function createUser($username, $passwordGiven) {
   $result = pg_query_params($conn, $query, [ $username, $passwordHash ]);
   return !!$result;
 }
+
+function getMovementsFromComponent($componentName) {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM movements INNER JOIN components ON movements.fromcomponent = components.id WHERE components.name = $1";
+  $result = pg_query_params($conn, $query, [ $componentName ]);
+  $ret = [];
+  while ($row = pg_fetch_assoc($result)) {
+      array_push($ret, $row);
+  }
+  return $ret;
+}
+
+function getMovementsToComponent($componentName) {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM movements INNER JOIN components ON movements.tocomponent = components.id WHERE components.name = $1";
+  $result = pg_query_params($conn, $query, [ $componentName ]);
+  $ret = [];
+  while ($row = pg_fetch_assoc($result)) {
+      array_push($ret, $row);
+  }
+  return $ret;
+}

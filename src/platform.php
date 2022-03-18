@@ -62,6 +62,6 @@ function getCommand() {
 }
 
 function output($str) {
-  echo "\n$str\n";
+  echo "$str\n";
 }
 ?>
