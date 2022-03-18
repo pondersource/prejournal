@@ -42,7 +42,17 @@ function getCommand() {
      $parts = explode("/", $_SERVER["REQUEST_URI"]);
      if (count($parts) >=3 && $parts[0] == "" && $parts[1] == "v1") {
        try {
-         $parts = array_merge($parts, json_decode(file_get_contents('php://input')));
+           var_dump("Getting POST body");
+           $postBody = file_get_contents('php://input');
+           var_dump($postBody);
+           if (is_string($postBody) && strlen($postBody) > 0) {
+              var_dump("Getting arr");
+              $arr = json_decode($postBody);
+              var_dump($arr);
+              if (is_array($arr)) {
+                   $parts = array_merge($parts, $arr);
+              }
+           }
        } catch (Exception $e) {
          // ...
        }
