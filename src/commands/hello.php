@@ -8,6 +8,6 @@ function hello($command) {
     $userId = $user['id'];
     output("Hello $username, your userId is $userId");
   } else {
-    output("User not found");
+    output("User not found or wrong password");
   }
 }

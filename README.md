@@ -12,6 +12,20 @@ The code is made platform independent through `src/platform.php`. To execute on 
 * Run `php src/index.php register <username> <password>`
 * Run `php src/index.php hello`
 
+# Usage (localhost)
+
+* `cd src/`
+* `php -S localhost:8080`
+* Visit http://localhost:8080/v1/hello with your browser
+* Or try:
+  * `curl -d'["alice","alice123"]' http://localhost:8080/v1/register`
+  * `curl http://alice:alice123@localhost:8080/v1/hello`
+* The username and password will be taken from http basic auth if present.
+* Otherwise, the username and password will be taken from `.env` PREJOURNAL_USERNAME / PREJOURNAL_PASSWORD if present.
+
+NB: In general, you would never put a password in a URL or even in a `.env` file;
+we're doing this here to simplify the setup during rapid initial development. See [#9](https://github.com/pondersource/prejournal/issues/9).
+
 # Database schema (version 1)
 The database stores movements which can be invoices or payments. See [schema.sql](./schema.sql).
 
