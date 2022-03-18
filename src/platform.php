@@ -27,7 +27,7 @@ if (is_readable($dotEnvPath)) {
 }
 
 function getUser() {
-  var_dump($_SERVER);
+  // var_dump($_SERVER);
   if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
     return validateUser($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
   }
@@ -52,7 +52,7 @@ function getCommand() {
        } catch (Exception $e) {
          // ...
        }
-       var_dump($parts);
+      //  var_dump($parts);
        return array_slice($parts, 2);
      }
    } else {

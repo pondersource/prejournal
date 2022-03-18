@@ -26,6 +26,15 @@ The code is made platform independent through `src/platform.php`. To execute on 
 NB: In general, you would never put a password in a URL or even in a `.env` file;
 we're doing this here to simplify the setup during rapid initial development. See [#9](https://github.com/pondersource/prejournal/issues/9).
 
+# Usage (Heroku)
+The app's main branch is automatically deployed to https://prejournal.herokuapp.com/ on each commit
+You can try for instance:
+```
+curl -d'["alice","alice123"]' https://prejournal.herokuapp.com/v1/register
+curl https://alice:alice123@prejournal.herokuapp.com/v1/hello
+```
+You can also create a Heroku app yourself and deploy a branch of the code there. Feel free, it's open source!
+
 # Database schema (version 1)
 The database stores movements which can be invoices or payments. See [schema.sql](./schema.sql).
 
