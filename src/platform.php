@@ -23,7 +23,7 @@ if (is_readable($dotEnvPath)) {
         }
     }
 } else {
-  output("Not loading .env file ".$dotEnvPath);
+  // output("Not loading .env file ".$dotEnvPath);
 }
 
 function getUser() {
@@ -46,6 +46,7 @@ function getCommand() {
        } catch (Exception $e) {
          // ...
        }
+       var_dump($parts);
        return array_slice($parts, 2);
      }
    } else {
