@@ -7,9 +7,9 @@ Like the [Resources-Events-Agents (REA)](http://mikorizal.org/Fromprivateownersh
 
 The code is made platform independent through `src/platform.php`. To execute on the command line, try for instance:
 
-* create a .env file with `DATABASE_URL` (Postgres), `PREJOURNAL_USERNAME` and `PREJOURNAL_PASSWORD`
+* create a .env file with `DATABASE_URL=...` (Postgres), `PREJOURNAL_ADMIN_PARTY=false` `PREJOURNAL_USERNAME=admin` and `PREJOURNAL_PASSWORD=...`
 * Load `./schema.sql` into the database
-* Run `php src/index.php register <username> <password>`
+* Run `php src/index.php register <username> <password>` (temporarily set `PREJOURNAL_ADMIN_PARTY=true` to create the 'admin' user)
 * Run `php src/index.php hello`
 
 # Usage (localhost)
@@ -18,7 +18,7 @@ The code is made platform independent through `src/platform.php`. To execute on 
 * `php -S localhost:8080`
 * Visit http://localhost:8080/v1/hello with your browser
 * Or try:
-  * `curl -d'["alice","alice123"]' http://localhost:8080/v1/register`
+  * `curl -d'["alice","alice123"]' http://admin:secret@localhost:8080/v1/register` (temporarily set `PREJOURNAL_ADMIN_PARTY=true` to create the 'admin' user)
   * `curl http://alice:alice123@localhost:8080/v1/hello`
 * The username and password will be taken from http basic auth if present.
 * Otherwise, the username and password will be taken from `.env` PREJOURNAL_USERNAME / PREJOURNAL_PASSWORD if present.
@@ -30,7 +30,7 @@ we're doing this here to simplify the setup during rapid initial development. Se
 The app's main branch is automatically deployed to https://prejournal.herokuapp.com/ on each commit
 You can try for instance:
 ```
-curl -d'["alice","alice123"]' https://prejournal.herokuapp.com/v1/register
+curl -d'["alice","alice123"]' https://admin:secret@prejournal.herokuapp.com/v1/register # requires admin permissions
 curl https://alice:alice123@prejournal.herokuapp.com/v1/hello
 ```
 You can also create a Heroku app yourself and deploy a branch of the code there. Feel free, it's open source!
