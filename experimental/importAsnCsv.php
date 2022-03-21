@@ -6,7 +6,7 @@ function parseDate($obj) {
   $day = $parts[0];
   $month = $parts[1];
   $year = $parts[2];
-  
+ 
   return date("Y/m/d", mktime(0, 0, 0, $month, $day, $year));
 }
 

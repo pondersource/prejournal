@@ -19,7 +19,7 @@ for ($i=0; $i < 2; $i++) {
           $matched[$thisDate] = [];
         }
         $matched[$thisDate][$i] = 0;
-      }  
+      } 
       $matched[$thisDate][$i] += $journals[$i]["entries"][$j]["amount"];
     }
   }
@@ -33,5 +33,5 @@ foreach ($matched as $date => $pair) {
   } else {
     echo "OK " . $date . " " . (isset($matched[$date][0]) ? $matched[$date][0] : "null") . " " . (isset($matched[$date][1]) ? $matched[$date][1] : "null") . "\n";
   }
-   
+  
 }

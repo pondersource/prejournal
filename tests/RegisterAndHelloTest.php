@@ -17,12 +17,10 @@ final class RegisterAndHelloTest extends TestCase
     public function testUserRegisteredAndFound(): void
     {
         setTestDb();
-        $this->assertEquals(
-            ['created user'],
-            register([ 'adminParty' => true ], ['register', 'someuser', 'somepass']));
+        $this->assertEquals(['created user'], register([ 'adminParty' => true ], ['register', 'someuser', 'somepass']));
+        // right user and pass
         setUser('someuser', 'somepass');
-        $this->assertEquals(
-            [ 
+        $this->assertEquals([
                 'user' => [
                     'id' => 0,
                     'username' => 'someuser',
@@ -30,8 +28,21 @@ final class RegisterAndHelloTest extends TestCase
                 'adminParty' => true
             ],
             getContext());
-            // , ['hello'])
-        //  );
+        setUser('someuser', 'wrongpass');
+        // wrong pass
+        $this->assertEquals([
+                'user' => null,
+                'adminParty' => true
+            ],
+            getContext());
+        // wrong user
+        setUser('wronguser', 'somepass');
+        $this->assertEquals([
+                'user' => null,
+                'adminParty' => true
+            ],
+            getContext());
+  
     }
 }
 
