@@ -1,21 +1,23 @@
 <?php
+require_once 'vendor/autoload.php';
+
+use Doctrine\DBAL\DriverManager;
 
 function getDbConn() {
-  return pg_connect($_ENV["DATABASE_URL"]);
+  return DriverManager::getConnection([ 'url' => $_ENV["DATABASE_URL"] ]);
 }
 
 function validateUser($username, $passwordGiven) {
   // output("Validating user $username $passwordGiven");
   $conn  = getDbConn();
-  $query = "SELECT id, passwordhash FROM users WHERE username = $1";
-  $result = pg_query_params($conn, $query, [ $username ]);
-  $arr = pg_fetch_array($result, 0, PGSQL_NUM);
-  if (pg_num_rows($result) == 1) {
-    $id = intval($arr[0]);
-    $passwordHash = $arr[1];
-    // var_dump($arr);
+  $query = 'SELECT id, passwordhash FROM users WHERE username = ?';
+  $result = $conn->executeQuery($query, [ $username ]);
+  $arr = $result->fetchAllNumeric();
+  if (count($arr) == 1) {
+    $id = intval($arr[0][0]);
+    $passwordHash = $arr[0][1];
     $conclusion = password_verify($passwordGiven, $passwordHash);
-    // var_dump($conclusion);
+    var_dump($conclusion);
     if ($conclusion) {
       return [
         "id" => $id,
@@ -29,17 +31,17 @@ function validateUser($username, $passwordGiven) {
 function createUser($username, $passwordGiven) {
   $conn  = getDbConn();
   $passwordHash = password_hash($passwordGiven, PASSWORD_BCRYPT, [ "cost" => 10 ]);
-  $query = "INSERT INTO users (username, passwordhash) VALUES ($1, $2)";
-  $result = pg_query_params($conn, $query, [ $username, $passwordHash ]);
+  $query = "INSERT INTO users (username, passwordhash) VALUES (?, ?)";
+  $result = $conn->executeQuery($query, [ $username, $passwordHash ]);
   return !!$result;
 }
 
 function getMovementsFromComponent($componentName) {
   $conn  = getDbConn();
-  $query = "SELECT * FROM movements INNER JOIN components ON movements.fromcomponent = components.id WHERE components.name = $1";
-  $result = pg_query_params($conn, $query, [ $componentName ]);
+  $query = "SELECT * FROM movements INNER JOIN components ON movements.fromcomponent = components.id WHERE components.name = ?";
+  $result = $conn->executeQuery($query, [ $componentName ]);
   $ret = [];
-  while ($row = pg_fetch_assoc($result)) {
+  while ($row = $result->fetchAssociative() !== false) {
       array_push($ret, $row);
   }
   return $ret;
@@ -47,10 +49,10 @@ function getMovementsFromComponent($componentName) {
 
 function getMovementsToComponent($componentName) {
   $conn  = getDbConn();
-  $query = "SELECT * FROM movements INNER JOIN components ON movements.tocomponent = components.id WHERE components.name = $1";
-  $result = pg_query_params($conn, $query, [ $componentName ]);
+  $query = "SELECT * FROM movements INNER JOIN components ON movements.tocomponent = components.id WHERE components.name = ?";
+  $result = $conn->executeQuery($query, [ $componentName ]);
   $ret = [];
-  while ($row = pg_fetch_assoc($result)) {
+  while ($row = $result->fetchAssociative() !== false) {
       array_push($ret, $row);
   }
   return $ret;

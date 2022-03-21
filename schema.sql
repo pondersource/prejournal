@@ -17,14 +17,15 @@ create table movements (
   fromComponent int,
   toComponent int,
   timestamp_ timestamp,
-  amount float,
-  agreementId int /* ties e.g. an invoice to a payment */
+  amount float
 );
 
 create table statements {
   id serial primary key,
   movementId int,
   userId int,
+  sourceDocumentFormat varchar, /* could be an invoice, bank statement csv file, API call etc */
+  sourceDocumentFilename varchar, /* TODO: work out how to store files when on Heroku */
   timestamp_ timestamp
 }
 
