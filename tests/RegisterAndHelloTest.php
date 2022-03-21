@@ -20,29 +20,60 @@ final class RegisterAndHelloTest extends TestCase
         $this->assertEquals(['created user'], register([ 'adminParty' => true ], ['register', 'someuser', 'somepass']));
         // right user and pass
         setUser('someuser', 'somepass');
-        $this->assertEquals([
+        $this->assertEquals(
+            [
                 'user' => [
                     'id' => 0,
                     'username' => 'someuser',
                 ],
                 'adminParty' => true
             ],
-            getContext());
-        setUser('someuser', 'wrongpass');
+            getContext()
+        );
+
+        $this->assertEquals(
+            [ "Hello someuser, your userId is 0" ],
+            hello(getContext(), ['hello'])
+        );
+    }
+    public function testUserRegisteredLoginWrongPass(): void
+    {
+        setTestDb();
+        $this->assertEquals(['created user'], register([ 'adminParty' => true ], ['register', 'someuser', 'somepass']));
+
         // wrong pass
+        setUser('someuser', 'wrongpass');
         $this->assertEquals([
                 'user' => null,
                 'adminParty' => true
             ],
-            getContext());
+            getContext()
+        );
+
+        $this->assertEquals(
+            [ "User not found or wrong password" ],
+            hello(getContext(), ['hello'])
+        );
+    }
+    public function testUserRegisteredLoginWrongUsername(): void
+    {
+        setTestDb();
+        $this->assertEquals(['created user'], register([ 'adminParty' => true ], ['register', 'someuser', 'somepass']));
+
         // wrong user
         setUser('wronguser', 'somepass');
         $this->assertEquals([
                 'user' => null,
                 'adminParty' => true
             ],
-            getContext());
-  
+            getContext()
+        );
+
+        $this->assertEquals(
+            [ "User not found or wrong password" ],
+            hello(getContext(), ['hello'])
+        );
+
     }
 }
 
