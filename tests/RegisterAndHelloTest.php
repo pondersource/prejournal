@@ -8,6 +8,7 @@ final class RegisterAndHelloTest extends TestCase
 {
     public function testUserNotFound(): void
     {
+        setTestDb();
         $this->assertEquals(
             [ "User not found or wrong password" ],
             hello([], ['hello'])
@@ -15,6 +16,7 @@ final class RegisterAndHelloTest extends TestCase
     }
     public function testUserRegisteredAndFound(): void
     {
+        setTestDb();
         $this->assertEquals(
             ['created user'],
             register([ 'adminParty' => true ], ['register', 'someuser', 'somepass']));
@@ -23,8 +25,9 @@ final class RegisterAndHelloTest extends TestCase
             [ 
                 'user' => [
                     'id' => 0,
-                    'username', 'someuser',
+                    'username' => 'someuser',
                 ],
+                'adminParty' => true
             ],
             getContext());
             // , ['hello'])

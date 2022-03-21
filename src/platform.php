@@ -29,11 +29,11 @@ if (is_readable($dotEnvPath)) {
 function getUser() {
   // var_dump($_SERVER);
   if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
-    echo 'validating user based on PHP_AUTH_USER / PHP_AUTH_PW';
+    // echo 'validating user based on PHP_AUTH_USER / PHP_AUTH_PW';
     return validateUser($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
   }
   if (isset($_SERVER['PREJOURNAL_USERNAME']) && isset($_SERVER['PREJOURNAL_PASSWORD'])) {
-    echo 'validating user based on PREJOURNAL_USERNAME / PREJOURNAL_PASSWORD';
+    // echo 'validating user based on PREJOURNAL_USERNAME / PREJOURNAL_PASSWORD';
     return validateUser($_SERVER['PREJOURNAL_USERNAME'], $_SERVER['PREJOURNAL_PASSWORD']);
   }
   echo 'not logged in';

@@ -5,21 +5,10 @@ require_once(__DIR__ . '/../schema.php');
 use Doctrine\DBAL\DriverManager;
 
 function getDbConn() {
+  global $test_db_connection;
   // var_dump($_SERVER);
-  if (isset($_SERVER['TESTING'])) {
-    // echo "Loading test database";
-    $tables = getTables();
-    $conn = DriverManager::getConnection([
-      'driver' => 'pdo_sqlite',
-      'memory' => true
-    ]);
-
-    for ($i = 0; $i < count($tables); $i++) {
-      // echo "Testing environment, creating table $i";
-      $created = $conn->executeQuery($tables[$i]);
-      // var_dump($created->fetchAll());
-    }
-    return $conn;
+  if (isset($test_db_connection)) {
+    return $test_db_connection;
   } else {
     return DriverManager::getConnection([
       // 'driver' => 'pdo_sqlite',
@@ -28,13 +17,28 @@ function getDbConn() {
   }
 }
 
+function setTestDb() {
+  global $test_db_connection;
+  $tables = getTables();
+  $test_db_connection = DriverManager::getConnection([
+    'driver' => 'pdo_sqlite',
+    'memory' => true
+  ]);
+
+  for ($i = 0; $i < count($tables); $i++) {
+    // echo "Testing environment, creating table $i";
+    $created = $test_db_connection->executeQuery($tables[$i]);
+    // var_dump($created->fetchAll());
+  }
+}
+
 function validateUser($username, $passwordGiven) {
-  echo "Validating user $username $passwordGiven";
+  // echo "Validating user $username $passwordGiven";
   $conn  = getDbConn();
   $query = 'SELECT id, passwordhash FROM users WHERE username = ?';
   $result = $conn->executeQuery($query, [ $username ]);
   $arr = $result->fetchAllNumeric();
-  var_dump($arr);
+  // var_dump($arr);
   if (count($arr) == 1) {
     $id = intval($arr[0][0]);
     $passwordHash = $arr[0][1];
@@ -55,8 +59,9 @@ function createUser($username, $passwordGiven) {
   $passwordHash = password_hash($passwordGiven, PASSWORD_BCRYPT, [ "cost" => 10 ]);
   $query = "INSERT INTO users (username, passwordhash) VALUES (?, ?)";
   $result = $conn->executeStatement($query, [ $username, $passwordHash ]);
-  var_dump("inserted $username $passwordHash new user");
-  var_dump($result);
+  // var_dump("inserted $username $passwordHash new user");
+  // var_dump($result);
+  // var_dump(validateUser($username, $passwordGiven));
   return !!$result;
 }
 

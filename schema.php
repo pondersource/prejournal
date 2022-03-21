@@ -4,7 +4,7 @@
 
 function getTables() {
     return [
-"create table userzs (
+"create table users (
   id serial primary key,
   username varchar unique,
   passwordhash varchar
