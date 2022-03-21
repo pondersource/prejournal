@@ -16,9 +16,9 @@ if (is_readable($dotEnvPath)) {
         $name = trim($name);
         $value = trim($value);
 
-        if (!array_key_exists($name, $_SERVER) && !array_key_exists($name, $_ENV)) {
+        if (!array_key_exists($name, $_SERVER) && !array_key_exists($name, $_SERVER)) {
             putenv(sprintf('%s=%s', $name, $value));
-            $_ENV[$name] = $value;
+            $_SERVER[$name] = $value;
             $_SERVER[$name] = $value;
         }
     }
@@ -29,12 +29,20 @@ if (is_readable($dotEnvPath)) {
 function getUser() {
   // var_dump($_SERVER);
   if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
+    echo 'validating user based on PHP_AUTH_USER / PHP_AUTH_PW';
     return validateUser($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
   }
-  if (isset($_ENV['PREJOURNAL_USERNAME']) && isset($_ENV['PREJOURNAL_PASSWORD'])) {
-    return validateUser($_ENV['PREJOURNAL_USERNAME'], $_ENV['PREJOURNAL_PASSWORD']);
+  if (isset($_SERVER['PREJOURNAL_USERNAME']) && isset($_SERVER['PREJOURNAL_PASSWORD'])) {
+    echo 'validating user based on PREJOURNAL_USERNAME / PREJOURNAL_PASSWORD';
+    return validateUser($_SERVER['PREJOURNAL_USERNAME'], $_SERVER['PREJOURNAL_PASSWORD']);
   }
+  echo 'not logged in';
   return null;
+}
+
+function setUser($username, $password) {
+  $_SERVER['PREJOURNAL_USERNAME'] = $username;
+  $_SERVER['PREJOURNAL_PASSWORD'] = $password;
 }
 
 function getCommand() {
@@ -61,7 +69,15 @@ function getCommand() {
   return [];
 }
 
-function output($str) {
-  echo "$str\n";
+function getContext() {
+  return [
+    'user' => getUser(),
+    'adminParty' => (isset($_SERVER["PREJOURNAL_ADMIN_PARTY"]) && $_SERVER["PREJOURNAL_ADMIN_PARTY"] == "true"),
+  ];
 }
-?>
+
+function output($strArr) {
+  for ($i = 0; $i < count($strArr); $i++) {
+    echo $strArr[$i] . "\n";
+  }
+}

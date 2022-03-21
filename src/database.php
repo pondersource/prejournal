@@ -22,18 +22,19 @@ function getDbConn() {
     return $conn;
   } else {
     return DriverManager::getConnection([
-      'driver' => 'pdo_sqlite',
-      'url' => $_ENV["DATABASE_URL"]
+      // 'driver' => 'pdo_sqlite',
+      'url' => $_SERVER["DATABASE_URL"]
     ]);
   }
 }
 
 function validateUser($username, $passwordGiven) {
-  // output("Validating user $username $passwordGiven");
+  echo "Validating user $username $passwordGiven";
   $conn  = getDbConn();
   $query = 'SELECT id, passwordhash FROM users WHERE username = ?';
   $result = $conn->executeQuery($query, [ $username ]);
   $arr = $result->fetchAllNumeric();
+  var_dump($arr);
   if (count($arr) == 1) {
     $id = intval($arr[0][0]);
     $passwordHash = $arr[0][1];
@@ -53,7 +54,9 @@ function createUser($username, $passwordGiven) {
   $conn  = getDbConn();
   $passwordHash = password_hash($passwordGiven, PASSWORD_BCRYPT, [ "cost" => 10 ]);
   $query = "INSERT INTO users (username, passwordhash) VALUES (?, ?)";
-  $result = $conn->executeQuery($query, [ $username, $passwordHash ]);
+  $result = $conn->executeStatement($query, [ $username, $passwordHash ]);
+  var_dump("inserted $username $passwordHash new user");
+  var_dump($result);
   return !!$result;
 }
 

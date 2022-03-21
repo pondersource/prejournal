@@ -5,13 +5,14 @@
   require_once(__DIR__ . '/commands/pta-me.php');
 
   $command = getCommand();
-  
+  $context = getContext();
+
   if (count($command) == 3 && $command[0] == 'register') {
-    output(register($command));
+    output(register($context, $command));
   } else if (count($command) == 1 && $command[0] == 'hello') {
-    output(hello($command));
+    output(hello($context, $command));
   } else if (count($command) == 1 && $command[0] == 'pta-me') {
-    output(ptaMe($command));
+    output(ptaMe($context, $command));
   } else {
-    output('Unrecognized command ' . var_export($command, true));
+    output(['Unrecognized command ' . var_export($command, true)]);
   }

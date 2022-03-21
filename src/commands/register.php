@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
   require_once(__DIR__ . '/../platform.php');
 
-function isAdmin() {
-  if (isset($_ENV["PREJOURNAL_ADMIN_PARTY"]) && $_ENV["PREJOURNAL_ADMIN_PARTY"] == "true") {
+function isAdmin($context) {
+  if ($context["adminParty"]) {
     return true;
   }
-  $user = getUser();
-  return ($user["username"] == "admin");
+  var_dump($context);
+  return ($context["user"]["username"] == "admin");
 }
 
 // For now, only the super-admin can register users.
-function register($command) {
-  if (isAdmin()) {
+function register($context, $command) {
+  if (isAdmin($context)) {
     if (createUser($command[1], $command[2])) {
         return ['created user'];
     } else {

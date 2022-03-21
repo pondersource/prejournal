@@ -1,10 +1,9 @@
 <?php declare(strict_types=1);
 require_once(__DIR__ . '/../database.php');
 $ret = [];
-function ptaMe() {
-  $user = getUser();
-  if ($user) {
-    $movementsIn = getMovementsToComponent($user['username']);
+function ptaMe($context) {
+  if ($context->user) {
+    $movementsIn = getMovementsToComponent($context->user['username']);
     for ($i = 0; $i < count($movementsIn); $i++) {
       ret.push($movementsIn[$i]["timestamp_"]);
       ret.push("assets  " . $movementsIn[$i]["amount"]);
@@ -17,7 +16,7 @@ function ptaMe() {
       ret.push("expenses");
       ret.push("");
     }
-    $movementsOut = getMovementsFromComponent($user['username']);
+    $movementsOut = getMovementsFromComponent($context->user['username']);
   } else {
     ret.push("User not found or wrong password");
   }
