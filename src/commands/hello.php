@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
   require_once(__DIR__ . '/../platform.php');
 
 function hello($command) {
@@ -6,8 +6,8 @@ function hello($command) {
   if ($user) {
     $username = $user['username'];
     $userId = $user['id'];
-    output("Hello $username, your userId is $userId");
+    return ["Hello $username, your userId is $userId"];
   } else {
-    output("User not found or wrong password");
+    return ["User not found or wrong password"];
   }
 }

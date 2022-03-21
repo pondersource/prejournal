@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 require_once(__DIR__ . '/database.php');
 
 // Can be used when running from CLI

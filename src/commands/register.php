@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
   require_once(__DIR__ . '/../platform.php');
 
 function isAdmin() {
@@ -12,8 +12,12 @@ function isAdmin() {
 // For now, only the super-admin can register users.
 function register($command) {
   if (isAdmin()) {
-    output(createUser($command[1], $command[2]));
+    if (createUser($command[1], $command[2])) {
+        return ['created user'];
+    } else {
+      return ['failed to create user'];
+    };
   } else {
-    output('Only admins can register new users');
+    return ['Only admins can register new users'];
   }
 }

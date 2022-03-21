@@ -1,15 +1,25 @@
-<?php
+<?php declare(strict_types=1);
 require_once 'vendor/autoload.php';
+require_once(__DIR__ . '/../schema.php');
 
 use Doctrine\DBAL\DriverManager;
 
 function getDbConn() {
-  var_dump($_SERVER);
+  // var_dump($_SERVER);
   if (isset($_SERVER['TESTING'])) {
-    return DriverManager::getConnection([
+    // echo "Loading test database";
+    $tables = getTables();
+    $conn = DriverManager::getConnection([
       'driver' => 'pdo_sqlite',
       'memory' => true
     ]);
+
+    for ($i = 0; $i < count($tables); $i++) {
+      // echo "Testing environment, creating table $i";
+      $created = $conn->executeQuery($tables[$i]);
+      // var_dump($created->fetchAll());
+    }
+    return $conn;
   } else {
     return DriverManager::getConnection([
       'driver' => 'pdo_sqlite',
@@ -28,7 +38,7 @@ function validateUser($username, $passwordGiven) {
     $id = intval($arr[0][0]);
     $passwordHash = $arr[0][1];
     $conclusion = password_verify($passwordGiven, $passwordHash);
-    var_dump($conclusion);
+    // var_dump($conclusion);
     if ($conclusion) {
       return [
         "id" => $id,

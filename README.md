@@ -3,6 +3,13 @@ An experiment in pre-journal bookkeeping.
 
 Like the [Resources-Events-Agents (REA)](http://mikorizal.org/Fromprivateownershipaccountingtocommonsaccoun.html) model, this is an alternative bookkeeping model. Alternative to dual entry / "generally accepted accounting principles" bookkeeping, that is. It takes a bird's eye view of the economic network, instead of an organisation-centric view.
 
+# Development
+```
+composer install
+GEN_XML=1 php schema.php > schemal.xml
+./vendor/bin/phpunit tests
+```
+
 # Usage (CLI)
 
 The code is made platform independent through `src/platform.php`. To execute on the command line, try for instance:
