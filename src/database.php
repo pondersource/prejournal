@@ -4,7 +4,18 @@ require_once 'vendor/autoload.php';
 use Doctrine\DBAL\DriverManager;
 
 function getDbConn() {
-  return DriverManager::getConnection([ 'url' => $_ENV["DATABASE_URL"] ]);
+  var_dump($_SERVER);
+  if (isset($_SERVER['TESTING'])) {
+    return DriverManager::getConnection([
+      'driver' => 'pdo_sqlite',
+      'memory' => true
+    ]);
+  } else {
+    return DriverManager::getConnection([
+      'driver' => 'pdo_sqlite',
+      'url' => $_ENV["DATABASE_URL"]
+    ]);
+  }
 }
 
 function validateUser($username, $passwordGiven) {
