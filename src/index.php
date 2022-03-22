@@ -7,12 +7,16 @@
   $command = getCommand();
   $context = getContext();
 
-  if (count($command) == 3 && $command[0] == 'register') {
-    output(register($context, $command));
-  } else if (count($command) == 1 && $command[0] == 'hello') {
-    output(hello($context, $command));
-  } else if (count($command) == 1 && $command[0] == 'pta-me') {
-    output(ptaMe($context, $command));
-  } else {
-    output(['Unrecognized command ' . var_export($command, true)]);
-  }
+// publically accessible commands:
+if (count($command) == 3 && $command[0] == 'register') {
+  output(register($context, $command));
+} else if (!isset($context["user"])) {
+    showLoginPage();
+// commands requiring a logged-in user
+} else  if (count($command) == 1 && $command[0] == 'hello') {
+  output(hello($context, $command));
+} else if (count($command) == 1 && $command[0] == 'pta-me') {
+  output(ptaMe($context, $command));
+} else {
+  output(['Unrecognized command ' . var_export($command, true)]);
+}

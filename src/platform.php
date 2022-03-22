@@ -35,7 +35,7 @@ function getUser() {
     // echo 'validating user based on PREJOURNAL_USERNAME / PREJOURNAL_PASSWORD';
     return validateUser($_SERVER['PREJOURNAL_USERNAME'], $_SERVER['PREJOURNAL_PASSWORD']);
   }
-  echo 'not logged in';
+  // echo 'not logged in\n';
   return null;
 }
 
