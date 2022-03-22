@@ -15,7 +15,7 @@ git remote -v # should have a remote 'heroku'	to https://git.heroku.com/prejourn
 heroku pg:backups:capture
 heroku pg:backups:download
 GEN_SQL_PG=1 php schema.php | heroku psql
-node ../../pondersource-books/stichting/reports/to-prejournal-sql.js | heroku psql
-sh ../../pondersource-books/stichting/employee-passwords.sh
+node ../../pondersource-books/stichting/reports/to-prejournal-cli.js | /bin/bash
+/bin/bash ../../pondersource-books/stichting/employee-passwords.sh
 ```
 
