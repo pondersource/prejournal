@@ -10,7 +10,6 @@ function getDbConn() {
     return $test_db_connection;
   } else {
     return DriverManager::getConnection([
-      // 'driver' => 'pdo_sqlite',
       'url' => $_SERVER["DATABASE_URL"]
     ]);
   }
@@ -20,14 +19,20 @@ function setTestDb() {
   global $test_db_connection;
   $tables = getTables();
   $test_db_connection = DriverManager::getConnection([
-    // 'driver' => 'pdo_sqlite',
-    // 'memory' => true
-    'driver' => 'pdo_pgsql' // for debugging, seeing database contents on localhost postgresql server using "psql postgres"
+    'driver' => 'pdo_sqlite', 'memory' => true
+    // 'driver' => 'pdo_pgsql' // for debugging, seeing database contents on localhost postgresql server using "psql postgres"
   ]);
 
   for ($i = 0; $i < count($tables); $i++) {
     $created = $test_db_connection->executeQuery($tables[$i]);
   }
+}
+
+function tableDump($tablename) { // for debugging
+  $conn  = getDbConn();
+  $query = "SELECT * FROM $tablename";
+  $result = $conn->executeQuery($query);
+  var_dump($result->fetchAllAssociative());
 }
 
 function validateUser($username, $passwordGiven) {
@@ -55,6 +60,7 @@ function createUser($username, $passwordGiven) {
   $passwordHash = password_hash($passwordGiven, PASSWORD_BCRYPT, [ "cost" => 10 ]);
   $query = "INSERT INTO users (username, passwordhash) VALUES (?, ?)";
   $result = $conn->executeStatement($query, [ $username, $passwordHash ]);
+  // tableDump("users");
   return $conn->lastInsertId();
 }
 

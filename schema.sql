@@ -4,7 +4,7 @@
 drop table if exists users;
 
 create table users (
-  id serial primary key,
+  id integer primary key autoincrement,
   username varchar unique,
   passwordhash varchar
 );
@@ -12,14 +12,14 @@ create table users (
 drop table if exists components;
 
 create table components (
-  id serial primary key,
+  id integer primary key autoincrement,
   name varchar unique
 );
 
 drop table if exists movements;
 
 create table movements (
-  id serial primary key,
+  id integer primary key autoincrement,
   type_ varchar, /* 'invoice', 'payment' */
   fromComponent int,
   toComponent int,
@@ -30,7 +30,7 @@ create table movements (
 drop table if exists statements;
 
 create table statements (
-  id serial primary key,
+  id integer primary key autoincrement,
   movementId int,
   userId int,
   sourceDocumentFormat varchar, /* could be an invoice, bank statement csv file, API call etc */
@@ -41,7 +41,7 @@ create table statements (
 drop table if exists componentGrants;
 
 create table componentGrants (
-  id serial primary key,
+  id integer primary key autoincrement,
   fromUser int,
   toUser int,
   componentId int
