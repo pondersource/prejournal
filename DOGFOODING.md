@@ -14,10 +14,8 @@ To regenerate the database contents from source documents (this requires access 
 git remote -v # should have a remote 'heroku'	to https://git.heroku.com/prejournal.git
 heroku pg:backups:capture
 heroku pg:backups:download
-cat schema.sql | heroku psql
-cd ../../pondersource-books/stichting
-sh ./employee-passwords.sh
-node reports/to-prejournal-sql.js > prejournal.sql
-cat prejournal.sql | heroku psql --app=prejournal
+GEN_SQL_PG=1 php schema.php | heroku psql
+node ../../pondersource-books/stichting/reports/to-prejournal-sql.js | heroku psql
+sh ../../pondersource-books/stichting/employee-passwords.sh
 ```
 
