@@ -1,7 +1,7 @@
 -- Created from schema.php, DO NOT EDIT DIRECTLY!
 -- To regenerate: GEN_SQL=1 php schema.php > schemal.xml
 
-drop if exists `users`;
+drop table if exists users;
 
 create table users (
   id serial primary key,
@@ -9,14 +9,14 @@ create table users (
   passwordhash varchar
 );
 
-drop if exists `components`;
+drop table if exists components;
 
 create table components (
   id serial primary key,
   name varchar unique
 );
 
-drop if exists `movements`;
+drop table if exists movements;
 
 create table movements (
   id serial primary key,
@@ -27,7 +27,7 @@ create table movements (
   amount float
 );
 
-drop if exists `statements`;
+drop table if exists statements;
 
 create table statements (
   id serial primary key,
@@ -38,7 +38,7 @@ create table statements (
   timestamp_ timestamp
 )
 
-drop if exists `componentGrants`;
+drop table if exists componentGrants;
 
 create table componentGrants (
   id serial primary key,

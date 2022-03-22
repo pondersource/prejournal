@@ -17,13 +17,13 @@ final class RegisterAndHelloTest extends TestCase
     public function testUserRegisteredAndFound(): void
     {
         setTestDb();
-        $this->assertEquals(['created user'], register([ 'adminParty' => true ], ['register', 'someuser', 'somepass']));
+        $lastInsertId = intval(register([ 'adminParty' => true ], ['register', 'someuser', 'somepass'])[0]);
         // right user and pass
         setUser('someuser', 'somepass');
         $this->assertEquals(
             [
                 'user' => [
-                    'id' => 0,
+                    'id' => $lastInsertId,
                     'username' => 'someuser',
                 ],
                 'adminParty' => true
@@ -32,14 +32,14 @@ final class RegisterAndHelloTest extends TestCase
         );
 
         $this->assertEquals(
-            [ "Hello someuser, your userId is 0" ],
+            [ "Hello someuser, your userId is $lastInsertId" ],
             hello(getContext(), ['hello'])
         );
     }
     public function testUserRegisteredLoginWrongPass(): void
     {
         setTestDb();
-        $this->assertEquals(['created user'], register([ 'adminParty' => true ], ['register', 'someuser', 'somepass']));
+        $lastInsertId = intval(register([ 'adminParty' => true ], ['register', 'someuser', 'somepass'])[0]);
 
         // wrong pass
         setUser('someuser', 'wrongpass');
@@ -58,7 +58,7 @@ final class RegisterAndHelloTest extends TestCase
     public function testUserRegisteredLoginWrongUsername(): void
     {
         setTestDb();
-        $this->assertEquals(['created user'], register([ 'adminParty' => true ], ['register', 'someuser', 'somepass']));
+        $lastInsertId = intval(register([ 'adminParty' => true ], ['register', 'someuser', 'somepass'])[0]);
 
         // wrong user
         setUser('wronguser', 'somepass');

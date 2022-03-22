@@ -4,20 +4,20 @@
 
 function getTables() {
     return [
-"drop if exists `users`;",
+"drop table if exists users;",
 "create table users (
   id serial primary key,
   username varchar unique,
   passwordhash varchar
 );",
 
-"drop if exists `components`;",
+"drop table if exists components;",
 "create table components (
   id serial primary key,
   name varchar unique
 );",
 
-"drop if exists `movements`;",
+"drop table if exists movements;",
 "create table movements (
   id serial primary key,
   type_ varchar, /* 'invoice', 'payment' */
@@ -27,7 +27,7 @@ function getTables() {
   amount float
 );",
 
-"drop if exists `statements`;",
+"drop table if exists statements;",
 "create table statements (
   id serial primary key,
   movementId int,
@@ -37,7 +37,7 @@ function getTables() {
   timestamp_ timestamp
 )",
 
-"drop if exists `componentGrants`;",
+"drop table if exists componentGrants;",
 "create table componentGrants (
   id serial primary key,
   fromUser int,
