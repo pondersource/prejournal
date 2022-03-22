@@ -5,7 +5,6 @@ function isAdmin($context) {
   if ($context["adminParty"]) {
     return true;
   }
-  var_dump($context);
   return ($context["user"]["username"] == "admin");
 }
 

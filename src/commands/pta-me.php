@@ -1,24 +1,17 @@
 <?php declare(strict_types=1);
 require_once(__DIR__ . '/../database.php');
-$ret = [];
 function ptaMe($context) {
-  if ($context->user) {
-    $movementsIn = getMovementsToComponent($context->user['username']);
-    for ($i = 0; $i < count($movementsIn); $i++) {
-      ret.push($movementsIn[$i]["timestamp_"]);
-      ret.push("assets  " . $movementsIn[$i]["amount"]);
-      ret.push("income");
-      ret.push("");
+  if (isset($context["user"])) {
+    $movements = getMovementsForUser($context["user"]["id"]);
+    $ret = [];
+    for ($i = 0; $i < count($movements); $i++) {
+      array_push($ret, $movements[$i]["timestamp_"]);
+      array_push($ret, "assets  " . $movements[$i]["amount"]);
+      array_push($ret, "income");
+      array_push($ret, "");
     }
-    for ($i = 0; $i < count($movementsIn); $i++) {
-      ret.push($movementsIn[$i]["timestamp_"]);
-      ret.push("liabilities  -" . $movementsIn[$i]["amount"]);
-      ret.push("expenses");
-      ret.push("");
-    }
-    $movementsOut = getMovementsFromComponent($context->user['username']);
+    return $ret;
   } else {
-    ret.push("User not found or wrong password");
+    return [ "User not found or wrong password" ];
   }
-  return ret;
 }

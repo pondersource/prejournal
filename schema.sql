@@ -1,5 +1,7 @@
 -- Created from schema.php, DO NOT EDIT DIRECTLY!
--- To regenerate: GEN_XML=1 php schema.php > schemal.xml
+-- To regenerate: GEN_SQL=1 php schema.php > schemal.xml
+
+drop if exists `users`;
 
 create table users (
   id serial primary key,
@@ -7,19 +9,25 @@ create table users (
   passwordhash varchar
 );
 
+drop if exists `components`;
+
 create table components (
   id serial primary key,
   name varchar unique
 );
 
+drop if exists `movements`;
+
 create table movements (
   id serial primary key,
-  type varchar, /* 'invoice', 'payment' */
+  type_ varchar, /* 'invoice', 'payment' */
   fromComponent int,
   toComponent int,
   timestamp_ timestamp,
   amount float
 );
+
+drop if exists `statements`;
 
 create table statements (
   id serial primary key,
@@ -29,6 +37,8 @@ create table statements (
   sourceDocumentFilename varchar, /* TODO: work out how to store files when on Heroku */
   timestamp_ timestamp
 )
+
+drop if exists `componentGrants`;
 
 create table componentGrants (
   id serial primary key,

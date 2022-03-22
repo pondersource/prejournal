@@ -6,7 +6,6 @@ use Doctrine\DBAL\DriverManager;
 
 function getDbConn() {
   global $test_db_connection;
-  // var_dump($_SERVER);
   if (isset($test_db_connection)) {
     return $test_db_connection;
   } else {
@@ -21,14 +20,13 @@ function setTestDb() {
   global $test_db_connection;
   $tables = getTables();
   $test_db_connection = DriverManager::getConnection([
-    'driver' => 'pdo_sqlite',
-    'memory' => true
+    // 'driver' => 'pdo_sqlite',
+    // 'memory' => true
+    // 'driver' => 'pdo_pgsql' // for debugging, seeing database contents on localhost postgresql server using "psql postgres"
   ]);
 
   for ($i = 0; $i < count($tables); $i++) {
-    // echo "Testing environment, creating table $i";
     $created = $test_db_connection->executeQuery($tables[$i]);
-    // var_dump($created->fetchAll());
   }
 }
 
@@ -38,12 +36,10 @@ function validateUser($username, $passwordGiven) {
   $query = 'SELECT id, passwordhash FROM users WHERE username = ?';
   $result = $conn->executeQuery($query, [ $username ]);
   $arr = $result->fetchAllNumeric();
-  // var_dump($arr);
   if (count($arr) == 1) {
     $id = intval($arr[0][0]);
     $passwordHash = $arr[0][1];
     $conclusion = password_verify($passwordGiven, $passwordHash);
-    // var_dump($conclusion);
     if ($conclusion) {
       return [
         "id" => $id,
@@ -59,30 +55,12 @@ function createUser($username, $passwordGiven) {
   $passwordHash = password_hash($passwordGiven, PASSWORD_BCRYPT, [ "cost" => 10 ]);
   $query = "INSERT INTO users (username, passwordhash) VALUES (?, ?)";
   $result = $conn->executeStatement($query, [ $username, $passwordHash ]);
-  // var_dump("inserted $username $passwordHash new user");
-  // var_dump($result);
-  // var_dump(validateUser($username, $passwordGiven));
   return !!$result;
 }
 
-function getMovementsFromComponent($componentName) {
+function getMovementsForUser($userId) {
   $conn  = getDbConn();
-  $query = "SELECT * FROM movements INNER JOIN components ON movements.fromcomponent = components.id WHERE components.name = ?";
-  $result = $conn->executeQuery($query, [ $componentName ]);
-  $ret = [];
-  while ($row = $result->fetchAssociative() !== false) {
-      array_push($ret, $row);
-  }
-  return $ret;
-}
-
-function getMovementsToComponent($componentName) {
-  $conn  = getDbConn();
-  $query = "SELECT * FROM movements INNER JOIN components ON movements.tocomponent = components.id WHERE components.name = ?";
-  $result = $conn->executeQuery($query, [ $componentName ]);
-  $ret = [];
-  while ($row = $result->fetchAssociative() !== false) {
-      array_push($ret, $row);
-  }
-  return $ret;
+  $query = "SELECT m.* FROM movements m INNER JOIN statements s ON m.id = s.movementId WHERE s.userId = ?";
+  $result = $conn->executeQuery($query, [ $userId ]);
+  return $result->fetchAllAssociative();
 }

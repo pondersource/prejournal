@@ -6,7 +6,7 @@ Like the [Resources-Events-Agents (REA)](http://mikorizal.org/Fromprivateownersh
 # Development
 ```
 composer install
-GEN_XML=1 php schema.php > schema.sql
+GEN_SQL=1 php schema.php > schema.sql
 ./vendor/bin/phpunit tests
 ```
 
