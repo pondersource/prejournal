@@ -111,7 +111,7 @@ function getComponentId($name, $atomic = false) {
       [ "name" => $name ]
     );
     $arr = $result->fetchAllAssociative();
-    var_dump($arr);
+    // var_dump($arr);
     if (count($arr) == 0) {
       $result = $conn->executeQuery("INSERT INTO components (name) VALUES (:name)",
         [ "name" => $name ]
@@ -121,9 +121,9 @@ function getComponentId($name, $atomic = false) {
       );
       $arr = $result->fetchAllAssociative();
       // return $conn->lastInsertId();
-      var_dump($arr);
+      // var_dump($arr);
     }
   }
-  echo "returning componentId for $name:".$arr[0]["id"];
+  // echo "returning componentId for $name:".$arr[0]["id"];
   return $arr[0]["id"];
 };
