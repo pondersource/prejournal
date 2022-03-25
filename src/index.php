@@ -9,7 +9,7 @@
 
   $command = getCommand();
   $context = getContext();
-var_dump($command);
+// var_dump($command);
 
 // publically accessible commands:
 if (count($command) == 3 && $command[0] == 'register') {

@@ -50,8 +50,8 @@ function getCommand() {
      if (count($parts) >=3 && $parts[0] == "" && $parts[1] == "v1") {
        try {
            $postBody = file_get_contents('php://input');
-           echo "parsing post body!";
-           var_dump($postBody);
+          //  echo "parsing post body!";
+          //  var_dump($postBody);
            if (is_string($postBody) && strlen($postBody) > 0) {
               $arr = json_decode($postBody);
               if (is_array($arr)) {

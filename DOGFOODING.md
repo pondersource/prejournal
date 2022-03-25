@@ -4,8 +4,7 @@
 You should have received a `<username>` and `<password>` from Michiel via Slack.
 
 ```sh
-curl https://<username>:<password>@api.prejournal.org/v1/pta-me > pondersource.journal
-hledger bs -f pondersouce.journal
+curl https://<username>:<password>@api.prejournal.org/v1/list-new
 ```
 
 ## Import from Ponder Source source documents (instructions for Michiel only)

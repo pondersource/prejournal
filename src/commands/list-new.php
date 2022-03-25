@@ -7,7 +7,8 @@ function listNew($context, $command) {
       . "INNER JOIN componentGrants g ON g.fromUser = s.userId "
       . "WHERE ((g.componentId = m.fromComponent) OR (g.componentId = m.fromComponent))"
       . "AND g.toUser = :userId;", [ "userId" => $context["user"]["id"] ]);
-    return array_map(function($row) {
+    $ret = ["timestamp, from, to, amount, observer"];
+    foreach($movements->fetchAllAssociative() as $row) {
       // var_dump($row);
       foreach(["fromComponent", "toComponent", "userId"] as $columnName) {
         // sqlite preserves case in column names but
@@ -21,8 +22,9 @@ function listNew($context, $command) {
       $toComponentName = getComponentName($row['toComponent']);
       $amount = $row['amount'];
       $observer = getUserName($row['userId']);
-      return "$timestamp_, $fromComponentName, $toComponentName, $amount, $observer";
-    }, $movements->fetchAllAssociative());
+      array_push($ret, "$timestamp_, $fromComponentName, $toComponentName, $amount, $observer");
+    }
+    return $ret;
     // var_dump($ret);
     // return $ret;
     // $recipientUserId = getUserId($command[1]);
