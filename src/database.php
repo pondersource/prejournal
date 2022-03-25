@@ -66,7 +66,64 @@ function createUser($username, $passwordGiven) {
 
 function getMovementsForUser($userId) {
   $conn  = getDbConn();
-  $query = "SELECT m.* FROM movements m INNER JOIN statements s ON m.id = s.movementId WHERE s.userId = ?";
-  $result = $conn->executeQuery($query, [ $userId ]);
+  $query = "SELECT m.* FROM movements m INNER JOIN statements s ON m.id = s.movementId WHERE s.userId = :userid";
+  $result = $conn->executeQuery($query, [ "userid" => $userId ]);
   return $result->fetchAllAssociative();
 }
+
+function getUserId($username) {
+  $conn  = getDbConn();
+  $query = "SELECT id FROM users WHERE username = :username";
+  $result = $conn->executeQuery($query, [ "username" => $username ]);
+  $arr = $result->fetchAllAssociative();
+  if (count($arr) != 1) {
+    return NULL;
+  }
+  return $arr[0]["id"];
+};
+
+function getUserName($id) {
+  $result = getDbConn()->executeQuery("SELECT username FROM users WHERE id = :id",
+    [ "id" => $id ]
+  );
+  return $result->fetchAllAssociative()[0]["username"];
+}
+
+function getComponentName($id) {
+  $result = getDbConn()->executeQuery("SELECT name FROM components WHERE id = :id",
+    [ "id" => $id ]
+  );
+  return $result->fetchAllAssociative()[0]["name"];
+}
+
+function getComponentId($name, $atomic = false) {
+  $conn  = getDbConn();
+  if ($atomic) {
+
+    // See https://dba.stackexchange.com/questions/129522/how-to-get-the-id-of-the-conflicting-row-in-upsert
+    $result = $conn->executeQuery("INSERT INTO components (name) VALUES (:name) "
+      . "ON CONFLICT (id) DO UPDATE SET name = :name RETURNING id;",
+      [ "name" => $name ]
+    );
+    $arr = $result->fetchAllAssociative();
+  } else {
+    $result = $conn->executeQuery("SELECT id FROM components WHERE name = :name",
+      [ "name" => $name ]
+    );
+    $arr = $result->fetchAllAssociative();
+    var_dump($arr);
+    if (count($arr) == 0) {
+      $result = $conn->executeQuery("INSERT INTO components (name) VALUES (:name)",
+        [ "name" => $name ]
+      );
+      $result = $conn->executeQuery("SELECT id FROM components WHERE name = :name",
+        [ "name" => $name ]
+      );
+      $arr = $result->fetchAllAssociative();
+      // return $conn->lastInsertId();
+      var_dump($arr);
+    }
+  }
+  echo "returning componentId for $name:".$arr[0]["id"];
+  return $arr[0]["id"];
+};
