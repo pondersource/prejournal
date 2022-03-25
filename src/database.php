@@ -10,7 +10,8 @@ function getDbConn() {
     return $test_db_connection;
   } else {
     return DriverManager::getConnection([
-      'url' => $_SERVER["DATABASE_URL"]
+      'url' => $_SERVER["DATABASE_URL"],
+      'persistent' => true
     ]);
   }
 }
