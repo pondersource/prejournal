@@ -72,6 +72,27 @@ function getMovementsForUser($userId) {
   return $result->fetchAllAssociative();
 }
 
+function getAllComponents() {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM components";
+  $result = $conn->executeQuery($query);
+  return $result->fetchAllAssociative();
+}
+
+function getAllMovements() {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM movements";
+  $result = $conn->executeQuery($query);
+  return $result->fetchAllAssociative();
+}
+
+function getAllStatements() {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM statements";
+  $result = $conn->executeQuery($query);
+  return $result->fetchAllAssociative();
+}
+
 function getUserId($username) {
   $conn  = getDbConn();
   $query = "SELECT id FROM users WHERE username = :username";

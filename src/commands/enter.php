@@ -5,30 +5,23 @@
 
 // E.g.: php src/index.php enter "from component" "to component" "1.23" "2021-12-31T23:00:00.000Z" "invoice" "ponder-source-agreement-192"
 //                           0              1               2       3                4                 5          6
-// create movement:
-// "type_" => $command[1],
-// "fromComponent" => intval($command[2]),
-// "toComponent" => intval($command[3]),
-// "timestamp_" => timestampToDateTime(intval($command[4])),
-// "amount" => floatval($command[5])
-//
-// create statement:
-// "userId" => $context["user"]["id"],
-// "movementId" => intval($command[1]),
-// "timestamp_" => timestampToDateTime(intval($command[2]))
 
 function enter($context, $command) {
   if (isset($context["user"])) {
-    $userId = $context["user"]["id"];
+    // $userId = $context["user"]["id"];
     $componentFromId = getComponentId($command[1]);
     $componentToId = getComponentId($command[2]);
+    $amountStr = $command[3];
+    $dateStr = $command[4];
+    $type_ = $command[5];
+    // unused: $command[6]
     $movementId = intval(createMovement($context, [
       "create-movement",
-      $command[5],
+      $type_,
       strval($componentFromId),
       strval($componentToId),
-      $command[4],
-      $command[3]
+      $dateStr,
+      $amountStr
     ])[0]);
     $statementId = intval(createStatement($context, [
       "create-statement",

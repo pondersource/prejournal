@@ -8,7 +8,6 @@ function createMovement($context, $command) {
     $conn  = getDbConn();
     $query = "INSERT INTO movements (type_, fromComponent, toComponent, timestamp_, amount) "
        . "VALUES (:type_, :fromComponent, :toComponent, :timestamp_, :amount);";
-    $timestamp_ = new DateTime();
 
     $ret = $conn->executeStatement($query, [
       "type_" => $command[1],

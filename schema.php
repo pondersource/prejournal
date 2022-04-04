@@ -20,7 +20,7 @@ function getTables() {
 "drop table if exists movements;",
 "create table movements (
   id integer primary key autoincrement,
-  type_ varchar, /* 'invoice', 'payment' */
+  type_ varchar, /* 'invoice', 'payment', 'worked' */
   fromComponent int,
   toComponent int,
   timestamp_ timestamp,

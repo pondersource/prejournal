@@ -17,4 +17,3 @@ GEN_SQL_PG=1 php schema.php | heroku psql
 node ../../pondersource-books/stichting/reports/to-prejournal-cli.js | /bin/bash
 /bin/bash ../../pondersource-books/stichting/employee-passwords.sh
 ```
-
