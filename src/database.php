@@ -20,8 +20,8 @@ function setTestDb() {
   global $test_db_connection;
   $tables = getTables();
   $test_db_connection = DriverManager::getConnection([
-    'driver' => 'pdo_sqlite', 'memory' => true
-    // 'driver' => 'pdo_pgsql' // for debugging, seeing database contents on localhost postgresql server using "psql postgres"
+    //'driver' => 'pdo_sqlite', 'memory' => true
+     'driver' => 'pdo_pgsql' // for debugging, seeing database contents on localhost postgresql server using "psql postgres"
   ]);
 
   for ($i = 0; $i < count($tables); $i++) {
