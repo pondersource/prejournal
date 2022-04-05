@@ -1,9 +1,6 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
-require_once(__DIR__ . '/../src/commands/register.php');
-require_once(__DIR__ . '/../src/commands/enter.php');
-require_once(__DIR__ . '/../src/commands/grant.php');
-require_once(__DIR__ . '/../src/commands/list-new.php');
+require_once(__DIR__ . '/../src/run-command.php');
 
 
 final class EnterThenGrantThenListNewTest extends TestCase
@@ -11,15 +8,16 @@ final class EnterThenGrantThenListNewTest extends TestCase
     public function testEnterThenGrantThenListNew(): void
     {
         setTestDb();
-        $aliceId = intval(register([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        $bobId = intval(register([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0]);
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        $bobId = intval(runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0]);
         setUser('alice', 'alice123');
-        enter(getContext(), ["enter", "from component", "to component", "1.23", "1234567890", "invoice", "ponder-source-agreement-192" ]);
-        grant(getContext(), ["grant", "bob", "from component"]);
+        runCommand(getContext(), ["enter", "from component", "to component", "1.23", "1234567890", "invoice", "ponder-source-agreement-192" ]);
+        runCommand(getContext(), ["grant", "bob", "from component"]);
         setUser('bob', 'bob123');
         $this->assertEquals([
+            'timestamp, from, to, amount, observer',
             '1234567890, from component, to component, 1.23, alice'
-        ], listNew(getContext(), ['list-new']));
+        ], runCommand(getContext(), ['list-new']));
     }
 }
 

@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
-require_once(__DIR__ . '/../src/commands/hello.php');
-require_once(__DIR__ . '/../src/commands/register.php');
-
+require_once(__DIR__ . '/../src/run-command.php');
 
 final class RegisterAndHelloTest extends TestCase
 {
@@ -11,13 +9,13 @@ final class RegisterAndHelloTest extends TestCase
         setTestDb();
         $this->assertEquals(
             [ "User not found or wrong password" ],
-            hello([], ['hello'])
+            runCommand([], ['hello'])
         );
     }
     public function testUserRegisteredAndFound(): void
     {
         setTestDb();
-        $lastInsertId = intval(register([ 'adminParty' => true ], ['register', 'someuser', 'somepass'])[0]);
+        $lastInsertId = intval(runCommand([ 'adminParty' => true ], ['register', 'someuser', 'somepass'])[0]);
         // right user and pass
         setUser('someuser', 'somepass');
         $this->assertEquals(
@@ -33,13 +31,13 @@ final class RegisterAndHelloTest extends TestCase
 
         $this->assertEquals(
             [ "Hello someuser, your userId is $lastInsertId" ],
-            hello(getContext(), ['hello'])
+            runCommand(getContext(), ['hello'])
         );
     }
     public function testUserRegisteredLoginWrongPass(): void
     {
         setTestDb();
-        $lastInsertId = intval(register([ 'adminParty' => true ], ['register', 'someuser', 'somepass'])[0]);
+        $lastInsertId = intval(runCommand([ 'adminParty' => true ], ['register', 'someuser', 'somepass'])[0]);
 
         // wrong pass
         setUser('someuser', 'wrongpass');
@@ -52,13 +50,13 @@ final class RegisterAndHelloTest extends TestCase
 
         $this->assertEquals(
             [ "User not found or wrong password" ],
-            hello(getContext(), ['hello'])
+            runCommand(getContext(), ['hello'])
         );
     }
     public function testUserRegisteredLoginWrongUsername(): void
     {
         setTestDb();
-        $lastInsertId = intval(register([ 'adminParty' => true ], ['register', 'someuser', 'somepass'])[0]);
+        $lastInsertId = intval(runCommand([ 'adminParty' => true ], ['register', 'someuser', 'somepass'])[0]);
 
         // wrong user
         setUser('wronguser', 'somepass');
@@ -71,7 +69,7 @@ final class RegisterAndHelloTest extends TestCase
 
         $this->assertEquals(
             [ "User not found or wrong password" ],
-            hello(getContext(), ['hello'])
+            runCommand(getContext(), ['hello'])
         );
 
     }
