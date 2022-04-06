@@ -1,6 +1,7 @@
 {
     "name": "federatedbookkeeping/prejournal",
-    "description": "Prejournal Bookkeeping App",
+    "description": "Tool for Automated Bookkeeping",
+    "version": "1.0",
     "type": "project",
     "autoload": {
         "psr-4": {

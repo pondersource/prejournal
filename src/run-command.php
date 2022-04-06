@@ -8,6 +8,7 @@
   require_once(__DIR__ . '/commands/list-new.php');
   require_once(__DIR__ . '/commands/import-hours.php');
   require_once(__DIR__ . '/commands/import-bank-statement.php');
+  require_once(__DIR__ . '/commands/minimal-version.php');
 
 function toCamel($str) {
     $parts = explode("-", $str);
@@ -26,11 +27,18 @@ function runCommand($context, $command)
         "grant" => 3,
         "list-new" => 1,
         "import-hours" => 4,
-        "import-bank-statement" => 4
+        "import-bank-statement" => 4,
+        "minimal-version" => 2,
     ];
     if (isset($commands[$command[0]]) && count($command) == $commands[$command[0]]) {
         $function = toCamel($command[0]);
         return $function($context, $command);
     }
     return ['Unrecognized command ' . var_export($command, true)];
+}
+
+function runCommands($context, $commands) {
+    foreach ($commands as $command) {
+        runCommand($context, $command);
+    }
 }

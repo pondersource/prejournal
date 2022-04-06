@@ -10,6 +10,16 @@ GEN_SQL=1 php schema.php > schema.sql
 ./vendor/bin/phpunit tests
 ```
 
+# Usage (batch processing from .pj file)
+
+The `.pj` file format is a very simple batch processing file format.
+Each line is a command.
+It doesn't support space in command words yet.
+
+```sh
+ php src/batch.php example.pj
+```
+
 # Usage (CLI)
 
 The code is made platform independent through `src/platform.php`. To execute on the command line, try for instance:
