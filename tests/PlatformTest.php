@@ -21,4 +21,12 @@ final class PlatformTest extends TestCase
             ['id' => 1,'username' => 'alice']
         );
     }
+
+    public function testRunCommand(): void {
+        $result = getCommand();
+        $this->assertEquals(
+            $result,
+            ['tests']
+        );
+    }
 }
