@@ -41,6 +41,12 @@ hello
  php src/batch.php example.pj
 ```
 
+Example output:
+```sh
+exact match
+Hello michiel, your userId is 1
+```
+
 # Usage (CLI)
 
 The code is made platform independent through `src/platform.php`. To execute on the command line, try for instance:
