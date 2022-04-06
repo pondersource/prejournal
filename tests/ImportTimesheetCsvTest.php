@@ -12,6 +12,7 @@ final class ImportTimesheetCsvTest extends TestCase
         setUser('alice', 'alice123');
         $fixture = __DIR__ . "/fixtures/time-CSV.csv";
         $result = runCommand(getContext(), ["import-hours", "time-CSV", $fixture,  "2022-03-31 12:00:00" ]);
+
         $this->assertEquals([
             [
                 'id' => 1,
@@ -57,7 +58,7 @@ public function testParseTimeBroCsv(): void
         ],
         [
             'id' => 2,
-            'name' => 'any'
+            'name' => 'test'
         ]
     ], getAllComponents());
     $this->assertEquals([
