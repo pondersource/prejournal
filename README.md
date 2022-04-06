@@ -27,10 +27,10 @@ Example of a `.pj` file that shows quoted vs unquoted words:
 ```pj
 do-something arg1 arg2 arg3
 do-something-else "accounts payable" 1.23
-word"with"quote "quoted words"
+word"with"quote "quoted word"
 ```
 
-Example of a `.pj` file that checks the Prejournal and says Hello to the current user:
+Example of a `.pj` file that checks the Prejournal version and says Hello to the current user:
 ```pj
 minimal-version 1.0
 hello
