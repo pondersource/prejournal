@@ -4,46 +4,47 @@
 drop table if exists users;
 
 create table users (
-  id integer primary key autoincrement,
-  username varchar unique,
+  id SERIAL PRIMARY KEY,
+  username varchar(54) UNIQUE,
   passwordhash varchar
 );
 
 drop table if exists components;
 
 create table components (
-  id integer primary key autoincrement,
-  name varchar unique
+  id SERIAL PRIMARY KEY,
+  name varchar,
+  UNIQUE(name)
 );
 
 drop table if exists movements;
 
 create table movements (
-  id integer primary key autoincrement,
-  type_ varchar, /* 'invoice', 'payment' */
-  fromComponent int,
-  toComponent int,
+  id SERIAL PRIMARY KEY,
+  type_ varchar(54), /* 'invoice', 'payment' */
+  fromComponent integer,
+  toComponent integer,
   timestamp_ timestamp,
-  amount float
+  amount decimal
 );
 
 drop table if exists statements;
 
 create table statements (
-  id integer primary key autoincrement,
-  movementId int,
-  userId int,
-  sourceDocumentFormat varchar, /* could be an invoice, bank statement csv file, API call etc */
-  sourceDocumentFilename varchar, /* TODO: work out how to store files when on Heroku */
+  id SERIAL PRIMARY KEY,
+  movementId integer,
+  userId integer,
+  sourceDocumentFormat character, /* could be an invoice, bank statement csv file, API call etc */
+  sourceDocumentFilename character, /* TODO: work out how to store files when on Heroku */
   timestamp_ timestamp
-)
+);
 
 drop table if exists componentGrants;
 
 create table componentGrants (
-  id integer primary key autoincrement,
-  fromUser int,
-  toUser int,
-  componentId int
-)
+  id SERIAL PRIMARY KEY,
+  fromUser numeric,
+  toUser numeric,
+  componentId numeric
+);
 

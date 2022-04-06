@@ -26,22 +26,60 @@ final class ImportTimesheetCsvTest extends TestCase
             [
                 'id' => 1,
                 'type_' => 'worked',
-                'fromComponent' => 1,
-                'toComponent' => 2,
+                'fromcomponent' => 1,
+                'tocomponent' => 2,
                 'timestamp_' => '2022-03-18 09:39:19',
                 'amount' => 5.0            ]
         ], getAllMovements());
         $this->assertEquals([
             [
                 'id' => 1,
-                'movementId' => 1,
-                'userId' => 1,
-                'sourceDocumentFormat' => null,
-                'sourceDocumentFilename' => null,
+                'movementid' => 1,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
                             ]
         ], getAllStatements());
     }
+
+public function testParseTimeBroCsv(): void
+{
+    setTestDb();
+    $aliceId = intval(register([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+    setUser('alice', 'alice123');
+    $fixture = __DIR__ . "/fixtures/timeBro-CSV.csv";
+    $result = runCommand(getContext(), ["import-hours", "timeBro-CSV", $fixture,  "2022-03-31 12:00:00" ]);
+    $this->assertEquals([
+        [
+            'id' => 1,
+            'name' => 'alex.malikov94@gmail.com'
+        ],
+        [
+            'id' => 2,
+            'name' => 'any'
+        ]
+    ], getAllComponents());
+    $this->assertEquals([
+        [
+            'id' => 1,
+            'type_' => 'worked',
+            'fromcomponent' => 1,
+            'tocomponent' => 2,
+            'timestamp_' => '2022-03-18 09:39:19',
+            'amount' => 5.0            ]
+    ], getAllMovements());
+    $this->assertEquals([
+        [
+            'id' => 1,
+            'movementid' => 1,
+            'userid' => 1,
+            'sourcedocumentformat' => null,
+            'sourcedocumentfilename' => null,
+            'timestamp_' => '2022-03-31 12:00:00',
+                        ]
+    ], getAllStatements());
+}
 }
 
 // in curl commands:

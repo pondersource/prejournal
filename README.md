@@ -6,7 +6,9 @@ Like the [Resources-Events-Agents (REA)](http://mikorizal.org/Fromprivateownersh
 # Development
 ```
 composer install
+sudo apt install postgresql postgresql-contrib
 GEN_SQL=1 php schema.php > schema.sql
+psql -h localhost -d prejournal -U your_username -f schema.sql
 ./vendor/bin/phpunit tests
 ```
 
@@ -14,7 +16,7 @@ GEN_SQL=1 php schema.php > schema.sql
 
 The code is made platform independent through `src/platform.php`. To execute on the command line, try for instance:
 
-* create a .env file with `DATABASE_URL=...` (Postgres), `PREJOURNAL_ADMIN_PARTY=false` `PREJOURNAL_USERNAME=admin` and `PREJOURNAL_PASSWORD=...`
+* create a .env file with `DATABASE_URL=...` postgresql://alex:123456@localhost/prejournal, `PREJOURNAL_ADMIN_PARTY=false` `PREJOURNAL_USERNAME=admin` and `PREJOURNAL_PASSWORD=...`
 * Load `./schema.sql` into the database
 * Run `php src/index.php register <username> <password>` (temporarily set `PREJOURNAL_ADMIN_PARTY=true` to create the 'admin' user)
 * Run `php src/index.php hello`
