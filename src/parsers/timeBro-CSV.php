@@ -8,8 +8,7 @@ function parseTimeBroCSV($str) {
   }
   for ($i = 1; $i < count($lines); $i++) {
     $cells = explode(",", $lines[$i]);
-    var_dump($cells);
-
+    
     if (count($cells) == 7) {
       array_push($ret, [
         "worker" => $cells[0],
