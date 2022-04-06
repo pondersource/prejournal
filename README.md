@@ -16,7 +16,26 @@ psql -h localhost -d prejournal -U your_username -f schema.sql
 
 The `.pj` file format is a very simple batch processing file format.
 Each line is a command.
-It doesn't support space in command words yet.
+Each command consists of space-separated words.
+A word can be quoted (surrounded by `"`) or unquoted.
+If a word is unquoted, it cannot contain spaces, because then the space would be interpreted as the start of the next word.
+If a word is quoted, it can contain spaces, since for the parser the next word would start after `" `.
+Both quoted and unquoted words can contain quotes inside them; the only limitation is that there is no way to put a quote followed by a space (`" `) inside a command word.
+
+Example of a `.pj` file that shows quoted vs unquoted words:
+
+```pj
+do-something arg1 arg2 arg3
+do-something-else "accounts payable" 1.23
+word"with"quote "quoted words"
+```
+
+Example of a `.pj` file that checks the Prejournal and says Hello to the current user:
+```pj
+minimal-version 1.0
+hello
+```
+
 
 ```sh
  php src/batch.php example.pj
