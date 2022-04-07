@@ -29,4 +29,14 @@ final class PlatformTest extends TestCase
             ['tests']
         );
     }
+
+    public function testOutput(): void {
+        $result = output(['hello']);
+        //var_dump($result);
+
+        $this->assertEquals(
+            $result,
+            null
+        );
+    }
 }
