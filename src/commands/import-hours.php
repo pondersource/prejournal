@@ -4,13 +4,15 @@
   require_once(__DIR__ . '/createStatement.php');
   require_once(__DIR__ . '/../parsers/time-CSV.php');
   require_once(__DIR__ . '/../parsers/timeBro-CSV.php');
+  require_once(__DIR__ . '/../parsers/timeDoctor-CSV.php');
 // E.g.: php src/index.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0             1           2         3
 
 function importHours($context, $command) {
   $parserFunctions = [
     "time-CSV" => "parseTimeCSV",
-    "timeBro-CSV" => "parseTimeBroCSV"
+    "timeBro-CSV" => "parseTimeBroCSV",
+    "timeDoctor-CSV" => "parseTimeDoctorCSV"
   ];
   
   if (isset($context["user"])) {

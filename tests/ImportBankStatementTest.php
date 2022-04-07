@@ -26,18 +26,18 @@ final class ImportBankStatementTest extends TestCase
             [
                 'id' => 1,
                 'type_' => 'payment',
-                'fromComponent' => 1,
-                'toComponent' => 2,
+                'fromcomponent' => 1,
+                'tocomponent' => 2,
                 'timestamp_' => '2021-01-01 12:00:00',
                 'amount' => 60.5            ]
         ], getAllMovements());
         $this->assertEquals([
             [
                 'id' => 1,
-                'movementId' => 1,
-                'userId' => 1,
-                'sourceDocumentFormat' => null,
-                'sourceDocumentFilename' => null,
+                'movementid' => 1,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
                             ]
         ], getAllStatements());

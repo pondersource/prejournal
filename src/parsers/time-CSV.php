@@ -8,6 +8,7 @@ function parseTimeCSV($str) {
   }
   for ($i = 1; $i < count($lines); $i++) {
     $cells = explode(",", $lines[$i]);
+
     if (count($cells) == 6) {
       array_push($ret, [
         "worker" => $cells[0],
