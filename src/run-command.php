@@ -8,6 +8,7 @@
   require_once(__DIR__ . '/commands/list-new.php');
   require_once(__DIR__ . '/commands/import-hours.php');
   require_once(__DIR__ . '/commands/import-bank-statement.php');
+  require_once(__DIR__ . '/commands/import-timetip.php');
   require_once(__DIR__ . '/commands/minimal-version.php');
 
 function toCamel($str) {
@@ -28,6 +29,7 @@ function runCommand($context, $command)
         "list-new" => 1,
         "import-hours" => 4,
         "import-bank-statement" => 4,
+        "import-timetip" => 4,
         "minimal-version" => 2,
     ];
     if (isset($commands[$command[0]]) && count($command) == $commands[$command[0]]) {
