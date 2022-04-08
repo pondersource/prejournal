@@ -9,7 +9,7 @@ function parseTimetipJSON($str) {
         array_push($ret, [
             "worker" => 'alex.malikov94@gmail.com',
             "project" => $lines->dates[$i]->last->reason,
-            "start" => $lines->dates[$i]->summary->start,
+            "start" => strtotime($lines->dates[$i]->date),
             "seconds" => $lines->dates[$i]->last->duration,
             /*"date" => $lines->dates[$i]->date,
             "last_type" => $lines->dates[$i]->last->type,

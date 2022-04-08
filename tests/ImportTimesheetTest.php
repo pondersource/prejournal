@@ -143,7 +143,7 @@ final class ImportTimesheetTest extends TestCase
                 'type_' => 'worked',
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
-                'timestamp_' => '1970-01-01 00:00:00',
+                'timestamp_' => '2022-03-27 19:00:00',
                 'amount' => '104580'           ]
         ], getAllMovements());
         $this->assertEquals([
