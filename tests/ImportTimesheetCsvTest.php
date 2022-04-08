@@ -3,7 +3,7 @@ use PHPUnit\Framework\TestCase;
 require_once(__DIR__ . '/../src/run-command.php');
 
 
-final class ImportTimesheetTest extends TestCase
+final class ImportTimesheetCsvTest extends TestCase
 {
     public function testParseTimeCsv(): void
     {
