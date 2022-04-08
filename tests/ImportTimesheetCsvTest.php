@@ -119,6 +119,45 @@ public function testParseTimeDoctorCsv(): void
                         ]
     ], getAllStatements());
 }
+
+public function testParseShaveMyTimeCsv(): void
+{
+    setTestDb();
+    $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+    setUser('alice', 'alice123');
+    $fixture = __DIR__ . "/fixtures/saveMyTime-CSV.csv";
+    $result = runCommand(getContext(), ["import-hours", "saveMyTime-CSV", $fixture,  "2022-03-31 12:00:00" ]);
+
+    $this->assertEquals([
+        [
+            'id' => 1,
+            'name' => 'alice'
+        ],
+        [
+            'id' => 2,
+            'name' => 'default-project'
+        ]
+    ], getAllComponents());
+    $this->assertEquals([
+        [
+            'id' => 1,
+            'type_' => 'worked',
+            'fromcomponent' => 1,
+            'tocomponent' => 2,
+            'timestamp_' => '2022-03-25 14:09:38',
+            'amount' => '560'        ]
+    ], getAllMovements());
+    $this->assertEquals([
+        [
+            'id' => 1,
+            'movementid' => 1,
+            'userid' => 1,
+            'sourcedocumentformat' => null,
+            'sourcedocumentfilename' => null,
+            'timestamp_' => '2022-03-31 12:00:00',
+                        ]
+    ], getAllStatements());
+}
 }
 
 // in curl commands:
