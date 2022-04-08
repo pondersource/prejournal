@@ -1,0 +1,26 @@
+{
+    "status": "OK",
+    "statusCode": 200,
+    "messages": null,
+    "data": {
+        "time_entry_id": 1,
+        "description": "",
+        "title": "",
+        "user_id": 3,
+        "activity_id": 0,
+        "invoice_line_id": 0,
+        "event_id": 48,
+        "event_type": "task",
+        "calendar_event_id": 0,
+        "time_entry_type": "task",
+        "start_datetime": "2010-03-16T11:00:00+02:00",
+        "duration": "01:30:00",
+        "billable_duration": "00:00:00",
+        "is_completed": 0,
+        "is_confirmed": 0,
+        "is_billable": 0,
+        "completed_datetime": null,
+        "is_deleted": 0,
+        "deleted_date": null
+    }
+}
