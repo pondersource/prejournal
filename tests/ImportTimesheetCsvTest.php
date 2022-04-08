@@ -82,43 +82,6 @@ final class ImportTimesheetCsvTest extends TestCase
         ], getAllStatements());
     }
 
-    public function testParseTimeDoctorCsv(): void
-    {
-        setTestDb();
-        $aliceId = intval(register([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
-        $fixture = __DIR__ . "/fixtures/timeDoctor-CSV.csv";
-        $result = runCommand(getContext(), ["import-hours", "timeDoctor-CSV", $fixture,  "2022-03-31 12:00:00" ]);
-        $this->assertEquals([
-            [
-                'id' => 1,
-                'name' => 'alex.malikov94@gmail.com'
-            ],
-            [
-                'id' => 2,
-                'name' => ' test'
-            ]
-        ], getAllComponents());
-        $this->assertEquals([
-            [
-                'id' => 1,
-                'type_' => 'worked',
-                'fromcomponent' => 1,
-                'tocomponent' => 2,
-                'timestamp_' => '2022-03-18 00:00:00',
-                'amount' => '0'            ]
-        ], getAllMovements());
-        $this->assertEquals([
-            [
-                'id' => 1,
-                'movementid' => 1,
-                'userid' => 1,
-                'sourcedocumentformat' => null,
-                'sourcedocumentfilename' => null,
-                'timestamp_' => '2022-03-31 12:00:00',
-                            ]
-        ], getAllStatements());
-    }
     public function testParseTimetipJson(): void
     {
         setTestDb();
@@ -197,82 +160,122 @@ final class ImportTimesheetCsvTest extends TestCase
         ], getAllStatements());
     }
   
-public function testParseTimeDoctorCsv(): void
-{
-    setTestDb();
-    $aliceId = intval(register([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-    setUser('alice', 'alice123');
-    $fixture = __DIR__ . "/fixtures/timeDoctor-CSV.csv";
-    $result = runCommand(getContext(), ["import-hours", "timeDoctor-CSV", $fixture,  "2022-03-31 12:00:00" ]);
-    $this->assertEquals([
-        [
-            'id' => 1,
-            'name' => 'alex.malikov94@gmail.com'
-        ],
-        [
-            'id' => 2,
-            'name' => ' test'
-        ]
-    ], getAllComponents());
-    $this->assertEquals([
-        [
-            'id' => 1,
-            'type_' => 'worked',
-            'fromcomponent' => 1,
-            'tocomponent' => 2,
-            'timestamp_' => '2022-04-06 00:00:00',
-            'amount' => '0'            ]
-    ], getAllMovements());
-    $this->assertEquals([
-        [
-            'id' => 1,
-            'movementid' => 1,
-            'userid' => 1,
-            'sourcedocumentformat' => null,
-            'sourcedocumentfilename' => null,
-            'timestamp_' => '2022-03-31 12:00:00',
-                        ]
-    ], getAllStatements());
-}
+    public function testParseTimeDoctorCsv(): void
+    {
+        setTestDb();
+        $aliceId = intval(register([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        setUser('alice', 'alice123');
+        $fixture = __DIR__ . "/fixtures/timeDoctor-CSV.csv";
+        $result = runCommand(getContext(), ["import-hours", "timeDoctor-CSV", $fixture,  "2022-03-31 12:00:00" ]);
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'name' => 'alex.malikov94@gmail.com'
+            ],
+            [
+                'id' => 2,
+                'name' => ' test'
+            ]
+        ], getAllComponents());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'type_' => 'worked',
+                'fromcomponent' => 1,
+                'tocomponent' => 2,
+                'timestamp_' => '2022-04-06 00:00:00',
+                'amount' => '0'            ]
+        ], getAllMovements());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'movementid' => 1,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-03-31 12:00:00',
+                            ]
+        ], getAllStatements());
+    }
 
-public function testParseShaveMyTimeCsv(): void
-{
-    setTestDb();
-    $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-    setUser('alice', 'alice123');
-    $fixture = __DIR__ . "/fixtures/saveMyTime-CSV.csv";
-    $result = runCommand(getContext(), ["import-hours", "saveMyTime-CSV", $fixture,  "2022-03-31 12:00:00" ]);
+    public function testParseShaveMyTimeCsv(): void
+    {
+        setTestDb();
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        setUser('alice', 'alice123');
+        $fixture = __DIR__ . "/fixtures/saveMyTime-CSV.csv";
+        $result = runCommand(getContext(), ["import-hours", "saveMyTime-CSV", $fixture,  "2022-03-31 12:00:00" ]);
 
-    $this->assertEquals([
-        [
-            'id' => 1,
-            'name' => 'alice'
-        ],
-        [
-            'id' => 2,
-            'name' => 'default-project'
-        ]
-    ], getAllComponents());
-    $this->assertEquals([
-        [
-            'id' => 1,
-            'type_' => 'worked',
-            'fromcomponent' => 1,
-            'tocomponent' => 2,
-            'timestamp_' => '2022-03-25 14:09:38',
-            'amount' => '560'        ]
-    ], getAllMovements());
-    $this->assertEquals([
-        [
-            'id' => 1,
-            'movementid' => 1,
-            'userid' => 1,
-            'sourcedocumentformat' => null,
-            'sourcedocumentfilename' => null,
-            'timestamp_' => '2022-03-31 12:00:00',
-                        ]
-    ], getAllStatements());
-}
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'name' => 'alice'
+            ],
+            [
+                'id' => 2,
+                'name' => 'default-project'
+            ]
+        ], getAllComponents());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'type_' => 'worked',
+                'fromcomponent' => 1,
+                'tocomponent' => 2,
+                'timestamp_' => '2022-03-25 14:09:38',
+                'amount' => '560'        ]
+        ], getAllMovements());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'movementid' => 1,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-03-31 12:00:00',
+                            ]
+        ], getAllStatements());
+    }
+
+    public function testParseTimeScoroJson(): void
+    {
+        setTestDb();
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        setUser('alice', 'alice123');
+        $fixture = __DIR__ . "/fixtures/timeScoro-JSON.json";
+        $result = runCommand(getContext(), ["import-hours", "timeScoro-JSON", $fixture,  "2022-03-31 12:00:00" ]);
+
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'name' => 'alice'
+            ],
+            [
+                'id' => 2,
+                'name' => '0'
+            ]
+        ], getAllComponents());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'type_' => 'worked',
+                'fromcomponent' => 1,
+                'tocomponent' => 2,
+                'timestamp_' => '2010-03-16 09:00:00',
+                'amount' => '1'           ]
+        ], getAllMovements());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'movementid' => 1,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-03-31 12:00:00',
+                            ]
+        ], getAllStatements());
+    }
+
 }
 
 // in curl commands:

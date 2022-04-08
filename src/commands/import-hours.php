@@ -8,6 +8,7 @@
   require_once(__DIR__ . '/../parsers/timetip-JSON.php');
   require_once(__DIR__ . '/../parsers/timetracker-XML.php');
   require_once(__DIR__ . '/../parsers/saveMyTime-CSV.php');
+  require_once(__DIR__ . '/../parsers/timeScoro-JSON.php');
 // E.g.: php src/index.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0             1           2         3
 
@@ -17,8 +18,9 @@ function importHours($context, $command) {
     "timeBro-CSV" => "parseTimeBroCSV",
     "timeDoctor-CSV" => "parseTimeDoctorCSV",
     "timetip-JSON" => "parseTimetipJSON",
-    "timetracker-XML" => "parseTimeTrackerXML"
-    "saveMyTime-CSV" => "parseSaveMyTimeCSV"
+    "timetracker-XML" => "parseTimeTrackerXML",
+    "saveMyTime-CSV" => "parseSaveMyTimeCSV",
+    "timeScoro-JSON" => "parseTimeScoroJSON"
   ];
   
   if (isset($context["user"])) {
