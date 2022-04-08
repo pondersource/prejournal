@@ -130,7 +130,7 @@ final class ImportTimesheetCsvTest extends TestCase
         $this->assertEquals([
             [
                 'id' => 1,
-                'name' => 'alex.malikov94@gmail.com'
+                'name' => 'alice'
             ],
             [
                 'id' => 2,
