@@ -7,13 +7,17 @@ function parseTimetipJSON($str) {
 
   for ($i = 0; $i < count($lines->dates); $i++) {
         array_push($ret, [
-            "date" => $lines->dates[$i]->date,
+            "worker" => 'alex.malikov94@gmail.com',
+            "project" => $lines->dates[$i]->last->reason,
+            "start" => $lines->dates[$i]->summary->start,
+            "seconds" => $lines->dates[$i]->last->duration,
+            /*"date" => $lines->dates[$i]->date,
             "last_type" => $lines->dates[$i]->last->type,
             "last_reason" => $lines->dates[$i]->last->reason,
             "duration" => $lines->dates[$i]->last->duration,
             "total" => $lines->dates[$i]->summary->total,
             "start" => $lines->dates[$i]->summary->start,
-            "finish" => $lines->dates[$i]->summary->finish
+            "finish" => $lines->dates[$i]->summary->finish*/
         ]);
   }
   return $ret;

@@ -11,16 +11,16 @@ final class ImportTimetipJsonTest extends TestCase
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         setUser('alice', 'alice123');
         $fixture = __DIR__ . "/fixtures/timetip-JSON.json";
-        $result = runCommand(getContext(), ["import-timetip", "timetip-JSON", $fixture,  "2022-03-31 12:00:00" ]);
+        $result = runCommand(getContext(), ["import-hours", "timetip-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
         $this->assertEquals([
             [
                 'id' => 1,
-                'name' => '2022-03-27T19:00:00.000Z'
+                'name' => 'alex.malikov94@gmail.com'
             ],
             [
                 'id' => 2,
-                'name' => 'break'
+                'name' => 'coffee break'
             ]
         ], getAllComponents());
         $this->assertEquals([
@@ -29,8 +29,8 @@ final class ImportTimetipJsonTest extends TestCase
                 'type_' => 'worked',
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
-                'timestamp_' => '1970-01-02 05:03:00',
-                'amount' => '0'           ]
+                'timestamp_' => '1970-01-01 00:00:00',
+                'amount' => '104580'           ]
         ], getAllMovements());
         $this->assertEquals([
             [
