@@ -8,7 +8,7 @@
   require_once(__DIR__ . '/../parsers/timetip-JSON.php');
   require_once(__DIR__ . '/../parsers/timetracker-XML.php');
   require_once(__DIR__ . '/../parsers/saveMyTime-CSV.php');
-  require_once(__DIR__ . '/../parsers/timeScoro-JSON.php');
+  require_once(__DIR__ . '/../parsers/scoro-JSON.php');
   require_once(__DIR__ . '/../parsers/timeManager-CSV.php');
   require_once(__DIR__ . '/../parsers/timeTracker-JSON.php');
 // E.g.: php src/index.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"
@@ -22,7 +22,7 @@ function importHours($context, $command) {
     "timetip-JSON" => "parseTimetipJSON",
     "timetracker-XML" => "parseTimeTrackerXML",
     "saveMyTime-CSV" => "parseSaveMyTimeCSV",
-    "timeScoro-JSON" => "parseTimeScoroJSON",
+    "scoro-JSON" => "parseScoroJSON",
     "timeManager-CSV" => "parseTimeManageCSV",
     "timeTracker-JSON" => "parseTimeTrackerJSON"
   ];
