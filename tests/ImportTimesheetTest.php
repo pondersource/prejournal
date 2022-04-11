@@ -3,7 +3,7 @@ use PHPUnit\Framework\TestCase;
 require_once(__DIR__ . '/../src/run-command.php');
 
 
-final class ImportTimesheetCsvTest extends TestCase
+final class ImportTimesheetTest extends TestCase
 {
     public function testParseTimeCsv(): void
     {
@@ -183,7 +183,7 @@ final class ImportTimesheetCsvTest extends TestCase
                 'type_' => 'worked',
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
-                'timestamp_' => '2022-04-06 00:00:00',
+                'timestamp_' => '2022-03-18 00:00:00',
                 'amount' => '0'            ]
         ], getAllMovements());
         $this->assertEquals([
