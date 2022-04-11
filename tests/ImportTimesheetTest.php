@@ -3,7 +3,7 @@ use PHPUnit\Framework\TestCase;
 require_once(__DIR__ . '/../src/run-command.php');
 
 
-final class ImportTimesheetCsvTest extends TestCase
+final class ImportTimesheetTest extends TestCase
 {
     public function testParseTimeCsv(): void
     {
@@ -183,7 +183,7 @@ final class ImportTimesheetCsvTest extends TestCase
                 'type_' => 'worked',
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
-                'timestamp_' => '2022-04-06 00:00:00',
+                'timestamp_' => '2022-03-18 00:00:00',
                 'amount' => '0'            ]
         ], getAllMovements());
         $this->assertEquals([
@@ -313,6 +313,85 @@ final class ImportTimesheetCsvTest extends TestCase
                             ]
         ], getAllStatements());
     }
+
+    public function testParseTimeManagerCsv(): void
+    {
+        setTestDb();
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        setUser('alice', 'alice123');
+        $fixture = __DIR__ . "/fixtures/timeManager-CSV.csv";
+        $result = runCommand(getContext(), ["import-hours", "timeManager-CSV", $fixture,  "2022-04-02 00:00:00" ]);
+
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'name' => 'test'
+            ],
+            [
+                'id' => 2,
+                'name' => 'project1'
+            ]
+        ], getAllComponents());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'type_' => 'worked',
+                'fromcomponent' => 1,
+                'tocomponent' => 2,
+                'timestamp_' => '1970-01-01 00:00:00',
+                'amount' => '1'            ]
+        ], getAllMovements());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'movementid' => 1,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-04-02 00:00:00',
+                            ]
+        ], getAllStatements());
+    }
+
+    public function testParseTimeTrackerJson(): void
+    {
+        setTestDb();
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        setUser('alice', 'alice123');
+        $fixture = __DIR__ . "/fixtures/timeTracker-JSON.json";
+        $result = runCommand(getContext(), ["import-hours", "timeTracker-JSON", $fixture,  "2022-03-31 12:00:00" ]);
+
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'name' => 'einstein'
+            ],
+            [
+                'id' => 2,
+                'name' => 'project1'
+            ]
+        ], getAllComponents());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'type_' => 'worked',
+                'fromcomponent' => 1,
+                'tocomponent' => 2,
+                'timestamp_' => '1970-01-01 00:00:04',
+                'amount' => '1649635203'            ]
+        ], getAllMovements());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'movementid' => 1,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-03-31 12:00:00',
+                            ]
+        ], getAllStatements());
+    }
+
 
 }
 
