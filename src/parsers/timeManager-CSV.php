@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-function parseTimeManageCSV($str) {
+function parseTimeManagerCSV($str) {
   $ret = [];
   $lines = explode("\n",$str);
   if ($lines[0] !== "start,end,note,status,duration,client,project,task") {
