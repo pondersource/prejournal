@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-function parseTimeScoroJSON($str) {
+function parseScoroJSON($str) {
     $ret = [];
     $response = json_decode($str);
 

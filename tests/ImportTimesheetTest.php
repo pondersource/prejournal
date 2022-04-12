@@ -237,13 +237,13 @@ final class ImportTimesheetTest extends TestCase
         ], getAllStatements());
     }
 
-    public function testParseTimeScoroJson(): void
+    public function testParseScoroJson(): void
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         setUser('alice', 'alice123');
-        $fixture = __DIR__ . "/fixtures/timeScoro-JSON.json";
-        $result = runCommand(getContext(), ["import-hours", "timeScoro-JSON", $fixture,  "2022-03-31 12:00:00" ]);
+        $fixture = __DIR__ . "/fixtures/scoro-JSON.json";
+        $result = runCommand(getContext(), ["import-hours", "scoro-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
         $this->assertEquals([
             [
@@ -275,13 +275,13 @@ final class ImportTimesheetTest extends TestCase
                             ]
         ], getAllStatements());
     }
-    public function testParseTimeStartustimeJson(): void
+    public function testParseStratustimeJson(): void
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         setUser('alice', 'alice123');
-        $fixture = __DIR__ . "/fixtures/timeStartustime-JSON.json";
-        $result = runCommand(getContext(), ["import-hours", "timeStratustime-JSON", $fixture,  "2022-03-31 12:00:00" ]);
+        $fixture = __DIR__ . "/fixtures/stratustime-JSON.json";
+        $result = runCommand(getContext(), ["import-hours", "stratustime-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
         $this->assertEquals([
             [
