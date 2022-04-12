@@ -5,8 +5,8 @@ function parseVerifyInvoiceJSON($str) {
   $lines = json_decode($str);
         array_push($ret, [
             "date" => $lines->due_date,
-            "from" => $lines->line_items[0]->description,
-            "to" =>$lines->vendor->raw_name,
+            "from" => $lines->bill_to_name,
+            "to" =>$lines->ship_to_name,
             "amount" => floatval($lines->subtotal),
             "total" => floatval($lines->total)
         ]);

@@ -16,11 +16,7 @@ public function testParseVerifyInvoiceJson(): void
         $this->assertEquals([
             [
                 'id' => 1,
-                'name' => 'Test'
-            ],
-            [
-                'id' => 2,
-                'name' => 'IRS'
+                'name' => 'Alex Malikov'
             ]
         ], getAllComponents());
         $this->assertEquals([
@@ -28,9 +24,9 @@ public function testParseVerifyInvoiceJson(): void
                 'id' => 1,
                 'type_' => 'invoice',
                 'fromcomponent' => 1,
-                'tocomponent' => 2,
-                'timestamp_' => '1970-01-01 00:33:42',
-                'amount' => '10'            ]
+                'tocomponent' => 1,
+                'timestamp_' => '1970-01-01 00:00:00',
+                'amount' => '0'            ]
         ], getAllMovements());
         $this->assertEquals([
             [

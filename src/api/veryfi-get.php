@@ -5,7 +5,7 @@
     $username = "tt3009117";
     $api_key = "0469cd5a13ede3bfed1590b3b39207f1";
 
-    $document_id = "65474055";
+    $document_id = "65496465";
 
     $headers = array(
         'Content-Type: application/json',
@@ -29,7 +29,7 @@
     echo '<pre>' . $json_result . '</pre>';
 
     //var_dump(__DIR__);
-    file_put_contents("../../tests/fixtures/verifyInvoice-JSONjson", $json_result);
+    file_put_contents("../../tests/fixtures/verifyInvoice-JSON.json", $json_result);
    
 
     //$file = fopen(__DIR__ . '/news.json','w');
