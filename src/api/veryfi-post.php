@@ -1,9 +1,10 @@
-<?php
-    $CLIENT_ID = "vrf9VRVOe2I2Kc38RkEj3Bzmgi6kKy12EPHu7yC";
-    $ENVIRONMENT_URL = "https://api.veryfi.com/";
+<?php declare(strict_types=1);
+require_once('../platform.php');
 
-    $username = "tt3009117";
-    $api_key = "0469cd5a13ede3bfed1590b3b39207f1";
+      $CLIENT_ID = $_SERVER["VERIFY_CLIENT_ID"];   
+      $ENVIRONMENT_URL = $_SERVER["VERIFY_ENVIROMENT_URL"];
+      $username = $_SERVER["VERIFY_USERNAME"];
+      $api_key = $_SERVER["VERIFY_API_KEY"];
 
     # You can send the list of categories that is relevant to your case
     # Veryfi will try to choose the best one that fits this file
