@@ -27,7 +27,7 @@ function importHours($context, $command) {
     "timeScoro-JSON" => "parseTimeScoroJSON",
     "timeManager-CSV" => "parseTimeManageCSV",
     "timeTracker-JSON" => "parseTimeTrackerJSON",
-    "timeTrackerCli-JSON" => "parseTimeTrackerCliJSON"
+    "timeTrackerCli-JSON" => "parseTimeTrackerCliJSON",
     "timeStratustime-JSON" => "parseTimeStratustimeJSON",
     "scoro-JSON" => "parseScoroJSON",
     "stratustime-JSON" => "parseStratustimeJSON",
