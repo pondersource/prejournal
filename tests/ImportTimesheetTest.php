@@ -378,7 +378,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:04',
-                'amount' => '1649635203'            ]
+                'amount' => '1649721603'            ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -392,6 +392,44 @@ final class ImportTimesheetTest extends TestCase
         ], getAllStatements());
     }
 
+    public function testParseTimeTrackerCliJson(): void
+    {
+        setTestDb();
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        setUser('alice', 'alice123');
+        $fixture = __DIR__ . "/fixtures/timeTrackerCli-JSON.json";
+        $result = runCommand(getContext(), ["import-hours", "timeTrackerCli-JSON", $fixture,  "2022-03-31 12:00:00" ]);
+
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'name' => 'alice'
+            ],
+            [
+                'id' => 2,
+                'name' => 'FINISHED'
+            ]
+        ], getAllComponents());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'type_' => 'worked',
+                'fromcomponent' => 1,
+                'tocomponent' => 2,
+                'timestamp_' => '1970-01-01 00:00:00',
+                'amount' => '0'            ]
+        ], getAllMovements());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'movementid' => 1,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-03-31 12:00:00',
+                            ]
+        ], getAllStatements());
+    }
 
 }
 
