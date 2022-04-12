@@ -17,10 +17,10 @@
 
 | Field| Value | Example |
 | --- | --- | --- |
-|User name | email address | user@pondersource.com | 
+|User name | <string> | user | 
 |Project name| <string> | prejournal | 
 |Issue| <string>  | testwork |
-|Time| <int>s | 5s |
+|Time| <int> seconds | 5s |
 |Start date| YY-MM-DD HH:MM:SS | 2022-03-18 09:39:19 |
 |End date| YY-MM-DD HH:MM:SS | 2022-03-18 09:39:24 | 
 
@@ -33,7 +33,7 @@
 |End time|  YYYY-MM-DD HH:MM:SS | | 
 |Project| <text> |  prejournal | 
 |Task| <text>  |add button |  
-|Duration| ?  | 600 | 
+|Duration| <int> seconds  | 600 | 
 |Comment| <text> | last task |
 
 
@@ -75,11 +75,11 @@
 | --- | --- | --- |
 |id| <int>  |  1 | 
 |name| <text>| user | 
-|details| <text> | ?  |
-|userUid| <unique text/int ?> | einstein |
+|details| <text> current task | working  |
+|userUid| <Nextcloud Username> | einstein |
 |project| <text>|  prejournal |
 |client| <text> | test client |
 |time| DD/MM/YYY | 04/04/2022 |
 |totalDuration| HH:MM:SS | 00:00:03 | 
-|ended| ? | ? |
+|ended| <string> | ? |
  
