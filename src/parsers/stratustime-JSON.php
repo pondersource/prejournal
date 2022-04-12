@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-    function parseTimeStratustimeJSON($str) {
+    function parseStratustimeJSON($str) {
         $ret = [];
         $data = json_decode($str);
 
