@@ -237,13 +237,13 @@ final class ImportTimesheetTest extends TestCase
         ], getAllStatements());
     }
 
-    public function testParseTimeScoroJson(): void
+    public function testParseScoroJson(): void
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         setUser('alice', 'alice123');
-        $fixture = __DIR__ . "/fixtures/timeScoro-JSON.json";
-        $result = runCommand(getContext(), ["import-hours", "timeScoro-JSON", $fixture,  "2022-03-31 12:00:00" ]);
+        $fixture = __DIR__ . "/fixtures/scoro-JSON.json";
+        $result = runCommand(getContext(), ["import-hours", "scoro-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
         $this->assertEquals([
             [
@@ -261,8 +261,46 @@ final class ImportTimesheetTest extends TestCase
                 'type_' => 'worked',
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
-                'timestamp_' => '2010-03-16 09:00:00',
+                'timestamp_' => '2017-03-13 16:00:00',
                 'amount' => '1'           ]
+        ], getAllMovements());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'movementid' => 1,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-03-31 12:00:00',
+                            ]
+        ], getAllStatements());
+    }
+    public function testParseStratustimeJson(): void
+    {
+        setTestDb();
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        setUser('alice', 'alice123');
+        $fixture = __DIR__ . "/fixtures/stratustime-JSON.json";
+        $result = runCommand(getContext(), ["import-hours", "stratustime-JSON", $fixture,  "2022-03-31 12:00:00" ]);
+
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'name' => '2147483647'
+            ],
+            [
+                'id' => 2,
+                'name' => 'default-project'
+            ]
+        ], getAllComponents());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'type_' => 'worked',
+                'fromcomponent' => 1,
+                'tocomponent' => 2,
+                'timestamp_' => '1970-01-01 00:00:00',
+                'amount' => '0'           ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -340,7 +378,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:04',
-                'amount' => '1649635203'            ]
+                'amount' => '1649721603'            ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -354,6 +392,83 @@ final class ImportTimesheetTest extends TestCase
         ], getAllStatements());
     }
 
+    public function testParseTimeTrackerCliJson(): void
+    {
+        setTestDb();
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        setUser('alice', 'alice123');
+        $fixture = __DIR__ . "/fixtures/timeTrackerCli-JSON.json";
+        $result = runCommand(getContext(), ["import-hours", "timeTrackerCli-JSON", $fixture,  "2022-03-31 12:00:00" ]);
+
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'name' => 'alice'
+            ],
+            [
+                'id' => 2,
+                'name' => 'FINISHED'
+            ]
+        ], getAllComponents());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'type_' => 'worked',
+                'fromcomponent' => 1,
+                'tocomponent' => 2,
+                'timestamp_' => '1970-01-01 00:00:00',
+                'amount' => '0'            ]
+        ], getAllMovements());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'movementid' => 1,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-03-31 12:00:00',
+                            ]
+        ], getAllStatements());
+    }
+
+    public function testParseVerifyTimeJson(): void
+    {
+        setTestDb();
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        setUser('alice', 'alice123');
+        $fixture = __DIR__ . "/fixtures/verifyInvoice-JSON.json";
+        $result = runCommand(getContext(), ["import-hours", "verifyTime-JSON", $fixture,  "2022-03-31 12:00:00" ]);
+
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'name' => 'Alex Malikov'
+            ],
+            [
+                'id' => 2,
+                'name' => 'food'
+            ]
+        ], getAllComponents());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'type_' => 'worked',
+                'fromcomponent' => 1,
+                'tocomponent' => 2,
+                'timestamp_' => '2022-04-12 09:34:45',
+                'amount' => '3.75'            ]
+        ], getAllMovements());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'movementid' => 1,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-03-31 12:00:00',
+                            ]
+        ], getAllStatements());
+    }
 
 }
 
