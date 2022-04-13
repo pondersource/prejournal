@@ -13,6 +13,7 @@
   require_once(__DIR__ . '/../parsers/timeManager-CSV.php');
   require_once(__DIR__ . '/../parsers/timeTracker-JSON.php');
   require_once(__DIR__ . '/../parsers/timeTrackerCli-JSON.php');
+  require_once(__DIR__ . '/../parsers/verifyTime-JSON.php');
 // E.g.: php src/index.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0             1           2         3
 
@@ -27,12 +28,13 @@ function importHours($context, $command) {
     "timeScoro-JSON" => "parseTimeScoroJSON",
     "timeManager-CSV" => "parseTimeManageCSV",
     "timeTracker-JSON" => "parseTimeTrackerJSON",
-    "timeTrackerCli-JSON" => "parseTimeTrackerCliJSON"
+    "timeTrackerCli-JSON" => "parseTimeTrackerCliJSON",
     "timeStratustime-JSON" => "parseTimeStratustimeJSON",
     "scoro-JSON" => "parseScoroJSON",
     "stratustime-JSON" => "parseStratustimeJSON",
     "timeManager-CSV" => "parseTimeManagerCSV",
-    "timeTracker-JSON" => "parseTimeTrackerJSON"
+    "timeTracker-JSON" => "parseTimeTrackerJSON",
+    "verifyTime-JSON" =>"parseVerifyTimeJSON"
   ];
 
   
