@@ -7,9 +7,9 @@ function parseTimeTrackerCliJSON($str) {
     
         array_push($ret, [
             "worker" =>  $_SERVER["PREJOURNAL_USERNAME"],
-            "project" => $response->ismoil->status,
-            "start" =>  $response->ismoil->log[0],
-            "seconds" => strtotime($response->ismoil->log[1]) - strtotime($response->ismoil->log[0])
+            "project" => $response->username->status,
+            "start" =>  $response->username->log[0],
+            "seconds" => strtotime($response->username->log[1]) - strtotime($response->username->log[0])
         ]); 
     //var_dump($ret);
    

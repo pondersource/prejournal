@@ -1,9 +1,12 @@
-<?php
-    $CLIENT_ID = "vrf9VRVOe2I2Kc38RkEj3Bzmgi6kKy12EPHu7yC";
-    $ENVIRONMENT_URL = "https://api.veryfi.com/";
+<?php declare(strict_types=1);
+require_once('../platform.php');
 
-    $username = "tt3009117";
-    $api_key = "0469cd5a13ede3bfed1590b3b39207f1";
+    $CLIENT_ID = $_SERVER["VERIFY_CLIENT_ID"];
+   
+    $ENVIRONMENT_URL = $_SERVER["VERIFY_ENVIROMENT_URL"];
+
+    $username = $_SERVER["VERIFY_USERNAME"];
+    $api_key = $_SERVER["VERIFY_API_KEY"];
 
     $document_id = "65496465";
 
@@ -29,7 +32,7 @@
     echo '<pre>' . $json_result . '</pre>';
 
     //var_dump(__DIR__);
-    file_put_contents("../../tests/fixtures/verifyInvoice-JSON.json", $json_result);
+    file_put_contents("api_responses/verifyInvoice-JSON.json", $json_result);
    
 
     //$file = fopen(__DIR__ . '/news.json','w');
