@@ -9,7 +9,7 @@ function parseTimeTrackerJSON($str) {
             "worker" => $response[$i]->userUid,
             "project" => $response[$i]->project,
             "start" => $response[$i]->time,
-            "seconds" => strtotime($response[$i]->totalDuration)
+            "seconds" => intval($response[$i]->totalDuration)
         ]);
     } 
     //var_dump($ret);
