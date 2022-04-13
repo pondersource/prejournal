@@ -4,11 +4,14 @@ function parseScoroJSON($str) {
     $ret = [];
     $response = json_decode($str);
 
-    array_push($ret, [
-        "worker" => $_SERVER["PREJOURNAL_USERNAME"],
-        "project" => $response->data->activity_id,
-        "start" => strtotime($response->data->start_datetime),
-        "seconds" => $response->data->duration
-    ]);
+    for ($i = 0; $i < count($response->data); $i++) {
+        array_push($ret, [
+            "worker" => $_SERVER["PREJOURNAL_USERNAME"],
+            "project" => $response->data[$i]->activity_id,
+            "start" => strtotime($response->data[$i]->start_datetime),
+            "seconds" => $response->data[$i]->duration
+        ]);
+    }
     return $ret;
 }
+
