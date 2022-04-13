@@ -15,8 +15,16 @@ psql -h localhost -d prejournal -U your_username -f schema.sql
 
 ### Verify API Call
 
-I think we have do API call POST to send invoice, and another GET documents and import invoice in JSON. First you need to sign up here [Verify](https://hub.veryfi.com/), you can find secret, username, and api key, for sending call. 
+Export and Import API call POST to send invoice, and another GET documents and import invoice in JSON. First you need to sign up here [Verify](https://hub.veryfi.com/), you can find secret, username, and api key, for sending call. Change in ```env``` file your credentials to your own.
 
+```
+VERIFY_USERNAME=YOUR_USERNAME
+VERIFY_CLIENT_ID=YOUR_CLIENT_ID
+VERIFY_ENVIROMENT_URL=https://api.veryfi.com/
+VERIFY_API_KEY=YOUR_KEY
+```
+
+After it go to the folder ```cd src/api``` You can first POST data or you can use exists documents if you have just get information. Run this command ```php verify-get.php```.
 
 # Usage (batch processing from .pj file)
 
