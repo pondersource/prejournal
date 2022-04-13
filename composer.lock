@@ -3368,16 +3368,16 @@
         },
         {
             "name": "pondersource/billing-api",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pondersource/billing-api.git",
-                "reference": "601fe6266e27feb2f13d8374de6ab36891dba96b"
+                "reference": "1f505a81f91229864ad40885bcaaccf3c273b7c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pondersource/billing-api/zipball/601fe6266e27feb2f13d8374de6ab36891dba96b",
-                "reference": "601fe6266e27feb2f13d8374de6ab36891dba96b",
+                "url": "https://api.github.com/repos/pondersource/billing-api/zipball/1f505a81f91229864ad40885bcaaccf3c273b7c4",
+                "reference": "1f505a81f91229864ad40885bcaaccf3c273b7c4",
                 "shasum": ""
             },
             "require": {
@@ -3424,9 +3424,9 @@
             "homepage": "https://github.com/pondersource/billing-api",
             "support": {
                 "issues": "https://github.com/pondersource/billing-api/issues",
-                "source": "https://github.com/pondersource/billing-api/tree/2.0.1"
+                "source": "https://github.com/pondersource/billing-api/tree/2.0.2"
             },
-            "time": "2022-04-13T10:31:26+00:00"
+            "time": "2022-04-13T12:36:52+00:00"
         },
         {
             "name": "psr/cache",
