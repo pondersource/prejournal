@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-function parseTimeTrackerJSON($str) {
+function parseTimeTrackerNextcloudJSON($str) {
     $ret = [];
     $response = json_decode($str);
     

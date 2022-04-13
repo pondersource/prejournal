@@ -353,13 +353,13 @@ final class ImportTimesheetTest extends TestCase
         ], getAllStatements());
     }
 
-    public function testParseTimeTrackerJson(): void
+    public function testParseTimeTrackerNextcloudJson(): void
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         setUser('alice', 'alice123');
-        $fixture = __DIR__ . "/fixtures/timeTracker-JSON.json";
-        $result = runCommand(getContext(), ["import-hours", "timeTracker-JSON", $fixture,  "2022-03-31 12:00:00" ]);
+        $fixture = __DIR__ . "/fixtures/timeTrackerNextcloud-JSON.json";
+        $result = runCommand(getContext(), ["import-hours", "timeTrackerNextcloud-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
         $this->assertEquals([
             [
