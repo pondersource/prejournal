@@ -470,6 +470,44 @@ final class ImportTimesheetTest extends TestCase
         ], getAllStatements());
     }
 
+    public function testParseTimeTrackerDailyCsv(): void
+    {
+        setTestDb();
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        setUser('alice', 'alice123');
+        $fixture = __DIR__ . "/fixtures/timeTrackerDaily-CSV.csv";
+        $result = runCommand(getContext(), ["import-hours", "timeTrackerDaily-CSV", $fixture,  "2022-03-31 12:00:00" ]);
+
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'name' => 'Alex'
+            ],
+            [
+                'id' => 2,
+                'name' => 'test'
+            ]
+        ], getAllComponents());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'type_' => 'worked',
+                'fromcomponent' => 1,
+                'tocomponent' => 2,
+                'timestamp_' => '2022-03-17 00:00:00',
+                'amount' => '0'            ]
+        ], getAllMovements());
+        $this->assertEquals([
+            [
+                'id' => 1,
+                'movementid' => 1,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-03-31 12:00:00',
+                            ]
+        ], getAllStatements());
+    }
 }
 
 // in curl commands:

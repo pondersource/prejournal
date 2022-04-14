@@ -14,6 +14,7 @@
   require_once(__DIR__ . '/../parsers/timeTrackerNextcloud-JSON.php');
   require_once(__DIR__ . '/../parsers/timeTrackerCli-JSON.php');
   require_once(__DIR__ . '/../parsers/verifyTime-JSON.php');
+  require_once(__DIR__ . '/../parsers/timeTrackerDaily-CSV.php');
 // E.g.: php src/index.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0             1           2         3
 
@@ -33,7 +34,8 @@ function importHours($context, $command) {
     "stratustime-JSON" => "parseStratustimeJSON",
     "timeManager-CSV" => "parseTimeManagerCSV",
     "timeTrackerNextcloud-JSON" => "parseTimeTrackerNextcloudJSON",
-    "verifyTime-JSON" =>"parseVerifyTimeJSON"
+    "verifyTime-JSON" =>"parseVerifyTimeJSON",
+    "timeTrackerDaily-CSV" => "parseTimeTrackerDailyCSV"
   ];
 
   
@@ -44,7 +46,7 @@ function importHours($context, $command) {
     $importTime = strtotime($command[3]);
     $type_ = "worked";
     $entries = $parserFunctions[$format](file_get_contents($fileName));
-    
+
     for ($i = 0; $i < count($entries); $i++) {
       //var_dump($entries);
         $movementId = intval(createMovement($context, [
