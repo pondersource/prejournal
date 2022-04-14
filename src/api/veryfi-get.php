@@ -8,8 +8,6 @@ require_once('../platform.php');
     $username = $_SERVER["VERIFY_USERNAME"];
     $api_key = $_SERVER["VERIFY_API_KEY"];
 
-    $document_id = "65496465";
-
     $headers = array(
         'Content-Type: application/json',
         'Accept: application/json',
@@ -17,7 +15,7 @@ require_once('../platform.php');
         "CLIENT-ID: $CLIENT_ID"
     );
 
-    $url = "{$ENVIRONMENT_URL}api/v7/partner/documents/$document_id/";
+    $url = "{$ENVIRONMENT_URL}api/v7/partner/documents";
 
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_HEADER, false);
