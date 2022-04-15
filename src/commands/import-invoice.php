@@ -3,6 +3,7 @@
   require_once(__DIR__ . '/createMovement.php');
   require_once(__DIR__ . '/createStatement.php');
   require_once(__DIR__ . '/../parsers/verifyInvoice-JSON.php');
+  require_once(__DIR__ . '/../parsers/timeHerokuInvoice-JSON.php');
 
 // E.g.: php src/index.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0                    1           2             3
@@ -10,6 +11,7 @@
 function importInvoice($context, $command) {
   $parserFunctions = [
     "verifyInvoice-JSON" => "parseVerifyInvoiceJSON",
+    "timeHerokuInvoice-JSON" => "parsetimeHerokuInvoiceJSON"
   ];
   
   if (isset($context["user"])) {
