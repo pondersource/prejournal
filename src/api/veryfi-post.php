@@ -15,7 +15,8 @@ require_once('../platform.php');
     $file_name = "invoice.pdf";
     $file_mime = "application/pdf";
 
-    $mime_boundary=md5(time());
+    $mime_boundary=rand(0, time());
+   
     $eol = "\r\n";
 
     $url = "{$ENVIRONMENT_URL}api/v7/partner/documents/";
