@@ -16,6 +16,7 @@
   require_once(__DIR__ . '/../parsers/verifyTime-JSON.php');
   require_once(__DIR__ . '/../parsers/timeTrackerDaily-CSV.php');
   require_once(__DIR__ . '/../parsers/timely-CSV.php');
+  require_once(__DIR__ . '/../parsers/timesheet-CSV.php');
 // E.g.: php src/index.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0             1           2         3
 
@@ -37,7 +38,8 @@ function importHours($context, $command) {
     "timeTrackerNextcloud-JSON" => "parseTimeTrackerNextcloudJSON",
     "verifyTime-JSON" =>"parseVerifyTimeJSON",
     "timeTrackerDaily-CSV" => "parseTimeTrackerDailyCSV",
-    "timely-CSV" => "parseTimelyCSV"
+    "timely-CSV" => "parseTimelyCSV",
+    "timesheet-CSV" => "parseTimesheetCSV"
   ];
 
   
