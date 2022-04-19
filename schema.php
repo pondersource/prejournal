@@ -21,7 +21,7 @@ function getTables() {
 "drop table if exists movements;",
 "create table movements (
   id SERIAL PRIMARY KEY,
-  type_ varchar(54), /* 'invoice', 'payment' */
+  type_ varchar(54), /* 'invoice', 'payment', 'worked' */
   fromComponent integer,
   toComponent integer,
   timestamp_ timestamp,
