@@ -94,16 +94,66 @@ curl https://alice:alice123@prejournal.herokuapp.com/v1/hello
 You can also create a Heroku app yourself and deploy a branch of the code there. Feel free, it's open source!
 
 # Database schema (version 1)
-The database stores movements which can be invoices or payments. See [schema.sql](./schema.sql).
 
-# In a nutshell
+See [schema.sql](./schema.sql).
 
-There are five elements to the Prejournal model:
-* A _component_ is can be an organisation, a department, a person, or a budget / asset group. Components will often map to accounts in GAAP, or to Agents in REA, but this mapping is not exact.
-* A _capacitor_ (like a series capacitor in electronics) holds a balance between two parties. It has a current balance which changes based on invoices, payments and settlements, and can have a maximum and a minimum balance.
-* An _invoice_ is an actual invoice (as in, the business document sent from seller to buyer, stating what is owed), but it can also be a different type of situation in which money becomes owed, for instance, on pay day, you would book an "invoice" from each worker to the organisation, even though workers don't really send invoice documents on pay day. Actually it would be more correct to point at the delivery of the goods or service than at the invoicing of the goods or service, but invoices are business documents that can enter a bookkeeping system in a machine-readable way through e-Invoicing, hence the emphasis on them.
-* A _payment_ is the movement (transfer, transaction) of money. These generally enter the bookkeeping system when you import a (csv) bank statement.
-* A _settlement_ is a loop of events that links a payment to an invoice and closes the business interaction. These enter the system when you _reconcile_ the bank statement entries with the invoices.
+## TABLES 
+
+### 1. Users
+ 
+| KEY | TYPE | DESCRIPTION |
+| --- | --- | --- |
+| id | SERIAL PRIMARY KEY | User ID | 
+| username | varchar(54) UNIQUE | Current Username |
+| passwordhash | varchar | password |
+
+### 2. components 
+
+ A _component_ is can be an organisation, a department, a person, or a budget / asset group. Components will often map to accounts in GAAP, or to Agents in REA, but this mapping is not exact.
+ 
+| KEY | TYPE | DESCRIPTION |
+| --- | --- | --- |
+| id | SERIAL PRIMARY KEY | Component's ID | 
+| name | varchar | Component's name | 
+
+
+
+### 3. movements
+
+Movements can be invoices or payments
+
+| KEY | TYPE | DESCRIPTION |
+| --- |  --- |  --- | 
+| id | SERIAL PRIMARY KEY | Movement's ID |
+| type_ | varchar(54) |'invoice', 'payment', 'worker'| Type of movement | 
+| fromComponent | Integer |  From which component(ID) |
+| toComponent | Integer |  To which component(ID) |
+| timestamp_ | timestamp |  When the transaction happened |
+| amount | decimal |   Amount of transer money |
+
+
+### 4. statements
+
+| KEY | TYPE | DESCRIPTION |
+| --- | --- |  --- |  
+| id | SERIAL PRIMARY KEY |  Statement's ID |
+| movementId | Integer |  n/a |
+| userId | Integer |  Whose User's is the statement |
+| sourceDocumentFormat | character |  invoice, bank statement csv file, API call etc |
+| sourceDocumentFilename | character |  TODO: work out how to store files when on Heroku |
+| timestamp_ | timestamp |  n/a |
+
+
+### 5. componentGrants
+
+| KEY | TYPE | DESCRIPTION | 
+| --- |  --- |  --- | 
+| id | SERIAL PRIMARY KEY | componentGrants's ID |
+| fromUser | numeric | Sender(User ID) of component() |
+| toUser | numeric | Receiver(ID) of component(?) |
+| componentId | numeric | Which component(ID) is tranfered |
+
+### The idea behind
 
 In standard bookkeeping, the invoices and bank statements are source document, and from there, the journal is generated. In the journal, accounts are divided into assets, liabilities, expenses, income, and equity. Prejournal makes no such division, although the idea is that a standard journal can be generated from the prejournal model, so that we can still export our data to the language that accountants understand (hence the name).
 
@@ -146,7 +196,7 @@ That's why GAAP journals can not really be considered as a database model, they 
 See [https://prejournal.org/example](https://prejournal.org/example) for some example PHP code.
 
 
-## Why?
+#### Why?
 
 In traditional (GAAP / double entry) bookkeeping, the journal already makes important choices about the system boundaries of an organisation and about depreciation time scales. For instance, if on a given day I bought a laptop and a banana, and then import my bank statement into a generic bookkeeping software package, the first transaction might get booked from `assets : bank : checking` to `assets : equipment : computers` and the other might be journaled as `liabilities : creditcard` to `expenses : groceries`.
 
