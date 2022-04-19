@@ -205,16 +205,18 @@ Assets, liabilities, and expenses are fundamentally different in traditional boo
 
 ## Commands 
 
-| Command | Usage | 
-| ------- |------- |
-| `createMovement` | - |
-| `createStatement` | - |
-| `enter` | - |
-| `grant` | - |
-| `hello` | Works more as a test command, to check if registration was successful |
-| `import-bank-statement` | - |
-| `import-hours` | - |
+| Command | Usage | Example | 
+| ------- | ------- |  ------- | 
+| `createMovement` | Create a new Movement entry | - | 
+| `createStatement` | Create a new Statement entry | - | 
+| `createCompany` | Create a new Company entry | - |
+| `enter` | - | - | 
+| `grant` | - | - | 
+| `hello` | Works more as a test command, to check if registration was successful | `php src/index.php hello` |
+| `import-bank-statement` | - | `php src/index.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"` | 
+| `import-hours` | Import timesheet data through CSV/JSON/XML files | `php src/index.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"` | 
+| `import-invoice` | Import invoice throuh CSV/JSON/XML | `php src/index.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"` | `
 | `list-new` | - |
-| `minimal-version` | - |
-| `pta-me` | - |
-| `register <username> <password>` | Register a new user |
+| `minimal-version` | Check the prejournal version | `php src/index.php minimal-version 1.0` |
+| `pta-me` | - | - | 
+| `register <username> <password>` | Register a new user | `php src/index.php register <username> <password>` | 
