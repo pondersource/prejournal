@@ -10,10 +10,10 @@
   require_once(__DIR__ . '/commands/import-bank-statement.php');
   require_once(__DIR__ . '/commands/import-invoice.php');
   require_once(__DIR__ . '/commands/minimal-version.php');
-  require_once(__DIR__ . '/commands/worked_hours.php');
-  require_once(__DIR__ . '/commands/worked_day.php');
-  require_once(__DIR__ . '/commands/worked_week.php');
-  require_once(__DIR__ . '/commands/submit_expense.php');
+  require_once(__DIR__ . '/commands/worked-hours.php');
+  require_once(__DIR__ . '/commands/worked-day.php');
+  require_once(__DIR__ . '/commands/worked-week.php');
+  require_once(__DIR__ . '/commands/submit-expense.php');
 
 function toCamel($str) {
     $parts = explode("-", $str);
