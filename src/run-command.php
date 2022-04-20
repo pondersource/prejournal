@@ -36,9 +36,9 @@ function runCommand($context, $command)
         "import-invoice" => 4,
         "minimal-version" => 2,
         "worked-hours" => 4,
-        "worked_day" => 3,
-        "worked_week" => 3,
-        "submit_expense" => 5,
+        "worked-day" => 3,
+        "worked-week" => 3,
+        "submit-expense" => 8,
     ];
     if (isset($commands[$command[0]]) && count($command) == $commands[$command[0]]) {
         $function = toCamel($command[0]);

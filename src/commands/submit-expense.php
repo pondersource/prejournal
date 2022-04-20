@@ -1,6 +1,8 @@
 <?php declare(strict_types=1);
   require_once(__DIR__ . '/../platform.php');
-
+  require_once(__DIR__ . '/helpers/createMovement.php');
+  require_once(__DIR__ . '/helpers/createStatement.php');
+  require_once(__DIR__ . '/helpers/createComponent.php');
   /*
   E.g.: php src/index.php submit-expense "28 August 2021" "stichting" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"
 
@@ -9,18 +11,14 @@
 */
 function submitExpense($context, $command) {
   if (isset($context["user"])) {
-
+  
     $timestamp = strtotime($command[1]);
-    $amount = $command[7];
-    $payer = $command[8]; /* michiel  */
+    $amount = $command[6];
+    $payer = $command[7]; /* michiel  */
     $shop = $command[2]; /* stichting  */
-    $receiver = $command[4]; /* Dutch railway  */
+    $receiver = $command[3]; /* Dutch railway  */
 
-    $components = array(
-      $payer,
-      $shop,
-      $receiver
-    );
+    $components = [$payer,$shop,$receiver];
 
     $componentsIDs = array(
       "payer_id",
