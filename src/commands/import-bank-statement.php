@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
   require_once(__DIR__ . '/../platform.php');
-  require_once(__DIR__ . '/createMovement.php');
-  require_once(__DIR__ . '/createStatement.php');
+  require_once(__DIR__ . '/helpers/createMovement.php');
+  require_once(__DIR__ . '/helpers/createStatement.php');
   require_once(__DIR__ . '/../parsers/asnbank-CSV.php');
 
 // E.g.: php src/index.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"

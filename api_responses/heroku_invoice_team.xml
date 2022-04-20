@@ -25,10 +25,10 @@
   <x1:id xmlns:x1="http://example.org/invoices">1bf5ee79-f5ae-449a-b34d-2b342aa2ede4</x1:id>
   <x1:number xmlns:x1="http://example.org/invoices">65553281</x1:number>
   <x1:period_start xmlns:x1="http://example.org/invoices">2022-04-01</x1:period_start>
-  <x1:period_end xmlns:x1="http://example.org/invoices">2022-04-13</x1:period_end>
+  <x1:period_end xmlns:x1="http://example.org/invoices">2022-04-20</x1:period_end>
   <x1:state xmlns:x1="http://example.org/invoices">0</x1:state>
   <x1:total xmlns:x1="http://example.org/invoices">0</x1:total>
-  <x1:updated_at xmlns:x1="http://example.org/invoices">2022-04-13T04:23:37Z</x1:updated_at>
+  <x1:updated_at xmlns:x1="http://example.org/invoices">2022-04-20T04:30:28Z</x1:updated_at>
   <x1:addons_total xmlns:x1="http://example.org/invoices">0</x1:addons_total>
   <x1:database_total xmlns:x1="http://example.org/invoices">0</x1:database_total>
   <x1:dyno_units xmlns:x1="http://example.org/invoices">0</x1:dyno_units>
@@ -169,10 +169,10 @@
   <x1:id xmlns:x1="http://example.org/invoices">56ae3c14-906b-4858-a8ff-a6347b9bb183</x1:id>
   <x1:number xmlns:x1="http://example.org/invoices">65621024</x1:number>
   <x1:period_start xmlns:x1="http://example.org/invoices">2022-04-01</x1:period_start>
-  <x1:period_end xmlns:x1="http://example.org/invoices">2022-04-13</x1:period_end>
+  <x1:period_end xmlns:x1="http://example.org/invoices">2022-04-20</x1:period_end>
   <x1:state xmlns:x1="http://example.org/invoices">0</x1:state>
   <x1:total xmlns:x1="http://example.org/invoices">0</x1:total>
-  <x1:updated_at xmlns:x1="http://example.org/invoices">2022-04-13T04:31:52Z</x1:updated_at>
+  <x1:updated_at xmlns:x1="http://example.org/invoices">2022-04-20T04:38:54Z</x1:updated_at>
   <x1:addons_total xmlns:x1="http://example.org/invoices">0</x1:addons_total>
   <x1:database_total xmlns:x1="http://example.org/invoices">0</x1:database_total>
   <x1:dyno_units xmlns:x1="http://example.org/invoices">0</x1:dyno_units>
