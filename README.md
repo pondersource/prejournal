@@ -114,7 +114,7 @@ See [schema.sql](./schema.sql).
 | KEY | TYPE | DESCRIPTION |
 | --- | --- | --- |
 | id | SERIAL PRIMARY KEY | Component's ID | 
-| name | varchar | Component's name | 
+| name | varchar  UNIQUE | Component's name | 
 
 
 
