@@ -12,6 +12,6 @@ $her = new HerokuClient([
     'apiKey' =>  $_SERVER["HEROKU_API_KEY"],
 ]);
  
-$her->getHerokuTeamInvoices();
+var_dump($her->getHerokuTeamInvoices());
 
 ?>

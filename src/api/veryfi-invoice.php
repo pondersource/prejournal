@@ -11,8 +11,8 @@ require_once('../platform.php');
     $categories = array("Office Expense", "Meals & Entertainment", "Utilities", "Auto");
 
 
-    $file_path = __DIR__ ."/invoice.pdf";
-    $file_name = "invoice.pdf";
+    //$file_path = "/invoice.pdf";
+    //$file_name = "invoice.pdf";
     $file_mime = "application/pdf";
 
     $mime_boundary=rand(0, time());
@@ -63,5 +63,8 @@ require_once('../platform.php');
     $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
-    print("json_response = " . $json_response);
+    $json_result = json_encode(json_decode($json_response), JSON_PRETTY_PRINT);
+    echo '<pre>' . $json_result . '</pre>';
+
+    file_put_contents("api_responses/../../verifyInvoice-JSON.json", $json_result);
 ?>
