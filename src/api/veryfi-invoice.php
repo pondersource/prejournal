@@ -11,8 +11,8 @@ require_once('../platform.php');
     $categories = array("Office Expense", "Meals & Entertainment", "Utilities", "Auto");
 
 
-    $file_path = "/invoice.pdf";
-    $file_name = "invoice.pdf";
+    //$file_path = "/invoice.pdf";
+    //$file_name = "invoice.pdf";
     $file_mime = "application/pdf";
 
     $mime_boundary=rand(0, time());
