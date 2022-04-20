@@ -120,12 +120,12 @@ See [schema.sql](./schema.sql).
 
 ### 3. movements
 
-Movements can be invoices or payments
+Movements can be invoices or payments.
 
 | KEY | TYPE | DESCRIPTION |
 | --- |  --- |  --- | 
 | id | SERIAL PRIMARY KEY | Movement's ID |
-| type_ | varchar(54) |'invoice', 'payment', 'worker'| Type of movement | 
+| type_ | varchar(54) |'invoice', 'payment', 'worker', 'transport'| Type of movement | 
 | fromComponent | Integer |  From which component(ID) |
 | toComponent | Integer |  To which component(ID) |
 | timestamp_ | timestamp |  When the transaction happened |
@@ -207,9 +207,6 @@ Assets, liabilities, and expenses are fundamentally different in traditional boo
 
 | Command | Usage | Example | 
 | ------- | ------- |  ------- | 
-| `createMovement` | Create a new Movement entry | - | 
-| `createStatement` | Create a new Statement entry | - | 
-| `createCompany` | Create a new Company entry | - |
 | `enter` | - | - | 
 | `grant` | - | - | 
 | `hello` | Works more as a test command, to check if registration was successful | `php src/index.php hello` |
@@ -220,3 +217,4 @@ Assets, liabilities, and expenses are fundamentally different in traditional boo
 | `minimal-version` | Check the prejournal version | `php src/index.php minimal-version 1.0` |
 | `pta-me` | - | - | 
 | `register <username> <password>` | Register a new user | `php src/index.php register <username> <password>` | 
+| `submit-expense` | Includes two movements(payment/invoice) | `php src/index.php submit-expense "28 August 2021" "stichting" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"`|  
