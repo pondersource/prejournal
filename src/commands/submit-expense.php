@@ -18,24 +18,7 @@ function submitExpense($context, $command) {
     $shop = $command[2]; /* stichting  */
     $receiver = $command[3]; /* Dutch railway  */
 
-    $components = [$payer,$shop,$receiver];
-
-    $componentsIDs = array(
-      "payer_id",
-      "shop_id",
-      "receiver_id"
-    );
-
-    /* Create 3 Components*/
-    for($i = 0; $i < count($components); $i++){
-      $componentId = intval(createComponent($context, [
-        "create-component",
-        $components[$i],
-      ])[0]);
-      $componentsIDs[$i] = $componentId;
-    }
-
-    /* We have two types of transactions  */
+    /* We have two types of movements  */
     $type = array(
       "payment",
       "invoice"
@@ -45,8 +28,8 @@ function submitExpense($context, $command) {
     $movementId_payment = intval(createMovement($context, [
       "create-movement",
       $type[0],
-      strval($payer),
-      strval($receiver),
+      strval(getComponentId($payer)),
+      strval(getComponentId($receiver)),
       $timestamp,
       $amount
     ])[0]);
@@ -54,8 +37,8 @@ function submitExpense($context, $command) {
     $movementId_invoice = intval(createMovement($context, [
       "create-movement",
       $type[1],
-      strval($receiver),
-      strval($shop),
+      strval(getComponentId($receiver)),
+      strval(getComponentId($shop)),
       $timestamp,
       $amount
     ])[0]);
