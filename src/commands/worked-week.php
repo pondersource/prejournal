@@ -5,7 +5,7 @@
 
 function workedWeek($context, $command) {
   if (isset($context["user"])) {
- //TODO
+  
   } else {
     return ["User not found or wrong password"];
   }

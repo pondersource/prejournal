@@ -5,7 +5,30 @@
 
 function workedHours($context, $command) {
   if (isset($context["user"])) {
- //TODO
+ 
+
+    $timestamp = strtotime($command[1]);
+    $worker = $_SERVER['PREJOURNAL_USERNAM'];
+    $project = $command[2].':'.$command[3];
+    $type = 'worked';
+    $worked_hours = $command[3];
+
+    
+  /* Create Movement */
+  $movementId = intval(createMovement($context, [
+    "create-movement",
+    $type[0],
+    strval(getComponentId($worker)),
+    strval(getComponentId($project)),
+    $timestamp,
+    $worked_hours
+  ])[0]);
+  $statementId = intval(createStatement($context, [
+    "create-statement",
+    $movementId,
+    $timestamp
+  ])[0]);
+
   } else {
     return ["User not found or wrong password"];
   }
