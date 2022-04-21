@@ -24,7 +24,7 @@ function submitExpense($context, $command) {
       "invoice"
     );
 
-    /* Create 2 Movements*/
+    /* Create 2 Movements */
     $movementId_payment = intval(createMovement($context, [
       "create-movement",
       $type[0],
