@@ -2,7 +2,6 @@
   require_once(__DIR__ . '/../platform.php');
   require_once(__DIR__ . '/helpers/createMovement.php');
   require_once(__DIR__ . '/helpers/createStatement.php');
-  require_once(__DIR__ . '/helpers/createComponent.php');
   /*
   E.g.: php src/index.php submit-expense "28 August 2021" "stichting" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"
 
