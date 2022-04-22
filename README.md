@@ -207,8 +207,11 @@ Assets, liabilities, and expenses are fundamentally different in traditional boo
 
 | Command | Usage | Example | 
 | ------- | ------- |  ------- | 
-| `enter` | - | - | 
-| `grant` | - | - | 
+| `createMovement` | Create a new Movement entry | - | 
+| `createStatement` | Create a new Statement entry | - | 
+| `createCompany` | Create a new Company entry | - |
+| `enter` | Enter a new data for every step component,movement and statement | php src/index.php enter "from component" "to component" "1.23" "2021-12-31T23:00:00.000Z" "invoice" "ponder-source-agreement-192" | 
+| `grant` | Add a new data to componentGrant | curl -d'["bob", "from component"]' http://alice:alice123@localhost:8080/v1/grant | 
 | `hello` | Works more as a test command, to check if registration was successful | `php src/index.php hello` |
 | `import-bank-statement` | - | `php src/index.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"` | 
 | `import-hours` | Import timesheet data through CSV/JSON/XML files | `php src/index.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"` | 
