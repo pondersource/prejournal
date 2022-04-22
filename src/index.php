@@ -2,6 +2,8 @@
   require_once(__DIR__ . '/platform.php');
   require_once(__DIR__ . '/run-command.php');
 
-
-// ...
-print(runCommand(getContext(), getCommand()));
+  // ...
+  $result = runCommand(getContext(), getCommand());
+  if($result != null ){
+    output($result);
+  }

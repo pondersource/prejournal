@@ -54,7 +54,7 @@ function submitExpense($context, $command) {
     $movementId_invoice ,
     $timestamp,
   ])[0]);
-
+  return(["Payment(Movement) ID: ".$movementId_payment."\n:invoice(Movement)ID: ".$movementId_invoice]);
   } else {
     return ["User not found or wrong password"];
   }
