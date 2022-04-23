@@ -13,7 +13,7 @@ function workedDay($context, $command) {
     $worker = $_SERVER['PREJOURNAL_USERNAM'];
     $project = $command[2].':'.$command[3];
     $type = 'worked';
-    $worked_hours = '8';
+    $worked_hours = 8;
   
   /* Create Movement */
   $movementId = intval(createMovement($context, [

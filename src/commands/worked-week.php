@@ -12,7 +12,7 @@ function workedWeek($context, $command) {
     $worker = $_SERVER['PREJOURNAL_USERNAM'];
     $project = $command[2].':'.$command[3];
     $type = 'worked';
-    $worked_hours = '40';
+    $worked_hours = 40;
     
   /* Create Movement */
   $movementId = intval(createMovement($context, [
@@ -28,7 +28,7 @@ function workedWeek($context, $command) {
     $movementId,
     $timestamp
   ])[0]);
-  return(["Work(Movement) ID".$movementId]);
+  return($movementId);
   } else {
     return ["User not found or wrong password"];
   }
