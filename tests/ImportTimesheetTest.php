@@ -9,8 +9,9 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/time-CSV.csv";
+        $_SERVER["PREJOURNAL_DEFAULT_EMPLOYER"] = "employer";
         $result = runCommand(getContext(), ["import-hours", "time-CSV", $fixture,  "2022-03-31 12:00:00" ]);
 
         $this->assertEquals([
@@ -48,7 +49,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(register([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timeBro-CSV.csv";
         $result = runCommand(getContext(), ["import-hours", "timeBro-CSV", $fixture,  "2022-03-31 12:00:00" ]);
         $this->assertEquals([
@@ -86,7 +87,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timetip-JSON.json";
         $result = runCommand(getContext(), ["import-hours", "timetip-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
@@ -125,7 +126,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timetracker-XML.xml";
         $result = runCommand(getContext(), ["import-hours", "timetracker-XML", $fixture,  "2022-03-31 12:00:00" ]);
 
@@ -164,7 +165,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(register([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timeDoctor-CSV.csv";
         $result = runCommand(getContext(), ["import-hours", "timeDoctor-CSV", $fixture,  "2022-03-31 12:00:00" ]);
         $this->assertEquals([
@@ -202,7 +203,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/saveMyTime-CSV.csv";
         $result = runCommand(getContext(), ["import-hours", "saveMyTime-CSV", $fixture,  "2022-03-31 12:00:00" ]);
 
@@ -241,7 +242,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/scoro-JSON.json";
         $result = runCommand(getContext(), ["import-hours", "scoro-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
@@ -279,7 +280,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/stratustime-JSON.json";
         $result = runCommand(getContext(), ["import-hours", "stratustime-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
@@ -318,7 +319,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timeManager-CSV.csv";
         $result = runCommand(getContext(), ["import-hours", "timeManager-CSV", $fixture,  "2022-04-02 00:00:00" ]);
 
@@ -357,7 +358,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timeTrackerNextcloud-JSON.json";
         $result = runCommand(getContext(), ["import-hours", "timeTrackerNextcloud-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
@@ -396,7 +397,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timeTrackerCli-JSON.json";
         $result = runCommand(getContext(), ["import-hours", "timeTrackerCli-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
@@ -435,7 +436,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/verifyInvoice-JSON.json";
         $result = runCommand(getContext(), ["import-hours", "verifyTime-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
@@ -474,7 +475,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timeTrackerDaily-CSV.csv";
         $result = runCommand(getContext(), ["import-hours", "timeTrackerDaily-CSV", $fixture,  "2022-03-31 12:00:00" ]);
 
@@ -513,7 +514,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timely-CSV.csv";
         $result = runCommand(getContext(), ["import-hours", "timely-CSV", $fixture,  "2022-03-31 12:00:00" ]);
 
@@ -552,7 +553,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timesheet-CSV.csv";
         $result = runCommand(getContext(), ["import-hours", "timesheet-CSV", $fixture,  "2022-03-31 12:00:00" ]);
 
@@ -591,7 +592,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timecamp-CSV.csv";
         $result = runCommand(getContext(), ["import-hours", "timecamp-CSV", $fixture,  "2022-03-31 12:00:00" ]);
 
@@ -630,7 +631,7 @@ final class ImportTimesheetTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timesheetMobile-CSV.csv";
         $result = runCommand(getContext(), ["import-hours", "timesheetMobile-CSV", $fixture,  "2022-03-31 12:00:00" ]);
 

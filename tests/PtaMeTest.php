@@ -17,7 +17,7 @@ final class PtaMeTest extends TestCase
     {
         setTestDb();
         $userId = intval(runCommand([ 'adminParty' => true ], ['register', 'someuser', 'somepass'])[0]);
-        setUser('someuser', 'somepass');
+        setUser('someuser', 'somepass', 'someemployer');
         $movementId = intval(createMovement(getContext(), ['create-movement', 'invoice', 'foo', 'bar', '123456790', '12'])[0]);
         $statementId = intval(createStatement(getContext(), ['create-statement', strval($movementId), '123466790'])[0]);
         $this->assertEquals(

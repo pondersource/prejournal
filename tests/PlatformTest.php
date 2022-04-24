@@ -6,7 +6,7 @@ final class PlatformTest extends TestCase
 {
     public function testSetUser(): void
     {
-        $result = setUser('alice', 'alice123');
+        $result = setUser('alice', 'alice123', 'employer');
 
         $this->assertEquals(
             $result,

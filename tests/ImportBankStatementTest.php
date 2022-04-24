@@ -9,7 +9,7 @@ final class ImportBankStatementTest extends TestCase
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/asnbank-CSV.csv";
         $result = runCommand(getContext(), ["import-bank-statement", "asnbank-CSV", $fixture,  "2022-03-31 12:00:00" ]);
         $this->assertEquals([
