@@ -67,13 +67,12 @@ The code is made platform independent through `src/platform.php`. To execute on 
 
 * create a .env file with `DATABASE_URL=...` postgresql://alex:123456@localhost/prejournal, `PREJOURNAL_ADMIN_PARTY=false` `PREJOURNAL_USERNAME=admin` and `PREJOURNAL_PASSWORD=...`
 * Load `./schema.sql` into the database
-* Run `php src/index.php register <username> <password>` (temporarily set `PREJOURNAL_ADMIN_PARTY=true` to create the 'admin' user)
-* Run `php src/index.php hello`
+* Run `php src/cli-single.php register <username> <password>` (temporarily set `PREJOURNAL_ADMIN_PARTY=true` to create the 'admin' user)
+* Run `php src/cli-single.php hello`
 
 # Usage (localhost)
 
-* `cd src/`
-* `php -S localhost:8080`
+* `php -S localhost:8080 src/server.php`
 * Visit http://localhost:8080/v1/hello with your browser
 * Or try:
   * `curl -d'["alice","alice123"]' http://admin:secret@localhost:8080/v1/register` (temporarily set `PREJOURNAL_ADMIN_PARTY=true` to create the 'admin' user)
@@ -210,14 +209,14 @@ Assets, liabilities, and expenses are fundamentally different in traditional boo
 | `createMovement` | Create a new Movement entry | - | 
 | `createStatement` | Create a new Statement entry | - | 
 | `createCompany` | Create a new Company entry | - |
-| `enter` | Enter a new data for every step component,movement and statement | php src/index.php enter "from component" "to component" "1.23" "2021-12-31T23:00:00.000Z" "invoice" "ponder-source-agreement-192" | 
+| `enter` | Enter a new data for every step component,movement and statement | php src/cli-single.php enter "from component" "to component" "1.23" "2021-12-31T23:00:00.000Z" "invoice" "ponder-source-agreement-192" | 
 | `grant` | Add a new data to componentGrant | curl -d'["bob", "from component"]' http://alice:alice123@localhost:8080/v1/grant | 
-| `hello` | Works more as a test command, to check if registration was successful | `php src/index.php hello` |
-| `import-bank-statement` | - | `php src/index.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"` | 
-| `import-hours` | Import timesheet data through CSV/JSON/XML files | `php src/index.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"` | 
-| `import-invoice` | Import invoice throuh CSV/JSON/XML | `php src/index.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"` | `
+| `hello` | Works more as a test command, to check if registration was successful | `php src/cli-single.php hello` |
+| `import-bank-statement` | - | `php src/cli-single.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"` | 
+| `import-hours` | Import timesheet data through CSV/JSON/XML files | `php src/cli-single.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"` | 
+| `import-invoice` | Import invoice throuh CSV/JSON/XML | `php src/cli-single.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"` | `
 | `list-new` | - |
-| `minimal-version` | Check the prejournal version | `php src/index.php minimal-version 1.0` |
+| `minimal-version` | Check the prejournal version | `php src/cli-single.php minimal-version 1.0` |
 | `pta-me` | - | - | 
-| `register <username> <password>` | Register a new user | `php src/index.php register <username> <password>` | 
-| `submit-expense` | Includes two movements(payment/invoice) | `php src/index.php submit-expense "28 August 2021" "stichting" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"`|  
+| `register <username> <password>` | Register a new user | `php src/cli-single.php register <username> <password>` | 
+| `submit-expense` | Includes two movements(payment/invoice) | `php src/cli-single.php submit-expense "28 August 2021" "stichting" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"`|  
