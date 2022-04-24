@@ -11,6 +11,7 @@ if (count($_SERVER["argv"]) != 2) {
 $handle = fopen($_SERVER["argv"][1], "r");
 while (($line = fgets($handle)) !== false) {
     $words = explode(" ", trim($line));
+    var_dump(reconcileQuotes($words));
 
     output(runCommand(getContext(), reconcileQuotes($words)));
 }

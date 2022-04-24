@@ -36,8 +36,8 @@ function runCommand($context, $command)
         "import-invoice" => 4,
         "minimal-version" => 2,
         "worked-hours" => 4,
-        "worked-day" => 3,
-        "worked-week" => 3,
+        "worked-day" => 4,
+        "worked-week" => 4,
         "submit-expense" => 8,
     ];
     if (isset($commands[$command[0]]) && count($command) == $commands[$command[0]]) {

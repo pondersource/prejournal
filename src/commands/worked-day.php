@@ -10,7 +10,7 @@ function workedDay($context, $command) {
   if (isset($context["user"])) {
   
     $timestamp = strtotime($command[1]);
-    $worker = $_SERVER['PREJOURNAL_USERNAM'];
+    $worker = $_SERVER['PREJOURNAL_USERNAME'];
     $project = $command[2].':'.$command[3];
     $type = 'worked';
     $worked_hours = 8;
