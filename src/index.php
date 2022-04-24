@@ -4,4 +4,4 @@
 
 
 // ...
-output(runCommand(getContext(), getCommand()));
+print(runCommand(getContext(), getCommand()));

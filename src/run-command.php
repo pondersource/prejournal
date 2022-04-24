@@ -10,6 +10,10 @@
   require_once(__DIR__ . '/commands/import-bank-statement.php');
   require_once(__DIR__ . '/commands/import-invoice.php');
   require_once(__DIR__ . '/commands/minimal-version.php');
+  require_once(__DIR__ . '/commands/worked-hours.php');
+  require_once(__DIR__ . '/commands/worked-day.php');
+  require_once(__DIR__ . '/commands/worked-week.php');
+  require_once(__DIR__ . '/commands/submit-expense.php');
 
 function toCamel($str) {
     $parts = explode("-", $str);
@@ -31,6 +35,10 @@ function runCommand($context, $command)
         "import-bank-statement" => 4,
         "import-invoice" => 4,
         "minimal-version" => 2,
+        "worked-hours" => 4,
+        "worked-day" => 3,
+        "worked-week" => 3,
+        "submit-expense" => 8,
     ];
     if (isset($commands[$command[0]]) && count($command) == $commands[$command[0]]) {
         $function = toCamel($command[0]);

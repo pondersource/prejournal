@@ -1,2 +1,130 @@
-minimal-version 1.0
-hello
+minimal-version 1.1
+worked-week "17 May 2021" "stichting" "Peppol for the Masses"
+worked-week "24 May 2021" "stichting" "Peppol for the Masses"
+worked-week "31 May 2021" "stichting" "Peppol for the Masses"
+
+worked-week "7 June 2021" "stichting" "Peppol for the Masses"
+worked-week "14 June 2021" "stichting" "Peppol for the Masses"
+worked-week "21 June 2021" "stichting" "Peppol for the Masses"
+worked-week "28 June 2021" "stichting" "Peppol for the Masses"
+
+worked-week "5 July 2021" "stichting" "Peppol for the Masses"
+worked-week "12 July 2021" "stichting" "Peppol for the Masses"
+
+worked-day "19 July 2021" "stichting" "Day Off"
+worked-day "20 July 2021" "stichting" "Day Off"
+worked-day "21 July 2021" "stichting" "Peppol for the Masses"
+worked-day "22 July 2021" "stichting" "Peppol for the Masses"
+worked-day "23 July 2021" "stichting" "Peppol for the Masses"
+
+worked-week "26 July 2021" "stichting" "Peppol for the Masses"
+
+worked-week "2 August 2021" "stichting" "Peppol for the Masses"
+worked-week "9 August 2021" "stichting" "Peppol for the Masses"
+worked-week "16 August 2021" "stichting" "Peppol for the Masses"
+
+worked-day "23 August 2021" "stichting" "Peppol for the Masses"
+worked-day "24 August 2021" "stichting" "Peppol for the Masses"
+worked-day "25 August 2021" "stichting" "Degrowth Conference"
+worked-day "26 August 2021" "stichting" "Degrowth Conference"
+worked-day "27 August 2021" "stichting" "Degrowth Conference"
+
+submit-expense "28 August 2021" "Degrowth Conference train tickets" "transport" 100 "michiel"
+
+worked-week "30 August 2021" "stichting" "Peppol for the Masses"
+
+worked-week "6 September 2021" "stichting" "Peppol for the Masses"
+
+worked-day "13 September 2021" "stichting" "Peppol for the Masses"
+worked-hours "14 September 2021" "stichting" "Peppol for the Masses" 4
+worked-hours "14 September 2021" "stichting" "ScienceMesh" 4
+worked-day "15 September 2021" "stichting" "ScienceMesh"
+worked-day "16 September 2021" "stichting" "ScienceMesh"
+worked-day "17 September 2021" "stichting" "ScienceMesh"
+
+worked-hours "20 September 2021" "stichting" "Peppol for the Masses" 4
+worked-hours "20 September 2021" "stichting" "ScienceMesh" 4
+worked-day "21 September 2021" "stichting" "ScienceMesh"
+worked-day "22 September 2021" "stichting" "ScienceMesh"
+worked-day "23 September 2021" "stichting" "ScienceMesh"
+worked-day "24 September 2021" "stichting" "ScienceMesh"
+
+worked-week "27 September 2021" "stichting" "ScienceMesh"
+worked-week "4 October 2021" "stichting" "ScienceMesh"
+worked-week "11 October 2021" "stichting" "ScienceMesh"
+worked-week "18 October 2021" "stichting" "ScienceMesh"
+worked-week "25 October 2021" "stichting" "ScienceMesh"
+
+worked-week "1 November 2021" "stichting" "ScienceMesh"
+worked-week "8 November 2021" "Off Sick"
+worked-week "15 November 2021" "stichting" "ScienceMesh"
+worked-week "22 November 2021" "stichting" "ScienceMesh"
+
+submit-expense "22 November 2021" "Printful" "hoodies Ponder Source Team" "team building" 210.96 "triodos"
+submit-expense "22 November 2021" "Printful" "hoodie Anke" "owed  by michiel" 23.70 "triodos"
+submit-expense "22 November 2021" "Printful" "hoodie Olivier" "owed  by michiel" 24.95 "triodos"
+
+worked-week "29 November 2021" "stichting" "ScienceMesh"
+
+submit-expense "29 November 2021" "removal.ai" "image background removal" "team building" 2.58 "triodos"
+
+worked-day "6 December 2021" "stichting" "Peppol for the Masses"
+worked-day "7 December 2021" "stichting" "Peppol for the Masses"
+worked-day "8 December 2021" "stichting" "Peppol for the Masses"
+worked-day "9 December 2021" "stichting" "Peppol for the Masses"
+worked-hours "10 December 2021" "stichting" "Peppol for the Masses" 3
+worked-hours "10 December 2021" "stichting" "Data Architectures Research" 5
+
+worked-day "13 December 2021" "stichting" "Peppol for the Masses"
+worked-day "14 December 2021" "stichting" "Peppol for the Masses"
+worked-day "15 December 2021" "stichting" "Peppol for the Masses"
+worked-day "16 December 2021" "stichting" "Peppol for the Masses"
+worked-hours "17 December 2021" "stichting" "Peppol for the Masses" 3
+worked-hours "17 December 2021" "stichting" "Data Architectures Research" 5
+
+submit-expense "17 December 2021" "Post NL" "Hoodie to Iran" "team building" 25.55 "triodos"
+submit-expense  "17 December 2021" "Post NL" "Hoodie to Switzerland" "team building" 18.50 "triodos"
+
+worked-week "20 December 2021" "stichting" "Peppol for the Masses"
+worked-week "27 December 2021" "stichting" "Peppol for the Masses"
+worked-week "3 January 2021" "stichting" "Peppol for the Masses"
+
+worked-week "10 January 2021" "stichting" "Study Leave"
+worked-week "17 January 2021" "stichting" "Study Leave"
+worked-week "24 January 2021" "stichting" "Study Leave"
+worked-week "31 January 2021" "stichting" "Study Leave"
+
+worked-day "7 February 2021" "stichting" "Study Leave"
+worked-day "8 February 2021" "stichting" "Study Leave"
+worked-day "9 February 2021" "stichting" "Study Leave"
+worked-day "10 February 2021" "stichting" "Study Leave"
+worked-day "11 February 2021" "stichting" "Billing APIs"
+
+worked-week "14 February 2021" "stichting" "Billing APIs"
+
+worked-day "21 February 2021" "stichting" "Day Off"
+worked-day "22 February 2021" "stichting" "Billing APIs"
+worked-day "23 February 2021" "stichting" "Billing APIs"
+worked-day "24 February 2021" "stichting" "Billing APIs"
+worked-day "25 February 2021" "stichting" "Billing APIs"
+
+worked-week "28 February 2021" "stichting" "Billing APIs"
+worked-week "7 March 2021" "stichting" "Billing APIs"
+
+worked-day "14 March 2021" "stichting" "Billing APIs"
+worked-day "15 March 2021" "stichting" "Billing APIs"
+worked-day "16 March 2021" "stichting" "Billing APIs"
+worked-day "17 March 2021" "stichting" "Billing APIs"
+worked-day "18 March 2021" "stichting" "Federated Timesheets"
+
+worked-week "21 March 2021" "stichting" "Federated Timesheets"
+
+worked-day "28 March 2021" "stichting" "Federated Timesheets"
+worked-day "29 March 2021" "stichting" "Federated Timesheets"
+worked-day "30 March 2021" "stichting" "Day Off"
+worked-day "31 March 2021" "stichting" "Federated Timesheets"
+worked-day "1 Apri 2021" "stichting" "Day Off"
+
+worked-day "4 April 2021" "stichting" "Federated Timesheets"
+worked-day "5 April 2021" "stichting" "Off Sick"
+worked-day "6 April 2021" "stichting" "Off Sick"
