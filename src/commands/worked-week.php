@@ -7,28 +7,29 @@
 
 function workedWeek($context, $command) {
   if (isset($context["user"])) {
-  
     $timestamp = strtotime($command[1]);
-    $worker = $_SERVER['PREJOURNAL_USERNAM'];
+    $worker = $context["user"]["username"];
     $project = $command[2].':'.$command[3];
     $type = 'worked';
     $worked_hours = '40';
-    
-  /* Create Movement */
-  $movementId = intval(createMovement($context, [
-    "create-movement",
-    $type[0],
-    strval(getComponentId($worker)),
-    strval(getComponentId($project)),
-    $timestamp,
-    $worked_hours
-  ])[0]);
-  $statementId = intval(createStatement($context, [
-    "create-statement",
-    $movementId,
-    $timestamp
-  ])[0]);
 
+    /* Create Movement */
+    $movementId = intval(createMovement($context, [
+      "create-movement",
+      $type[0],
+      strval(getComponentId($worker)),
+      strval(getComponentId($project)),
+      $timestamp,
+      $worked_hours
+    ])[0]);
+    $statementId = intval(createStatement($context, [
+      "create-statement",
+      $movementId,
+      $timestamp
+    ])[0]);
+
+    // return [json_encode($command), "Created movement $movementId", "Created statement $statementId"];
+    return ["Created movement $movementId", "Created statement $statementId"];
   } else {
     return ["User not found or wrong password"];
   }
