@@ -5,7 +5,9 @@ function isAdmin($context) {
   if ($context["adminParty"]) {
     return true;
   }
-  return ($context["user"]["username"] == "admin");
+  if (isset($context["user"]) && isset($context["user"]["username"])) {
+    return ($context["user"]["username"] == "admin");
+  }
 }
 
 // For now, only the super-admin can register users.

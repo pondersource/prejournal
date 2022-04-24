@@ -4,6 +4,10 @@ An experiment in pre-journal bookkeeping.
 Like the [Resources-Events-Agents (REA)](http://mikorizal.org/Fromprivateownershipaccountingtocommonsaccoun.html) model, this is an alternative bookkeeping model. Alternative to dual entry / "generally accepted accounting principles" bookkeeping, that is. It takes a bird's eye view of the economic network, instead of an organisation-centric view.
 
 # Development
+Note that the `psql` command below will drop and recreate all tables in your `prejournal` database on localhost psql
+or wherever you have pointed the DATABASE_URL in your `.env` file, so be careful
+if that's not what you want. :)
+
 ```
 composer install
 sudo apt install postgresql postgresql-contrib
@@ -11,7 +15,10 @@ cp .env.example .env
 GEN_SQL=1 php schema.php > schema.sql
 psql -h localhost -d prejournal -U your_username -f schema.sql
 ./vendor/bin/phpunit tests
+php src/cli-single.php register admin secret
+perl -i -pe's/PREJOURNAL_ADMIN_PARTY=true/PREJOURNAL_ADMIN_PARTY=false/g' .env
 ```
+If you don't have perl on your system, you can also open `.env` with a text editor and change the value for 'PREJOURNAL_ADMIN_PARTY' from 'true' to 'false' by hand.
 
 ### Verify API Call
 
@@ -65,9 +72,7 @@ Hello michiel, your userId is 1
 
 The code is made platform independent through `src/platform.php`. To execute on the command line, try for instance:
 
-* create a .env file with `DATABASE_URL=...` postgresql://alex:123456@localhost/prejournal, `PREJOURNAL_ADMIN_PARTY=false` `PREJOURNAL_USERNAME=admin` and `PREJOURNAL_PASSWORD=...`
-* Load `./schema.sql` into the database
-* Run `php src/cli-single.php register <username> <password>` (temporarily set `PREJOURNAL_ADMIN_PARTY=true` to create the 'admin' user)
+* Run through the steps detailed above under [#Development](#development).
 * Run `php src/cli-single.php hello`
 
 # Usage (localhost)
