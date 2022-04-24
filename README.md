@@ -58,7 +58,7 @@ hello
 ```
 
 ```sh
-php src/batch.php hello.pj
+php src/cli-batch.php hello.pj
 ```
 
 Example output:
@@ -67,7 +67,7 @@ Hello admin, your userId is 1
 ```
 
 ```sh
-php src/batch.php example.pj
+php src/cli-batch.php example.pj
 ```
 
 Example output:
