@@ -29,7 +29,7 @@ worked-day "25 August 2021" "stichting" "Degrowth Conference"
 worked-day "26 August 2021" "stichting" "Degrowth Conference"
 worked-day "27 August 2021" "stichting" "Degrowth Conference"
 
-submit-expense "28 August 2021" "Degrowth Conference train tickets" "transport" 100 "michiel"
+submit-expense "28 August 2021" "Dutch Railways" "Degrowth Conference train tickets" "transport" 100 "michiel"
 
 worked-week "30 August 2021" "stichting" "Peppol for the Masses"
 
@@ -56,7 +56,7 @@ worked-week "18 October 2021" "stichting" "ScienceMesh"
 worked-week "25 October 2021" "stichting" "ScienceMesh"
 
 worked-week "1 November 2021" "stichting" "ScienceMesh"
-worked-week "8 November 2021" "Off Sick"
+worked-week "8 November 2021" "stichting" "Off Sick"
 worked-week "15 November 2021" "stichting" "ScienceMesh"
 worked-week "22 November 2021" "stichting" "ScienceMesh"
 
