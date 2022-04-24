@@ -96,24 +96,24 @@ You can also create a Heroku app yourself and deploy a branch of the code there.
 
 See [schema.sql](./schema.sql).
 
-## TABLES 
+## TABLES
 
 ### 1. Users
- 
+
 | KEY | TYPE | DESCRIPTION |
 | --- | --- | --- |
-| id | SERIAL PRIMARY KEY | User ID | 
+| id | SERIAL PRIMARY KEY | User ID |
 | username | varchar(54) UNIQUE | Current Username |
 | passwordhash | varchar | password |
 
-### 2. components 
+### 2. components
 
  A _component_ is can be an organisation, a department, a person, or a budget / asset group. Components will often map to accounts in GAAP, or to Agents in REA, but this mapping is not exact.
- 
+
 | KEY | TYPE | DESCRIPTION |
 | --- | --- | --- |
-| id | SERIAL PRIMARY KEY | Component's ID | 
-| name | varchar  UNIQUE | Component's name | 
+| id | SERIAL PRIMARY KEY | Component's ID |
+| name | varchar  UNIQUE | Component's name |
 
 
 
@@ -122,9 +122,9 @@ See [schema.sql](./schema.sql).
 Movements can be invoices or payments.
 
 | KEY | TYPE | DESCRIPTION |
-| --- |  --- |  --- | 
+| --- |  --- |  --- |
 | id | SERIAL PRIMARY KEY | Movement's ID |
-| type_ | varchar(54) |'invoice', 'payment', 'worker', 'transport'| Type of movement | 
+| type_ | varchar(54) |'invoice', 'payment', 'worker', 'transport'| Type of movement |
 | fromComponent | Integer |  From which component(ID) |
 | toComponent | Integer |  To which component(ID) |
 | timestamp_ | timestamp |  When the transaction happened |
@@ -134,7 +134,7 @@ Movements can be invoices or payments.
 ### 4. statements
 
 | KEY | TYPE | DESCRIPTION |
-| --- | --- |  --- |  
+| --- | --- |  --- |
 | id | SERIAL PRIMARY KEY |  Statement's ID |
 | movementId | Integer |  n/a |
 | userId | Integer |  Whose User's is the statement |
@@ -145,8 +145,8 @@ Movements can be invoices or payments.
 
 ### 5. componentGrants
 
-| KEY | TYPE | DESCRIPTION | 
-| --- |  --- |  --- | 
+| KEY | TYPE | DESCRIPTION |
+| --- |  --- |  --- |
 | id | SERIAL PRIMARY KEY | componentGrants's ID |
 | fromUser | numeric | Sender(User ID) of component() |
 | toUser | numeric | Receiver(ID) of component(?) |
@@ -202,21 +202,22 @@ In traditional (GAAP / double entry) bookkeeping, the journal already makes impo
 Assets, liabilities, and expenses are fundamentally different in traditional bookkeeping, but the act of buying a laptop with your debit card is not fundamentally different from the act of buying a banana with your credit card, and when you federate bookkeeping systems, the local choices about what is an expense (something that lasts less than a month, like a banana) and what is an asset (something that lasts more than a month, like a laptop) should not get exported. That's why we are now experimenting with the federation of bookkeeping systems at the pre-journal phase.
 
 
-## Commands 
+## Commands
 
-| Command | Usage | Example | 
-| ------- | ------- |  ------- | 
-| `createMovement` | Create a new Movement entry | - | 
-| `createStatement` | Create a new Statement entry | - | 
-| `createCompany` | Create a new Company entry | - |
-| `enter` | Enter a new data for every step component,movement and statement | php src/cli-single.php enter "from component" "to component" "1.23" "2021-12-31T23:00:00.000Z" "invoice" "ponder-source-agreement-192" | 
-| `grant` | Add a new data to componentGrant | curl -d'["bob", "from component"]' http://alice:alice123@localhost:8080/v1/grant | 
-| `hello` | Works more as a test command, to check if registration was successful | `php src/cli-single.php hello` |
-| `import-bank-statement` | - | `php src/cli-single.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"` | 
-| `import-hours` | Import timesheet data through CSV/JSON/XML files | `php src/cli-single.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"` | 
-| `import-invoice` | Import invoice throuh CSV/JSON/XML | `php src/cli-single.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"` | `
-| `list-new` | - |
-| `minimal-version` | Check the prejournal version | `php src/cli-single.php minimal-version 1.0` |
-| `pta-me` | - | - | 
-| `register <username> <password>` | Register a new user | `php src/cli-single.php register <username> <password>` | 
-| `submit-expense` | Includes two movements(payment/invoice) | `php src/cli-single.php submit-expense "28 August 2021" "stichting" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"`|  
+| Command | minimal PJ version | Usage | Example |
+| ------- | ------- | ------- |  ------- |
+| `createMovement` | 1.0 | Create a new Movement entry | - |
+| `createStatement` | 1.0 | Create a new Statement entry | - |
+| `createCompany` | 1.0 | Create a new Company entry | - |
+| `enter` | 1.0 | Enter a new data for every step component,movement and statement | php src/cli-single.php enter "from component" "to component" "1.23" "2021-12-31T23:00:00.000Z" "invoice" "ponder-source-agreement-192" |
+| `grant` | 1.0 | Add a new data to componentGrant | curl -d'["bob", "from component"]' http://alice:alice123@localhost:8080/v1/grant |
+| `hello` | 1.0 | Works more as a test command, to check if registration was successful | `php src/cli-single.php hello` |
+| `import-bank-statement` | 1.0 | - | `php src/cli-single.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"` |
+| `import-hours` | 1.1 | Import timesheet data through CSV/JSON/XML files | `php src/cli-single.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"` |
+| `import-invoice` | 1.1 | Import invoice throuh CSV/JSON/XML | `php src/cli-single.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"` |
+| `list-new` | 1.1 | - |
+| `minimal-version` | 1.0 | Check the prejournal version | `php src/cli-single.php minimal-version 1.0` |
+| `pta-me` | 1.0 | - | - |
+| `register <username> <password>` | 1.0 | Register a new user | `php src/cli-single.php register <username> <password>` |
+| `submit-expense` (7 words) | 1.1 | Includes two movements(payment/invoice) | `php src/cli-single.php submit-expense "28 August 2021" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"`|
+| `submit-expense` (8 words) | 1.2 | Includes two movements(payment/invoice) | `php src/cli-single.php submit-expense "28 August 2021" "stichting" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"`|

@@ -44,6 +44,20 @@ function runCommand($context, $command)
         $function = toCamel($command[0]);
         return $function($context, $command);
     }
+    // Support original 1.1 version of submit-expense command,
+    // see https://github.com/pondersource/prejournal/issues/53#issuecomment-1107842489
+    if ($command[0] == 'submit-expense' && count($command) == 7) {
+        return submitExpense($context, [
+            $command[0], // 'submit-expense'
+            $command[1], // '28 August 2021'
+            $context['employer'], // 'stichting'
+            $command[2], // 'Dutch Railways'
+            $command[3], // 'Degrowth Conference train tickets'
+            $command[4], // 'transport'
+            $command[5], // '100'
+            $command[6] // 'michiel'
+        ]);
+    }
     return ['Unrecognized command ' . var_export($command, true)];
 }
 

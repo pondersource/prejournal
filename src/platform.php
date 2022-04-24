@@ -1,6 +1,9 @@
 <?php declare(strict_types=1);
 require_once(__DIR__ . '/database.php');
 
+// See https://github.com/pondersource/prejournal/issues/53#issuecomment-1107842489
+const DOGFOODING_DEFAULT_EMPLOYER = "stichting";
+
 function readDotEnv() {
   // Can be used when running from CLI
   $dotEnvPath = __DIR__ . '/../.env';
@@ -97,6 +100,7 @@ function getContext() {
   return [
     'user' => getUser(),
     'adminParty' => (isset($_SERVER["PREJOURNAL_ADMIN_PARTY"]) && $_SERVER["PREJOURNAL_ADMIN_PARTY"] == "true"),
+    'employer' => (isset($_SERVER["PREJOURNAL_DEFAULT_EMPLOYER"]) ? $_SERVER["PREJOURNAL_DEFAULT_EMPLOYER"] : DOGFOODING_DEFAULT_EMPLOYER)
   ];
 }
 
