@@ -1,7 +1,1 @@
-<?php declare(strict_types=1);
-  require_once(__DIR__ . '/platform.php');
-  require_once(__DIR__ . '/run-command.php');
-
-
-// ...
-print(runCommand(getContext(), getCommand()));
+DEPRECATED! Please use `./cli-single.php`, `./cli-batch.php`, or `./server.php`.
