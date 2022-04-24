@@ -10,9 +10,9 @@ final class ImportInvoiceTest extends TestCase
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         $bobId = intval(runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0]);
-        setUser('alice', 'alice123');
+        setUser('alice', 'alice123', 'employer');
         runCommand(getContext(), ["enter", "ismoil", "alex", "4.00", "1123211312", "invoice", "ponder-source" ]);
-        setUser('bob', 'bob123');
+        setUser('bob', 'bob123', 'employer');
         $this->assertEquals([
             'timestamp, from, to, amount, observer',
         ], runCommand(getContext(), ['list-new']));
@@ -21,7 +21,7 @@ final class ImportInvoiceTest extends TestCase
         {
             setTestDb();
             $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-            setUser('alice', 'alice123');
+            setUser('alice', 'alice123', 'employer');
             $fixture = __DIR__ . "/fixtures/verifyInvoice-JSON.json";
             $result = runCommand(getContext(), ["import-invoice", "verifyInvoice-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
@@ -56,7 +56,7 @@ final class ImportInvoiceTest extends TestCase
         {
             setTestDb();
             $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-            setUser('alice', 'alice123');
+            setUser('alice', 'alice123', 'employer');
             $fixture = __DIR__ . "/fixtures/timeHerokuInvoice-JSON.json";
             $result = runCommand(getContext(), ["import-invoice", "timeHerokuInvoice-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 

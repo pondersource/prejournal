@@ -42,19 +42,23 @@ function submitExpense($context, $command) {
       $amount
     ])[0]);
 
-  /* Create 2 Statements*/
-  $statementId_payment = intval(createStatement($context, [
-    "create-statement",
-    $movementId_payment ,
-    $timestamp,
-  ])[0]);
+    /* Create 2 Statements*/
+    $statementId_payment = intval(createStatement($context, [
+      "create-statement",
+      $movementId_payment ,
+      $timestamp,
+    ])[0]);
 
-  $statementId_invoice = intval(createStatement($context, [
-    "create-statement",
-    $movementId_invoice ,
-    $timestamp,
-  ])[0]);
-  return(["Payment(Movement) ID: ".$movementId_payment."\n:invoice(Movement)ID: ".$movementId_invoice]);
+
+    $statementId_invoice = intval(createStatement($context, [
+      "create-statement",
+      $movementId_invoice ,
+      $timestamp,
+    ])[0]);
+    return [
+      "Created movements $movementId_payment and $movementId_invoice",
+      "Created statements $statementId_payment and $statementId_invoice"
+    ];
   } else {
     return ["User not found or wrong password"];
   }

@@ -8,7 +8,7 @@ final class WorkedTest extends TestCase
     {
         setTestDb();
         $testuserID = intval(runCommand([ 'adminParty' => true ], ['register', 'testusername', 'passwd'])[0]);
-        setUser('testusername', 'passwd');
+        setUser('testusername', 'passwd','employer');
         runCommand(getContext(), ["worked-day","23 August 2021","stichting","Peppol for the Masses"]);
         $this->assertEquals([
             [
@@ -46,7 +46,7 @@ final class WorkedTest extends TestCase
     {
         setTestDb();
         $testuserID = intval(runCommand([ 'adminParty' => true ], ['register', 'testusername', 'passwd'])[0]);
-        setUser('testusername', 'passwd');
+        setUser('testusername', 'passwd','employer');
         runCommand(getContext(), ["worked-hours","23 August 2021","stichting","Peppol for the Masses","4"]);
         $this->assertEquals([
             [
@@ -84,7 +84,7 @@ final class WorkedTest extends TestCase
     {
         setTestDb();
         $testuserID = intval(runCommand([ 'adminParty' => true ], ['register', 'testusername', 'passwd'])[0]);
-        setUser('testusername', 'passwd');
+        setUser('testusername', 'passwd','employer');
         runCommand(getContext(), ["worked-week","23 August 2021","stichting","Peppol for the Masses"]);
         $this->assertEquals([
             [

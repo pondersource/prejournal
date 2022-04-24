@@ -15,16 +15,17 @@ final class RegisterAndHelloTest extends TestCase
     public function testUserRegisteredAndFound(): void
     {
         setTestDb();
-        $lastInsertId = intval(runCommand([ 'adminParty' => true ], ['register', 'someuser', 'somepass'])[0]);
+        $lastInsertId = intval(runCommand([ 'adminParty' => true,  ], ['register', 'someuser', 'somepass'])[0]);
         // right user and pass
-        setUser('someuser', 'somepass');
+        setUser('someuser', 'somepass', 'someemployer');
         $this->assertEquals(
             [
                 'user' => [
                     'id' => $lastInsertId,
                     'username' => 'someuser',
                 ],
-                'adminParty' => true
+                'adminParty' => false,
+                'employer' => 'someemployer'
             ],
             getContext()
         );
@@ -40,10 +41,11 @@ final class RegisterAndHelloTest extends TestCase
         $lastInsertId = intval(runCommand([ 'adminParty' => true ], ['register', 'someuser', 'somepass'])[0]);
 
         // wrong pass
-        setUser('someuser', 'wrongpass');
+        setUser('someuser', 'wrongpass', 'someemployer');
         $this->assertEquals([
                 'user' => null,
-                'adminParty' => true
+                'adminParty' => false,
+                'employer' => 'someemployer'
             ],
             getContext()
         );
@@ -59,10 +61,11 @@ final class RegisterAndHelloTest extends TestCase
         $lastInsertId = intval(runCommand([ 'adminParty' => true ], ['register', 'someuser', 'somepass'])[0]);
 
         // wrong user
-        setUser('wronguser', 'somepass');
+        setUser('wronguser', 'somepass', 'someemployer');
         $this->assertEquals([
                 'user' => null,
-                'adminParty' => true
+                'adminParty' => false,
+                'employer' => 'someemployer'
             ],
             getContext()
         );
