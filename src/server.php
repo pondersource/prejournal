@@ -5,14 +5,13 @@
 
 // ...
 if (getMode() === 'batch') {
-  $handle = getBatchHandle();
+  $handle = getBatchHandle(false);
   while (($line = fgets($handle)) !== false) {
-      $words = explode(" ", trim($line));
-
-      output(runCommand(getContext(), reconcileQuotes($words)));
+    $words = explode(" ", trim($line));
+    
+    output(runCommand(getContext(), reconcileQuotes($words)));
   }
   fclose($handle);
 } else {
   output(runCommand(getContext(), getCommand()));
-
 }

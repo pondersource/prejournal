@@ -45,7 +45,30 @@ function setUser($username, $password) {
   $_SERVER['PREJOURNAL_PASSWORD'] = $password;
 }
 
-function getCommand() {
+function getMode() {
+  if (isset($_SERVER["REQUEST_URI"])) {
+      $parts = explode("/", $_SERVER["REQUEST_URI"]);
+      if (count($parts) >=3 && $parts[0] == "") {
+          if ($parts[1] == "v1") {
+              return 'single';
+          }
+          if ($parts[1] == "v1-batch") {
+              return 'batch';
+          }
+      }
+  }
+  return 'unknown';
+}
+
+function getBatchHandle($isCli) {
+  if ($isCli) {
+    return fopen($_SERVER['argv'][1], 'r');
+  } else {
+    return fopen('php://input', 'r');
+  }
+}
+
+function getCommand() { 
    if (isset($_SERVER["REQUEST_URI"])) {
      $parts = explode("/", $_SERVER["REQUEST_URI"]);
      if (count($parts) >=3 && $parts[0] == "" && $parts[1] == "v1") {

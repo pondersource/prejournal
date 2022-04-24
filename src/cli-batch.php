@@ -10,7 +10,7 @@ function runCliBatch() {
   }
 
   readDotEnv();
-  $handle = fopen($_SERVER["argv"][1], "r");
+  $handle = getBatchHandle(true);
   while (($line = fgets($handle)) !== false) {
     $words = explode(" ", trim($line));
     
