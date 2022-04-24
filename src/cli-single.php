@@ -2,6 +2,10 @@
   require_once(__DIR__ . '/platform.php');
   require_once(__DIR__ . '/run-command.php');
 
+function runCliSingle() {
+  readDotEnv();
+  output(runCommand(getContext(), getCommand()));
+}
 
 // ...
-print(runCommand(getContext(), getCommand()));
+runCliSingle();

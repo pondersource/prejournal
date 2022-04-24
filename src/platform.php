@@ -1,29 +1,30 @@
 <?php declare(strict_types=1);
 require_once(__DIR__ . '/database.php');
 
-// Can be used when running from CLI
-// Not necessary when running on Heroku or as a Nextcloud app
-$dotEnvPath = __DIR__ . '/../.env';
-if (is_readable($dotEnvPath)) {
-    // output("loading .env file");
-    $lines = file($dotEnvPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        if (strpos(trim($line), '#') === 0) {
-            continue;
-        }
+function readDotEnv() {
+  // Can be used when running from CLI
+  $dotEnvPath = __DIR__ . '/../.env';
+  if (is_readable($dotEnvPath)) {
+      // output("loading .env file");
+      $lines = file($dotEnvPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+      foreach ($lines as $line) {
+          if (strpos(trim($line), '#') === 0) {
+              continue;
+          }
 
-        list($name, $value) = explode('=', $line, 2);
-        $name = trim($name);
-        $value = trim($value);
+          list($name, $value) = explode('=', $line, 2);
+          $name = trim($name);
+          $value = trim($value);
 
-        if (!array_key_exists($name, $_SERVER) && !array_key_exists($name, $_SERVER)) {
-            putenv(sprintf('%s=%s', $name, $value));
-            $_SERVER[$name] = $value;
-            $_SERVER[$name] = $value;
-        }
-    }
-} else {
-  // output("Not loading .env file ".$dotEnvPath);
+          if (!array_key_exists($name, $_SERVER) && !array_key_exists($name, $_SERVER)) {
+              putenv(sprintf('%s=%s', $name, $value));
+              $_SERVER[$name] = $value;
+              $_SERVER[$name] = $value;
+          }
+      }
+  } else {
+      // output("Not loading .env file ".$dotEnvPath);
+  }
 }
 
 function getUser() {
