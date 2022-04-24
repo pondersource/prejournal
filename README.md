@@ -57,15 +57,31 @@ minimal-version 1.0
 hello
 ```
 
+```sh
+php src/batch.php hello.pj
+```
+
+Example output:
+```sh
+Hello admin, your userId is 1
+```
 
 ```sh
- php src/batch.php example.pj
+php src/batch.php example.pj
 ```
 
 Example output:
 ```sh
 exact match
-Hello michiel, your userId is 1
+Created movement 1
+Created statement 1
+Created movement 2
+Created statement 2
+Created movement 3
+Created statement 3
+Blank link in batch file
+Created movement 4
+[...]
 ```
 
 # Usage (CLI)
