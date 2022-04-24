@@ -85,11 +85,11 @@ NB: In general, you would never put a password in a URL or even in a `.env` file
 we're doing this here to simplify the setup during rapid initial development. See [#9](https://github.com/pondersource/prejournal/issues/9).
 
 # Usage (Heroku)
-The app's main branch is automatically deployed to https://prejournal.herokuapp.com/ on each commit
+The app's main branch is automatically deployed to https://api.prejournal.org/ on each commit
 You can try for instance:
 ```
-curl -d'["alice","alice123"]' https://admin:secret@prejournal.herokuapp.com/v1/register # requires admin permissions
-curl https://alice:alice123@prejournal.herokuapp.com/v1/hello
+curl -d'["alice","alice123"]' https://admin:secret@api.prejournal.org/v1/register # requires admin permissions
+curl https://alice:alice123@api.prejournal.org/v1/hello
 ```
 You can also create a Heroku app yourself and deploy a branch of the code there. Feel free, it's open source!
 
