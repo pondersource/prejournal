@@ -5,6 +5,18 @@ require_once(__DIR__ . '/../src/run-command.php');
 
 final class ImportInvoiceTest extends TestCase
 {
+    public function testImportInvoice(): void
+    {
+        setTestDb();
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        $bobId = intval(runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0]);
+        setUser('alice', 'alice123');
+        runCommand(getContext(), ["enter", "ismoil", "alex", "4.00", "1123211312", "invoice", "ponder-source" ]);
+        setUser('bob', 'bob123');
+        $this->assertEquals([
+            'timestamp, from, to, amount, observer',
+        ], runCommand(getContext(), ['list-new']));
+    }
     public function testParseVerifyInvoiceJson(): void
         {
             setTestDb();

@@ -5,7 +5,7 @@ function listNew($context, $command) {
   if (isset($context["user"])) {
     $movements = getDbConn()->executeQuery("SELECT m.*,s.userId from movements m INNER JOIN statements s ON s.movementId = m.id "
       . "INNER JOIN componentGrants g ON g.fromUser = s.userId "
-      . "WHERE ((g.componentId = m.fromComponent) OR (g.componentId = m.fromComponent))"
+      . "WHERE ((g.componentId = m.fromComponent) OR (g.componentId = m.toComponent))"
       . "AND g.toUser = :userId;", [ "userId" => $context["user"]["id"] ]);
     $ret = ["timestamp, from, to, amount, observer"];
     foreach($movements->fetchAllAssociative() as $row) {
