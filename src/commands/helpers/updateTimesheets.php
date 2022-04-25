@@ -14,7 +14,7 @@ function updateScoro($movement){
 
     $username = $_SERVER["SCORO_USERNAME"];
     $password = $_SERVER["SCORO_PASSWORD"];
-    $company_account_id = $_SERVER["SCORO_company_account_id"];
+    $company_account_id = $_SERVER["SCORO_COMPANY_ID"];
     $base_url  = 'https://'.$company_account_id.'.scoro.com/api/v2/';
     
     // Fix: What if more than one ':' are included into the data string(stichting:Peppol for :the Masses)
