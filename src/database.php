@@ -144,4 +144,11 @@ function getComponentId($name, $atomic = false) {
     }
   }
   return $arr[0]["id"];
+
+  function getMovementFromID($movementID) {
+    $conn  = getDbConn();
+    $query = "SELECT * FROM movements WHERE id = :movementID";
+    $result = $conn->executeQuery($query);
+    return $result->fetchAllAssociative();
+  }
 };

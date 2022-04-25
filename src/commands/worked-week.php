@@ -2,6 +2,7 @@
   require_once(__DIR__ . '/../platform.php');  require_once(__DIR__ . '/../platform.php');
   require_once(__DIR__ . '/helpers/createMovement.php');
   require_once(__DIR__ . '/helpers/createStatement.php');
+  require_once(__DIR__ . '/helpers/updateTimesheets.php');
 
   // E.g.: php src/index.php worked-week "22 November 2021" "stichting" "ScienceMesh"
 
@@ -27,7 +28,7 @@ function workedWeek($context, $command) {
       $movementId,
       $timestamp
     ])[0]);
-
+    updateTimesheets($movementId);
     // return [json_encode($command), "Created movement $movementId", "Created statement $statementId"];
     return ["Created movement $movementId", "Created statement $statementId"];
   } else {

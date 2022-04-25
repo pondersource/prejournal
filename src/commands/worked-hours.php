@@ -2,6 +2,7 @@
   require_once(__DIR__ . '/../platform.php');
   require_once(__DIR__ . '/helpers/createMovement.php');
   require_once(__DIR__ . '/helpers/createStatement.php');
+  require_once(__DIR__ . '/helpers/updateTimesheets.php');
 
 // E.g.: php src/index.php worked-hours "20 September 2021" "stichting" "Peppol for the Masses" 4
 
@@ -26,7 +27,7 @@ function workedHours($context, $command) {
       $movementId,
       $timestamp
     ])[0]);
-
+    updateTimesheets($movementId);
     // return [json_encode($command), "Created movement $movementId", "Created statement $statementId"];
     return [ "Created movement $movementId", "Created statement $statementId"];
   } else {
