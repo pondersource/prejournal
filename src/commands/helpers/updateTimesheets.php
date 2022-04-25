@@ -21,11 +21,14 @@ function updateScoro($movement){
     $data = explode(":",$to_component,);
     $project_name = $data[1]; 
     $company_name = $data[0];
-    $event_name = 'new task';
-
+    $event_name = 'Worked on '.$project_name.' project';
     $amount =  $movement[0]["amount"];
     $start_datetime = $movement[0]["timestamp_"];
-    $datetime_completed = date($start_datetime, strtotime('+'.$amount.'hours'));
+    $datetime_completed = date($start_datetime, strtotime('+ '.$amount.' hours'));
+    $created_date = date('Y-m-d H:i:s');
+    $modified_date = date('Y-m-d H:i:s');
+    /* Time (HH:ii:ss) */	
+    $billable_hours = gmdate('H:i:s', ($amount * 3600));
 
     $token_request = [
       'base_url' => $base_url,
@@ -46,13 +49,14 @@ function updateScoro($movement){
       'base_url' => $base_url,
       'lang' => 'eng',
       'user_token' => $user_token,
-      'base_url' => $base_url,
       'company_account_id' => $company_account_id,
       'event_name' => $event_name,
       'start_datetime' => $start_datetime,
       'project_name' => $project_name,
       'company_name' => $company_name,
-      'datetime_completed' => $datetime_completed
+      'billable_hours' => $billable_hours,
+      'created_date' => $created_date,
+      'modified_date' => $modified_date
     ];
     $response = createTask($request);
     if($response != 200){

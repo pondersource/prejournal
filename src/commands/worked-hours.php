@@ -12,7 +12,7 @@ function workedHours($context, $command) {
     $worker = $context["user"]["username"];
     $project = $command[2].':'.$command[3];
     $type = 'worked';
-    $worked_hours = (int)$command[3];
+    $worked_hours = (int)$command[4];
     /* Create Movement */
     $movementId = intval(createMovement($context, [
       "create-movement",
