@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
     require_once(__DIR__ . '/callEndpoint.php');
 
-    function getUserToken($lang,$company_account_id,$username,$password,$base_url,$device_type,$device_name,$device_id){
-        $url = $base_url.'userAuth/modify';
+    function getUserToken($request){
+        $url = $request['base_url'].'userAuth/modify';
         $data = [
-            'lang' => $lang,
-            'company_account_id' => $company_account_id,
-            'username' => $username,
-            'password' => $password,
-            'device_type' => $device_type,
-            'device_name' => $device_name,
-            'device_id' => $device_id,
+            'lang' => $request['lang'],
+            'company_account_id' => $request['company_account_id'],
+            'username' => $request['username'],
+            'password' => $request['password'],
+            'device_type' => $request['device_type'],
+            'device_name' => $request['device_name'],
+            'device_id' => $request['device_id'],
             'request' => []
         ];
         $headers = array(
@@ -21,25 +21,62 @@
         return $user_token;
     }
 
-    function addTask($lang,$user_token,$base_url,$company_account_id,$event_name,$start_datetime,$project_name,$company_name,$datetime_completed){
-        $url = $base_url.'tasks/modify/';
+    function createTask(array $request){
+        
+        $url = $request['base_url'].'tasks/modify/';
         $data = [
-            'lang' => $lang,
-            'user_token' => $user_token,
-            'company_account_id' => $company_account_id,
+            'lang' => $request['lang'],
+            'user_token' => $request['user_token'],
+            'company_account_id' => $request['company_account_id'],
             'return_data' => 1,
             'request' => [
-                'event_name' => $event_name,
-                'start_datetime' => $start_datetime,
-                'project_name' => $project_name,
-                'company_name' => $company_name,
-                'datetime_completed' => $datetime_completed
+                'event_name' => $request['event_name'],
+                'start_datetime' => $request['start_datetime'],
+                'datetime_completed' => $request['datetime_completed'],
+                'project_name' => $request['project_name'],
+                'company_name' =>  $request['company_name'],
+                'is_completed' => null,
+                'assigned_to' => null,
+                'related_users' => null,
+                'related_users_email' => null,
+                'duration_actual' => null,
+                'status' => null,
+                'status_name' => null,
+                'time_entries' => null,
+                'sortorder' => null,
+                'ete_id' => null,
+                'activity_id' => null,
+                'activity_type' => null,
+                'event_id' => null,
+                'description' => null,
+                'is_personal' => null,
+                'project_id' => null,
+                'project_phase_id' => null,
+                'company_id' => null,
+                'person_id' => null,
+                'person_name' => null,
+                'invoice_id' => null,
+                'purchase_order_id' => null,
+                'order_id' => null,
+                'quote_id' => null,
+                'rent_order_id' => null,
+                'bill_id' => null,
+                'duration_planned' => null,
+                'billable_hours' => null,
+                'owner_id' => null,
+                'owner_email' => null,
+                'modified_date' => null,
+                'created_date' => null,
+                'permissions' => null,
+                'id_deleted' => null,
+                'deleted_date' => null,
             ]
         ];
         $headers = array(
             'Accept: application/json',
         );
         $response = callEndpoint($headers,json_encode($data),$url);
+        echo 'Status: '.strval($response['statusCode']).PHP_EOL;
         return $response['statusCode'];
     }
 ?>

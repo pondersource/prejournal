@@ -4,7 +4,7 @@
   require_once(__DIR__ . '/helpers/createStatement.php');
   require_once(__DIR__ . '/helpers/updateTimesheets.php');
 
-  // E.g.: src/cli-single.php  worked-week "22 November 2021" "stichting" "ScienceMesh"
+  // E.g.: php src/cli-single.php  worked-week "22 November 2021" "stichting" "ScienceMesh"
 
 function workedWeek($context, $command) {
   if (isset($context["user"])) {

@@ -27,11 +27,34 @@ function updateScoro($movement){
     $start_datetime = $movement[0]["timestamp_"];
     $datetime_completed = date($start_datetime, strtotime('+'.$amount.'hours'));
 
-    $user_token = getUserToken('eng',$company_account_id,$username,$password,$base_url,'android','my device',123456789987654321);
+    $token_request = [
+      'base_url' => $base_url,
+      'lang' => 'eng',
+      'company_account_id' => $company_account_id,
+      'username' => $username,
+      'password' => $password,
+      'device_type' => 'android',
+      'device_name' => 'my device',
+      'device_id' => 123456789987654321,
+      'request' => []
+    ];
+    $user_token = getUserToken($token_request);
     if($user_token == null){
       return ["Failed to generate user token"];
     }
-    $response = addTask('eng',$user_token,$base_url,$company_account_id,$event_name,$start_datetime,$project_name,$company_name,$datetime_completed);
+    $request =[
+      'base_url' => $base_url,
+      'lang' => 'eng',
+      'user_token' => $user_token,
+      'base_url' => $base_url,
+      'company_account_id' => $company_account_id,
+      'event_name' => $event_name,
+      'start_datetime' => $start_datetime,
+      'project_name' => $project_name,
+      'company_name' => $company_name,
+      'datetime_completed' => $datetime_completed
+    ];
+    $response = createTask($request);
     if($response != 200){
       return ["Failed to create new task"];
     }
