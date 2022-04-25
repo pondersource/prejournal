@@ -16,9 +16,9 @@ function updateScoro($movement){
     $password = $_SERVER["SCORO_PASSWORD"];
     $company_account_id = $_SERVER["SCORO_COMPANY_ID"];
     $base_url  = 'https://'.$company_account_id.'.scoro.com/api/v2/';
-    
+    var_dump($movement);
     // Fix: What if more than one ':' are included into the data string(stichting:Peppol for :the Masses)
-    $data = explode($movement["fromComponent"],":");
+    $data = explode($movement["fromcomponent"],":");
     $project_name = $data[1]; 
     $company_name = $data[0];
     $event_name = 'new task';
