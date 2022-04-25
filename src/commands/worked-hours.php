@@ -4,7 +4,7 @@
   require_once(__DIR__ . '/helpers/createStatement.php');
   require_once(__DIR__ . '/helpers/updateTimesheets.php');
 
-// E.g.: php src/cli-single.php  worked-hours "20 September 2021" "stichting" "Peppol for the Masses" 4
+// E.g.: php src/cli-single.php  worked-hours "20 September 2021" "stichting" "Peppol for the Masses" 4 "Write Documentation"
 
 function workedHours($context, $command) {
   if (isset($context["user"])) {
@@ -12,7 +12,9 @@ function workedHours($context, $command) {
     $worker = $context["user"]["username"];
     $project = $command[2].':'.$command[3];
     $type = 'worked';
-    $worked_hours = (int)$command[3];
+    $worked_hours = (int)$command[4];
+    $description = $command[5];
+
     /* Create Movement */
     $movementId = intval(createMovement($context, [
       "create-movement",
@@ -22,6 +24,7 @@ function workedHours($context, $command) {
       $timestamp,
       $worked_hours
     ])[0]);
+    /* Create Statement */
     $statementId = intval(createStatement($context, [
       "create-statement",
       $movementId,

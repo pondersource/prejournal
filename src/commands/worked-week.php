@@ -4,13 +4,14 @@
   require_once(__DIR__ . '/helpers/createStatement.php');
   require_once(__DIR__ . '/helpers/updateTimesheets.php');
 
-  // E.g.: src/cli-single.php  worked-week "22 November 2021" "stichting" "ScienceMesh"
+  // E.g.: php src/cli-single.php  worked-week "22 November 2021" "stichting" "ScienceMesh" "Working on Milestone 2"
 
 function workedWeek($context, $command) {
   if (isset($context["user"])) {
     $timestamp = strtotime($command[1]);
     $worker = $context["user"]["username"];
     $project = $command[2].':'.$command[3];
+    $description = $command[4];
     $type = 'worked';
     $worked_hours = '40';
 
@@ -23,6 +24,7 @@ function workedWeek($context, $command) {
       $timestamp,
       $worked_hours
     ])[0]);
+    /* Create Statement */
     $statementId = intval(createStatement($context, [
       "create-statement",
       $movementId,

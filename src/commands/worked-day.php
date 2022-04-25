@@ -4,7 +4,7 @@
   require_once(__DIR__ . '/helpers/createStatement.php');
   require_once(__DIR__ . '/helpers/updateTimesheets.php');
 
-// E.g.: php src/cli-single.php   worked-day "23 August 2021" "stichting" "Peppol for the Masses"
+// E.g.: php src/cli-single.php   worked-day "23 August 2021" "stichting" "Peppol for the Masses" "Research on Federated Bookeeping systems"
 
 function workedDay($context, $command) {
   if (isset($context["user"])) {
@@ -13,6 +13,7 @@ function workedDay($context, $command) {
     $project = $command[2].':'.$command[3];
     $type = 'worked';
     $worked_hours = 8;
+    $description = $command[4];
   
     /* Create Movement */
     $movementId = intval(createMovement($context, [
@@ -23,6 +24,7 @@ function workedDay($context, $command) {
       $timestamp,
       $worked_hours
     ])[0]);
+    /* Create Statement */
     $statementId = intval(createStatement($context, [
       "create-statement",
       $movementId,
