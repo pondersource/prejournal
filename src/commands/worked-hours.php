@@ -4,7 +4,7 @@
   require_once(__DIR__ . '/helpers/createStatement.php');
   require_once(__DIR__ . '/helpers/updateTimesheets.php');
 
-// E.g.: src/cli-single.php  worked-hours "20 September 2021" "stichting" "Peppol for the Masses" 4
+// E.g.: php src/cli-single.php  worked-hours "20 September 2021" "stichting" "Peppol for the Masses" 4
 
 function workedHours($context, $command) {
   if (isset($context["user"])) {
