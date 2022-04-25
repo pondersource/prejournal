@@ -1,10 +1,11 @@
 <?php declare(strict_types=1);
-require_once('../platform.php');
-
-      $CLIENT_ID = $_SERVER["VERIFY_CLIENT_ID"];   
-      $ENVIRONMENT_URL = $_SERVER["VERIFY_ENVIROMENT_URL"];
-      $username = $_SERVER["VERIFY_USERNAME"];
-      $api_key = $_SERVER["VERIFY_API_KEY"];
+    require_once('../platform.php');
+    require_once(__DIR__ . '/callEndpoint.php');
+  
+    $CLIENT_ID = $_SERVER["VERIFY_CLIENT_ID"];   
+    $ENVIRONMENT_URL = $_SERVER["VERIFY_ENVIROMENT_URL"];
+    $username = $_SERVER["VERIFY_USERNAME"];
+    $api_key = $_SERVER["VERIFY_API_KEY"];
 
     # You can send the list of categories that is relevant to your case
     # Veryfi will try to choose the best one that fits this file
@@ -50,20 +51,8 @@ require_once('../platform.php');
         "AUTHORIZATION: apikey $username:$api_key",
         "CLIENT-ID: $CLIENT_ID"
     );
-
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_HEADER, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-    $json_response = curl_exec($ch);
-    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-
-    $json_result = json_encode(json_decode($json_response), JSON_PRETTY_PRINT);
+    $json_response = callEndpoint($headers,$data,$url);
+    $json_result = json_encode($json_response, JSON_PRETTY_PRINT);
     echo '<pre>' . $json_result . '</pre>';
 
     file_put_contents("api_responses/../../verifyInvoice-JSON.json", $json_result);
