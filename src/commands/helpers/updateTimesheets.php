@@ -4,7 +4,7 @@
   require_once(__DIR__ . '/../../api/scoro.php');
 
 function updateTimesheets($movement_id) {
-    $last_movement = getMovementFromID($movement_id);
+    $last_movement = getMovementByID($movement_id);
     updateScoro($last_movement);    
 
 }

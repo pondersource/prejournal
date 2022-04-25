@@ -64,7 +64,12 @@ function createUser($username, $passwordGiven) {
   // tableDump("users");
   return $conn->lastInsertId();
 }
-
+function getMovementByID($id) {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM movements WHERE id = :id";
+  $result = $conn->executeQuery($query, [ "id" => $id ]);
+  return $result->fetchAllAssociative();
+}
 function getMovementsForUser($userId) {
   $conn  = getDbConn();
   $query = "SELECT m.* FROM movements m INNER JOIN statements s ON m.id = s.movementId WHERE s.userId = :userid";
@@ -144,11 +149,4 @@ function getComponentId($name, $atomic = false) {
     }
   }
   return $arr[0]["id"];
-
-  function getMovementFromID($movementID) {
-    $conn  = getDbConn();
-    $query = "SELECT * FROM movements WHERE id = :movementID";
-    $result = $conn->executeQuery($query);
-    return $result->fetchAllAssociative();
-  }
 };

@@ -1,5 +1,4 @@
 <?php declare(strict_types=1);
-    require_once(__DIR__ . '../platform.php');
     require_once(__DIR__ . '/callEndpoint.php');
 
     function getUserToken($lang,$company_account_id,$username,$password,$base_url,$device_type,$device_name,$device_id){
