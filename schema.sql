@@ -25,7 +25,8 @@ create table movements (
   fromComponent integer,
   toComponent integer,
   timestamp_ timestamp,
-  amount decimal
+  amount decimal,
+  description varchar
 );
 
 drop table if exists statements;
