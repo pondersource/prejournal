@@ -3,8 +3,8 @@
   require_once(__DIR__ . '/helpers/services/updateScoro.php');
   require_once(__DIR__ . '/../database.php');
   /*
-  E.g.: php src/cli-single update-remote-service scoro
-  E.g.: php src/cli-single update-remote-service -a
+  E.g.: php src/cli-single.php  update-remote-service scoro
+  E.g.: php src/cli-single.php update-remote-service -a
 */
 function updateRemoteService($context, $command) {
   if (isset($context["user"])) {
@@ -19,7 +19,7 @@ function updateRemoteService($context, $command) {
 
         /* Check if there is synchronization between prejournal and remote system */
         if($sync == []){
-          $remote_id = updateScoro($movement_id);
+          $remote_id = updateScoro($movement_id,null);
           intval(createSync($context, [
             "movement",
             $movement_id,

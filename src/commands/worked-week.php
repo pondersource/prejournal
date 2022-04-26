@@ -3,7 +3,7 @@
   require_once(__DIR__ . '/helpers/createMovement.php');
   require_once(__DIR__ . '/helpers/createStatement.php');
 
-  // E.g.: php src/index.php worked-week "22 November 2021" "stichting" "ScienceMesh"
+  // E.g.: php src/cli-single.php  worked-week "22 November 2021" "stichting" "ScienceMesh"
 
 function workedWeek($context, $command) {
   if (isset($context["user"])) {
