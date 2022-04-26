@@ -168,4 +168,3 @@ function getSyncByInternalID($internal_id) {
   $result = $conn->executeQuery($query);
   return $result->fetchAllAssociative();
 }
-
