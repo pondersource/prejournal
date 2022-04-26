@@ -25,7 +25,8 @@ function getTables() {
   fromComponent integer,
   toComponent integer,
   timestamp_ timestamp,
-  amount decimal
+  amount decimal,
+  description varchar
 );",
 
 "drop table if exists statements;",
@@ -44,7 +45,14 @@ function getTables() {
   fromUser numeric,
   toUser numeric,
   componentId numeric
-);"
+);",
+"drop table if exists sync;",
+"create table sync (
+  internal_type varchar,
+  internal_id numeric,
+  remote_id  varchar,
+  remote_system varchar
+);",
   ];
 }
 

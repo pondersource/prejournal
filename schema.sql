@@ -25,7 +25,8 @@ create table movements (
   fromComponent integer,
   toComponent integer,
   timestamp_ timestamp,
-  amount decimal
+  amount decimal,
+  description varchar
 );
 
 drop table if exists statements;
@@ -47,4 +48,16 @@ create table componentGrants (
   toUser numeric,
   componentId numeric
 );
+
+
+drop table if exists sync;
+
+create table sync (
+  internal_type varchar,
+  internal_id numeric,
+  remote_id  varchar,
+  remote_system varchar
+);
+
+
 
