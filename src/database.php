@@ -168,3 +168,10 @@ function getSyncByInternalID($internal_id) {
   $result = $conn->executeQuery($query);
   return $result->fetchAllAssociative();
 }
+
+function getMovementByID($movement_id) {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM movements WHERE id = :id  ";
+  $result = $conn->executeQuery($query);
+  return $result->fetchAllAssociative();
+}
