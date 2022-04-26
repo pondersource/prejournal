@@ -6,6 +6,7 @@
   require_once(__DIR__ . '/commands/enter.php');
   require_once(__DIR__ . '/commands/grant.php');
   require_once(__DIR__ . '/commands/list-new.php');
+  require_once(__DIR__ . '/commands/list-payments.php');
   require_once(__DIR__ . '/commands/import-hours.php');
   require_once(__DIR__ . '/commands/import-bank-statement.php');
   require_once(__DIR__ . '/commands/import-invoice.php');
@@ -33,6 +34,7 @@ function runCommand($context, $command)
         "enter" => 7,
         "grant" => 3,
         "list-new" => 1,
+        "list-payments" => 1,
         "import-hours" => 4,
         "import-bank-statement" => 4,
         "import-invoice" => 4,
