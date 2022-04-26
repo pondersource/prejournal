@@ -50,7 +50,7 @@ function getTables() {
 "create table sync (
   internal_type varchar,
   internal_id numeric,
-  remote_id  varchar
+  remote_id  varchar,
   remote_system varchar
 );",
   ];
