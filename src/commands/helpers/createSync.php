@@ -6,7 +6,7 @@ function createSync($context, $command) {
   if (isset($context["user"])) {
     $conn  = getDbConn();
     $query = "INSERT INTO sync (internal_type, internal_id, remote_id, remote_system) VALUES (:internal_type, :internal_id, :remote_id, :remote_system);";
-    $ret = $conn->executeSync($query, [
+    $conn->executeSync($query, [
       "internal_type" => $command[1],
       "internal_id" => intval($command[2]),
       "remote_id" => intval($command[3]),

@@ -161,3 +161,11 @@ function getComponentId($name, $atomic = false) {
   }
   return $arr[0]["id"];
 };
+
+function getSyncByInternalID($internal_id) {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM sync WHERE internal_id = :internal_id  ";
+  $result = $conn->executeQuery($query);
+  return $result->fetchAllAssociative();
+}
+
