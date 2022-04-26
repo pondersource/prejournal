@@ -102,6 +102,13 @@ function getAllStatements() {
   return $result->fetchAllAssociative();
 }
 
+function getAllSync() {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM sync";
+  $result = $conn->executeQuery($query);
+  return $result->fetchAllAssociative();
+}
+
 function getUserId($username) {
   $conn  = getDbConn();
   $query = "SELECT id FROM users WHERE username = :username";
