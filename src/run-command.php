@@ -14,6 +14,7 @@
   require_once(__DIR__ . '/commands/worked-day.php');
   require_once(__DIR__ . '/commands/worked-week.php');
   require_once(__DIR__ . '/commands/submit-expense.php');
+  require_once(__DIR__ . '/commands/who-works-when.php');
 
 function toCamel($str) {
     $parts = explode("-", $str);
@@ -40,6 +41,7 @@ function runCommand($context, $command)
         "worked-day" => 4,
         "worked-week" => 4,
         "submit-expense" => 8,
+        "who-works-when" => 1
     ];
     if (isset($commands[$command[0]]) && count($command) == $commands[$command[0]]) {
         $function = toCamel($command[0]);

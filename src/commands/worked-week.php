@@ -16,7 +16,7 @@ function workedWeek($context, $command) {
     /* Create Movement */
     $movementId = intval(createMovement($context, [
       "create-movement",
-      $type[0],
+      $type,
       strval(getComponentId($worker)),
       strval(getComponentId($project)),
       $timestamp,

@@ -79,6 +79,15 @@ function getAllComponents() {
   return $result->fetchAllAssociative();
 }
 
+function getAllComponentNames() {
+  $list =getAllComponents();
+  $ret = [];
+  for ($i = 0; $i < count($list); $i++) {
+    $ret[$list[$i]["id"]] = $list[$i]["name"];
+  }
+  return $ret;
+}
+
 function getAllMovements() {
   $conn  = getDbConn();
   $query = "SELECT * FROM movements";

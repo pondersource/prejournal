@@ -19,7 +19,7 @@ function parseAccount2($obj) {
   if ($obj["globaleTransactiecode"] == "BEA") {
     return normalizeAccountName(substr($obj["omschrijving"], 1, 22));
   }
-  if ($obj["globaleTransactiecode"] == "COR") {
+  if ($obj["globaleTransactiecode"] == "COR" || $obj["globaleTransactiecode"] == "RTI") {
     return normalizeAccountName(substr($obj["omschrijving"], 1, 22));
   }
   if ($obj["globaleTransactiecode"] == "RNT") {
@@ -36,12 +36,13 @@ function parseAccount2($obj) {
   if ($obj["globaleTransactiecode"] == "GEA") {
     return normalizeAccountName("Geldautomaat " . normalizeAccountName(substr($obj["omschrijving"], 1, 22)));
   }
-  if ($obj["globaleTransactiecode"] == "KST") {
+  if ($obj["globaleTransactiecode"] == "KST" || $obj["globaleTransactiecode"] == "MSC" || $obj["globaleTransactiecode"] == "AFB") {
     return normalizeAccountName("Kosten " . substr($obj["omschrijving"], 1, strlen($obj["omschrijving"]) - 2));
   }
-  if ($obj["globaleTransactiecode"] == "DIV") {
+  if ($obj["globaleTransactiecode"] == "DIV" || $obj["globaleTransactiecode"] == "NUL") {
     return normalizeAccountName("Diversen " . substr($obj["omschrijving"], 1, strlen($obj["omschrijving"]) - 2));
   }
+  echo "Cannot parse account2!";
   var_dump($obj);
   exit();
   return "UNKNOWN " . $obj["globaleTransactiecode"];
@@ -77,12 +78,12 @@ function parseAsnBankCSV($text) {
   ];
   $lines = explode("\n", $text);
   $ret = [];
-  foreach($lines as $line) {
-    if (strlen($line) > 0) {
-      $cells = explode(",", $line);
+  for($i = 0; $i < count($lines); $i++) {
+    if (strlen($lines[$i]) > 0) {
+      $cells = explode(",", $lines[$i]);
       $obj = [];
-      for ($i = 0; $i < count($cells); $i++) {
-        $obj[$ASN_BANK_CSV_COLUMNS[$i]] = trim($cells[$i]);
+      for ($j = 0; $j < count($cells); $j++) {
+        $obj[$ASN_BANK_CSV_COLUMNS[$j]] = trim($cells[$j]);
         // if ($first) {
         //   printOpeningBalance([
         //     "date" => parseDate($obj),
@@ -94,7 +95,7 @@ function parseAsnBankCSV($text) {
       }
 
       if (floatval($obj["transactiebedrag"]) > 0) {
-          array_push($ret, [
+        array_push($ret, [
           "date" => parseDate($obj),
           "comment" => parseDescription($obj),
           "from" => parseAccount2($obj),
@@ -113,6 +114,6 @@ function parseAsnBankCSV($text) {
         ]);
       }
     }
-    return $ret;
   }
+  return $ret;
 }

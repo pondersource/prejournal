@@ -19,7 +19,7 @@ function importBankStatement($context, $command) {
     $type_ = "payment";
     $entries = $parserFunctions[$format](file_get_contents($fileName));
     for ($i = 0; $i < count($entries); $i++) {
-        $movementId = intval(createMovement($context, [
+      $movementId = intval(createMovement($context, [
         "create-movement",
         $type_,
         strval(getComponentId($entries[$i]["from"])),
@@ -27,7 +27,7 @@ function importBankStatement($context, $command) {
         $entries[$i]["date"],
         $entries[$i]["amount"]
       ])[0]);
-        $statementId = intval(createStatement($context, [
+      $statementId = intval(createStatement($context, [
         "create-statement",
         $movementId,
         $importTime
