@@ -9,7 +9,7 @@ final class WorkedTest extends TestCase
         setTestDb();
         $testuserID = intval(runCommand([ 'adminParty' => true ], ['register', 'testusername', 'passwd'])[0]);
         setUser('testusername', 'passwd');
-        runCommand(getContext(), ["submit-expensey","23 August 2021","companyname","railway","conference","transport","100","employer"]);
+        runCommand(getContext(), ["submit-expense","23 August 2021","companyname","railway","conference","transport","100","employer"]);
         $this->assertEquals([
             [
                 'id' => 1,
