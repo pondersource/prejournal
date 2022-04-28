@@ -166,10 +166,13 @@ function getSyncByInternalID($internal_id) {
   $conn  = getDbConn();
   $query = "SELECT * FROM sync WHERE internal_id = :internal_id  ";
   $result = $conn->executeQuery($query);
+  if($result == null){
+    return null;
+  }
   return $result->fetchAllAssociative();
 }
 
-function getMovementByID($movement_id) {
+function getMovementByID($id) {
   $conn  = getDbConn();
   $query = "SELECT * FROM movements WHERE id = :id  ";
   $result = $conn->executeQuery($query);

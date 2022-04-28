@@ -4,7 +4,7 @@
 
 function runCliSingle() {
   readDotEnv();
-  var_dump(getContext());
+  //var_dump(getContext());
   output(runCommand(getContext(), getCommand()));
 }
 

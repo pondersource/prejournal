@@ -49,7 +49,6 @@ create table componentGrants (
   componentId numeric
 );
 
-
 drop table if exists sync;
 
 create table sync (
@@ -58,6 +57,4 @@ create table sync (
   remote_id  varchar,
   remote_system varchar
 );
-
-
 

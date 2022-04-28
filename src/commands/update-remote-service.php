@@ -4,7 +4,6 @@
   require_once(__DIR__ . '/../database.php');
   /*
   E.g.: php src/cli-single.php  update-remote-service scoro
-  E.g.: php src/cli-single.php update-remote-service -a
 */
 function updateRemoteService($context, $command) {
   if (isset($context["user"])) {
@@ -12,11 +11,10 @@ function updateRemoteService($context, $command) {
     $movements = getDbConn()->executeQuery("SELECT * from movements  WHERE type_='worked'");
 
     if($remote_system == "scoro"){
-      
-      foreach($movements as $movement){
+      foreach($movements->fetchAllAssociative() as $movement){
         $movement_id = $movement["id"];
+        var_dump($movement_id);
         $sync = getSyncByInternalID($movement_id);
-
         /* Check if there is synchronization between prejournal and remote system */
         if($sync == []){
           $remote_id = updateScoro($movement_id,null);
@@ -29,6 +27,7 @@ function updateRemoteService($context, $command) {
         }
       }
     }
+    return ["Created sync with scoro"];
   } else {
     return ["User not found or wrong password"];
   }
