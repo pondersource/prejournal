@@ -173,6 +173,15 @@ Movements can be invoices or payments.
 | toUser | numeric | Receiver(ID) of component(?) |
 | componentId | numeric | Which component(ID) is tranfered |
 
+### 6. sync 
+
+| KEY | TYPE | DESCRIPTION |
+| --- |  --- |  --- |
+|  internal_type |  varchar | “component” or “movement” | 
+|  internal_id | numeric | Matching the internal component_id or movement_id |
+|  remote_id | varchar | The identifier for this component or movement in a time tracker application | 
+|  remote_system | varchar | Time tracker application | 
+
 ### The idea behind
 
 In standard bookkeeping, the invoices and bank statements are source document, and from there, the journal is generated. In the journal, accounts are divided into assets, liabilities, expenses, income, and equity. Prejournal makes no such division, although the idea is that a standard journal can be generated from the prejournal model, so that we can still export our data to the language that accountants understand (hence the name).

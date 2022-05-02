@@ -102,6 +102,13 @@ function getAllStatements() {
   return $result->fetchAllAssociative();
 }
 
+function getAllSync() {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM sync";
+  $result = $conn->executeQuery($query);
+  return $result->fetchAllAssociative();
+}
+
 function getUserId($username) {
   $conn  = getDbConn();
   $query = "SELECT id FROM users WHERE username = :username";
@@ -125,6 +132,25 @@ function getComponentName($id) {
     [ "id" => $id ]
   );
   return $result->fetchAllAssociative()[0]["name"];
+}
+
+function getMovement($id) {
+  $result = getDbConn()->executeQuery("SELECT * FROM movements WHERE id = :id",
+    [ "id" => $id ]
+  );
+  return $result->fetchAllAssociative()[0];
+}
+
+function getSync($internal_id,$internal_type,$remote_system) {
+  $result = getDbConn()->executeQuery("SELECT * FROM sync WHERE internal_id = :internal_id AND internal_type = :internal_type AND remote_system = :remote_system",
+  [ "internal_id" => $internal_id , 'internal_type' => $internal_type , 'remote_system' => $remote_system ]
+  );
+  $arr = $result->fetchAllAssociative();
+  if(empty($arr)){
+    return null;
+  }
+  return  $arr[0];
+ 
 }
 
 function getComponentId($name, $atomic = false) {
@@ -154,3 +180,4 @@ function getComponentId($name, $atomic = false) {
   }
   return $arr[0]["id"];
 };
+
