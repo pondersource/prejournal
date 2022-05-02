@@ -6,11 +6,11 @@ function createSync($context, $command) {
   if (isset($context["user"])) {
     $conn  = getDbConn();
     $query = "INSERT INTO sync (internal_type, internal_id, remote_id, remote_system) VALUES (:internal_type, :internal_id, :remote_id, :remote_system);";
-    $conn->executeSync($query, [
-      "internal_type" => $command[1],
-      "internal_id" => intval($command[2]),
-      "remote_id" => intval($command[3]),
-      "remote_system" => $command[4],
+    $conn->executeStatement($query, [
+      "internal_type" => $command[0],
+      "internal_id" => intval($command[1]),
+      "remote_id" => intval($command[2]),
+      "remote_system" => $command[3]
     ]);
     return [ strval($conn->lastInsertId()) ];
   } else {

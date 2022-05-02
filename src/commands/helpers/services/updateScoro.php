@@ -7,20 +7,19 @@
 // TODO update task when already exists
 function updateScoro($movement_id,$event_id){
 
-    $movement = getMovementByID($movement_id);
+    $movement = getMovement($movement_id);
     $username = $_SERVER["SCORO_USERNAME"];
     $password = $_SERVER["SCORO_PASSWORD"];
     $company_account_id = $_SERVER["SCORO_COMPANY_ID"];
     $base_url  = 'https://'.$company_account_id.'.scoro.com/api/v2/';
     // Fix: What if more than one ':' are included into the data string(stichting:Peppol for :the Masses)
-    $to_component = getComponentName($movement[0]["tocomponent"]);
+    $to_component = getComponentName($movement["tocomponent"]);
+    $event_name = $movement["description"];
     $data = explode(":",$to_component,);
     $project_name = $data[1]; 
-    $company_name = $data[0];
-    $event_name = 'Worked on '.$project_name.' project';
-    $amount =  $movement[0]["amount"];
-    $start_datetime = $movement[0]["timestamp_"];
-    $datetime_completed = date($start_datetime, strtotime('+ '.$amount.' hours'));
+    $company_name = $data;
+    $amount =  $movement["amount"];
+    $start_datetime = $movement["timestamp_"];
     $created_date = date('Y-m-d H:i:s');
     $modified_date = date('Y-m-d H:i:s');
     /* Time (HH:ii:ss) */	
@@ -55,8 +54,5 @@ function updateScoro($movement_id,$event_id){
       'modified_date' => $modified_date,
       'event_id' => $event_id
     ];
-    $response = createTask($request);
-    if($response != 200){
-      return ["Failed to create new task"];
-    }
+    return createTask($request);
 }

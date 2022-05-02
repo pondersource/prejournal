@@ -3,7 +3,7 @@
   require_once(__DIR__ . '/helpers/createMovement.php');
   require_once(__DIR__ . '/helpers/createStatement.php');
 
-  // E.g.: php src/cli-single.php  worked-week "22 November 2021" "stichting" "ScienceMesh"
+  // E.g.: php src/cli-single.php  worked-week "22 November 2021" "stichting" "ScienceMesh" "Almost done"
 
 function workedWeek($context, $command) {
   if (isset($context["user"])) {
@@ -12,6 +12,7 @@ function workedWeek($context, $command) {
     $project = $command[2].':'.$command[3];
     $type = 'worked';
     $worked_hours = '40';
+    $description = $command[4];
 
     /* Create Movement */
     $movementId = intval(createMovement($context, [
@@ -20,7 +21,8 @@ function workedWeek($context, $command) {
       strval(getComponentId($worker)),
       strval(getComponentId($project)),
       $timestamp,
-      $worked_hours
+      $worked_hours,
+      $description
     ])[0]);
     $statementId = intval(createStatement($context, [
       "create-statement",

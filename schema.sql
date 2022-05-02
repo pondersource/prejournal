@@ -52,6 +52,7 @@ create table componentGrants (
 drop table if exists sync;
 
 create table sync (
+  id SERIAL PRIMARY KEY,
   internal_type varchar,
   internal_id numeric,
   remote_id  varchar,

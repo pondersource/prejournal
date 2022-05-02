@@ -75,7 +75,9 @@
             'Accept: application/json',
         );
         $response = callEndpoint($headers,json_encode($data),$url);
-        echo 'Status: '.strval($response['statusCode']).PHP_EOL;
-        return $response['statusCode'];
+        if($response['statusCode'] != 200){
+            return $response['statusCode'];
+        }
+        return intval($response['data']['event_id']);
     }
 ?>
