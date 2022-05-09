@@ -17,6 +17,8 @@
   require_once(__DIR__ . '/commands/submit-expense.php');
   require_once(__DIR__ . '/commands/who-works-when.php');
   require_once(__DIR__ . '/commands/update-remote-service.php');
+  require_once(__DIR__ . '/commands/comment.php');
+  require_once(__DIR__ . '/commands/loan.php');
 
 function toCamel($str) {
     $parts = explode("-", $str);
@@ -45,7 +47,9 @@ function runCommand($context, $command)
         "worked-week" => 4,
         "submit-expense" => 8,
         "who-works-when" => 1,
-        "update-remote-service" => 2
+        "update-remote-service" => 2,
+        "comment" => 1,
+        "loan" => 4
     ];
     if (isset($commands[$command[0]]) && count($command) >= $commands[$command[0]]) {
         $function = toCamel($command[0]);

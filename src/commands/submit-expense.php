@@ -30,7 +30,8 @@ function submitExpense($context, $command) {
       strval(getComponentId($payer)),
       strval(getComponentId($receiver)),
       $timestamp,
-      $amount
+      $amount,
+      "payment related to expense"
     ])[0]);
   
     $movementId_invoice = intval(createMovement($context, [
@@ -39,7 +40,8 @@ function submitExpense($context, $command) {
       strval(getComponentId($receiver)),
       strval(getComponentId($shop)),
       $timestamp,
-      $amount
+      $amount,
+      "invoice related to expense"
     ])[0]);
 
     /* Create 2 Statements*/
