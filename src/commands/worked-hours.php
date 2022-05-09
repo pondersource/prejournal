@@ -3,6 +3,7 @@
   require_once(__DIR__ . '/helpers/createMovement.php');
   require_once(__DIR__ . '/helpers/createStatement.php');
 
+// E.g.: php src/cli-single.php  worked-hours "20 September 2021" "stichting" "Peppol for the Masses" 4
 // E.g.: php src/cli-single.php  worked-hours "20 September 2021" "stichting" "Peppol for the Masses" 4 "Last hours"
 
 function workedHours($context, $command) {
@@ -12,7 +13,7 @@ function workedHours($context, $command) {
     $project = $command[2].':'.$command[3];
     $type = 'worked';
     $worked_hours = $command[4];
-    $description = $command[5];
+    $description = (count($command) >= 6 ? $command[5] : "");
     /* Create Movement */
     $movementId = intval(createMovement($context, [
       "create-movement",

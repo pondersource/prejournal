@@ -40,14 +40,14 @@ function runCommand($context, $command)
         "import-bank-statement" => 4,
         "import-invoice" => 4,
         "minimal-version" => 2,
-        "worked-hours" => 6,
-        "worked-day" => 5,
-        "worked-week" => 5,
+        "worked-hours" => 5,
+        "worked-day" => 4,
+        "worked-week" => 4,
         "submit-expense" => 8,
         "who-works-when" => 1,
         "update-remote-service" => 2
     ];
-    if (isset($commands[$command[0]]) && count($command) == $commands[$command[0]]) {
+    if (isset($commands[$command[0]]) && count($command) >= $commands[$command[0]]) {
         $function = toCamel($command[0]);
         // print("running $function");
         return $function($context, $command);
