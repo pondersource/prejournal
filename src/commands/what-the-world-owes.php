@@ -35,11 +35,9 @@ function whatTheWorldOwes($context, $command) {
     $ret = [];
     $cumm = 0;
     foreach ($days as $date => $arr) {
-      array_push($ret, "");
-      array_push($ret, formatDate($date));
+      array_push($ret, formatDate($date) . " $cumm");
       foreach ($days[$date] as $val) {
         $cumm += $val;
-        array_push($ret, "$val -> $cumm");
       }
     }
     return $ret;

@@ -17,20 +17,34 @@ function importBankStatement($context, $command) {
     $fileName = $command[2];
     $importTime = strtotime($command[3]);
     $type_ = "payment";
-    $entries = $parserFunctions[$format](file_get_contents($fileName));
+    $entries = $parserFunctions[$format](file_get_contents($fileName), $context["user"]["username"]);
     for ($i = 0; $i < count($entries); $i++) {
-      $movementId = intval(createMovement($context, [
+      $movementIdOutside = intval(createMovement($context, [
         "create-movement",
         $type_,
         strval(getComponentId($entries[$i]["from"])),
         strval(getComponentId($entries[$i]["to"])),
         $entries[$i]["date"],
         $entries[$i]["amount"],
-        "from bank statement"
+        "outside movement from bank statement"
       ])[0]);
-      $statementId = intval(createStatement($context, [
+      intval(createStatement($context, [
         "create-statement",
-        $movementId,
+        $movementIdOutside,
+        $importTime
+      ])[0]);
+      $movementIdInside = intval(createMovement($context, [
+        "create-movement",
+        $type_,
+        strval(getComponentId($entries[$i]["insideFrom"])),
+        strval(getComponentId($entries[$i]["insideTo"])),
+        $entries[$i]["date"],
+        $entries[$i]["amount"],
+        "inside movement from bank statement"
+      ])[0]);
+      intval(createStatement($context, [
+        "create-statement",
+        $movementIdInside,
         $importTime
       ])[0]);
     }

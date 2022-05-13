@@ -9,6 +9,7 @@ function formatDate($date) {
 // and therefore it only works in adminParty mode:
 function whoWorksWhen($context) {
   if ($context['adminParty']) {
+    // similar to the code in the what-the-world-owes command:
     $days = [];
     $movements = getAllMovements();
     $componentNames = getAllComponentNames();

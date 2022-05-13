@@ -39,7 +39,7 @@ function parseAccount2($obj) {
   if ($obj["globaleTransactiecode"] == "KST" || $obj["globaleTransactiecode"] == "MSC" || $obj["globaleTransactiecode"] == "AFB") {
     return normalizeAccountName("Kosten " . substr($obj["omschrijving"], 1, strlen($obj["omschrijving"]) - 2));
   }
-  if ($obj["globaleTransactiecode"] == "DIV" || $obj["globaleTransactiecode"] == "NUL") {
+  if ($obj["globaleTransactiecode"] == "DIV" || $obj["globaleTransactiecode"] == "NUL" || $obj["globaleTransactiecode"] == "BIJ") {
     return normalizeAccountName("Diversen " . substr($obj["omschrijving"], 1, strlen($obj["omschrijving"]) - 2));
   }
   echo "Cannot parse account2!";
@@ -52,7 +52,7 @@ function parseDescription($obj) {
   return str_replace("*", " ", $obj["globaleTransactiecode"] . "  " . $obj["omschrijving"]);
 }
 
-function parseAsnBankCSV($text) {
+function parseAsnBankCSV($text, $owner) {
   // This list uses the exact names as documented in Dutch
   // at https://www.asnbank.nl/web/file?uuid=fc28db9c-d91e-4a2c-bd3a-30cffb057e8b&owner=6916ad14-918d-4ea8-80ac-f71f0ff1928e&contentid=852
   $ASN_BANK_CSV_COLUMNS = [
@@ -101,7 +101,9 @@ function parseAsnBankCSV($text) {
           "from" => parseAccount2($obj),
           "to" => $obj["opdrachtgeversrekening"],
           "amount" => floatval($obj["transactiebedrag"]),
-          "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"])
+          "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"]),
+          "insideFrom" => $obj["opdrachtgeversrekening"],
+          "insideTo" => $owner
         ]);
       } else {
         array_push($ret, [
@@ -110,7 +112,9 @@ function parseAsnBankCSV($text) {
           "from" => $obj["opdrachtgeversrekening"],
           "to" => parseAccount2($obj),
           "amount" => -floatval($obj["transactiebedrag"]),
-          "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"])
+          "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"]),
+          "insideFrom" => $owner,
+          "insideTo" => $obj["opdrachtgeversrekening"]
         ]);
       }
     }
