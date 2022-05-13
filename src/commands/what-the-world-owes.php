@@ -28,10 +28,11 @@ function isBefore($d1, $d2) {
   return false;
 }
 
-// start and end date are optional, so:
+// start and end date and start balance are optional, so:
 // what-the-world-owes michiel
 // what-the-world-owes michiel 2022-01-01
 // what-the-world-owes michiel 2022-01-01 2023-01-01
+// what-the-world-owes michiel 2022-01-01 2023-01-01 1000.0
 function whatTheWorldOwes($context, $command) {
   if ($context['adminParty']) {
     $componentId = getComponentId($command[1]);
@@ -45,10 +46,15 @@ function whatTheWorldOwes($context, $command) {
     } else {
       $endDate = "2070-01-01";
     }
+    if (count($command) >= 5) {
+      $cumm = floatval($command[4]);
+    } else {
+      $cumm = 0;
+    }
     $movements = getAllMovements();
+
     // similar to the code in the who-works-when command:
     $days = [];
-    $cumm = 0;
     for ($i = 0; $i < count($movements); $i++) {
       $date = toDate($movements[$i]["timestamp_"]);
       if (isBefore($startDate, $date) && isBefore($date, $endDate)) {
@@ -70,7 +76,6 @@ function whatTheWorldOwes($context, $command) {
     }
     ksort($days);
     $ret = [];
-    $cumm = 0;
     foreach ($days as $date => $arr) {
       array_push($ret, formatDate($date) . " $cumm");
       foreach ($days[$date] as $val) {
