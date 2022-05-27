@@ -20,6 +20,10 @@ final class ImportBankStatementTest extends TestCase
             [
                 'id' => 2,
                 'name' => 'NL08BUNQ2040937927'
+            ],
+            [
+                'id' => 3,
+                'name' => 'alice'
             ]
         ], getAllComponents());
         $this->assertEquals([
@@ -29,12 +33,31 @@ final class ImportBankStatementTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2021-01-01 12:00:00',
-                'amount' => 60.5            ]
+                'amount' => '60.5',     
+                'description' => 'outside movement from bank statement'    
+            ],
+            [
+                'id' => 2,
+                'type_' => 'payment',
+                'fromcomponent' => 3,
+                'tocomponent' => 1,
+                'timestamp_' => '2021-01-01 12:00:00',
+                'amount' => '60.5',     
+                'description' => 'inside movement from bank statement'    
+             ]
         ], getAllMovements());
         $this->assertEquals([
             [
                 'id' => 1,
                 'movementid' => 1,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-03-31 12:00:00',
+            ],
+            [
+                'id' => 2,
+                'movementid' => 2,
                 'userid' => 1,
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,

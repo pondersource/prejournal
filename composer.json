@@ -21,7 +21,8 @@
         "doctrine/annotations": "1.13.2",
         "symfony/yaml": "^5.4",
         "symfony/cache": "^5.4",
-        "pondersource/billing-api": "^2.0"
+        "pondersource/billing-api": "^2.0",
+        "vlucas/phpdotenv": "^5.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^9"

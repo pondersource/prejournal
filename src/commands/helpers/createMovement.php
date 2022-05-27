@@ -14,7 +14,7 @@ function createMovement($context, $command) {
       "toComponent" => intval($command[3]),
       "timestamp_" => timestampToDateTime(intval($command[4])),
       "amount" => floatval($command[5]),
-      "description" => $command[6]
+      "description" => $command[6] ?? null
     ]);
     return [ strval($conn->lastInsertId()) ];
   } else {

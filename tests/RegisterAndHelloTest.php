@@ -24,7 +24,7 @@ final class RegisterAndHelloTest extends TestCase
                     'id' => $lastInsertId,
                     'username' => 'someuser',
                 ],
-                'adminParty' => false,
+                'adminParty' => true,
                 'employer' => 'someemployer'
             ],
             getContext()
@@ -44,7 +44,7 @@ final class RegisterAndHelloTest extends TestCase
         setUser('someuser', 'wrongpass', 'someemployer');
         $this->assertEquals([
                 'user' => null,
-                'adminParty' => false,
+                'adminParty' => true,
                 'employer' => 'someemployer'
             ],
             getContext()
@@ -64,7 +64,7 @@ final class RegisterAndHelloTest extends TestCase
         setUser('wronguser', 'somepass', 'someemployer');
         $this->assertEquals([
                 'user' => null,
-                'adminParty' => false,
+                'adminParty' => true,
                 'employer' => 'someemployer'
             ],
             getContext()

@@ -31,7 +31,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-18 09:39:19',
-                'amount' => 5.0            ]
+                'amount' => '5',
+                'description' => null
+                ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -69,7 +71,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-18 09:39:19',
-                'amount' => 5.0            ]
+                'amount' => '5',
+                'description' => null
+                ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -108,7 +112,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-27 19:00:00',
-                'amount' => '104580'           ]
+                'amount' => '104580',
+                'description' => null
+                ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -147,7 +153,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-30 00:00:00',
-                'amount' => '15'           ]
+                'amount' => '15',          
+                'description' => null
+                ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -185,7 +193,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-18 00:00:00',
-                'amount' => '0'            ]
+                'amount' => '0',     
+                'description' => null
+                ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -224,7 +234,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-25 14:09:38',
-                'amount' => '560'        ]
+                'amount' => '560',       
+                'description' => null    
+            ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -263,7 +275,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2017-03-13 16:00:00',
-                'amount' => '1'           ]
+                'amount' => '1',           
+                'description' => null
+                ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -301,7 +315,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
-                'amount' => '0'           ]
+                'amount' => '0',  
+                'description' => null  
+              ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -340,7 +356,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
-                'amount' => '1'            ]
+                'amount' => '1',
+                'description' => null     
+           ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -379,7 +397,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:04',
-                'amount' => '0'            ]
+                'amount' => '0',
+                'description' => null          
+            ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -418,7 +438,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
-                'amount' => '0'            ]
+                'amount' => '0',    
+                'description' => null    
+            ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -457,7 +479,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-04-12 09:34:45',
-                'amount' => '3.75'            ]
+                'amount' => '3.75',          
+                'description' => null
+                ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -496,7 +520,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-17 00:00:00',
-                'amount' => '0'            ]
+                'amount' => '0',        
+                'description' => null
+                ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -535,7 +561,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
-                'amount' => '3.75'            ]
+                'amount' => '3.75',           
+                'description' => null
+                ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -574,7 +602,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-29 15:30:00',
-                'amount' => '0'            ]
+                'amount' => '0',           
+                'description' => null
+                ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -613,7 +643,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:08',
-                'amount' => '8'            ]
+                'amount' => '8',            
+                'description' => null
+                ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -652,7 +684,9 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-30 00:00:00',
-                'amount' => '0'            ]
+                'amount' => '0',           
+                'description' => null
+                ]
         ], getAllMovements());
         $this->assertEquals([
             [
