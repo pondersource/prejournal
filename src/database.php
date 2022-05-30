@@ -25,7 +25,7 @@ function setTestDb() {
     'user' =>  $_SERVER["DB_USER"],
     'password' => $_SERVER["DB_PASSWORD"],
     'host' => $_SERVER["DB_HOST"],
-    'driver' => 'pdo_pgsql',
+    'driver' =>  $_SERVER["DB_DRIVER"]
 ];
   $test_db_connection = DriverManager::getConnection($connectionParams);
 
