@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 require_once (__DIR__ . '/../vendor/autoload.php');
 require_once(__DIR__ . '/../schema.php');
+require_once(__DIR__ . '/../loadenv.php');
 
 use Doctrine\DBAL\DriverManager;
 
@@ -19,10 +20,14 @@ function getDbConn() {
 function setTestDb() {
   global $test_db_connection;
   $tables = getTables();
-  $test_db_connection = DriverManager::getConnection([
-    //'driver' => 'pdo_sqlite', 'memory' => true
-     'driver' => 'pdo_pgsql' // for debugging, seeing database contents on localhost postgresql server using "psql postgres"
-  ]);
+  $connectionParams = [
+    'dbname' =>  $_SERVER["DB_DATABASE"],
+    'user' =>  $_SERVER["DB_USER"],
+    'password' => $_SERVER["DB_PASSWORD"],
+    'host' => $_SERVER["DB_HOST"],
+    'driver' =>  $_SERVER["DB_DRIVER"]
+];
+  $test_db_connection = DriverManager::getConnection($connectionParams);
 
   for ($i = 0; $i < count($tables); $i++) {
     $created = $test_db_connection->executeQuery($tables[$i]);

@@ -38,7 +38,9 @@ final class ImportInvoiceTest extends TestCase
                     'fromcomponent' => 1,
                     'tocomponent' => 1,
                     'timestamp_' => '1970-01-01 00:00:00',
-                    'amount' => '0'            ]
+                    'amount' => '0',
+                    'description' => null
+                    ]
             ], getAllMovements());
             $this->assertEquals([
                 [
@@ -85,7 +87,8 @@ final class ImportInvoiceTest extends TestCase
                     'fromcomponent' => 1,
                     'tocomponent' => 2,
                     'timestamp_' => '1970-01-01 00:33:42',
-                    'amount' => '0'            
+                    'amount' => '0' ,
+                    'description' => null           
                 ],
                 [
                         'id' => 2,
@@ -93,7 +96,8 @@ final class ImportInvoiceTest extends TestCase
                         'fromcomponent' => 1,
                         'tocomponent' => 3,
                         'timestamp_' => '1970-01-01 00:33:42',
-                        'amount' => '0'           
+                        'amount' => '0',
+                        'description' => null           
                 ],
                 [
                         'id' => 3,
@@ -101,7 +105,8 @@ final class ImportInvoiceTest extends TestCase
                         'fromcomponent' => 1,
                         'tocomponent' => 4,
                         'timestamp_' => '1970-01-01 00:33:42',
-                        'amount' => '0'           
+                        'amount' => '0',
+                        'description' => null           
                 ]
             ], getAllMovements());
             $this->assertEquals([
