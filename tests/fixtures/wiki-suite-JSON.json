@@ -1,0 +1,54 @@
+[
+    {
+        "tsURI": "https:\/\/timesheet.dev3.evoludata.com\/api\/trackers\/1\/items\/1",
+        "tsUser": "victor",
+        "tsProject": "Federated timesheets",
+        "tsTask": "",
+        "tsDescription": "Meeting - discuss unique identifiers",
+        "tsStartTime": "",
+        "tsEndTime": "",
+        "tsDate": "2022-04-21",
+        "tsDuration": "1 hour",
+        "tsMinutesCalculated": "60",
+        "tsHoursCalculated": "1"
+    },
+    {
+        "tsURI": "https:\/\/timesheet.dev3.evoludata.com\/api\/trackers\/1\/items\/2",
+        "tsUser": "victor",
+        "tsProject": "Tiki",
+        "tsTask": "",
+        "tsDescription": "BS5 modal was not showing when confirming permission assignment",
+        "tsStartTime": "Thursday April 21, 2022 10:30:00 UTC",
+        "tsEndTime": "Thursday April 21, 2022 10:48:00 UTC",
+        "tsDate": "",
+        "tsDuration": "",
+        "tsMinutesCalculated": "18",
+        "tsHoursCalculated": "0.3"
+    },
+    {
+        "tsURI": "https:\/\/timesheet.dev3.evoludata.com\/api\/trackers\/1\/items\/11",
+        "tsUser": "kroky",
+        "tsProject": "Timesheet tracking",
+        "tsTask": "Meeting with Ismoil and Michiel",
+        "tsDescription": "discuss Tiki API and whatever",
+        "tsStartTime": "",
+        "tsEndTime": "",
+        "tsDate": "2022-05-30",
+        "tsDuration": "1 hour, 20 minutes",
+        "tsMinutesCalculated": "80",
+        "tsHoursCalculated": "1.33"
+    },
+    {
+        "tsURI": "https:\/\/timesheet.dev3.evoludata.com\/api\/trackers\/1\/items\/12",
+        "tsUser": "ishifoev",
+        "tsProject": "Test",
+        "tsTask": "Talking with Michiel",
+        "tsDescription": "Test",
+        "tsStartTime": "",
+        "tsEndTime": "",
+        "tsDate": "",
+        "tsDuration": "5 minutes",
+        "tsMinutesCalculated": "5",
+        "tsHoursCalculated": "0.08"
+    }
+]

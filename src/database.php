@@ -10,10 +10,14 @@ function getDbConn() {
   if (isset($test_db_connection)) {
     return $test_db_connection;
   } else {
-    return DriverManager::getConnection([
-      'url' => $_SERVER["DATABASE_URL"],
-      'persistent' => true
-    ]);
+    $connectionParams = [
+      'dbname' =>  $_SERVER["DB_DATABASE"],
+      'user' =>  $_SERVER["DB_USER"],
+      'password' => $_SERVER["DB_PASSWORD"],
+      'host' => $_SERVER["DB_HOST"],
+      'driver' =>  $_SERVER["DB_DRIVER"]
+  ];
+    return DriverManager::getConnection($connectionParams);
   }
 }
 
