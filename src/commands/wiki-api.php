@@ -4,7 +4,7 @@
   require_once(__DIR__ . '/helpers/createSync.php');
   require_once(__DIR__ . '/../database.php');
   /*
-  E.g.: php src/cli-single.php  update-remote-service scoro
+  E.g.: php src/cli-single.php wiki-api wiki
 */
 function wikiApi($context, $command) {
   if (isset($context["user"])) {
