@@ -268,3 +268,5 @@ Assets, liabilities, and expenses are fundamentally different in traditional boo
 | `register <username> <password>` | 1.0 | Register a new user | `php src/cli-single.php register <username> <password>` |
 | `submit-expense` (7 words) | 1.1 | Includes two movements(payment/invoice) | `php src/cli-single.php submit-expense "28 August 2021" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"`|
 | `submit-expense` (8 words) | 1.2 | Includes two movements(payment/invoice) | `php src/cli-single.php submit-expense "28 August 2021" "stichting" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"`|
+| `wiki-api` | 1.2 | Export from API WikiSuite information save JSON file inside folder | `php src/cli-single.php wiki-api wiki`|
+
