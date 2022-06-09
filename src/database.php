@@ -104,6 +104,27 @@ function getAllMovements() {
   return $result->fetchAllAssociative();
 }
 
+function getAllWorkedMovements() {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM movements WHERE type_='worked'";
+  $result = $conn->executeQuery($query);
+  return $result->fetchAllAssociative();
+}
+
+function getAllInvoiceMovements() {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM movements WHERE type_='invoice'";
+  $result = $conn->executeQuery($query);
+  return $result->fetchAllAssociative();
+}
+
+function getAllPaymentMovements() {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM movements WHERE type_='payment'";
+  $result = $conn->executeQuery($query);
+  return $result->fetchAllAssociative();
+}
+
 function getAllStatements() {
   $conn  = getDbConn();
   $query = "SELECT * FROM statements";
