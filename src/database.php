@@ -162,6 +162,22 @@ function getSync($internal_id,$internal_type,$remote_system) {
  
 }
 
+function addMovement($type, $fromComponent, $toComponent, $timestamp, $amount, $description) {
+  $conn  = getDbConn();
+  $query = "INSERT INTO movements (type_, fromComponent, toComponent, timestamp_, amount, description) "
+       . "VALUES (:type_, :fromComponent, :toComponent, :timestamp_, :amount, :description);";
+
+    $ret = $conn->executeStatement($query, [
+      "type_" => $type,
+      "fromComponent" => intval($fromComponent),
+      "toComponent" => intval($toComponent),
+      "timestamp_" => timestampToDateTime(intval($timestamp)),
+      "amount" => intval($amount),
+      "description" => $description ?? null
+    ]);
+    return intval($conn->lastInsertId());
+}
+
 function getComponentId($name, $atomic = false) {
   $conn  = getDbConn();
   if ($atomic) {

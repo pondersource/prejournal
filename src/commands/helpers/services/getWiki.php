@@ -3,9 +3,9 @@
   require_once(__DIR__ . '/../../../database.php');
   require_once(__DIR__ . '/../../../api/wiki.php');
 
-  function getWiki($movement_id, $tabularId){
-    $movement = getMovement($movement_id);
-    var_dump($movement);
+  function getWiki(){
+    //$movement = getMovement($movement_id);
+    //var_dump($movement);
     
     return exportWikiFile();
   }

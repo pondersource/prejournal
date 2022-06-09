@@ -11,30 +11,33 @@ function wikiApi($context, $command) {
     $remote_system = $command[1];
     //var_dump($remote_system);
     //exit;
-    $movements = getDbConn()->executeQuery("SELECT * from movements  WHERE type_='worked'");
-    //if($remote_system == "wiki"){
-      foreach($movements->fetchAllAssociative() as $movement){
-        $movement_id = $movement["id"];
-        //var_dump($movement);
-        $internal_type = 'movement';
-        $remote_system = 'wiki';
-        $sync = getSync($movement_id,$internal_type,$remote_system);
-        /* Check if there is synchronization between prejournal and remote system */
-        if($sync == null ){
-          $remote_id = getWiki($movement_id,null);
-          createSync($context, [
-            "movement",
-            $movement_id,
-            $remote_id,
-            "wiki"
-          ])[0];
-        }else{
+    $type = "worked";
+    $remote_id = getWiki();
 
-          $remote_id = getWiki($movement_id,$sync["remote_id"]);
-        }
-      }
-    //}
-    return ["Wiki updated"];
+    if($remote_system == "wiki"){
+    $fromComponent = getComponentId($remote_id[0]->tsProject);
+    $toComponent = getComponentId($remote_id[0]->tsUser);
+    $timestamp = strtotime($remote_id[0]->tsDate);
+    //var_dump($timestamp);
+    //exit;
+    $amount = $remote_id[0]->tsMinutesCalculated;
+    $description = $remote_id[0]->tsDescription;
+
+    $result = addMovement($type, $fromComponent, $toComponent, $timestamp, $amount, $description);
+   
+    $internal_type = 'movement';
+    $remote_system = 'wiki';
+  
+    $remote_url = stripslashes($remote_id[0]->tsURI);
+    $res = createSync($context, [
+       $internal_type,
+        $result,
+        $remote_url,
+        "wiki"
+    ]);
+      return ["Prejournal create a new data from Wiki"];
+    }
+   
   } else {
     return ["User not found or wrong password"];
   }

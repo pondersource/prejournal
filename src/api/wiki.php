@@ -39,8 +39,9 @@ function exportWikiFile() {
     
      $resp = callGetEndpoint($headers, $url);
      $json_result = json_encode($resp, JSON_PRETTY_PRINT);
-     echo '<pre>' . $json_result . '</pre>';
+     //echo '<pre>' . $json_result . '</pre>';
 
      file_put_contents("tests/fixtures/wiki-suite-JSON.json", $json_result);
+     return $resp;
 }
 ?>
