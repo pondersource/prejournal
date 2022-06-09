@@ -107,6 +107,9 @@ function getContext() {
 }
 
 function output($strArr) {
+ if($strArr === null) {
+   return;
+ }
   for ($i = 0; $i < count($strArr); $i++) {
     echo $strArr[$i] . "\n";
   }

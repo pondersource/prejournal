@@ -10,24 +10,28 @@ function getDbConn() {
   if (isset($test_db_connection)) {
     return $test_db_connection;
   } else {
-    return DriverManager::getConnection([
-      'url' => $_SERVER["DATABASE_URL"],
-      'persistent' => true
-    ]);
+     $result = db_creddentials();
+    return DriverManager::getConnection($result);
   }
+}
+
+function db_creddentials() {
+  $connectionParams = [
+      'dbname' =>  $_SERVER["DB_DATABASE"],
+      'user' =>  $_SERVER["DB_USER"],
+      'password' => $_SERVER["DB_PASSWORD"],
+      'host' => $_SERVER["DB_HOST"],
+      'driver' =>  $_SERVER["DB_DRIVER"]
+ ];
+ return $connectionParams;
 }
 
 function setTestDb() {
   global $test_db_connection;
   $tables = getTables();
-  $connectionParams = [
-    'dbname' =>  $_SERVER["DB_DATABASE"],
-    'user' =>  $_SERVER["DB_USER"],
-    'password' => $_SERVER["DB_PASSWORD"],
-    'host' => $_SERVER["DB_HOST"],
-    'driver' =>  $_SERVER["DB_DRIVER"]
-];
-  $test_db_connection = DriverManager::getConnection($connectionParams);
+  
+  $result = db_creddentials();
+  $test_db_connection = DriverManager::getConnection($result);
 
   for ($i = 0; $i < count($tables); $i++) {
     $created = $test_db_connection->executeQuery($tables[$i]);
@@ -100,6 +104,27 @@ function getAllMovements() {
   return $result->fetchAllAssociative();
 }
 
+function getAllWorkedMovements() {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM movements WHERE type_='worked'";
+  $result = $conn->executeQuery($query);
+  return $result->fetchAllAssociative();
+}
+
+function getAllInvoiceMovements() {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM movements WHERE type_='invoice'";
+  $result = $conn->executeQuery($query);
+  return $result->fetchAllAssociative();
+}
+
+function getAllPaymentMovements() {
+  $conn  = getDbConn();
+  $query = "SELECT * FROM movements WHERE type_='payment'";
+  $result = $conn->executeQuery($query);
+  return $result->fetchAllAssociative();
+}
+
 function getAllStatements() {
   $conn  = getDbConn();
   $query = "SELECT * FROM statements";
@@ -156,6 +181,22 @@ function getSync($internal_id,$internal_type,$remote_system) {
   }
   return  $arr[0];
  
+}
+
+function addMovement($type, $fromComponent, $toComponent, $timestamp, $amount, $description) {
+  $conn  = getDbConn();
+  $query = "INSERT INTO movements (type_, fromComponent, toComponent, timestamp_, amount, description) "
+       . "VALUES (:type_, :fromComponent, :toComponent, :timestamp_, :amount, :description);";
+
+    $ret = $conn->executeStatement($query, [
+      "type_" => $type,
+      "fromComponent" => intval($fromComponent),
+      "toComponent" => intval($toComponent),
+      "timestamp_" => timestampToDateTime(intval($timestamp)),
+      "amount" => intval($amount),
+      "description" => $description ?? null
+    ]);
+    return intval($conn->lastInsertId());
 }
 
 function getComponentId($name, $atomic = false) {

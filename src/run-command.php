@@ -20,6 +20,7 @@
   require_once(__DIR__ . '/commands/comment.php');
   require_once(__DIR__ . '/commands/loan.php');
   require_once(__DIR__ . '/commands/what-the-world-owes.php');
+  require_once(__DIR__ . '/commands/wiki-api.php');
 
 function toCamel($str) {
     $parts = explode("-", $str);
@@ -49,6 +50,7 @@ function runCommand($context, $command)
         "submit-expense" => 8,
         "who-works-when" => 1,
         "update-remote-service" => 2,
+        "wiki-api" => 2,
         "comment" => 1,
         "loan" => 4,
         "what-the-world-owes" => 2,

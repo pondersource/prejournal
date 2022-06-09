@@ -9,7 +9,7 @@ function createSync($context, $command) {
     $conn->executeStatement($query, [
       "internal_type" => $command[0],
       "internal_id" => intval($command[1]),
-      "remote_id" => intval($command[2]),
+      "remote_id" => $command[2],
       "remote_system" => $command[3]
     ]);
     return [ strval($conn->lastInsertId()) ];

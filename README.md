@@ -6,7 +6,15 @@ Like the [Resources-Events-Agents (REA)](http://mikorizal.org/Fromprivateownersh
 # Development
 Note that the `psql` command below will drop and recreate all tables in your `prejournal` database on localhost psql
 or wherever you have pointed the DATABASE_URL in your `.env` file, so be careful
-if that's not what you want. :)
+if that's not what you want. :). I think we need to working with something like a username, password, and provider that will setup in ```.env.example```. You can setup your usernamem database, password .etc. We are using PostqresSQL database by default.
+
+```
+DB_USER=prejournal_test
+DB_DATABASE=prejournal_test
+DB_PASSWORD=123456
+DB_HOST=localhost
+DB_DRIVER=pdo_pgsql
+```
 
 ```
 composer install
@@ -19,6 +27,15 @@ php src/cli-single.php register admin secret
 perl -i -pe's/PREJOURNAL_ADMIN_PARTY=true/PREJOURNAL_ADMIN_PARTY=false/g' .env
 ```
 If you don't have perl on your system, you can also open `.env` with a text editor and change the value for 'PREJOURNAL_ADMIN_PARTY' from 'true' to 'false' by hand.
+
+### Wiki API Call
+
+You need first have a token for authorize with API Wiki Suite and take the host from Wiki Suite. This API call for getting tabulars and export and import timedata. Change in ```env``` file your credentials to your own
+
+```
+WIKI_TOKEN=GET_WIKI_TOKEN
+WIKI_HOST=GET_WIKI_HOST
+```
 
 ### Verify API Call
 
@@ -251,3 +268,5 @@ Assets, liabilities, and expenses are fundamentally different in traditional boo
 | `register <username> <password>` | 1.0 | Register a new user | `php src/cli-single.php register <username> <password>` |
 | `submit-expense` (7 words) | 1.1 | Includes two movements(payment/invoice) | `php src/cli-single.php submit-expense "28 August 2021" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"`|
 | `submit-expense` (8 words) | 1.2 | Includes two movements(payment/invoice) | `php src/cli-single.php submit-expense "28 August 2021" "stichting" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"`|
+| `wiki-api` | 1.2 | Save data from Wiki API like a JSON file and save Information in database | `php src/cli-single.php wiki-api wiki`|
+
