@@ -1,6 +1,9 @@
-<?php declare(strict_types=1);
+<?php
 
-    function parseStratustimeJSON($str) {
+declare(strict_types=1);
+
+    function parseStratustimeJSON($str)
+    {
         $ret = [];
         $data = json_decode($str);
 
@@ -13,4 +16,4 @@
             ]);
         }
         return $ret;
-}
+    }

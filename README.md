@@ -16,6 +16,14 @@ DB_HOST=localhost
 DB_DRIVER=pdo_pgsql
 ```
 
+### PHP CS fix
+
+If you need to fix your PHP standard working you can go to terminal and run this command.
+
+```
+./vendor/bin/php-cs-fixer fix your_folder_that_you_would_like_to_fix
+```
+
 ```
 composer install
 sudo apt install postgresql postgresql-contrib

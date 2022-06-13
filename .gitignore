@@ -2,3 +2,5 @@
 .env
 latest.dump
 composer.lock
+/tools/
+.php-cs-fixer.cache

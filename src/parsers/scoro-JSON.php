@@ -1,6 +1,9 @@
-<?php declare(strict_types=1);
+<?php
 
-function parseScoroJSON($str) {
+declare(strict_types=1);
+
+function parseScoroJSON($str)
+{
     $ret = [];
     $response = json_decode($str);
 
@@ -14,4 +17,3 @@ function parseScoroJSON($str) {
     }
     return $ret;
 }
-

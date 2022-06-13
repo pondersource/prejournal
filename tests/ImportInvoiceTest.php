@@ -1,5 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
+
 require_once(__DIR__ . '/../src/run-command.php');
 
 
@@ -18,20 +21,20 @@ final class ImportInvoiceTest extends TestCase
         ], runCommand(getContext(), ['list-new']));
     }
     public function testParseVerifyInvoiceJson(): void
-        {
-            setTestDb();
-            $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-            setUser('alice', 'alice123', 'employer');
-            $fixture = __DIR__ . "/fixtures/verifyInvoice-JSON.json";
-            $result = runCommand(getContext(), ["import-invoice", "verifyInvoice-JSON", $fixture,  "2022-03-31 12:00:00" ]);
+    {
+        setTestDb();
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        setUser('alice', 'alice123', 'employer');
+        $fixture = __DIR__ . "/fixtures/verifyInvoice-JSON.json";
+        $result = runCommand(getContext(), ["import-invoice", "verifyInvoice-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
-            $this->assertEquals([
+        $this->assertEquals([
                 [
                     'id' => 1,
                     'name' => 'Alex Malikov'
                 ]
             ], getAllComponents());
-            $this->assertEquals([
+        $this->assertEquals([
                 [
                     'id' => 1,
                     'type_' => 'invoice',
@@ -42,7 +45,7 @@ final class ImportInvoiceTest extends TestCase
                     'description' => null
                     ]
             ], getAllMovements());
-            $this->assertEquals([
+        $this->assertEquals([
                 [
                     'id' => 1,
                     'movementid' => 1,
@@ -52,17 +55,17 @@ final class ImportInvoiceTest extends TestCase
                     'timestamp_' => '2022-03-31 12:00:00',
                                 ]
             ], getAllStatements());
-        }
+    }
 
-        public function testParseHerokuInvoiceJson(): void
-        {
-            setTestDb();
-            $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-            setUser('alice', 'alice123', 'employer');
-            $fixture = __DIR__ . "/fixtures/timeHerokuInvoice-JSON.json";
-            $result = runCommand(getContext(), ["import-invoice", "timeHerokuInvoice-JSON", $fixture,  "2022-03-31 12:00:00" ]);
+    public function testParseHerokuInvoiceJson(): void
+    {
+        setTestDb();
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        setUser('alice', 'alice123', 'employer');
+        $fixture = __DIR__ . "/fixtures/timeHerokuInvoice-JSON.json";
+        $result = runCommand(getContext(), ["import-invoice", "timeHerokuInvoice-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
-            $this->assertEquals([
+        $this->assertEquals([
                 [
                     'id' => 1,
                     'name' => 'alice'
@@ -80,7 +83,7 @@ final class ImportInvoiceTest extends TestCase
                     'name' => 'c1f7f8b3-b063-4001-aebd-7a7600ebf206'
                 ]
             ], getAllComponents());
-            $this->assertEquals([
+        $this->assertEquals([
                 [
                     'id' => 1,
                     'type_' => 'invoice',
@@ -88,7 +91,7 @@ final class ImportInvoiceTest extends TestCase
                     'tocomponent' => 2,
                     'timestamp_' => '1970-01-01 00:33:42',
                     'amount' => '0' ,
-                    'description' => null           
+                    'description' => null
                 ],
                 [
                         'id' => 2,
@@ -97,7 +100,7 @@ final class ImportInvoiceTest extends TestCase
                         'tocomponent' => 3,
                         'timestamp_' => '1970-01-01 00:33:42',
                         'amount' => '0',
-                        'description' => null           
+                        'description' => null
                 ],
                 [
                         'id' => 3,
@@ -106,10 +109,10 @@ final class ImportInvoiceTest extends TestCase
                         'tocomponent' => 4,
                         'timestamp_' => '1970-01-01 00:33:42',
                         'amount' => '0',
-                        'description' => null           
+                        'description' => null
                 ]
             ], getAllMovements());
-            $this->assertEquals([
+        $this->assertEquals([
                 [
                     'id' => 1,
                     'movementid' => 1,
@@ -135,5 +138,5 @@ final class ImportInvoiceTest extends TestCase
                     'timestamp_' => '2022-03-31 12:00:00',
                 ]
             ], getAllStatements());
-        }
+    }
 }

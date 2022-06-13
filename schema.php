@@ -2,7 +2,8 @@
 
 # Prejournal internal database schema, version 1
 
-function getTables() {
+function getTables()
+{
     return [
 "drop table if exists users;",
 "create table users (
@@ -59,17 +60,17 @@ function getTables() {
 
 
 if (isset($_SERVER["GEN_SQL"])) {
-  echo "-- Created from schema.php, DO NOT EDIT DIRECTLY!\n";
-  echo "-- To regenerate: GEN_SQL=1 php schema.php > schemal.xml\n\n";
-  $tables = getTables();
-  for ($i = 0; $i < count($tables); $i++) {
-      echo $tables[$i] . "\n\n";
-  }
-} else if (isset($_SERVER["GEN_SQL_PG"])) {
-  echo "-- Created from schema.php, DO NOT EDIT DIRECTLY!\n";
-  echo "-- To regenerate: GEN_SQL=1 php schema.php > schemal.xml\n\n";
-  $tables = getTables();
-  for ($i = 0; $i < count($tables); $i++) {
-      echo str_replace('integer primary key autoincrement', 'serial primary key', $tables[$i]) . "\n\n";
-  }
+    echo "-- Created from schema.php, DO NOT EDIT DIRECTLY!\n";
+    echo "-- To regenerate: GEN_SQL=1 php schema.php > schemal.xml\n\n";
+    $tables = getTables();
+    for ($i = 0; $i < count($tables); $i++) {
+        echo $tables[$i] . "\n\n";
+    }
+} elseif (isset($_SERVER["GEN_SQL_PG"])) {
+    echo "-- Created from schema.php, DO NOT EDIT DIRECTLY!\n";
+    echo "-- To regenerate: GEN_SQL=1 php schema.php > schemal.xml\n\n";
+    $tables = getTables();
+    for ($i = 0; $i < count($tables); $i++) {
+        echo str_replace('integer primary key autoincrement', 'serial primary key', $tables[$i]) . "\n\n";
+    }
 }

@@ -1,7 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
     require_once(__DIR__ . '/callEndpoint.php');
 
-    function getUserToken($request){
+    function getUserToken($request)
+    {
         $url = $request['base_url'].'userAuth/modify';
         $data = [
             'lang' => $request['lang'],
@@ -16,13 +19,13 @@
         $headers = array(
             'Accept: application/json',
         );
-        $response = callEndpoint($headers,json_encode($data),$url);
+        $response = callEndpoint($headers, json_encode($data), $url);
         $user_token = $response['data']['token'];
         return $user_token;
     }
 
-    function createTask(array $request){
-        
+    function createTask(array $request)
+    {
         $url = $request['base_url'].'tasks/modify/'.$request['event_id'];
         $data = [
             'lang' => $request['lang'],
@@ -74,10 +77,9 @@
         $headers = array(
             'Accept: application/json',
         );
-        $response = callEndpoint($headers,json_encode($data),$url);
-        if($response['statusCode'] != 200){
+        $response = callEndpoint($headers, json_encode($data), $url);
+        if ($response['statusCode'] != 200) {
             return $response['statusCode'];
         }
         return intval($response['data']['event_id']);
     }
-?>
