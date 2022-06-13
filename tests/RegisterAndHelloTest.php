@@ -1,5 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
+
 require_once(__DIR__ . '/../src/run-command.php');
 
 final class RegisterAndHelloTest extends TestCase
@@ -42,7 +45,8 @@ final class RegisterAndHelloTest extends TestCase
 
         // wrong pass
         setUser('someuser', 'wrongpass', 'someemployer');
-        $this->assertEquals([
+        $this->assertEquals(
+            [
                 'user' => null,
                 'adminParty' => true,
                 'employer' => 'someemployer'
@@ -62,7 +66,8 @@ final class RegisterAndHelloTest extends TestCase
 
         // wrong user
         setUser('wronguser', 'somepass', 'someemployer');
-        $this->assertEquals([
+        $this->assertEquals(
+            [
                 'user' => null,
                 'adminParty' => true,
                 'employer' => 'someemployer'
@@ -74,10 +79,5 @@ final class RegisterAndHelloTest extends TestCase
             [ "User not found or wrong password" ],
             runCommand(getContext(), ['hello'])
         );
-
     }
 }
-
-
-
-

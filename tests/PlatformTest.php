@@ -1,5 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
+
 require_once(__DIR__ . '/../src/platform.php');
 
 final class PlatformTest extends TestCase
@@ -22,7 +25,8 @@ final class PlatformTest extends TestCase
         );
     }
 
-    public function testRunCommand(): void {
+    public function testRunCommand(): void
+    {
         $result = getCommand();
         $this->assertEquals(
             $result,
@@ -30,7 +34,8 @@ final class PlatformTest extends TestCase
         );
     }
 
-    public function testOutput(): void {
+    public function testOutput(): void
+    {
         $result = output(['hello']);
         //var_dump($result);
 

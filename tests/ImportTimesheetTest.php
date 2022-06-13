@@ -1,5 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
+
 require_once(__DIR__ . '/../src/run-command.php');
 
 
@@ -153,7 +156,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-30 00:00:00',
-                'amount' => '15',          
+                'amount' => '15',
                 'description' => null
                 ]
         ], getAllMovements());
@@ -168,7 +171,7 @@ final class ImportTimesheetTest extends TestCase
                             ]
         ], getAllStatements());
     }
-  
+
     public function testParseTimeDoctorCsv(): void
     {
         setTestDb();
@@ -193,7 +196,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-18 00:00:00',
-                'amount' => '0',     
+                'amount' => '0',
                 'description' => null
                 ]
         ], getAllMovements());
@@ -234,8 +237,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-25 14:09:38',
-                'amount' => '560',       
-                'description' => null    
+                'amount' => '560',
+                'description' => null
             ]
         ], getAllMovements());
         $this->assertEquals([
@@ -275,7 +278,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2017-03-13 16:00:00',
-                'amount' => '1',           
+                'amount' => '1',
                 'description' => null
                 ]
         ], getAllMovements());
@@ -315,8 +318,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
-                'amount' => '0',  
-                'description' => null  
+                'amount' => '0',
+                'description' => null
               ]
         ], getAllMovements());
         $this->assertEquals([
@@ -357,7 +360,7 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
                 'amount' => '1',
-                'description' => null     
+                'description' => null
            ]
         ], getAllMovements());
         $this->assertEquals([
@@ -398,7 +401,7 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:04',
                 'amount' => '0',
-                'description' => null          
+                'description' => null
             ]
         ], getAllMovements());
         $this->assertEquals([
@@ -438,8 +441,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
-                'amount' => '0',    
-                'description' => null    
+                'amount' => '0',
+                'description' => null
             ]
         ], getAllMovements());
         $this->assertEquals([
@@ -479,7 +482,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-04-12 09:34:45',
-                'amount' => '3.75',          
+                'amount' => '3.75',
                 'description' => null
                 ]
         ], getAllMovements());
@@ -520,7 +523,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-17 00:00:00',
-                'amount' => '0',        
+                'amount' => '0',
                 'description' => null
                 ]
         ], getAllMovements());
@@ -561,7 +564,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
-                'amount' => '3.75',           
+                'amount' => '3.75',
                 'description' => null
                 ]
         ], getAllMovements());
@@ -602,7 +605,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-29 15:30:00',
-                'amount' => '0',           
+                'amount' => '0',
                 'description' => null
                 ]
         ], getAllMovements());
@@ -643,7 +646,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:08',
-                'amount' => '8',            
+                'amount' => '8',
                 'description' => null
                 ]
         ], getAllMovements());
@@ -684,7 +687,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-30 00:00:00',
-                'amount' => '0',           
+                'amount' => '0',
                 'description' => null
                 ]
         ], getAllMovements());
@@ -703,12 +706,12 @@ final class ImportTimesheetTest extends TestCase
     public function testImportApiWikiSuite(): void
     {
         setTestDb();
-            $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-            setUser('alice', 'alice123', 'employer');
-            $fixture = __DIR__ . "/fixtures/wiki-suite-JSON.json";
-            $result = runCommand(getContext(), ["import-hours", "wiki-suite-JSON", $fixture,  "2022-03-31 12:00:00" ]);
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        setUser('alice', 'alice123', 'employer');
+        $fixture = __DIR__ . "/fixtures/wiki-suite-JSON.json";
+        $result = runCommand(getContext(), ["import-hours", "wiki-suite-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
-            $this->assertEquals([
+        $this->assertEquals([
                 [
                     'id' => 1,
                     'name' => 'victor'
@@ -738,7 +741,7 @@ final class ImportTimesheetTest extends TestCase
                     'name' => 'Test'
                 ]
             ], getAllComponents());
-            $this->assertEquals([
+        $this->assertEquals([
                 [
                     'id' => 1,
                     'type_' => 'worked',
@@ -776,7 +779,7 @@ final class ImportTimesheetTest extends TestCase
                     'description' => null
                 ]
             ], getAllMovements());
-            $this->assertEquals([
+        $this->assertEquals([
                 [
                     'id' => 1,
                     'movementid' => 1,

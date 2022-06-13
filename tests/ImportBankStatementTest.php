@@ -1,5 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
+
 require_once(__DIR__ . '/../src/run-command.php');
 
 
@@ -33,8 +36,8 @@ final class ImportBankStatementTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2021-01-01 12:00:00',
-                'amount' => '60.5',     
-                'description' => 'outside movement from bank statement'    
+                'amount' => '60.5',
+                'description' => 'outside movement from bank statement'
             ],
             [
                 'id' => 2,
@@ -42,8 +45,8 @@ final class ImportBankStatementTest extends TestCase
                 'fromcomponent' => 3,
                 'tocomponent' => 1,
                 'timestamp_' => '2021-01-01 12:00:00',
-                'amount' => '60.5',     
-                'description' => 'inside movement from bank statement'    
+                'amount' => '60.5',
+                'description' => 'inside movement from bank statement'
              ]
         ], getAllMovements());
         $this->assertEquals([
