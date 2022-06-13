@@ -1,61 +1,66 @@
 <?php
 
-function parseDate($obj) {
-  $parts = explode("-", $obj["journaaldatum"]);
-  $day = $parts[0];
-  $month = $parts[1];
-  $year = $parts[2];
- 
-  return strtotime(date("Y/m/d 12:00", mktime(0, 0, 0, $month, $day, $year)));
+function parseDate($obj)
+{
+    $parts = explode("-", $obj["journaaldatum"]);
+    $day = $parts[0];
+    $month = $parts[1];
+    $year = $parts[2];
+
+    return strtotime(date("Y/m/d 12:00", mktime(0, 0, 0, $month, $day, $year)));
 }
 
-function normalizeAccountName($str) {
-  return preg_replace('/\s+/', ' ', str_replace("*", " ", trim($str)));
+function normalizeAccountName($str)
+{
+    return preg_replace('/\s+/', ' ', str_replace("*", " ", trim($str)));
 }
-function parseAccount2($obj) {
-  if (strlen($obj["tegenrekeningnummer"]) > 0) {
-    return $obj["tegenrekeningnummer"];
-  }
-  if ($obj["globaleTransactiecode"] == "BEA") {
-    return normalizeAccountName(substr($obj["omschrijving"], 1, 22));
-  }
-  if ($obj["globaleTransactiecode"] == "COR" || $obj["globaleTransactiecode"] == "RTI") {
-    return normalizeAccountName(substr($obj["omschrijving"], 1, 22));
-  }
-  if ($obj["globaleTransactiecode"] == "RNT") {
-    return "ASN Bank Rente";
-  }
-  if ($obj["globaleTransactiecode"] == "BTL") {
-    $omschrijvingParts = explode(" ", substr($obj["omschrijving"], 1, strlen($obj["omschrijving"]) - 2));
-    if (($omschrijvingParts[0] == "EUR") &&
+function parseAccount2($obj)
+{
+    if (strlen($obj["tegenrekeningnummer"]) > 0) {
+        return $obj["tegenrekeningnummer"];
+    }
+    if ($obj["globaleTransactiecode"] == "BEA") {
+        return normalizeAccountName(substr($obj["omschrijving"], 1, 22));
+    }
+    if ($obj["globaleTransactiecode"] == "COR" || $obj["globaleTransactiecode"] == "RTI") {
+        return normalizeAccountName(substr($obj["omschrijving"], 1, 22));
+    }
+    if ($obj["globaleTransactiecode"] == "RNT") {
+        return "ASN Bank Rente";
+    }
+    if ($obj["globaleTransactiecode"] == "BTL") {
+        $omschrijvingParts = explode(" ", substr($obj["omschrijving"], 1, strlen($obj["omschrijving"]) - 2));
+        if (($omschrijvingParts[0] == "EUR") &&
       ($omschrijvingParts[2] == "van") &&
       ($omschrijvingParts[4] == "van")) {
-      return $omschrijvingParts[3];
+            return $omschrijvingParts[3];
+        }
     }
-  }
-  if ($obj["globaleTransactiecode"] == "GEA") {
-    return normalizeAccountName("Geldautomaat " . normalizeAccountName(substr($obj["omschrijving"], 1, 22)));
-  }
-  if ($obj["globaleTransactiecode"] == "KST" || $obj["globaleTransactiecode"] == "MSC" || $obj["globaleTransactiecode"] == "AFB") {
-    return normalizeAccountName("Kosten " . substr($obj["omschrijving"], 1, strlen($obj["omschrijving"]) - 2));
-  }
-  if ($obj["globaleTransactiecode"] == "DIV" || $obj["globaleTransactiecode"] == "NUL" || $obj["globaleTransactiecode"] == "BIJ") {
-    return normalizeAccountName("Diversen " . substr($obj["omschrijving"], 1, strlen($obj["omschrijving"]) - 2));
-  }
-  echo "Cannot parse account2!";
-  var_dump($obj);
-  exit();
-  return "UNKNOWN " . $obj["globaleTransactiecode"];
+    if ($obj["globaleTransactiecode"] == "GEA") {
+        return normalizeAccountName("Geldautomaat " . normalizeAccountName(substr($obj["omschrijving"], 1, 22)));
+    }
+    if ($obj["globaleTransactiecode"] == "KST" || $obj["globaleTransactiecode"] == "MSC" || $obj["globaleTransactiecode"] == "AFB") {
+        return normalizeAccountName("Kosten " . substr($obj["omschrijving"], 1, strlen($obj["omschrijving"]) - 2));
+    }
+    if ($obj["globaleTransactiecode"] == "DIV" || $obj["globaleTransactiecode"] == "NUL" || $obj["globaleTransactiecode"] == "BIJ") {
+        return normalizeAccountName("Diversen " . substr($obj["omschrijving"], 1, strlen($obj["omschrijving"]) - 2));
+    }
+    echo "Cannot parse account2!";
+    var_dump($obj);
+    exit();
+    return "UNKNOWN " . $obj["globaleTransactiecode"];
 }
 
-function parseDescription($obj) {
-  return str_replace("*", " ", $obj["globaleTransactiecode"] . "  " . $obj["omschrijving"]);
+function parseDescription($obj)
+{
+    return str_replace("*", " ", $obj["globaleTransactiecode"] . "  " . $obj["omschrijving"]);
 }
 
-function parseAsnBankCSV($text, $owner) {
-  // This list uses the exact names as documented in Dutch
-  // at https://www.asnbank.nl/web/file?uuid=fc28db9c-d91e-4a2c-bd3a-30cffb057e8b&owner=6916ad14-918d-4ea8-80ac-f71f0ff1928e&contentid=852
-  $ASN_BANK_CSV_COLUMNS = [
+function parseAsnBankCSV($text, $owner)
+{
+    // This list uses the exact names as documented in Dutch
+    // at https://www.asnbank.nl/web/file?uuid=fc28db9c-d91e-4a2c-bd3a-30cffb057e8b&owner=6916ad14-918d-4ea8-80ac-f71f0ff1928e&contentid=852
+    $ASN_BANK_CSV_COLUMNS = [
     'boekingsdatum', // dd-mm-jjjj Dit veld geeft de datum weer waarop de transactie daadwerkelijk heeft plaatsgevonden. Voorbeeld: 3-­4-­2000
     'opdrachtgeversrekening', // X (18) Uw ASN­Rekening (IBAN). Voorbeeld: NL01ASNB0123456789
     'tegenrekeningnummer', // X (34) Dit veld bevat het rekeningnummer (IBAN) naar of waarvan de transactie afkomstig is. Het IBAN telt maximaal 34 alfanumerieke tekens en heeft een vaste lengte per land. Het IBAN bestaat uit een landcode (twee letters), een controlegetal (twee cijfers) en een (voor bepaalde landen aangevuld) nationaal rekeningnummer. Voorbeeld: NL01BANK0123456789
@@ -76,15 +81,15 @@ function parseAsnBankCSV($text, $owner) {
     'omschrijving', // X (140) De omschrijving zoals die bij de overboeking is opgegeven. De omschrijving kan maximaal 140 posities beslaan. Voorbeeld ’02438000140032extra trekking werelddierendag 4info’
     'afschriftnummer', // N (3) Het nummer van het afschrift waar de betreffende boeking op staat vermeld. Voorbeeld: 42
   ];
-  $lines = explode("\n", $text);
-  $ret = [];
-  for($i = 0; $i < count($lines); $i++) {
-    if (strlen($lines[$i]) > 0) {
-      $cells = explode(",", $lines[$i]);
-      $obj = [];
-      for ($j = 0; $j < count($cells); $j++) {
-        $obj[$ASN_BANK_CSV_COLUMNS[$j]] = trim($cells[$j]);
-        // if ($first) {
+    $lines = explode("\n", $text);
+    $ret = [];
+    for ($i = 0; $i < count($lines); $i++) {
+        if (strlen($lines[$i]) > 0) {
+            $cells = explode(",", $lines[$i]);
+            $obj = [];
+            for ($j = 0; $j < count($cells); $j++) {
+                $obj[$ASN_BANK_CSV_COLUMNS[$j]] = trim($cells[$j]);
+                // if ($first) {
         //   printOpeningBalance([
         //     "date" => parseDate($obj),
         //     "account1" => $obj["opdrachtgeversrekening"],
@@ -92,10 +97,10 @@ function parseAsnBankCSV($text, $owner) {
         //   ]);
         //   $first = false;
         // }
-      }
+            }
 
-      if (floatval($obj["transactiebedrag"]) > 0) {
-        array_push($ret, [
+            if (floatval($obj["transactiebedrag"]) > 0) {
+                array_push($ret, [
           "date" => parseDate($obj),
           "comment" => parseDescription($obj),
           "from" => parseAccount2($obj),
@@ -105,8 +110,8 @@ function parseAsnBankCSV($text, $owner) {
           "insideFrom" => $obj["opdrachtgeversrekening"],
           "insideTo" => $owner
         ]);
-      } else {
-        array_push($ret, [
+            } else {
+                array_push($ret, [
           "date" => parseDate($obj),
           "comment" => parseDescription($obj),
           "from" => $obj["opdrachtgeversrekening"],
@@ -116,8 +121,8 @@ function parseAsnBankCSV($text, $owner) {
           "insideFrom" => $owner,
           "insideTo" => $obj["opdrachtgeversrekening"]
         ]);
-      }
+            }
+        }
     }
-  }
-  return $ret;
+    return $ret;
 }

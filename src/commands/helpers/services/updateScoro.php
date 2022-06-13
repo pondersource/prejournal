@@ -1,12 +1,14 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
   require_once(__DIR__ . '/../../../platform.php');
   require_once(__DIR__ . '/../../../database.php');
   require_once(__DIR__ . '/../../../api/scoro.php');
 
 // creates new task
 // TODO update task when already exists
-function updateScoro($movement_id,$event_id){
-
+function updateScoro($movement_id, $event_id)
+{
     $movement = getMovement($movement_id);
     $username = $_SERVER["SCORO_USERNAME"];
     $password = $_SERVER["SCORO_PASSWORD"];
@@ -15,14 +17,14 @@ function updateScoro($movement_id,$event_id){
     // Fix: What if more than one ':' are included into the data string(stichting:Peppol for :the Masses)
     $to_component = getComponentName($movement["tocomponent"]);
     $event_name = $movement["description"];
-    $data = explode(":",$to_component,);
-    $project_name = $data[1]; 
+    $data = explode(":", $to_component, );
+    $project_name = $data[1];
     $company_name = $data;
     $amount =  $movement["amount"];
     $start_datetime = $movement["timestamp_"];
     $created_date = date('Y-m-d H:i:s');
     $modified_date = date('Y-m-d H:i:s');
-    /* Time (HH:ii:ss) */	
+    /* Time (HH:ii:ss) */
     $billable_hours = gmdate('H:i:s', ($amount * 3600));
 
     $token_request = [
@@ -37,8 +39,8 @@ function updateScoro($movement_id,$event_id){
       'request' => []
     ];
     $user_token = getUserToken($token_request);
-    if($user_token == null){
-      return ["Failed to generate user token"];
+    if ($user_token == null) {
+        return ["Failed to generate user token"];
     }
     $request =[
       'base_url' => $base_url,

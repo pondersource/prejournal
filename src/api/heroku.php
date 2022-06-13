@@ -6,12 +6,9 @@ require_once('../platform.php');
 //use PonderSource\GoogleApi\Google;
 use PonderSource\HerokuApi\HerokuClient;
 
-
 //HEROKU
 $her = new HerokuClient([
     'apiKey' =>  $_SERVER["HEROKU_API_KEY"],
 ]);
- 
-var_dump($her->getHerokuTeamInvoices());
 
-?>
+var_dump($her->getHerokuTeamInvoices());

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
   require_once(__DIR__ . '/platform.php');
   require_once(__DIR__ . '/commands/hello.php');
   require_once(__DIR__ . '/commands/register.php');
@@ -22,10 +24,11 @@
   require_once(__DIR__ . '/commands/what-the-world-owes.php');
   require_once(__DIR__ . '/commands/wiki-api.php');
 
-function toCamel($str) {
+function toCamel($str)
+{
     $parts = explode("-", $str);
-    return implode("", array_map(function($x) {
-      return ucfirst($x);
+    return implode("", array_map(function ($x) {
+        return ucfirst($x);
     }, $parts));
 }
 
@@ -83,7 +86,8 @@ function runCommand($context, $command)
     return ['Unrecognized command ' . var_export($command, true)];
 }
 
-function runCommands($context, $commands) {
+function runCommands($context, $commands)
+{
     foreach ($commands as $command) {
         runCommand($context, $command);
     }

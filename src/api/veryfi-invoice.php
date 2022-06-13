@@ -1,7 +1,9 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 require_once('../platform.php');
 
-      $CLIENT_ID = $_SERVER["VERIFY_CLIENT_ID"];   
+      $CLIENT_ID = $_SERVER["VERIFY_CLIENT_ID"];
       $ENVIRONMENT_URL = $_SERVER["VERIFY_ENVIROMENT_URL"];
       $username = $_SERVER["VERIFY_USERNAME"];
       $api_key = $_SERVER["VERIFY_API_KEY"];
@@ -16,7 +18,7 @@ require_once('../platform.php');
     $file_mime = "application/pdf";
 
     $mime_boundary=rand(0, time());
-   
+
     $eol = "\r\n";
 
     $url = "{$ENVIRONMENT_URL}api/v7/partner/documents/";
@@ -67,4 +69,3 @@ require_once('../platform.php');
     echo '<pre>' . $json_result . '</pre>';
 
     file_put_contents("api_responses/../../verifyInvoice-JSON.json", $json_result);
-?>

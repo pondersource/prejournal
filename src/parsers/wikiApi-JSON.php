@@ -1,9 +1,12 @@
-<?php declare(strict_types=1);
+<?php
 
-function parseWikiApiJSON($str) {
-  $ret = [];
-  $lines = json_decode($str);
-  //var_dump($lines);
+declare(strict_types=1);
+
+function parseWikiApiJSON($str)
+{
+    $ret = [];
+    $lines = json_decode($str);
+    //var_dump($lines);
 
     for ($i = 0; $i < count($lines); $i++) {
         array_push($ret, [
@@ -13,5 +16,5 @@ function parseWikiApiJSON($str) {
             "seconds" => $lines[$i]->tsDuration
         ]);
     }
-  return $ret;
+    return $ret;
 }
