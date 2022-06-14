@@ -8,7 +8,7 @@ declare(strict_types=1);
   /*
   E.g.: php src/cli-single.php wiki-api wiki
 */
-function wikiApi($context, $command)
+function wikiApiExport($context, $command)
 {
     if (isset($context["user"])) {
         $remote_system = $command[1];

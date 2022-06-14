@@ -10,7 +10,7 @@
         "tsDate": "2022-04-21",
         "tsDuration": "1 hour",
         "tsMinutesCalculated": "60",
-        "tsHoursCalculated": "1"
+        "tsHoursCalculated": "0"
     },
     {
         "tsURI": "https:\/\/timesheet.dev3.evoludata.com\/api\/trackers\/1\/items\/2",
@@ -36,7 +36,7 @@
         "tsDate": "2022-05-30",
         "tsDuration": "1 hour, 20 minutes",
         "tsMinutesCalculated": "80",
-        "tsHoursCalculated": "1.33"
+        "tsHoursCalculated": "0"
     },
     {
         "tsURI": "https:\/\/timesheet.dev3.evoludata.com\/api\/trackers\/1\/items\/12",
@@ -49,6 +49,6 @@
         "tsDate": "",
         "tsDuration": "5 minutes",
         "tsMinutesCalculated": "5",
-        "tsHoursCalculated": "0.08"
+        "tsHoursCalculated": "0"
     }
 ]
