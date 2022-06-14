@@ -3,7 +3,7 @@
 require_once(__DIR__ . '/../../vendor/autoload.php');
 require_once(__DIR__ . '/../../loadenv.php');
 require_once(__DIR__ . '/callGetEndpoint.php');
-
+require_once(__DIR__ . '/callEndpoint.php');
 
 function fetchTabularId()
 {
@@ -33,7 +33,7 @@ function exportWikiFile()
 
     $headers = array(
         "Accept: application/json",
-        "Authorization: Bearer " .$_SERVER['WIKI_TOKEN'],
+        "Authorization: Bearer " .$_SERVER['WIKI_TOKEN']
      );
 
     $resp = callGetEndpoint($headers, $url);
@@ -42,4 +42,23 @@ function exportWikiFile()
 
     file_put_contents("tests/fixtures/wiki-suite-JSON.json", $json_result);
     return $resp;
+}
+
+function importWikiFile()
+{
+    $result = fetchTabularId();
+    $url = $_SERVER["WIKI_HOST"] . '/' .$result . '/import';
+    $headers = array(
+        "Accept: application/json",
+        "Authorization: Bearer " .$_SERVER['WIKI_TOKEN'],
+        "Content-Type: multipart/form-data"
+     );
+    $txt_curlfile = new \CURLFile('tests/fixtures/wiki-suite-JSON.json', 'application/json', 'tests/fixtures/wiki-suite-JSON.json');
+    $data = [
+      'file' => $txt_curlfile
+     ];
+
+    $resp = callEndpoint($headers, $data, $url);
+    var_dump($resp);
+    exit;
 }

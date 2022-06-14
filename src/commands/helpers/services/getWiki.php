@@ -12,3 +12,11 @@ declare(strict_types=1);
 
       return exportWikiFile();
   }
+
+  function importWiki()
+  {
+      //$movement = getMovement($movement_id);
+      //var_dump($movement);
+
+      return importWikiFile();
+  }
