@@ -37,8 +37,14 @@ function exportWikiFile()
      );
 
     $resp = callGetEndpoint($headers, $url);
+
+    if (isset($resp->code)) {
+        if ($resp->code === 403) {
+            echo $resp->errortitle ." ";
+            exit;
+        }
+    }
     $json_result = json_encode($resp, JSON_PRETTY_PRINT);
-    //echo '<pre>' . $json_result . '</pre>';
 
     file_put_contents("tests/fixtures/wiki-suite-JSON.json", $json_result);
     return $resp;
@@ -50,7 +56,7 @@ function importWikiFile()
     $url = $_SERVER["WIKI_HOST"] . '/' .$result . '/import';
     $headers = array(
         "Accept: application/json",
-        "Authorization: Bearer " .$_SERVER['WIKI_TOKEN'],
+        "Authorization: Bearer " . $_SERVER['WIKI_TOKEN'],
         "Content-Type: multipart/form-data"
      );
     $txt_curlfile = new \CURLFile('tests/fixtures/wiki-suite-JSON.json', 'application/json', 'tests/fixtures/wiki-suite-JSON.json');
@@ -59,6 +65,11 @@ function importWikiFile()
      ];
 
     $resp = callEndpoint($headers, $data, $url);
-    var_dump($resp);
-    exit;
+    if (isset($resp["code"])) {
+        if ($resp["code"] === 403) {
+            echo $resp["errortitle"] ." ";
+            exit;
+        }
+    }
+    return $resp["feedback"];
 }

@@ -15,8 +15,10 @@ function wikiApiImport($context, $command)
         //var_dump($remote_system);
         //exit;
         $type = "worked";
-        $remote_id =  importWiki();
-        var_dump($remote_id);
-        exit;
+
+        if ($remote_system == "wiki") {
+            $remote_id = importWiki();
+            echo $remote_id;
+        }
     }
 }
