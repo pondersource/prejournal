@@ -12,13 +12,25 @@ function wikiApiImport($context, $command)
 {
     if (isset($context["user"])) {
         $remote_system = $command[1];
-        //var_dump($remote_system);
-        //exit;
-        $type = "worked";
-
+     
+        $movements = getAllWorkedMovements();
         if ($remote_system == "wiki") {
-            $remote_id = importWiki();
-            echo $remote_id;
+          $remote_id = importWiki();
+            //echo $remote_id;
+            foreach ($movements as $movement) {
+              $movement_id = $movement["id"];
+              $internal_type = 'movement';
+              $remote_system = 'wiki';
+              $sync = getSync($movement_id, $internal_type, $remote_system);
+              if ($sync == null) {
+                createSync($context, [
+                    "movement",
+                    $movement_id,
+                    "wiki"
+                ])[0];
+            }
+          }
+          echo $remote_id;
         }
     }
 }
