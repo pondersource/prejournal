@@ -10,7 +10,7 @@
         "tsDate": "2022-04-21",
         "tsDuration": "1 hour",
         "tsMinutesCalculated": "60",
-        "tsHoursCalculated": "1"
+        "tsHoursCalculated": "0"
     },
     {
         "tsURI": "https:\/\/timesheet.dev3.evoludata.com\/api\/trackers\/1\/items\/2",
@@ -29,26 +29,26 @@
         "tsURI": "https:\/\/timesheet.dev3.evoludata.com\/api\/trackers\/1\/items\/11",
         "tsUser": "kroky",
         "tsProject": "Timesheet tracking",
-        "tsTask": "Meeting with Ismoil and Michiel",
+        "tsTask": "Meeting with Kroky",
         "tsDescription": "discuss Tiki API and whatever",
         "tsStartTime": "",
         "tsEndTime": "",
         "tsDate": "2022-05-30",
         "tsDuration": "1 hour, 20 minutes",
         "tsMinutesCalculated": "80",
-        "tsHoursCalculated": "1.33"
+        "tsHoursCalculated": "0"
     },
     {
         "tsURI": "https:\/\/timesheet.dev3.evoludata.com\/api\/trackers\/1\/items\/12",
         "tsUser": "ishifoev",
         "tsProject": "Test",
-        "tsTask": "Talking with Michiel",
+        "tsTask": "Talking with Ismoil",
         "tsDescription": "Test",
         "tsStartTime": "",
         "tsEndTime": "",
         "tsDate": "",
         "tsDuration": "5 minutes",
         "tsMinutesCalculated": "5",
-        "tsHoursCalculated": "0.08"
+        "tsHoursCalculated": "0"
     }
 ]

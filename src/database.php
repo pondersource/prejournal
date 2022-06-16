@@ -198,7 +198,7 @@ function getMovement($id)
 function getSync($internal_id, $internal_type, $remote_system)
 {
     $result = getDbConn()->executeQuery(
-        "SELECT * FROM sync WHERE internal_id = :internal_id AND internal_type = :internal_type AND remote_system = :remote_system",
+        "SELECT * FROM sync WHERE internal_id = :internal_id OR internal_type = :internal_type OR remote_system = :remote_system",
         [ "internal_id" => $internal_id , 'internal_type' => $internal_type , 'remote_system' => $remote_system ]
     );
     $arr = $result->fetchAllAssociative();

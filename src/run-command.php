@@ -22,7 +22,8 @@ declare(strict_types=1);
   require_once(__DIR__ . '/commands/comment.php');
   require_once(__DIR__ . '/commands/loan.php');
   require_once(__DIR__ . '/commands/what-the-world-owes.php');
-  require_once(__DIR__ . '/commands/wiki-api.php');
+  require_once(__DIR__ . '/commands/wiki-api-export.php');
+  require_once(__DIR__ . '/commands/wiki-api-import.php');
 
 function toCamel($str)
 {
@@ -53,7 +54,8 @@ function runCommand($context, $command)
         "submit-expense" => 8,
         "who-works-when" => 1,
         "update-remote-service" => 2,
-        "wiki-api" => 2,
+        "wiki-api-export" => 2,
+        "wiki-api-import" => 2,
         "comment" => 1,
         "loan" => 4,
         "what-the-world-owes" => 2,

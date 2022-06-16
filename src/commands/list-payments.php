@@ -6,9 +6,9 @@ declare(strict_types=1);
 function listPayments($context)
 {
     if ($context['adminParty']) {
-        $movements = getDbConn()->executeQuery("SELECT * from movements WHERE type_='payment'");
+        $movements = getAllPaymentMovements();
         $ret = ["timestamp, from, to, amount"];
-        foreach ($movements->fetchAllAssociative() as $row) {
+        foreach ($movements as $row) {
             // var_dump($row);
             foreach (["fromComponent", "toComponent"] as $columnName) {
                 // sqlite preserves case in column names but
