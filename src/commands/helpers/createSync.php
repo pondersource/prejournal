@@ -6,8 +6,10 @@ declare(strict_types=1);
 
 function createSync($context, $command)
 {
+  $conn  = getDbConn();
     if (isset($context["user"])) {
-        $conn  = getDbConn();
+      try {
+        // process stuff
         $query = "INSERT INTO sync (internal_type, internal_id, remote_id, remote_system) VALUES (:internal_type, :internal_id, :remote_id, :remote_system);";
         $conn->executeStatement($query, [
       "internal_type" => $command[0],
@@ -15,6 +17,12 @@ function createSync($context, $command)
       "remote_id" => $command[2],
       "remote_system" => $command[3]
     ]);
+    } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+        if($e->getCode() === 7) {
+          return ["Duplication entry this movement exist in our sync table."];
+        }
+    }
+    
         return [ strval($conn->lastInsertId()) ];
     } else {
         return ["User not found or wrong password"];

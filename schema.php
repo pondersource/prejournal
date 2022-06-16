@@ -53,6 +53,7 @@ function getTables()
   internal_type varchar,
   internal_id numeric,
   remote_id  varchar,
+  UNIQUE(remote_id),
   remote_system varchar
 );",
   ];

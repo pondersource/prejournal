@@ -27,17 +27,22 @@ function wikiApiExport($context, $command)
             $description = $remote_id[0]->tsDescription;
 
             $result = addMovement($type, $fromComponent, $toComponent, $timestamp, $amount, $description);
+            //var_dump($result);
+            //exit;
 
             $internal_type = 'movement';
             $remote_system = 'wiki';
 
             $remote_url = stripslashes($remote_id[0]->tsURI);
             $res = createSync($context, [
-       $internal_type,
-        $result,
-        $remote_url,
-        "wiki"
-    ]);
+                $internal_type,
+                    $result,
+                    $remote_url,
+                    "wiki"
+                ]);
+           if(isset($res[0])) {
+               return ["Duplication entry this movement exist in our sync table."];
+           }
             return ["Prejournal create a new data from Wiki"];
         }
     } else {
