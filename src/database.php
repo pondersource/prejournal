@@ -207,6 +207,12 @@ function getSync($internal_id, $internal_type, $remote_system)
     }
     return  $arr[0];
 }
+function getFromMovementAndSync() {
+    $conn  = getDbConn();
+    $query = "SELECT m.id, d.name, m.type_, m.timestamp_, m.amount, m.description, s.remote_id FROM movements m INNER JOIN sync s ON m.id = s.internal_id INNER JOIN components d ON m.fromComponent = d.id";
+    $result = $conn->executeQuery($query);
+    return $result->fetchAllAssociative();
+}
 
 function getComponentId($name, $atomic = false)
 {
