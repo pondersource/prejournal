@@ -10,16 +10,17 @@ declare(strict_types=1);
 function printTimesheetCsv($context, $command)
 {
     if (isset($context["user"])) {
-        $remote_system = $command[1];
-        $jsondata = getFromMovementAndSync();
-        if($remote_system === "timesheet") {
+        $project_name = $command[1];
+        $min_id = intval($command[2]);
+        $max_id = intval($command[3]);
+        $jsondata = getFromMovementAndSync($project_name, $min_id, $max_id);
+
             header("Content-type: application/csv");
             header("Content-Disposition: attachment; filename=test.csv");
             $fp = fopen('php://output', 'w'); // or use php://stdout
             foreach ($jsondata as $row) {
                 echo fputcsv($fp, $row);
             }
-        }
        
     } else {
         return ["User not found or wrong password"];

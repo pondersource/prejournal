@@ -4,18 +4,21 @@ declare(strict_types=1);
   require_once(__DIR__ . '/../platform.php');
   require_once(__DIR__ . '/../database.php');
   /*
-  E.g.: php src/cli-single.php print-timesheet-json timesheet
+  E.g.: php src/cli-single.php print-timesheet-json wiki 0 100
 */
 function printTimesheetJson($context, $command)
 {
     if (isset($context["user"])) {
-        $remote_system = $command[1];
-        $jsondata = getFromMovementAndSync();
-        if($remote_system === "timesheet") {
-            $result = json_decode(json_encode($jsondata, JSON_PRETTY_PRINT), false);
+        $project_name = $command[1];
+        $min_id = intval($command[2]);
+        $max_id = intval($command[3]);
+      
 
-            var_dump($result);
-        }
+        $jsondata = getFromMovementAndSync($project_name, $min_id, $max_id);
+       
+        $result = json_encode($jsondata, JSON_PRETTY_PRINT);
+
+        echo $result;
        
     } else {
         return ["User not found or wrong password"];

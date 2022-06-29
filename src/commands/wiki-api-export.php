@@ -56,15 +56,15 @@ function addMovementForWiki()
     if(!$result && empty($result)) {
         foreach ($remote_id as $remote) {
 
-            $fromComponent = intval(getComponentId($remote->tsProject));           
-            $toComponent = intval(getComponentId($remote->tsUser));
+            $fromComponent = intval(getComponentId($remote->tsUser));           
+            $toComponent = intval(getComponentId($remote->tsProject));
             $timestamp = timestampToDateTime(intval($remote->tsDate));
             $amount = intval($remote->tsMinutesCalculated);
             $description = $remote->tsDescription ?? null;
           
             
         
-            $movement = "INSERT INTO movements(type_, fromComponent, toComponent,timestamp_, amount,description) VALUES ('".$type. "',".intval(getComponentId($remote->tsProject)).",'".$toComponent."', '".$timestamp."','".$amount."','".$description."'); "; 
+            $movement = "INSERT INTO movements(type_, fromComponent, toComponent,timestamp_, amount,description) VALUES ('".$type. "',".intval(getComponentId($remote->tsUser)).",'".$toComponent."', '".$timestamp."','".$amount."','".$description."'); "; 
             
             $conn->exec($movement);
     }
