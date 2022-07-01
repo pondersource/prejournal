@@ -1,4 +1,12 @@
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+if (isset($_SERVER['PREJOURNAL_ENV_FILE_DIR'])) {
+  $envFileDir = $_SERVER['PREJOURNAL_ENV_FILE_DIR'];
+} else {
+
+  $envFileDir = __DIR__;
+}
+var_dump($_SERVER);
+echo "Looking for .env in $envFileDir\n";
+$dotenv = Dotenv\Dotenv::createImmutable($envFileDir);
 $dotenv->load();
