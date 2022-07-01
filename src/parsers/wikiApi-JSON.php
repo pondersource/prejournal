@@ -13,7 +13,8 @@ function parseWikiApiJSON($str)
             "worker" => $lines[$i]->tsUser,
             "project" => $lines[$i]->tsProject,
             "start" => strtotime($lines[$i]->tsStartTime),
-            "seconds" => $lines[$i]->tsDuration
+            "seconds" => $lines[$i]->tsDuration,
+            "description" => $lines[$i]->tsDescription,
         ]);
     }
     return $ret;
