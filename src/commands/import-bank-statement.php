@@ -29,7 +29,7 @@ function importBankStatement($context, $command)
         strval(getComponentId($entries[$i]["to"])),
         $entries[$i]["date"],
         $entries[$i]["amount"],
-        "outside movement from bank statement"
+        "outside movement from bank statement: " .$entries[$i]["comment"]
       ])[0]);
             intval(createStatement($context, [
         "create-statement",
@@ -43,7 +43,7 @@ function importBankStatement($context, $command)
         strval(getComponentId($entries[$i]["insideTo"])),
         $entries[$i]["date"],
         $entries[$i]["amount"],
-        "inside movement from bank statement"
+        "inside movement from bank statement: " .$entries[$i]["comment"]
       ])[0]);
             intval(createStatement($context, [
         "create-statement",
