@@ -65,9 +65,13 @@ function whatTheWorldOwes($context, $command)
             if (isBefore($startDate, $date) && isBefore($date, $endDate)) {
                 $delta = 0;
                 if ($movements[$i]["fromcomponent"] == $componentId) {
+                    echo("outgoing value:" . floatval($movements[$i]["amount"]) . "\n");
+                    var_dump($movements[$i]);
                     $delta = -floatval($movements[$i]["amount"]);
                 }
                 if ($movements[$i]["tocomponent"] == $componentId) {
+                    echo("incoming value:" . floatval($movements[$i]["amount"]) . "\n");
+                    var_dump($movements[$i]);
                     $delta = floatval($movements[$i]["amount"]);
                 }
                 if ($delta != 0) {
