@@ -12,12 +12,13 @@ function getDbConn()
     if (isset($test_db_connection)) {
         return $test_db_connection;
     } else {
-        $result = db_creddentials();
-        return DriverManager::getConnection($result);
+        $result = db_credentials();
+        $test_db_connection = DriverManager::getConnection($result);
+        return $test_db_connection;
     }
 }
 
-function db_creddentials()
+function db_credentials()
 {
     $connectionParams = [
       'dbname' =>  $_SERVER["DB_DATABASE"],
@@ -34,7 +35,7 @@ function setTestDb()
     global $test_db_connection;
     $tables = getTables();
 
-    $result = db_creddentials();
+    $result = db_credentials();
     $test_db_connection = DriverManager::getConnection($result);
 
     for ($i = 0; $i < count($tables); $i++) {
