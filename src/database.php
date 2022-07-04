@@ -140,6 +140,14 @@ function getAllPaymentMovements()
     return $result->fetchAllAssociative();
 }
 
+function getAllMovementsFromId($fromId)
+{
+    $conn  = getDbConn();
+    $query = "SELECT * FROM movements WHERE fromComponent = :fromId";
+    $result = $conn->executeQuery($query, [ "fromId" => $fromId ]);
+    return $result->fetchAllAssociative();
+}
+
 function getAllStatements()
 {
     $conn  = getDbConn();

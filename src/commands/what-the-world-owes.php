@@ -70,7 +70,8 @@ function whatTheWorldOwes($context, $command)
                         . " to "
                         . getComponentName($movements[$i]["tocomponent"])
                         . ": "
-                        . floatval($movements[$i]["amount"]) . "\n");
+                        . floatval($movements[$i]["amount"])
+                        . " " . $movements[$i]["description"] . "\n");
                     // var_dump($movements[$i]);
                     $delta = -floatval($movements[$i]["amount"]);
                 }
@@ -80,7 +81,8 @@ function whatTheWorldOwes($context, $command)
                         . " to "
                         . getComponentName($movements[$i]["tocomponent"])
                         . ": "
-                        . floatval($movements[$i]["amount"]) . "\n");
+                        . floatval($movements[$i]["amount"])
+                        . " " . $movements[$i]["description"] . "\n");
                     // var_dump($movements[$i]);
                     $delta = floatval($movements[$i]["amount"]);
                 }
@@ -97,9 +99,9 @@ function whatTheWorldOwes($context, $command)
         $ret = [];
         foreach ($days as $date => $arr) {
             array_push($ret, formatDate($date) . " $cumm");
-            echo formatDate($date);
+            echo "\n" . formatDate($date) . "\n";
             foreach ($days[$date] as $val) {
-                echo "$cumm+$val\n";
+                echo " $cumm + $val\n";
                 $cumm += $val;
             }
         }
