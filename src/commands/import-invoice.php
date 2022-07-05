@@ -7,7 +7,7 @@ declare(strict_types=1);
   require_once(__DIR__ . '/../parsers/verifyInvoice-JSON.php');
   require_once(__DIR__ . '/../parsers/timeHerokuInvoice-JSON.php');
 
-// E.g.: php src/index.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"
+// E.g.: php src/cli-single.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0                    1           2             3
 
 function importInvoice($context, $command)
