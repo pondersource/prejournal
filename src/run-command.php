@@ -27,7 +27,7 @@ declare(strict_types=1);
   require_once(__DIR__ . '/commands/print-timesheet-json.php'); 
   require_once(__DIR__ . '/commands/print-timesheet-csv.php'); 
   require_once(__DIR__ . '/commands/import-timesheet.php'); 
- 
+  require_once(__DIR__ . '/commands/remove-entry.php'); 
 
 function toCamel($str)
 {
@@ -62,6 +62,7 @@ function runCommand($context, $command)
         "wiki-api-export" => 2,
         "wiki-api-import" => 2,
         "print-timesheet-json" => 3,
+        "remove-entry" => 2,
         "print-timesheet-csv" => 2,
         "comment" => 1,
         "loan" => 4,

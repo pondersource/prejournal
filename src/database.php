@@ -219,6 +219,17 @@ function getFromMovementAndSync($project, $min_id, $max_id) {
     return $arr;
 }
 
+function deleteDataFromMovement($type_, $id) {
+    $conn  = getDbConn();
+    $qb = $conn
+        ->delete('movements', ['type_' => $type_, 'id' => $id])
+    ;
+
+    if($qb === 1) {
+        return ["Delete data from movement"];
+    }
+}
+
 function getComponentId($name, $atomic = false)
 {
     $conn  = getDbConn();

@@ -13,7 +13,7 @@ function importTimesheet($context, $command)
     $parserFunctions = [
     "wikiApi-JSON" => "parseWikiApiJSON"
   ];
-
+  $conn  = getDbConn();
 
     if (isset($context["user"])) {
         $format = $command[1];
@@ -23,32 +23,37 @@ function importTimesheet($context, $command)
         $importTime = strtotime($command[3]);
         $type_ = "worked";
         $entries = $parserFunctions[$format](file_get_contents($fileName));
-        
-        foreach($entries as $result) {
-            var_dump($result);
-        }
-        exit;
 
-        for ($i = 0; $i < count($entries); $i++) {
-            //var_dump($entries);
-            $movementId = intval(createMovement($context, [
-        "create-movement",
-        $type_,
-        strval(getComponentId($entries[$i]["worker"])),
-        strval(getComponentId($entries[$i]["project"])),
-        $entries[$i]["start"],
-        $entries[$i]["seconds"],
-        $entries[$i]["description"]
-      ])[0]);
-            createSync($context, [
-                "movement",
-                $movementId,
-                $format,
-                $fileName,
-                intval(getComponentId($entries[$i]["worker"]))
-            ])[0];
+        $res = getAllWorkedMovements();
+       
+        foreach($entries as $result) {
+            $fromComponent = intval(getComponentId($result["worker"]));
+            $toComponent = intval(getComponentId($result["project"]));
+            $timestamp_ = timestampToDateTime(intval($result["start"]));
+            $amount = intval($result["seconds"]);
+            $description = $result["description"];
+
+            if(!$res) {
+                $result = $conn->executeQuery(
+                    "INSERT INTO movements (type_, fromComponent, toComponent,timestamp_, amount,description) VALUES (:type_, :fromComponent, :toComponent, :timestamp_,:amount, :description) "
+              . "ON CONFLICT (id) DO UPDATE SET fromComponent = :fromComponent, toComponent = :toComponent, timestamp_ = :timestamp_, amount = :amount, description = :description RETURNING id;",
+                    [ "type_" => $type_, "fromComponent" => $fromComponent, "toComponent" => $toComponent, "timestamp_" => $timestamp_, "amount" => $amount, "description" => $description]
+                );
+                $arr = $result->fetchAllAssociative();
+                var_dump($arr);
+            } else {
+                $result = $conn->executeQuery(
+                    "SELECT * FROM movements",
+                );
+                
+                $arr = $result->fetchAllAssociative();
+                var_dump($arr);
+
+            }
+           
+            //$movement = "INSERT INTO movements(type_, fromComponent, toComponent,timestamp_, amount,description) VALUES ('".$type_. "',".$from.",'".$to."', '".$timestamp."','".$amount."','".$description."'); "; 
+            //$conn->exec($movement);
         }
-        return [strval(count($entries))];
     } else {
         return ["User not found or wrong password"];
     }
