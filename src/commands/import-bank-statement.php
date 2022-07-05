@@ -12,8 +12,8 @@ declare(strict_types=1);
 function importBankStatement($context, $command)
 {
     $parserFunctions = [
-    "asnbank-CSV" => "parseAsnBankCSV",
-  ];
+        "asnbank-CSV" => "parseAsnBankCSV",
+    ];
 
     if (isset($context["user"])) {
         $format = $command[1];
@@ -23,33 +23,33 @@ function importBankStatement($context, $command)
         $entries = $parserFunctions[$format](file_get_contents($fileName), $context["user"]["username"]);
         for ($i = 0; $i < count($entries); $i++) {
             $movementIdOutside = intval(createMovement($context, [
-        "create-movement",
-        $type_,
-        strval(getComponentId($entries[$i]["from"])),
-        strval(getComponentId($entries[$i]["to"])),
-        $entries[$i]["date"],
-        $entries[$i]["amount"],
-        "outside movement from bank statement: " .$entries[$i]["comment"]
-      ])[0]);
-            intval(createStatement($context, [
-        "create-statement",
-        $movementIdOutside,
-        $importTime
-      ])[0]);
-            $movementIdInside = intval(createMovement($context, [
-        "create-movement",
-        $type_,
-        strval(getComponentId($entries[$i]["insideFrom"])),
-        strval(getComponentId($entries[$i]["insideTo"])),
-        $entries[$i]["date"],
-        $entries[$i]["amount"],
-        "inside movement from bank statement: " .$entries[$i]["comment"]
-      ])[0]);
-            intval(createStatement($context, [
-        "create-statement",
-        $movementIdInside,
-        $importTime
-      ])[0]);
+                "create-movement",
+                $type_,
+                strval(getComponentId($entries[$i]["from"])),
+                strval(getComponentId($entries[$i]["to"])),
+                $entries[$i]["date"],
+                $entries[$i]["amount"]
+            ], true)[0]);
+            createStatement($context, [
+                "create-statement",
+                $movementIdOutside,
+                $importTime,
+                "outside movement from bank statement: " .$entries[$i]["comment"]
+            ]);
+            $movementIdInside = createMovement($context, [
+                "create-movement",
+                $type_,
+                strval(getComponentId($entries[$i]["insideFrom"])),
+                strval(getComponentId($entries[$i]["insideTo"])),
+                $entries[$i]["date"],
+                $entries[$i]["amount"]
+            ], true)[0];
+            createStatement($context, [
+                "create-statement",
+                $movementIdInside,
+                $importTime,
+                "inside movement from bank statement: " .$entries[$i]["comment"]
+            ]);
         }
         return [strval(count($entries))];
     } else {

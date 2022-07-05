@@ -24,13 +24,13 @@ function workedHours($context, $command)
       strval(getComponentId($worker)),
       strval(getComponentId($project)),
       $timestamp,
-      $worked_hours,
-      $description
+      $worked_hours
     ])[0]);
         $statementId = intval(createStatement($context, [
       "create-statement",
       $movementId,
-      $timestamp
+      $timestamp,
+      $description
     ])[0]);
 
         // return [json_encode($command), "Created movement $movementId", "Created statement $statementId"];
