@@ -8,7 +8,7 @@ require_once(__DIR__ . '/../src/run-command.php');
 
 final class ImportBankStatementTest extends TestCase
 {
-    public function testParseTimeCsv(): void
+    public function testParseAsnBankCsv(): void
     {
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
@@ -37,7 +37,7 @@ final class ImportBankStatementTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '2021-01-01 12:00:00',
                 'amount' => '60.5',
-                'description' => 'outside movement from bank statement'
+                'description' => 'outside movement from bank statement: OVB  \'Fictional transaction\''
             ],
             [
                 'id' => 2,
@@ -46,7 +46,7 @@ final class ImportBankStatementTest extends TestCase
                 'tocomponent' => 1,
                 'timestamp_' => '2021-01-01 12:00:00',
                 'amount' => '60.5',
-                'description' => 'inside movement from bank statement'
+                'description' =>  "inside movement from bank statement: OVB  'Fictional transaction'"
              ]
         ], getAllMovements());
         $this->assertEquals([

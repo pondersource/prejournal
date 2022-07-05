@@ -777,6 +777,15 @@ final class ImportTimesheetTest extends TestCase
                     'timestamp_' => '1970-01-01 00:00:00',
                     'amount' => '5',
                     'description' => null
+                ],
+                [
+                  'id' => 5,
+                  'type_' => 'worked',
+                  'fromcomponent' => 6,
+                  'tocomponent' => 7,
+                  'timestamp_' => '1970-01-01 00:00:00',
+                  'amount' => '5',
+                  'description' => null
                 ]
             ], getAllMovements());
         $this->assertEquals([
@@ -811,6 +820,14 @@ final class ImportTimesheetTest extends TestCase
                     'sourcedocumentformat' => null,
                     'sourcedocumentfilename' => null,
                     'timestamp_' => '2022-03-31 12:00:00',
+                ],
+                [
+                  'id' => 5,
+                  'timestamp_' => '2022-03-31 12:00:00',
+                  'movementid' => 5,
+                  'userid' => 1,
+                  'sourcedocumentformat' => null,
+                  'sourcedocumentfilename' => null
                 ]
             ], getAllStatements());
     }
