@@ -5,7 +5,7 @@ declare(strict_types=1);
   require_once(__DIR__ . '/helpers/createMovement.php');
   require_once(__DIR__ . '/helpers/createStatement.php');
 
-// E.g.: php src/index.php enter "from component" "to component" "1.23" "2021-12-31T23:00:00.000Z" "invoice" "ponder-source-agreement-192"
+// E.g.: php src/cli-single.php enter "from component" "to component" "1.23" "2021-12-31T23:00:00.000Z" "invoice" "ponder-source-agreement-192"
 //                           0              1               2       3                4                 5          6
 
 function enter($context, $command)

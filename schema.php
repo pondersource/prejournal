@@ -59,7 +59,6 @@ function getTables()
   ];
 }
 
-
 if (isset($_SERVER["GEN_SQL"])) {
     echo "-- Created from schema.php, DO NOT EDIT DIRECTLY!\n";
     echo "-- To regenerate: GEN_SQL=1 php schema.php > schemal.xml\n\n";

@@ -65,9 +65,25 @@ function whatTheWorldOwes($context, $command)
             if (isBefore($startDate, $date) && isBefore($date, $endDate)) {
                 $delta = 0;
                 if ($movements[$i]["fromcomponent"] == $componentId) {
+                    echo("outgoing value: "
+                        . getComponentName($movements[$i]["fromcomponent"])
+                        . " to "
+                        . getComponentName($movements[$i]["tocomponent"])
+                        . ": "
+                        . floatval($movements[$i]["amount"])
+                        . " " . $movements[$i]["description"] . "\n");
+                    // var_dump($movements[$i]);
                     $delta = -floatval($movements[$i]["amount"]);
                 }
                 if ($movements[$i]["tocomponent"] == $componentId) {
+                    echo("incoming value:"
+                        . getComponentName($movements[$i]["fromcomponent"])
+                        . " to "
+                        . getComponentName($movements[$i]["tocomponent"])
+                        . ": "
+                        . floatval($movements[$i]["amount"])
+                        . " " . $movements[$i]["description"] . "\n");
+                    // var_dump($movements[$i]);
                     $delta = floatval($movements[$i]["amount"]);
                 }
                 if ($delta != 0) {
@@ -83,10 +99,13 @@ function whatTheWorldOwes($context, $command)
         $ret = [];
         foreach ($days as $date => $arr) {
             array_push($ret, formatDate($date) . " $cumm");
+            echo "\n" . formatDate($date) . "\n";
             foreach ($days[$date] as $val) {
+                echo " $cumm + $val\n";
                 $cumm += $val;
             }
         }
+        array_push($ret, "end $cumm");
         return $ret;
     } else {
         return ["This command disregards access checks so it only works in admin party mode"];

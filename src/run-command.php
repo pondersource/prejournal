@@ -28,6 +28,10 @@ declare(strict_types=1);
   require_once(__DIR__ . '/commands/print-timesheet-csv.php'); 
   require_once(__DIR__ . '/commands/import-timesheet.php'); 
   require_once(__DIR__ . '/commands/remove-entry.php'); 
+  require_once(__DIR__ . '/commands/print-timesheet-json.php');
+  require_once(__DIR__ . '/commands/print-timesheet-csv.php');
+  require_once(__DIR__ . '/commands/import-timesheet.php');
+  require_once(__DIR__ . '/commands/generate-implied-purchases.php');
 
 function toCamel($str)
 {
@@ -67,6 +71,7 @@ function runCommand($context, $command)
         "comment" => 1,
         "loan" => 4,
         "what-the-world-owes" => 2,
+        "generate-implied-purchases" => 3,
     ];
     if (isset($commands[$command[0]]) && count($command) >= $commands[$command[0]]) {
         $function = toCamel($command[0]);

@@ -7,6 +7,12 @@ function timestampToDateTime($timestamp)
     return $ret->format('Y-m-d H:i:s');
 }
 
+function dateTimeToTimestamp($dateTime)
+{
+    $ret = new DateTime($dateTime);
+    return $ret->getTimestamp();
+}
+
 function reconcileQuotes($x)
 {
     // var_dump($x);

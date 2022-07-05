@@ -6,7 +6,7 @@ declare(strict_types=1);
   require_once(__DIR__ . '/helpers/createStatement.php');
   require_once(__DIR__ . '/../parsers/asnbank-CSV.php');
 
-// E.g.: php src/index.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"
+// E.g.: php src/cli-single.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0                    1           2             3
 
 function importBankStatement($context, $command)
@@ -29,7 +29,7 @@ function importBankStatement($context, $command)
         strval(getComponentId($entries[$i]["to"])),
         $entries[$i]["date"],
         $entries[$i]["amount"],
-        "outside movement from bank statement"
+        "outside movement from bank statement: " .$entries[$i]["comment"]
       ])[0]);
             intval(createStatement($context, [
         "create-statement",
@@ -43,7 +43,7 @@ function importBankStatement($context, $command)
         strval(getComponentId($entries[$i]["insideTo"])),
         $entries[$i]["date"],
         $entries[$i]["amount"],
-        "inside movement from bank statement"
+        "inside movement from bank statement: " .$entries[$i]["comment"]
       ])[0]);
             intval(createStatement($context, [
         "create-statement",

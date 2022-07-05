@@ -115,6 +115,10 @@ The code is made platform independent through `src/platform.php`. To execute on 
 
 * Run through the steps detailed above under [#Development](#development).
 * Run `php src/cli-single.php hello`
+* If you want to use a .env file from a different directory, try:
+```
+PREJOURNAL_ENV_FILE_DIR=`pwd` php ../../pondersource/prejournal/src/cli-single.php hello
+```
 
 # Usage (localhost)
 

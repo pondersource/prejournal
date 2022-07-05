@@ -3,8 +3,9 @@
 declare(strict_types=1);
   require_once(__DIR__ . '/../database.php');
 
-function listPayments($context)
+function listPayments($context, $command)
 {
+    $sum = 0;
     if ($context['adminParty']) {
         $movements = getAllPaymentMovements();
         $ret = ["timestamp, from, to, amount"];
@@ -21,7 +22,12 @@ function listPayments($context)
             $fromComponentName = getComponentName($row['fromComponent']);
             $toComponentName = getComponentName($row['toComponent']);
             $amount = $row['amount'];
-            array_push($ret, "$timestamp_, $fromComponentName, $toComponentName, $amount");
+            if (count($command) == 1 || ($fromComponentName == $command[1])) {
+                // if ($amount > 1000) {
+                    $sum += $amount;
+                    array_push($ret, "$timestamp_, $fromComponentName, $toComponentName, $amount, $sum");
+                // }
+            }
         }
         return $ret;
     } else {
