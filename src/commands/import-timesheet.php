@@ -34,20 +34,11 @@ function importTimesheet($context, $command)
             $description = $result["description"];
 
             if(!$res) {
-                $result = $conn->executeQuery(
-                    "INSERT INTO movements (type_, fromComponent, toComponent,timestamp_, amount,description) VALUES (:type_, :fromComponent, :toComponent, :timestamp_,:amount, :description) "
-              . "ON CONFLICT (id) DO UPDATE SET fromComponent = :fromComponent, toComponent = :toComponent, timestamp_ = :timestamp_, amount = :amount, description = :description RETURNING id;",
-                    [ "type_" => $type_, "fromComponent" => $fromComponent, "toComponent" => $toComponent, "timestamp_" => $timestamp_, "amount" => $amount, "description" => $description]
-                );
-                $arr = $result->fetchAllAssociative();
-                var_dump($arr);
+                $result = createMultipleMovement($type_, $fromComponent, $toComponent, $timestamp_, $amount, $description);
+                var_dump($result);
             } else {
-                $result = $conn->executeQuery(
-                    "SELECT * FROM movements",
-                );
-                
-                $arr = $result->fetchAllAssociative();
-                var_dump($arr);
+                $res = getAllWorkedMovements();
+                var_dump($res);
 
             }
            
