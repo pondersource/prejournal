@@ -35,8 +35,8 @@ function getTables()
   id SERIAL PRIMARY KEY,
   movementId integer,
   userId integer,
-  sourceDocumentFormat character, /* could be an invoice, bank statement csv file, API call etc */
-  sourceDocumentFilename character, /* TODO: work out how to store files when on Heroku */
+  sourceDocumentFormat varchar, /* could be an invoice, bank statement csv file, API call etc */
+  sourceDocumentFilename varchar, /* TODO: work out how to store files when on Heroku */
   timestamp_ timestamp
 );",
 
