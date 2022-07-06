@@ -10,6 +10,7 @@ function createMovement($context, $command)
         return ["User not found or wrong password"];
     }
 
+    // var_dump($command);
     $conn  = getDbConn();
     $query = "INSERT INTO movements (type_, fromComponent, toComponent, timestamp_, amount) "
         . "VALUES (:type_, :fromComponent, :toComponent, :timestamp_, :amount);";

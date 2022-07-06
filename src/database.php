@@ -109,7 +109,7 @@ function getAllComponentNames()
 function getAllMovements()
 {
     $conn  = getDbConn();
-    $query = "SELECT m.*, s.* FROM movements m INNER JOIN statements s ON s.movementId = m.id";
+    $query = "SELECT * FROM movements";
     $result = $conn->executeQuery($query);
     return $result->fetchAllAssociative();
 }
@@ -141,7 +141,7 @@ function getAllPaymentMovements()
 function getAllMovementsFromId($fromId)
 {
     $conn  = getDbConn();
-    $query = "SELECT m.*,s.* FROM movements m INNER JOIN statements s ON s.movementId = m.id WHERE fromComponent = :fromId";
+    $query = "SELECT m.*,s.description FROM movements m INNER JOIN statements s ON s.movementId = m.id WHERE fromComponent = :fromId";
     $result = $conn->executeQuery($query, [ "fromId" => $fromId ]);
     return $result->fetchAllAssociative();
 }
