@@ -40,6 +40,7 @@ curl -d'["nlnet-timesh:Federated Timesheets","0","100"]' https://example:passwor
 
 
 ```
+         command        type     id
 
 curl -d'["remove-entry","worked", 1]' https://example:password123@time.pondersource.com/v1/remove-entry
 
