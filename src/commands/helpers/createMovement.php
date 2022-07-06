@@ -58,10 +58,12 @@ function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
     ];
     $ret = $conn->executeQuery($query, $fields);
     $arr = $ret->fetchAllAssociative();
-    if (count($arr) > 1) {
-        throw new Error("multiple movements match this!");
-    }
     if (count($arr) > $numNeeded) {
+        echo "Weird, queried for:";
+        echo $query;
+        var_dump($fields);
+        echo "Have " . count($arr) . " need $numNeeded";
+        var_dump($arr);
         throw new Error('Too many entries already for this lookalike group, don\'t know what to do!');
     } else if (count($arr) == $numNeeded) {
         echo ("Already have $numNeeded movements with these details!");
