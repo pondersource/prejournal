@@ -32,8 +32,8 @@ $queryStr = "SELECT m.id, w.name as worker, p.name as project, m.timestamp_, m.a
   WHERE m.type_='worked' AND p.name=:project AND m.id >=:min_id AND m.id <=:max_id
   AND w.id IN (:visibleWorkerComponents)";
   $params = [ 'project' => $project, 'min_id' => $min_id, 'max_id' => $max_id, 'visibleWorkerComponents' => $visibleWorkerComponents ];
-  var_dump($queryStr);
-  var_dump($params);
+  // var_dump($queryStr);
+  // var_dump($params);
   $query = $conn->executeQuery($queryStr, $params,
     [ 'visibleWorkerComponents' => \Doctrine\DBAL\Connection::PARAM_INT_ARRAY ]
   );
