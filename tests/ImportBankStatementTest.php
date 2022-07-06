@@ -14,7 +14,10 @@ final class ImportBankStatementTest extends TestCase
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/asnbank-CSV.csv";
-        $result = runCommand(getContext(), ["import-bank-statement", "asnbank-CSV", $fixture,  "2022-03-31 12:00:00" ]);
+        runCommand(getContext(), ["import-bank-statement", "asnbank-CSV", $fixture,  "2022-03-31 12:00:00" ]);
+        
+        // run it again to test idempotency, second run should have no effect:
+        runCommand(getContext(), ["import-bank-statement", "asnbank-CSV", $fixture,  "2022-03-31 12:00:00" ]);
         $this->assertEquals([
             [
                 'id' => 1,
