@@ -55,8 +55,8 @@ final class ImportBankStatementTest extends TestCase
                 'id' => 1,
                 'movementid' => 1,
                 'userid' => 1,
-                'sourcedocumentformat' => null,
-                'sourcedocumentfilename' => null,
+                'sourcedocumentformat' => 'asnbank-CSV',
+                'sourcedocumentfilename' => "$fixture#0",
                 'timestamp_' => '2022-03-31 12:00:00',
                 'description' => 'outside movement from bank statement: OVB  \'Fictional transaction\''
             ],
@@ -64,8 +64,8 @@ final class ImportBankStatementTest extends TestCase
                 'id' => 2,
                 'movementid' => 2,
                 'userid' => 1,
-                'sourcedocumentformat' => null,
-                'sourcedocumentfilename' => null,
+                'sourcedocumentformat' => 'asnbank-CSV',
+                'sourcedocumentfilename' => "$fixture#0",
                 'timestamp_' => '2022-03-31 12:00:00',
                 'description' =>  "inside movement from bank statement: OVB  'Fictional transaction'"
             ]

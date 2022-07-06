@@ -47,7 +47,7 @@ function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
     $query = "SELECT m.*, s.* FROM "
         . "movements m INNER JOIN statements s ON m.id = s.movementid WHERE "
         . "type_ = :type_ AND fromComponent = :fromComponent AND toComponent = :toComponent AND "
-        . "timestamp_ >= :mintimestamp_ AND timestamp_ <= :maxtimestamp_ AND amount = :amount;";
+        . "m.timestamp_ >= :mintimestamp_ AND m.timestamp_ <= :maxtimestamp_ AND amount = :amount;";
     $fields = [
         "type_" => $movement["type_"],
         "fromComponent" => $movement["fromComponent"],

@@ -22,34 +22,40 @@ function importBankStatement($context, $command)
         $type_ = "payment";
         $entries = $parserFunctions[$format](file_get_contents($fileName), $context["user"]["username"]);
         for ($i = 0; $i < count($entries); $i++) {
-            $movementIdOutside = intval(createMovement($context, [
-                "create-movement",
-                $type_,
-                strval(getComponentId($entries[$i]["from"])),
-                strval(getComponentId($entries[$i]["to"])),
-                $entries[$i]["date"],
-                $entries[$i]["amount"]
-            ], true)[0]);
-            createStatement($context, [
-                "create-statement",
-                $movementIdOutside,
-                $importTime,
-                "outside movement from bank statement: " .$entries[$i]["comment"]
-            ]);
-            $movementIdInside = createMovement($context, [
-                "create-movement",
-                $type_,
-                strval(getComponentId($entries[$i]["insideFrom"])),
-                strval(getComponentId($entries[$i]["insideTo"])),
-                $entries[$i]["date"],
-                $entries[$i]["amount"]
-            ], true)[0];
-            createStatement($context, [
-                "create-statement",
-                $movementIdInside,
-                $importTime,
-                "inside movement from bank statement: " .$entries[$i]["comment"]
-            ]);
+            $movementIdsOutside = ensureMovementsLookalikeGroup($context, [
+                "type_" => $type_,
+                "fromComponent" => strval(getComponentId($entries[$i]["from"])),
+                "toComponent" => strval(getComponentId($entries[$i]["to"])),
+                "timestamp_" => $entries[$i]["date"],
+                "amount" => $entries[$i]["amount"]
+            ], 1);
+            for ($j = 0; $j < count($movementIdsOutside); $j++) {
+                ensureStatement($context, [
+                    "create-statement",
+                    intval($movementIdsOutside[$j]),
+                    $importTime,
+                    "outside movement from bank statement: " .$entries[$i]["comment"],
+                    $format,
+                    "$fileName#$i"
+                ]);
+            }
+            $movementIdsInside = ensureMovementsLookalikeGroup($context, [
+                "type_" => $type_,
+                "fromComponent" => strval(getComponentId($entries[$i]["insideFrom"])),
+                "toComponent" => strval(getComponentId($entries[$i]["insideTo"])),
+                "timestamp_" => $entries[$i]["date"],
+                "amount" => $entries[$i]["amount"]
+            ], 1);
+            for ($j = 0; $j < count($movementIdsInside); $j++) {
+                ensureStatement($context, [
+                    "create-statement",
+                    intval($movementIdsInside[$j]),
+                    $importTime,
+                    "inside movement from bank statement: " .$entries[$i]["comment"],
+                    $format,
+                    "$fileName#$i"
+                ]);
+            }
         }
         return [strval(count($entries))];
     } else {
