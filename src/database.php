@@ -215,18 +215,6 @@ function getSync($internal_id, $internal_type, $remote_system)
     }
     return  $arr[0];
 }
-function getFromMovementAndSync($project, $min_id, $max_id) {
-    //$conn  = getDbConn();
-    $query = getDbConn()->executeQuery("SELECT m.id, s.name as worker, d.name as project, m.timestamp_, m.amount,
-    m.description FROM movements m INNER JOIN components s ON m.fromComponent = s.id
-    INNER JOIN components d ON m.toComponent = d.id 
-    WHERE m.type_='worked' AND d.name=:project AND m.id >=:min_id AND m.id <=:max_id",
-    ['project' => $project, 'min_id' => $min_id, 'max_id' => $max_id]
-   );
-    //$result = $conn->executeQuery($query);
-    $arr = $query->fetchAllAssociative();
-    return $arr;
-}
 
 function getComponentId($name, $atomic = false)
 {
