@@ -1,8 +1,7 @@
 <?php
 
 declare(strict_types=1);
-  require_once(__DIR__ . '/../platform.php');
-  require_once(__DIR__ . '/../database.php');
+  require_once(__DIR__ . '/helpers/dataAccessObject.php');
   /*
   E.g.: php src/cli-single.php print-timesheet-json wiki 0 100
 */
@@ -14,7 +13,7 @@ function printTimesheetJson($context, $command)
         $max_id = intval($command[3]);
       
 
-        $jsondata = getFromMovementAndSync($project_name, $min_id, $max_id);
+        $jsondata = getFromMovementAndSync($context["user"]["id"], $project_name, $min_id, $max_id);
        
         $result = json_encode($jsondata, JSON_PRETTY_PRINT);
 
