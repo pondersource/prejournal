@@ -24,50 +24,62 @@ function createMovement($context, $command)
     return [ strval($conn->lastInsertId()) ];
 }
 
-function ensureMovementsAndStatements($context, $movements, $statements)
+// HAVOC: there is no check at all that the user who is logged in has anything
+// to say about the components they edit.
+// Maybe the only way forward is to say each movement and each component belongs
+// to a user, and then voluntarily you can observe the statements from others?
+// The situation where each local edit is automatically accepted globally doesn't work
+// Neither is the opposite situation, where each edit needs to be approved.
+// Maybe a federated application automatically has complex access control.
+
+// UNUSED:
+function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
 {
     if (!isset($context["user"])) {
         return ["User not found or wrong password"];
     }
-    // FIXME:
-    $command = $movements;
+    // for instance,
+    // importing a lookalike group from for instance a savings account
+    // make sure the number of movements is correct
+    // make sure the right statements exist.
     $conn  = getDbConn();
     $query = "SELECT m.*, s.* FROM "
         . "movements m INNER JOIN statements s ON m.id = s.movementid WHERE "
         . "type_ = :type_ AND fromComponent = :fromComponent AND toComponent = :toComponent AND "
         . "timestamp_ >= :mintimestamp_ AND timestamp_ <= :maxtimestamp_ AND amount = :amount;";
     $fields = [
-        "type_" => $command[1],
-        "fromComponent" => intval($command[2]),
-        "toComponent" => intval($command[3]),
-        "mintimestamp_" => timestampToDateTime(intval($command[4]) - 12 * 3600),
-        "maxtimestamp_" => timestampToDateTime(intval($command[4]) + 12 * 3600),
-        "amount" => floatval($command[5])
+        "type_" => $movement["type_"],
+        "fromComponent" => $movement["fromComponent"],
+        "toComponent" => $movement["toComponent"],
+        "mintimestamp_" => timestampToDateTime($movement["timestamp_"] - 12 * 3600),
+        "maxtimestamp_" => timestampToDateTime($movement["timestamp_"] + 12 * 3600),
+        "amount" => $movement["amount"]
     ];
     $ret = $conn->executeQuery($query, $fields);
     $arr = $ret->fetchAllAssociative();
     if (count($arr) > 1) {
         throw new Error("multiple movements match this!");
     }
-    if (count($arr) >= 1) {
-        echo ("\nexists!\n");
-        var_dump($command);
-        var_dump($fields);
-        var_dump($arr);
-        return [ strval($arr[0]["id"]) ];
-    }
-    // CAREFUL, this SELECT-check-INSERT sequence is not thread-safe
-    // Another process may have inserted inbetween the SELECT time and the INSERT time
-    // and that would still lead to duplicates
-    $query = "INSERT INTO movements (type_, fromComponent, toComponent, timestamp_, amount) "
+    if (count($arr) > $numNeeded) {
+        throw new Error('Too many entries already for this lookalike group, don\'t know what to do!');
+    } else if (count($arr) == $numNeeded) {
+        echo ("Already have $numNeeded movements with these details!");
+    } else {
+        $query = "INSERT INTO movements (type_, fromComponent, toComponent, timestamp_, amount) "
         . "VALUES (:type_, :fromComponent, :toComponent, :timestamp_, :amount);";
+        $numToAdd = $numNeeded - count($arr);
+        echo ("Have " . count($arr) . " movements with these details, adding $numToAdd!");
 
-    $ret = $conn->executeStatement($query, [
-        "type_" => $command[1],
-        "fromComponent" => intval($command[2]),
-        "toComponent" => intval($command[3]),
-        "timestamp_" => timestampToDateTime(intval($command[4])),
-        "amount" => floatval($command[5])
-    ]);
-    return [ strval($conn->lastInsertId()) ];
+        for ($i = 0; $i < $numToAdd; $i++) {
+            $conn->executeStatement($query, [
+                "type_" => $movement["type_"],
+                "fromComponent" => $movement["fromComponent"],
+                "toComponent" => $movement["toComponent"],
+                "timestamp_" => timestampToDateTime($movement["timestamp_"]),
+                "amount" => $movement["amount"]
+            ]);
+            array_push($arr, $conn->lastInsertId());
+        }
+    }
+    return $arr;
 }
