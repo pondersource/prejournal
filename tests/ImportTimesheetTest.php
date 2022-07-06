@@ -885,6 +885,48 @@ final class ImportTimesheetTest extends TestCase
         $this->assertEquals(null, $result);
         //var_dump($result);
     }
+
+    public function testWorkedDay(): void
+    {
+        setTestDb();
+        runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
+        runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
+        setUser('alice', 'alice123', 'employer');
+        $result =  runCommand(getContext(), [ "worked-day", "23 August 2021", "stichting", "Peppol for the Masses" ]);
+        $this->assertEquals([
+          0 => 'Created movement 1',
+          1 => 'Created statement 1'
+        ], $result);
+        //var_dump($result);
+    }
+
+    public function testWorkedWeek(): void
+    {
+        setTestDb();
+        runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
+        runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
+        setUser('alice', 'alice123', 'employer');
+        $result =  runCommand(getContext(), [ "worked-week", "22 November 2021", "stichting", "ScienceMesh", "Almost done"]);
+        $this->assertEquals([
+          0 => 'Created movement 1',
+          1 => 'Created statement 1'
+        ], $result);
+        //var_dump($result);
+    }
+
+    public function testWorkedHours(): void
+    {
+        setTestDb();
+        runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
+        runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
+        setUser('alice', 'alice123', 'employer');
+        $result =  runCommand(getContext(), [ "worked-hours", "20 September 2021", "stichting", "Peppol for the Masses", 4]);
+        $this->assertEquals([
+          0 => 'Created movement 1',
+          1 => 'Created statement 1'
+        ], $result);
+        //var_dump($result);
+    }
 }
 
 // in curl commands:
