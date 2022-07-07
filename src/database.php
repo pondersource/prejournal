@@ -214,6 +214,17 @@ function getSync($internal_id, $internal_type, $remote_system)
     return  $arr[0];
 }
 
+function deleteDataFromMovement($type_, $id) {
+    $conn  = getDbConn();
+    $qb = $conn
+        ->delete('movements', ['type_' => $type_, 'id' => $id])
+    ;
+
+    if($qb === 1) {
+        return ["Delete data from movement"];
+    }
+}
+
 function getComponentId($name, $atomic = false)
 {
     $conn  = getDbConn();

@@ -831,6 +831,119 @@ final class ImportTimesheetTest extends TestCase
                   ]
             ], getAllStatements());
     }
+
+    public function testWikiApiExport(): void
+    {
+        setTestDb();
+        runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
+        runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
+        setUser('alice', 'alice123', 'employer');
+        $result = runCommand(getContext(), ["wiki-api-export", "wiki"]);
+        $this->assertEquals([
+            0 => 'Try again to insert data inside sync and movement'
+        ],$result);
+        //var_dump($result);
+        setUser('bob', 'bob123', 'employer');
+        //$this->assertEquals([
+          //  "1", "2", "3","4","5"
+        //], runCommand(getContext(), ["print-timesheet-json", "Test", 2, 100]));
+    }
+
+    public function testWikiApiImport(): void
+    {
+        setTestDb();
+        runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
+        runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
+        setUser('alice', 'alice123', 'employer');
+        $result = runCommand(getContext(), ["wiki-api-import", "wiki"]);
+        $this->assertEquals(null,$result);
+        //var_dump($result);
+        setUser('bob', 'bob123', 'employer');
+        //$this->assertEquals([
+          //  "1", "2", "3","4","5"
+        //], runCommand(getContext(), ["print-timesheet-json", "Test", 2, 100]));
+    }
+
+    public function testImportEntry(): void
+    {
+        setTestDb();
+        runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
+        runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
+        setUser('alice', 'alice123', 'employer');
+        $fixture = __DIR__ . "/fixtures/wiki-suite-JSON.json";
+        $result = runCommand(getContext(), ["import-timesheet", "wikiApi-JSON", $fixture, "2022-03-31 12:00:00" ]);
+        $this->assertEquals([
+            0 => '5'
+        ],$result);
+        //var_dump($result);
+        setUser('bob', 'bob123', 'employer');
+        //$this->assertEquals([
+          //  "1", "2", "3","4","5"
+        //], runCommand(getContext(), ["print-timesheet-json", "Test", 2, 100]));
+    }
+
+    public function testExportEntry(): void
+    {
+        setTestDb();
+        runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
+        runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
+        setUser('alice', 'alice123', 'employer');
+        $result =  runCommand(getContext(), ["print-timesheet-json", "Test", 2, 4]);
+        $this->assertEquals(null, $result);
+    }
+
+    public function testRemove(): void
+    {
+        setTestDb();
+        runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
+        runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
+        setUser('alice', 'alice123', 'employer');
+        $result =  runCommand(getContext(), [ "remove-entry",  "worked",   1 ]);
+        $this->assertEquals(null, $result);
+        //var_dump($result);
+    }
+
+    public function testWorkedDay(): void
+    {
+        setTestDb();
+        runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
+        runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
+        setUser('alice', 'alice123', 'employer');
+        $result =  runCommand(getContext(), [ "worked-day", "23 August 2021", "stichting", "Peppol for the Masses" ]);
+        $this->assertEquals([
+          0 => 'Created movement 1',
+          1 => 'Created statement 1'
+        ], $result);
+        //var_dump($result);
+    }
+
+    public function testWorkedWeek(): void
+    {
+        setTestDb();
+        runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
+        runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
+        setUser('alice', 'alice123', 'employer');
+        $result =  runCommand(getContext(), [ "worked-week", "22 November 2021", "stichting", "ScienceMesh", "Almost done"]);
+        $this->assertEquals([
+          0 => 'Created movement 1',
+          1 => 'Created statement 1'
+        ], $result);
+        //var_dump($result);
+    }
+
+    public function testWorkedHours(): void
+    {
+        setTestDb();
+        runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
+        runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
+        setUser('alice', 'alice123', 'employer');
+        $result =  runCommand(getContext(), [ "worked-hours", "20 September 2021", "stichting", "Peppol for the Masses", 4]);
+        $this->assertEquals([
+          0 => 'Created movement 1',
+          1 => 'Created statement 1'
+        ], $result);
+        //var_dump($result);
+    }
 }
 
 // in curl commands:

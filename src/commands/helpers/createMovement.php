@@ -84,3 +84,12 @@ function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
     }
     return $arr;
 }
+
+function createMultipleMovement($type_, $fromComponent, $toComponent, $timestamp_, $amount, $description) {
+    $conn  = getDbConn();
+    $conn->executeQuery(
+        "INSERT INTO movements (type_, fromComponent, toComponent,timestamp_, amount,description) VALUES (:type_, :fromComponent, :toComponent, :timestamp_,:amount, :description) ",
+        [ "type_" => $type_, "fromComponent" => $fromComponent, "toComponent" => $toComponent, "timestamp_" => $timestamp_, "amount" => $amount, "description" => $description]
+    );
+    return [ strval($conn->lastInsertId()) ];
+}

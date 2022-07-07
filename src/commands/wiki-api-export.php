@@ -6,7 +6,7 @@ declare(strict_types=1);
   require_once(__DIR__ . '/helpers/createSync.php');
   require_once(__DIR__ . '/../database.php');
   /*
-  E.g.: php src/cli-single.php wiki-api wiki
+  E.g.: php src/cli-single.php wiki-api-export wiki
 */
 function wikiApiExport($context, $command)
 {

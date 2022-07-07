@@ -14,7 +14,39 @@ DB_DATABASE=prejournal_test
 DB_PASSWORD=123456
 DB_HOST=localhost
 DB_DRIVER=pdo_pgsql
+``` 
+
+# Usage (time.pondersource.com)
+
+You can just working with import, export, remove entry. 
+
+1) Push timesheet entries you can use 
+
+```        
+            command        timestamp             worker      project
+
+curl -d'["worked-hours", "20 September 2021", "stichting", "Peppol for the Masses"]' https://example:password123@time.pondersource.com/v1/worked-hours
+````
+
+2) pull timesheet information 
+
 ```
+          project_name                       min  max
+
+curl -d'["nlnet-timesh:Federated Timesheets","0","100"]' https://example:password123@time.pondersource.com/v1/print-timesheet-json
+```
+
+3) Remove timesheet information 
+
+
+```
+         command        type     id
+
+curl -d'["remove-entry","worked", 1]' https://example:password123@time.pondersource.com/v1/remove-entry
+
+```
+
+
 
 ### PHP CS fix
 

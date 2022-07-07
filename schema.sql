@@ -36,6 +36,7 @@ create table statements (
   userId integer,
   sourceDocumentFormat varchar, /* could be an invoice, bank statement csv file, API call etc */
   sourceDocumentFilename varchar, /* TODO: work out how to store files when on Heroku */
+  timestamp_ timestamp
   timestamp_ timestamp,
   description varchar
 );

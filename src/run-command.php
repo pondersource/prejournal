@@ -24,11 +24,14 @@ declare(strict_types=1);
   require_once(__DIR__ . '/commands/what-the-world-owes.php');
   require_once(__DIR__ . '/commands/wiki-api-export.php');
   require_once(__DIR__ . '/commands/wiki-api-import.php');
+  require_once(__DIR__ . '/commands/print-timesheet-json.php'); 
+  require_once(__DIR__ . '/commands/print-timesheet-csv.php'); 
+  require_once(__DIR__ . '/commands/import-timesheet.php'); 
+  require_once(__DIR__ . '/commands/remove-entry.php'); 
   require_once(__DIR__ . '/commands/print-timesheet-json.php');
   require_once(__DIR__ . '/commands/print-timesheet-csv.php');
   require_once(__DIR__ . '/commands/import-timesheet.php');
   require_once(__DIR__ . '/commands/generate-implied-purchases.php');
- 
 
 function toCamel($str)
 {
@@ -62,6 +65,9 @@ function runCommand($context, $command)
         "update-remote-service" => 2,
         "wiki-api-export" => 2,
         "wiki-api-import" => 2,
+        "print-timesheet-json" => 3,
+        "remove-entry" => 2,
+        "print-timesheet-csv" => 2,
         "print-timesheet-json" => 4,
         "print-timesheet-csv" => 4,
         "comment" => 1,
