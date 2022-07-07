@@ -5,19 +5,10 @@ use PHPUnit\Framework\TestCase;
 
 require_once(__DIR__ . '/../src/run-command.php');
 
-
 final class ImportBankStatementTest extends TestCase
 {
-    public function testParseAsnBankCsv(): void
-    {
-        setTestDb();
-        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
-        setUser('alice', 'alice123', 'employer');
-        $fixture = __DIR__ . "/fixtures/asnbank-CSV.csv";
-        runCommand(getContext(), ["import-bank-statement", "asnbank-CSV", $fixture,  "2022-03-31 12:00:00" ]);
-        
-        // run it again to test idempotency, second run should have no effect:
-        runCommand(getContext(), ["import-bank-statement", "asnbank-CSV", $fixture,  "2022-03-31 12:00:00" ]);
+
+    private function checkResult($fixture) {
         $this->assertEquals([
             [
                 'id' => 1,
@@ -38,7 +29,8 @@ final class ImportBankStatementTest extends TestCase
                 'type_' => 'payment',
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
-                'timestamp_' => '2021-01-01 12:00:00',
+                // 'timestamp_' => '2021-01-01 12:00:00',
+                'timestamp_' => '1970-01-01 00:00:01',
                 'amount' => '60.5'
             ],
             [
@@ -46,9 +38,10 @@ final class ImportBankStatementTest extends TestCase
                 'type_' => 'payment',
                 'fromcomponent' => 3,
                 'tocomponent' => 1,
-                'timestamp_' => '2021-01-01 12:00:00',
+                // 'timestamp_' => '2021-01-01 12:00:00',
+                'timestamp_' => '1970-01-01 00:00:02',
                 'amount' => '60.5'
-             ]
+            ]
         ], getAllMovements());
         $this->assertEquals([
             [
@@ -70,5 +63,18 @@ final class ImportBankStatementTest extends TestCase
                 'description' =>  "inside movement from bank statement: OVB  'Fictional transaction'"
             ]
         ], getAllStatements());
+    }
+
+    public function testParseAsnBankCsv(): void
+    {
+        setTestDb();
+        $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
+        setUser('alice', 'alice123', 'employer');
+        $fixture = __DIR__ . "/fixtures/asnbank-CSV.csv";
+        runCommand(getContext(), ["import-bank-statement", "asnbank-CSV", $fixture,  "2022-03-31 12:00:00" ]);
+        $this->checkResult($fixture);
+        // run it again to test idempotency, second run should have no effect:
+        runCommand(getContext(), ["import-bank-statement", "asnbank-CSV", $fixture,  "2022-03-31 12:00:00" ]);
+        $this->checkResult($fixture);
     }
 }

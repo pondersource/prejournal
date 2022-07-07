@@ -46,10 +46,15 @@ function ensureStatement($context, $command)
         $query2 = "INSERT INTO statements " .
           "(userId, movementId, timestamp_, description, sourceDocumentFormat, sourceDocumentFilename) VALUES " .
           "(:userId, :movementId, :timestamp_, :description, :sourceDocumentFormat, :sourceDocumentFilename);";
-          $ret1 = $conn->executeStatement($query2, $params);
-          var_dump($ret1);
-          $ret2 = $conn->executeStatement($query2, $params);
-          return [ strval($conn->lastInsertId()) ];
+          $ret1 = $conn->executeQuery($query1, $params);
+          $numExist = $ret1->fetchAllAssociative()[0]["count"];
+          if ($numExist == 0) {
+            $created = strval($conn->lastInsertId());
+            // echo "Statement $created was created about movement " . intval($command[1]) . "\n";
+            $ret2 = $conn->executeStatement($query2, $params);
+            return [ "created $created" ];
+          }
+          return [ "already exists" ];
     } else {
         return ["User not found or wrong password"];
     }
