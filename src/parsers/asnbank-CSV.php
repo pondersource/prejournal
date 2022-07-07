@@ -53,7 +53,7 @@ function parseAccount2($obj)
 
 function parseDescription($obj)
 {
-    return str_replace("*", " ", $obj["globaleTransactiecode"] . "  " . $obj["omschrijving"]);
+    return str_replace("*", " ", $obj["naamTegenrekening"] . " " .$obj["globaleTransactiecode"] . "  " . $obj["omschrijving"]);
 }
 
 function parseAsnBankCSV($text, $owner)
