@@ -16,8 +16,8 @@ function generateImpliedPurchases($context, $command)
     $movements = getAllMovementsFromId(getComponentId($fromAccount));
     for ($i = 0; $i < count($movements); $i++) {
       if (str_contains($movements[$i]["description"], $filterString)) {
-        echo "Filter string match! " . $movements[$i]["description"] . " - " . $filterString . "\n";
-        var_dump($movements[$i]);
+        // echo "Filter string match! " . $movements[$i]["description"] . " - " . $filterString . "\n";
+        // var_dump($movements[$i]);
         createMovement($context, [
           "create-movement",
           "implied-delivery",
