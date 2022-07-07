@@ -47,7 +47,7 @@ function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
     $query = "SELECT m.*, s.* FROM "
         . "movements m INNER JOIN statements s ON m.id = s.movementid WHERE "
         . "type_ = :type_ AND fromComponent = :fromComponent AND toComponent = :toComponent AND "
-        . "timestamp_ >= :mintimestamp_ AND timestamp_ <= :maxtimestamp_ AND amount = :amount;";
+        . "m.timestamp_ >= :mintimestamp_ AND m.timestamp_ <= :maxtimestamp_ AND amount = :amount;";
     $fields = [
         "type_" => $movement["type_"],
         "fromComponent" => $movement["fromComponent"],
@@ -57,20 +57,24 @@ function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
         "amount" => $movement["amount"]
     ];
     $ret = $conn->executeQuery($query, $fields);
-    $arr = $ret->fetchAllAssociative();
-    if (count($arr) > 1) {
-        throw new Error("multiple movements match this!");
+    $ass = $ret->fetchAllAssociative();
+    $arr = [];
+    for ($i = 0; $i < count($ass); $i++) {
+        array_push($arr, $ass[$i]["id"]);
     }
     if (count($arr) > $numNeeded) {
+        echo "Weird, queried for:";
+        echo $query;
+        var_dump($fields);
+        echo "Have " . count($arr) . " need $numNeeded";
+        var_dump($arr);
         throw new Error('Too many entries already for this lookalike group, don\'t know what to do!');
     } else if (count($arr) == $numNeeded) {
-        echo ("Already have $numNeeded movements with these details!");
+        // echo ("Already have $numNeeded movements with these details!\n");
     } else {
         $query = "INSERT INTO movements (type_, fromComponent, toComponent, timestamp_, amount) "
         . "VALUES (:type_, :fromComponent, :toComponent, :timestamp_, :amount);";
         $numToAdd = $numNeeded - count($arr);
-        echo ("Have " . count($arr) . " movements with these details, adding $numToAdd!");
-
         for ($i = 0; $i < $numToAdd; $i++) {
             $conn->executeStatement($query, [
                 "type_" => $movement["type_"],
@@ -79,7 +83,9 @@ function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
                 "timestamp_" => timestampToDateTime($movement["timestamp_"]),
                 "amount" => $movement["amount"]
             ]);
-            array_push($arr, $conn->lastInsertId());
+            $created = $conn->lastInsertId();
+            // echo("Movement $created was created\n");
+            array_push($arr, $created);
         }
     }
     return $arr;
