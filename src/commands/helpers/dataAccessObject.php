@@ -26,8 +26,7 @@ $visibleWorkerComponents = [];
 for ($i = 0; $i < count($visibleWorkerComponentsAssoc); $i++) {
   array_push($visibleWorkerComponents, $visibleWorkerComponentsAssoc[$i]["id"]);
 }
-$queryStr = "SELECT m.id, w.name as worker, p.name as project, m.timestamp_, m.amount,
-  m.description FROM movements m INNER JOIN components w ON m.fromComponent = w.id
+$queryStr = "SELECT m.id, w.name as worker, p.name as project, m.timestamp_, m.amount FROM movements m INNER JOIN components w ON m.fromComponent = w.id
   INNER JOIN components p ON m.toComponent = p.id 
   WHERE m.type_='worked' AND p.name=:project AND m.id >=:min_id AND m.id <=:max_id
   AND w.id IN (:visibleWorkerComponents)";

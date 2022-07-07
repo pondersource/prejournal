@@ -31,10 +31,9 @@ function importTimesheet($context, $command)
             $toComponent = intval(getComponentId($result["project"]));
             $timestamp_ = timestampToDateTime(intval($result["start"]));
             $amount = intval($result["seconds"]);
-            $description = $result["description"];
 
             if(!$res) {
-                $result = createMultipleMovement($type_, $fromComponent, $toComponent, $timestamp_, $amount, $description);
+                $result = createMultipleMovement($type_, $fromComponent, $toComponent, $timestamp_, $amount);
                 //var_dump($result);
             } else {
                 $res = getAllWorkedMovements();
