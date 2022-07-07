@@ -71,7 +71,7 @@ function whatTheWorldOwes($context, $command)
                         . getComponentName($movements[$i]["tocomponent"])
                         . ": "
                         . floatval($movements[$i]["amount"])
-                        . " " . $movements[$i]["description"] . "\n");
+                        /* . " " . $movements[$i]["description"] */ . "\n");
                     // var_dump($movements[$i]);
                     $delta = -floatval($movements[$i]["amount"]);
                 }
@@ -82,7 +82,7 @@ function whatTheWorldOwes($context, $command)
                         . getComponentName($movements[$i]["tocomponent"])
                         . ": "
                         . floatval($movements[$i]["amount"])
-                        . " " . $movements[$i]["description"] . "\n");
+                        /* . " " . $movements[$i]["description"] */ . "\n");
                     // var_dump($movements[$i]);
                     $delta = floatval($movements[$i]["amount"]);
                 }

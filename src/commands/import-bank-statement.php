@@ -26,7 +26,7 @@ function importBankStatement($context, $command)
                 "type_" => $type_,
                 "fromComponent" => strval(getComponentId($entries[$i]["from"])),
                 "toComponent" => strval(getComponentId($entries[$i]["to"])),
-                "timestamp_" => 10*$i + 1,
+                "timestamp_" => $entries[$i]["date"],
                 "amount" => $entries[$i]["amount"]
             ], 1);
             for ($j = 0; $j < count($movementIdsOutside); $j++) {
@@ -44,7 +44,7 @@ function importBankStatement($context, $command)
                 "type_" => $type_,
                 "fromComponent" => strval(getComponentId($entries[$i]["insideFrom"])),
                 "toComponent" => strval(getComponentId($entries[$i]["insideTo"])),
-                "timestamp_" => 10*$i + 2,
+                "timestamp_" => $entries[$i]["date"],
                 "amount" => $entries[$i]["amount"]
             ], 1);
             for ($j = 0; $j < count($movementIdsInside); $j++) {
@@ -57,7 +57,7 @@ function importBankStatement($context, $command)
                     "$fileName#$i"
                 ]);
             }
-        }        
+        }
         return [strval(count($entries))];
     } else {
         return ["User not found or wrong password"];
