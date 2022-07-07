@@ -8,13 +8,13 @@ use Doctrine\DBAL\DriverManager;
 
 function getDbConn()
 {
-    global $test_db_connection;
-    if (isset($test_db_connection)) {
-        return $test_db_connection;
+    global $singleton_db_connection;
+    if (isset($singleton_db_connection)) {
+        return $singleton_db_connection;
     } else {
         $result = db_credentials();
-        $test_db_connection = DriverManager::getConnection($result);
-        return $test_db_connection;
+        $singleton_db_connection = DriverManager::getConnection($result);
+        return $singleton_db_connection;
     }
 }
 
@@ -32,14 +32,12 @@ function db_credentials()
 
 function setTestDb()
 {
-    global $test_db_connection;
     $tables = getTables();
 
-    $result = db_credentials();
-    $test_db_connection = DriverManager::getConnection($result);
+    $conn = getDbConn();
 
     for ($i = 0; $i < count($tables); $i++) {
-        $created = $test_db_connection->executeQuery($tables[$i]);
+        $conn->executeQuery($tables[$i]);
     }
 }
 
@@ -143,7 +141,7 @@ function getAllPaymentMovements()
 function getAllMovementsFromId($fromId)
 {
     $conn  = getDbConn();
-    $query = "SELECT * FROM movements WHERE fromComponent = :fromId";
+    $query = "SELECT m.*,s.description FROM movements m INNER JOIN statements s ON s.movementId = m.id WHERE fromComponent = :fromId";
     $result = $conn->executeQuery($query, [ "fromId" => $fromId ]);
     return $result->fetchAllAssociative();
 }
@@ -214,18 +212,6 @@ function getSync($internal_id, $internal_type, $remote_system)
         return null;
     }
     return  $arr[0];
-}
-function getFromMovementAndSync($project, $min_id, $max_id) {
-    //$conn  = getDbConn();
-    $query = getDbConn()->executeQuery("SELECT m.id, s.name as worker, d.name as project, m.timestamp_, m.amount,
-    m.description FROM movements m INNER JOIN components s ON m.fromComponent = s.id
-    INNER JOIN components d ON m.toComponent = d.id 
-    WHERE m.type_='worked' AND d.name=:project AND m.id >=:min_id AND m.id <=:max_id",
-    ['project' => $project, 'min_id' => $min_id, 'max_id' => $max_id]
-   );
-    //$result = $conn->executeQuery($query);
-    $arr = $query->fetchAllAssociative();
-    return $arr;
 }
 
 function deleteDataFromMovement($type_, $id) {

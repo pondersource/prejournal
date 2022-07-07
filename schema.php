@@ -26,8 +26,7 @@ function getTables()
   fromComponent integer,
   toComponent integer,
   timestamp_ timestamp,
-  amount decimal,
-  description varchar
+  amount decimal
 );",
 
 "drop table if exists statements;",
@@ -38,6 +37,8 @@ function getTables()
   sourceDocumentFormat varchar, /* could be an invoice, bank statement csv file, API call etc */
   sourceDocumentFilename varchar, /* TODO: work out how to store files when on Heroku */
   timestamp_ timestamp
+  timestamp_ timestamp,
+  description varchar
 );",
 
 "drop table if exists componentGrants;",

@@ -8,11 +8,12 @@ function createStatement($context, $command)
 {
     if (isset($context["user"])) {
         $conn  = getDbConn();
-        $query = "INSERT INTO statements (userId, movementId, timestamp_) VALUES (:userId, :movementId, :timestamp_);";
+        $query = "INSERT INTO statements (userId, movementId, timestamp_, description) VALUES (:userId, :movementId, :timestamp_, :description);";
         $ret = $conn->executeStatement($query, [
       "userId" => $context["user"]["id"],
       "movementId" => intval($command[1]),
-      "timestamp_" => timestampToDateTime(intval($command[2]))
+      "timestamp_" => timestampToDateTime(intval($command[2])),
+      "description" => $command[3] ?? null
     ]);
         return [ strval($conn->lastInsertId()) ];
     } else {

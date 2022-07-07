@@ -68,6 +68,8 @@ function runCommand($context, $command)
         "print-timesheet-json" => 3,
         "remove-entry" => 2,
         "print-timesheet-csv" => 2,
+        "print-timesheet-json" => 4,
+        "print-timesheet-csv" => 4,
         "comment" => 1,
         "loan" => 4,
         "what-the-world-owes" => 2,

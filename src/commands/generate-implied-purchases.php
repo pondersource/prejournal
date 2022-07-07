@@ -15,6 +15,7 @@ function generateImpliedPurchases($context, $command)
     $userComponent = getComponentId($context["user"]["username"]);
     $movements = getAllMovementsFromId(getComponentId($fromAccount));
     for ($i = 0; $i < count($movements); $i++) {
+      var_dump($movements[$i]);
       if (str_contains($movements[$i]["description"], $filterString)) {
         createMovement($context, [
           "create-movement",

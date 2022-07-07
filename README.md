@@ -62,11 +62,23 @@ sudo apt install postgresql postgresql-contrib
 cp .env.example .env
 GEN_SQL=1 php schema.php > schema.sql
 psql -h localhost -d prejournal -U your_username -f schema.sql
-./vendor/bin/phpunit tests
 php src/cli-single.php register admin secret
 perl -i -pe's/PREJOURNAL_ADMIN_PARTY=true/PREJOURNAL_ADMIN_PARTY=false/g' .env
 ```
 If you don't have perl on your system, you can also open `.env` with a text editor and change the value for 'PREJOURNAL_ADMIN_PARTY' from 'true' to 'false' by hand.
+
+### Run tests
+```
+PREJOURNAL_ADMIN_PARTY=true DB_DATABASE=testing DB_USER=michiel DB_PASSWORD= DB_HOST=localhost DB_DRIVER=pdo_pgsql ./vendor/bin/phpunit tests
+PHPUnit 9.5.20 #StandWithUkraine
+
+...........................hello
+.......                                34 / 34 (100%)
+
+Time: 00:05.803, Memory: 6.00 MB
+
+OK (34 tests, 79 assertions)
+```
 
 ### Wiki API Call
 
