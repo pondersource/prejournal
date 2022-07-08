@@ -228,6 +228,9 @@ function deleteDataFromMovement($type_, $id) {
 function getComponentId($name, $atomic = false)
 {
     $conn  = getDbConn();
+    if ($name == '') {
+        throw new Error('getting component id for empty name?');
+    }
     if ($atomic) {
         // See https://dba.stackexchange.com/questions/129522/how-to-get-the-id-of-the-conflicting-row-in-upsert
         // FIXME: This doesn't seem to work as intended
@@ -285,4 +288,14 @@ function getCycles($componentId, $cycleLength) {
         }
     }
     return $res;
+}
+
+function getDescriptionFromStatement($movementId) {
+    $query = "SELECT description FROM statements WHERE movementid = :movementid";
+    $res = getDbConn()->executeQuery($query, [ "movementid" => $movementId ]);
+    $ass = $res->fetchAllAssociative();
+    if (count($ass) > 0) {
+        return $ass[0]["description"];
+    }
+    return "N/A";
 }

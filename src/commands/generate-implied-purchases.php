@@ -12,6 +12,10 @@ function generateImpliedPurchases($context, $command)
     $fromAccount = $command[1];
     $filterString = $command[2];
     $budgetName = $command[3];
+    var_dump($command);
+    if (strlen($command[2]) == 0) {
+      throw new Error("Filter string cannot be zer length!");
+    }
     $userComponent = getComponentId($context["user"]["username"]);
     $movements = getAllMovementsFromId(getComponentId($fromAccount));
     for ($i = 0; $i < count($movements); $i++) {

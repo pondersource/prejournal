@@ -79,7 +79,7 @@ function whatTheWorldOwes($context, $command)
                         . getComponentName($movements[$i]["tocomponent"])
                         . ": "
                         . floatval($movements[$i]["amount"])
-                        /* . " " . $movements[$i]["description"] */ . "\n");
+                        . " " . getDescriptionFromStatement($movements[$i]["id"]) . "\n");
                     // var_dump($movements[$i]);
                     $delta = -floatval($movements[$i]["amount"]);
                 }
