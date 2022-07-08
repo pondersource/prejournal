@@ -10,11 +10,20 @@ final class UtilsTest extends TestCase
 {
     public function testReconcileQuotes(): void
     {
-        $words = [ "a", "\"hello", "world\""];
+        $words = [ "a", "\"hello", "world\"" ];
         $result = reconcileQuotes($words);
         $this->assertEquals(
             $result,
-            [ "a", "hello world"]
+            [ "a", "hello world" ]
+        );
+    }
+    public function testReconcileQuotesEmptyWordsInsideReconciled(): void
+    {
+        $words = [ "\"approach...", "", "", "", "friend\"" ];
+        $result = reconcileQuotes($words);
+        $this->assertEquals(
+            $result,
+            [ "approach...    friend" ]
         );
     }
 }

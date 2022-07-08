@@ -20,11 +20,16 @@ function reconcileQuotes($x)
     $reconciled = null;
     for ($i = 0; $i < count($x); $i++) {
         if (strlen($x[$i]) == 0) {
-            // print("zero-length word\n");
-            array_push($ret, $x[$i]);
+            if ($reconciled == null) {
+                // print("zero-length word outside quotes\n");
+                array_push($ret, $x[$i]);
+            } else {
+                // print("zero-length word inside quotes\n");
+                $reconciled .= " ";
+            }
         } elseif ($x[$i][0] == '"') {
             if ($x[$i][strlen($x[$i]) - 1] == '"') {
-                // print("solo quoted '$xi[$i]'\n");
+                // print("solo quoted '$x[$i]'\n");
                 array_push($ret, substr($x[$i], 1, strlen($x[$i]) - 2));
             } else {
                 $reconciled = substr($x[$i], 1);
@@ -38,12 +43,15 @@ function reconcileQuotes($x)
         } else {
             if ($reconciled == null) {
                 array_push($ret, $x[$i]);
-            // print("unquoted '$x[$i]'\n");
+                // print("unquoted '$x[$i]'\n");
             } else {
                 $reconciled .= " " . $x[$i];
                 // print("quoted '$x[$i]'\n");
             }
         }
     }
+    // echo "quotes reconciled!";
+    // var_dump($x);
+    // var_dump($ret);
     return $ret;
 }

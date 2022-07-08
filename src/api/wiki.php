@@ -6,6 +6,12 @@ require_once(__DIR__ . '/callEndpoint.php');
 
 function fetchTabularId()
 {
+    if (!isset($_SERVER["WIKI_HOST"])) {
+        throw new Error("Please set WIKI_HOST env var");
+    }
+    if (!isset($_SERVER["WIKI_TOKEN"])) {
+        throw new Error("Please set WIKI_TOKEN env var");
+    }
     $url = $_SERVER["WIKI_HOST"];
 
     $headers = array(

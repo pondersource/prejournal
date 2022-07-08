@@ -70,7 +70,7 @@ function getMode()
 function getBatchHandle($isCli)
 {
     if ($isCli) {
-        echo "Opening batch file " . $_SERVER['argv'][1];
+        echo "Opening batch file " . $_SERVER['argv'][1] . "\n";
         return fopen($_SERVER['argv'][1], 'r');
     } else {
         return fopen('php://input', 'r');

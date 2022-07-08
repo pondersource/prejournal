@@ -705,6 +705,8 @@ final class ImportTimesheetTest extends TestCase
 
     public function testImportApiWikiSuite(): void
     {
+        $_SERVER["WIKI_HOST"] = "https://api.wiki.host/v1/";
+        $_SERVER["WIKI_TOKEN"] = "some-token";
         setTestDb();
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         setUser('alice', 'alice123', 'employer');

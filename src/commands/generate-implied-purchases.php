@@ -14,7 +14,7 @@ function generateImpliedPurchases($context, $command)
     $budgetName = $command[3];
     var_dump($command);
     if (strlen($command[2]) == 0) {
-      throw new Error("Filter string cannot be zer length!");
+      throw new Error("Filter string cannot be zero length!");
     }
     $userComponent = getComponentId($context["user"]["username"]);
     $movements = getAllMovementsFromId(getComponentId($fromAccount));

@@ -29,8 +29,7 @@ final class ImportBankStatementTest extends TestCase
                 'type_' => 'payment',
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
-                // 'timestamp_' => '2021-01-01 12:00:00',
-                'timestamp_' => '1970-01-01 00:00:01',
+                'timestamp_' => '2021-01-01 12:00:00',
                 'amount' => '60.5'
             ],
             [
@@ -38,8 +37,7 @@ final class ImportBankStatementTest extends TestCase
                 'type_' => 'payment',
                 'fromcomponent' => 3,
                 'tocomponent' => 1,
-                // 'timestamp_' => '2021-01-01 12:00:00',
-                'timestamp_' => '1970-01-01 00:00:02',
+                'timestamp_' => '2021-01-01 12:00:00',
                 'amount' => '60.5'
             ]
         ], getAllMovements());
@@ -51,7 +49,7 @@ final class ImportBankStatementTest extends TestCase
                 'sourcedocumentformat' => 'asnbank-CSV',
                 'sourcedocumentfilename' => "$fixture#0",
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => 'outside movement from bank statement: OVB  \'Fictional transaction\''
+                'description' => 'outside movement from bank statement: stichting blockchain promotie OVB  \'Fictional transaction\''
             ],
             [
                 'id' => 2,
@@ -60,7 +58,7 @@ final class ImportBankStatementTest extends TestCase
                 'sourcedocumentformat' => 'asnbank-CSV',
                 'sourcedocumentfilename' => "$fixture#0",
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' =>  "inside movement from bank statement: OVB  'Fictional transaction'"
+                'description' =>  "inside movement from bank statement: stichting blockchain promotie OVB  'Fictional transaction'"
             ]
         ], getAllStatements());
     }

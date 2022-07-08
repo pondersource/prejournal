@@ -13,7 +13,13 @@ declare(strict_types=1);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
         $resp = curl_exec($curl);
-        $result = json_decode($resp);
+        try {
+            $result = json_decode($resp);
+        } catch (TypeError $e) {
+            throw new Error("Request to $url failed");
+        } catch (Exception $e) {
+            throw new Error("Response JSON could not be decoded");
+        }
         curl_close($curl);
         return $result;
     }
