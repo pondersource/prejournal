@@ -214,13 +214,14 @@ function getSync($internal_id, $internal_type, $remote_system)
     return  $arr[0];
 }
 
-function deleteDataFromMovement($type_, $id) {
+function deleteDataFromMovement($type_, $id)
+{
     $conn  = getDbConn();
     $qb = $conn
         ->delete('movements', ['type_' => $type_, 'id' => $id])
     ;
 
-    if($qb === 1) {
+    if ($qb === 1) {
         return ["Delete data from movement"];
     }
 }
@@ -264,7 +265,8 @@ function getComponentId($name, $atomic = false)
 // FIXME: methods like this belong in some intermediate layer,
 // they're not purely about database access, they also contain
 // a lot of business logic
-function getCycles($componentId, $cycleLength) {
+function getCycles($componentId, $cycleLength)
+{
     if ($cycleLength < 2) {
         throw new Error("cycleLength should be at least 2");
     }
@@ -290,7 +292,8 @@ function getCycles($componentId, $cycleLength) {
     return $res;
 }
 
-function getDescriptionFromStatement($movementId) {
+function getDescriptionFromStatement($movementId)
+{
     $query = "SELECT description FROM statements WHERE movementid = :movementid";
     $res = getDbConn()->executeQuery($query, [ "movementid" => $movementId ]);
     $ass = $res->fetchAllAssociative();

@@ -16,27 +16,26 @@ function wikiApiExport($context, $command)
         //exit;
 
         $sync = getAllSync();
-     
+
         if ($remote_system == "wiki") {
-            
             $result = addMovementForWiki();
-            if($result === null) return ["Try again to insert data inside sync and movement"];
-            
+            if ($result === null) {
+                return ["Try again to insert data inside sync and movement"];
+            }
+
             $internal_type = 'movement';
             $remote_system = 'wiki';
 
-            if($sync == null || !$sync && !$result) {
-                      foreach($result as $syns) {
-                         createSync($context, [
+            if ($sync == null || !$sync && !$result) {
+                foreach ($result as $syns) {
+                    createSync($context, [
                             $internal_type,
                                 $syns["id"],
                                 $syns["url"],
-                                $remote_system 
+                                $remote_system
                             ]);
-                       
-                      }
-                      
-            } 
+                }
+            }
             return ["Prejournal create a new data from Wiki"];
         }
     } else {
@@ -52,32 +51,31 @@ function addMovementForWiki()
     $newArray = [];
     $conn  = getDbConn();
     $type = "worked";
- 
-    if(!$result && empty($result)) {
-        foreach ($remote_id as $remote) {
 
-            $fromComponent = intval(getComponentId($remote->tsUser));           
+    if (!$result && empty($result)) {
+        foreach ($remote_id as $remote) {
+            $fromComponent = intval(getComponentId($remote->tsUser));
             $toComponent = intval(getComponentId($remote->tsProject));
             $timestamp = timestampToDateTime(intval($remote->tsDate));
             $amount = intval($remote->tsMinutesCalculated);
-          
-            
-        
-            $movement = "INSERT INTO movements(type_, fromComponent, toComponent,timestamp_, amount) VALUES ('".$type. "',".intval(getComponentId($remote->tsUser)).",'".$toComponent."', '".$timestamp."','".$amount."'); "; 
-            
+
+
+
+            $movement = "INSERT INTO movements(type_, fromComponent, toComponent,timestamp_, amount) VALUES ('".$type. "',".intval(getComponentId($remote->tsUser)).",'".$toComponent."', '".$timestamp."','".$amount."'); ";
+
             $conn->exec($movement);
-    }
-} else {
-    foreach ($remote_id as $remote) {
-    foreach($result as $res) {
-        if($res["description"] == $remote->tsDescription ) {
-            array_push($newArray,[
+        }
+    } else {
+        foreach ($remote_id as $remote) {
+            foreach ($result as $res) {
+                if ($res["description"] == $remote->tsDescription) {
+                    array_push($newArray, [
                 'id' => $res["id"],
                 "url" =>stripslashes($remote->tsURI)
             ]);
+                }
+            }
         }
-    }    
-   }
-  return $newArray;
-}
+        return $newArray;
+    }
 }

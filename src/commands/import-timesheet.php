@@ -13,11 +13,11 @@ function importTimesheet($context, $command)
     $parserFunctions = [
     "wikiApi-JSON" => "parseWikiApiJSON"
   ];
-  $conn  = getDbConn();
+    $conn  = getDbConn();
 
     if (isset($context["user"])) {
         $format = $command[1];
-        
+
         $fileName = $command[2];
 
         $importTime = strtotime($command[3]);
@@ -25,23 +25,22 @@ function importTimesheet($context, $command)
         $entries = $parserFunctions[$format](file_get_contents($fileName));
 
         $res = getAllWorkedMovements();
-       
-        foreach($entries as $result) {
+
+        foreach ($entries as $result) {
             $fromComponent = intval(getComponentId($result["worker"]));
             $toComponent = intval(getComponentId($result["project"]));
             $timestamp_ = timestampToDateTime(intval($result["start"]));
             $amount = intval($result["seconds"]);
 
-            if(!$res) {
+            if (!$res) {
                 $result = createMultipleMovement($type_, $fromComponent, $toComponent, $timestamp_, $amount);
-                //var_dump($result);
+            //var_dump($result);
             } else {
                 $res = getAllWorkedMovements();
                 //var_dump($res);
-
             }
-           
-            //$movement = "INSERT INTO movements(type_, fromComponent, toComponent,timestamp_, amount,description) VALUES ('".$type_. "',".$from.",'".$to."', '".$timestamp."','".$amount."','".$description."'); "; 
+
+            //$movement = "INSERT INTO movements(type_, fromComponent, toComponent,timestamp_, amount,description) VALUES ('".$type_. "',".$from.",'".$to."', '".$timestamp."','".$amount."','".$description."'); ";
             //$conn->exec($movement);
         }
         return [strval(count($entries))];

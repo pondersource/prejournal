@@ -8,23 +8,23 @@ require_once(__DIR__ . '/../utils.php');
 
 function generateImpliedPurchases($context, $command)
 {
-  if ($context['adminParty']) {
-    $fromAccount = $command[1];
-    $filterString = $command[2];
-    $budgetName = $command[3];
-    var_dump($command);
-    if (strlen($command[2]) == 0) {
-      throw new Error("Filter string cannot be zero length!");
-    }
-    $userComponent = getComponentId($context["user"]["username"]);
-    $movements = getAllMovementsFromId(getComponentId($fromAccount));
-    for ($i = 0; $i < count($movements); $i++) {
-      if (str_contains($movements[$i]["description"], $filterString) || str_contains(getComponentName($movements[$i]["tocomponent"]), $filterString)) {
-        echo "Filter string match! " . $movements[$i]["description"]
+    if ($context['adminParty']) {
+        $fromAccount = $command[1];
+        $filterString = $command[2];
+        $budgetName = $command[3];
+        var_dump($command);
+        if (strlen($command[2]) == 0) {
+            throw new Error("Filter string cannot be zero length!");
+        }
+        $userComponent = getComponentId($context["user"]["username"]);
+        $movements = getAllMovementsFromId(getComponentId($fromAccount));
+        for ($i = 0; $i < count($movements); $i++) {
+            if (str_contains($movements[$i]["description"], $filterString) || str_contains(getComponentName($movements[$i]["tocomponent"]), $filterString)) {
+                echo "Filter string match! " . $movements[$i]["description"]
             . " - " . getComponentName($movements[$i]["tocomponent"])
             . " - " . $filterString . "\n";
-        // var_dump($movements[$i]);
-        createMovement($context, [
+                // var_dump($movements[$i]);
+                createMovement($context, [
           "create-movement",
           "implied-delivery",
           $movements[$i]["tocomponent"],
@@ -33,8 +33,8 @@ function generateImpliedPurchases($context, $command)
           $movements[$i]["amount"],
           "implied purchase: " . $movements[$i]["description"]
         ]);
-        // TODO: implement depreciation here
-        createMovement($context, [
+                // TODO: implement depreciation here
+                createMovement($context, [
           "create-movement",
           "implied-consumption",
           getComponentId($budgetName),
@@ -43,10 +43,10 @@ function generateImpliedPurchases($context, $command)
           $movements[$i]["amount"],
           "implied purchase: " . $movements[$i]["description"]
         ]);
-        //  var_dump($movements[$i]);
-      }
+                //  var_dump($movements[$i]);
+            }
+        }
+    } else {
+        return ["This command only works in admin party mode"];
     }
-  } else {
-      return ["This command only works in admin party mode"];
-  }
 }

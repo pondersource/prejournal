@@ -39,7 +39,7 @@ function importBankStatement($context, $command)
                     "$fileName#$i"
                 ]);
             }
-    
+
             $movementIdsInside = ensureMovementsLookalikeGroup($context, [
                 "type_" => $type_,
                 "fromComponent" => strval(getComponentId($entries[$i]["insideFrom"])),

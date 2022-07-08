@@ -7,8 +7,8 @@ require_once(__DIR__ . '/../src/run-command.php');
 
 final class ImportBankStatementTest extends TestCase
 {
-
-    private function checkResult($fixture) {
+    private function checkResult($fixture)
+    {
         $this->assertEquals([
             [
                 'id' => 1,

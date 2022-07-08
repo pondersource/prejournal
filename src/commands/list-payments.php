@@ -24,8 +24,8 @@ function listPayments($context, $command)
             $amount = $row['amount'];
             if (count($command) == 1 || ($fromComponentName == $command[1])) {
                 // if ($amount > 1000) {
-                    $sum += $amount;
-                    array_push($ret, "$timestamp_, $fromComponentName, $toComponentName, $amount, $sum");
+                $sum += $amount;
+                array_push($ret, "$timestamp_, $fromComponentName, $toComponentName, $amount, $sum");
                 // }
             }
         }

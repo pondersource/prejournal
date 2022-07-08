@@ -43,7 +43,7 @@ function reconcileQuotes($x)
         } else {
             if ($reconciled == null) {
                 array_push($ret, $x[$i]);
-                // print("unquoted '$x[$i]'\n");
+            // print("unquoted '$x[$i]'\n");
             } else {
                 $reconciled .= " " . $x[$i];
                 // print("quoted '$x[$i]'\n");

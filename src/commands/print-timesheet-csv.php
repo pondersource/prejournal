@@ -15,13 +15,12 @@ function printTimesheetCsv($context, $command)
         $max_id = intval($command[3]);
         $jsondata = getFromMovementAndSync($context["user"]["id"], $project_name, $min_id, $max_id);
 
-            header("Content-type: application/csv");
-            header("Content-Disposition: attachment; filename=test.csv");
-            $fp = fopen('php://output', 'w'); // or use php://stdout
-            foreach ($jsondata as $row) {
-                echo fputcsv($fp, $row);
-            }
-       
+        header("Content-type: application/csv");
+        header("Content-Disposition: attachment; filename=test.csv");
+        $fp = fopen('php://output', 'w'); // or use php://stdout
+        foreach ($jsondata as $row) {
+            echo fputcsv($fp, $row);
+        }
     } else {
         return ["User not found or wrong password"];
     }

@@ -11,16 +11,14 @@ function printTimesheetJson($context, $command)
         $project_name = $command[1];
         $min_id = intval($command[2]);
         $max_id = intval($command[3]);
-      
+
 
         $jsondata = getFromMovementAndSync($context["user"]["id"], $project_name, $min_id, $max_id);
-       
+
         $result = json_encode($jsondata, JSON_PRETTY_PRINT);
 
         echo $result;
-       
     } else {
         return ["User not found or wrong password"];
     }
 }
-

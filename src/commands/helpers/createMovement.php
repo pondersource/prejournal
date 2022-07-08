@@ -69,7 +69,7 @@ function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
         echo "Have " . count($arr) . " need $numNeeded";
         var_dump($arr);
         throw new Error('Too many entries already for this lookalike group, don\'t know what to do!');
-    } else if (count($arr) == $numNeeded) {
+    } elseif (count($arr) == $numNeeded) {
         // echo ("Already have $numNeeded movements with these details!\n");
     } else {
         $query = "INSERT INTO movements (type_, fromComponent, toComponent, timestamp_, amount) "
@@ -91,7 +91,8 @@ function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
     return $arr;
 }
 
-function createMultipleMovement($type_, $fromComponent, $toComponent, $timestamp_, $amount) {
+function createMultipleMovement($type_, $fromComponent, $toComponent, $timestamp_, $amount)
+{
     $conn  = getDbConn();
     $conn->executeQuery(
         "INSERT INTO movements (type_, fromComponent, toComponent,timestamp_, amount) VALUES (:type_, :fromComponent, :toComponent, :timestamp_,:amount) ",

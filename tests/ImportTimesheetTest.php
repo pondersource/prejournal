@@ -843,7 +843,7 @@ final class ImportTimesheetTest extends TestCase
         $result = runCommand(getContext(), ["wiki-api-export", "wiki"]);
         $this->assertEquals([
             0 => 'Try again to insert data inside sync and movement'
-        ],$result);
+        ], $result);
         //var_dump($result);
         setUser('bob', 'bob123', 'employer');
         //$this->assertEquals([
@@ -858,7 +858,7 @@ final class ImportTimesheetTest extends TestCase
         runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
         setUser('alice', 'alice123', 'employer');
         $result = runCommand(getContext(), ["wiki-api-import", "wiki"]);
-        $this->assertEquals(null,$result);
+        $this->assertEquals(null, $result);
         //var_dump($result);
         setUser('bob', 'bob123', 'employer');
         //$this->assertEquals([
@@ -876,7 +876,7 @@ final class ImportTimesheetTest extends TestCase
         $result = runCommand(getContext(), ["import-timesheet", "wikiApi-JSON", $fixture, "2022-03-31 12:00:00" ]);
         $this->assertEquals([
             0 => '5'
-        ],$result);
+        ], $result);
         //var_dump($result);
         setUser('bob', 'bob123', 'employer');
         //$this->assertEquals([
