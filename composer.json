@@ -1,24 +1,24 @@
 {
     "name": "federatedbookkeeping/prejournal",
     "description": "Tool for Automated Bookkeeping",
-    "version": "1.1",
     "type": "project",
     "autoload": {
         "psr-4": {
             "Federatedbookkeeping\\Prejournal\\": "src/"
         }
     },
+    "license": "MIT",
     "authors": [
         {
-            "name": "Michiel de Jong",
-            "email": "michiel@unhosted.org"
+            "name": "Ponder Source Team",
+            "email": "team@pondersource.com"
         }
     ],
     "require": {
         "php": "^7.3||^8.0",
         "doctrine/orm": "^2.11.0",
         "doctrine/dbal": "^3.2",
-        "doctrine/annotations": "1.13.2",
+        "doctrine/annotations": "^1.13.2",
         "symfony/yaml": "^5.4",
         "symfony/cache": "^5.4",
         "pondersource/billing-api": "^2.0",
