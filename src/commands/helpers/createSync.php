@@ -37,11 +37,11 @@ function createMultipleStatements($internal_type, $movementId, $remote_id, $remo
             "INSERT INTO statements (internal_type, movementId, remote_id, remote_system) VALUES (:internal_type, :movementId, :remote_id, :remote_system) ",
             [ "internal_type" => $internal_type, "movementId" => $movementId, "remote_id" => $remote_id, "remote_system" => $remote_system]
         );
-    }  catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+    } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
         if ($e->getCode() === 7) {
             return ["Duplication entry this movement exist in our sync table."];
         }
     }
-    
+
     return [ strval($conn->lastInsertId()) ];
 }

@@ -19,8 +19,8 @@ function wikiApiExport($context, $command)
 
         if ($remote_system == "wiki") {
             $result = addMovementForWiki();
-           //var_dump($result);
-           // exit;
+            //var_dump($result);
+            // exit;
             if ($result === null) {
                 return ["Try again to insert data inside sync and movement"];
             }
@@ -29,7 +29,6 @@ function wikiApiExport($context, $command)
             $remote_system = 'wiki';
 
             if ($sync == null || !$sync && !$result) {
-                
                 foreach ($result as $syn) {
                     createSync($context, [
                             $internal_type,
