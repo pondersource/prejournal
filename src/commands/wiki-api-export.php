@@ -15,10 +15,12 @@ function wikiApiExport($context, $command)
         //var_dump($remote_system);
         //exit;
 
-        $sync = getAllSync();
+        $sync = getAllStatementsWiki($remote_system);
 
         if ($remote_system == "wiki") {
             $result = addMovementForWiki();
+           //var_dump($result);
+           // exit;
             if ($result === null) {
                 return ["Try again to insert data inside sync and movement"];
             }
@@ -27,11 +29,12 @@ function wikiApiExport($context, $command)
             $remote_system = 'wiki';
 
             if ($sync == null || !$sync && !$result) {
-                foreach ($result as $syns) {
+                
+                foreach ($result as $syn) {
                     createSync($context, [
                             $internal_type,
-                                $syns["id"],
-                                $syns["url"],
+                                $syn["id"],
+                                $syn["url"],
                                 $remote_system
                             ]);
                 }
@@ -68,7 +71,10 @@ function addMovementForWiki()
     } else {
         foreach ($remote_id as $remote) {
             foreach ($result as $res) {
-                if ($res["description"] == $remote->tsDescription) {
+                //var_dump($res["amount"]);
+                //var_dump($remote->tsMinutesCalculated);
+                //exit;
+                if ($res["amount"] == $remote->tsMinutesCalculated) {
                     array_push($newArray, [
                 'id' => $res["id"],
                 "url" =>stripslashes($remote->tsURI)

@@ -154,11 +154,11 @@ function getAllStatements()
     return $result->fetchAllAssociative();
 }
 
-function getAllSync()
+function getAllStatementsWiki($remote_system)
 {
     $conn  = getDbConn();
-    $query = "SELECT * FROM sync";
-    $result = $conn->executeQuery($query);
+    $query = "SELECT * FROM statements WHERE remote_system=:remote_system";
+    $result = $conn->executeQuery($query, ['remote_system' => $remote_system]);
     return $result->fetchAllAssociative();
 }
 
@@ -201,11 +201,11 @@ function getMovement($id)
     return $result->fetchAllAssociative()[0];
 }
 
-function getSync($internal_id, $internal_type, $remote_system)
+function getSync($movementId, $internal_type, $remote_system)
 {
     $result = getDbConn()->executeQuery(
-        "SELECT * FROM sync WHERE internal_id = :internal_id OR internal_type = :internal_type OR remote_system = :remote_system",
-        [ "internal_id" => $internal_id , 'internal_type' => $internal_type , 'remote_system' => $remote_system ]
+        "SELECT * FROM statements WHERE movementId = :movementId OR internal_type = :internal_type OR remote_system = :remote_system",
+        [ "movementId" => $movementId , 'internal_type' => $internal_type , 'remote_system' => $remote_system ]
     );
     $arr = $result->fetchAllAssociative();
     if (empty($arr)) {
