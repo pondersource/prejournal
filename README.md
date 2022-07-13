@@ -69,7 +69,7 @@ If you don't have perl on your system, you can also open `.env` with a text edit
 
 ### Run tests
 ```
-PREJOURNAL_ADMIN_PARTY=true DB_DATABASE=testing DB_USER=michiel DB_PASSWORD= DB_HOST=localhost DB_DRIVER=pdo_pgsql ./vendor/bin/phpunit tests
+DB_DATABASE=prejournal_test DB_USER=prejournal_test  DB_PASSWORD=123456 DB_HOST=localhost DB_DRIVER=pdo_pgsql WIKI_HOST=https://timesheet.dev3.evoludata.com/api/tabulars WIKI_TOKEN=YOUR_TOKEN ./vendor/bin/phpunit tests
 PHPUnit 9.5.20 #StandWithUkraine
 
 ...........................hello

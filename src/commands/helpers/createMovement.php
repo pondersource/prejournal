@@ -12,15 +12,16 @@ function createMovement($context, $command)
 
     // var_dump($command);
     $conn  = getDbConn();
-    $query = "INSERT INTO movements (type_, fromComponent, toComponent, timestamp_, amount) "
-        . "VALUES (:type_, :fromComponent, :toComponent, :timestamp_, :amount);";
+    $query = "INSERT INTO movements (userId, type_, fromComponent, toComponent, timestamp_, amount) "
+        . "VALUES (:userId, :type_, :fromComponent, :toComponent, :timestamp_, :amount);";
 
     $ret = $conn->executeStatement($query, [
-        "type_" => $command[1],
-        "fromComponent" => intval($command[2]),
-        "toComponent" => intval($command[3]),
-        "timestamp_" => timestampToDateTime(intval($command[4])),
-        "amount" => floatval($command[5])
+        "userId" => $command[1],
+        "type_" => $command[2],
+        "fromComponent" => intval($command[3]),
+        "toComponent" => intval($command[4]),
+        "timestamp_" => timestampToDateTime(intval($command[5])),
+        "amount" => floatval($command[6])
     ]);
     return [ strval($conn->lastInsertId()) ];
 }
@@ -91,12 +92,12 @@ function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
     return $arr;
 }
 
-function createMultipleMovement($type_, $fromComponent, $toComponent, $timestamp_, $amount)
+function createMultipleMovement($userId, $type_, $fromComponent, $toComponent, $timestamp_, $amount)
 {
     $conn  = getDbConn();
     $conn->executeQuery(
-        "INSERT INTO movements (type_, fromComponent, toComponent,timestamp_, amount) VALUES (:type_, :fromComponent, :toComponent, :timestamp_,:amount) ",
-        [ "type_" => $type_, "fromComponent" => $fromComponent, "toComponent" => $toComponent, "timestamp_" => $timestamp_, "amount" => $amount]
+        "INSERT INTO movements (userId, type_, fromComponent, toComponent,timestamp_, amount) VALUES (:userId, :type_, :fromComponent, :toComponent, :timestamp_,:amount) ",
+        [ "userId" => $userId, "type_" => $type_, "fromComponent" => $fromComponent, "toComponent" => $toComponent, "timestamp_" => $timestamp_, "amount" => $amount]
     );
     return [ strval($conn->lastInsertId()) ];
 }

@@ -20,6 +20,7 @@ function workedHours($context, $command)
         /* Create Movement */
         $movementId = intval(createMovement($context, [
       "create-movement",
+      $context["user"]["id"],
       $type,
       strval(getComponentId($worker)),
       strval(getComponentId($project)),

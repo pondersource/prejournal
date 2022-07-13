@@ -18,7 +18,8 @@ function wikiApiExport($context, $command)
         $sync = getAllStatementsWiki($remote_system);
 
         if ($remote_system == "wiki") {
-            $result = addMovementForWiki();
+            $userId = $context["user"]["id"];
+            $result = addMovementForWiki($userId);
             //var_dump($result);
             // exit;
             if ($result === null) {
@@ -45,7 +46,7 @@ function wikiApiExport($context, $command)
     }
 }
 
-function addMovementForWiki()
+function addMovementForWiki($userId)
 {
     $remote_id = getWiki();
     $result = getAllWorkedMovements();
@@ -63,7 +64,7 @@ function addMovementForWiki()
 
 
 
-            $movement = "INSERT INTO movements(type_, fromComponent, toComponent,timestamp_, amount) VALUES ('".$type. "',".intval(getComponentId($remote->tsUser)).",'".$toComponent."', '".$timestamp."','".$amount."'); ";
+            $movement = "INSERT INTO movements(userId, type_, fromComponent, toComponent,timestamp_, amount) VALUES ('".$userId. "','".$type. "',".intval(getComponentId($remote->tsUser)).",'".$toComponent."', '".$timestamp."','".$amount."'); ";
 
             $conn->exec($movement);
         }
