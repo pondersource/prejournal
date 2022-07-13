@@ -22,6 +22,7 @@ function wikiApiImport($context, $command)
                 $internal_type = 'movement';
                 $remote_system = 'wiki';
                 $sync = getSync($movement_id, $internal_type, $remote_system);
+
                 if ($sync == null) {
                     createSync($context, [
                     "movement",

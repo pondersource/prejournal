@@ -37,7 +37,11 @@ create table statements (
   sourceDocumentFormat varchar, /* could be an invoice, bank statement csv file, API call etc */
   sourceDocumentFilename varchar, /* TODO: work out how to store files when on Heroku */
   timestamp_ timestamp,
-  description varchar
+  description varchar,
+  internal_type varchar,
+  remote_id  varchar,
+  UNIQUE(remote_id),
+  remote_system varchar
 );
 
 drop table if exists componentGrants;
@@ -47,16 +51,5 @@ create table componentGrants (
   fromUser numeric,
   toUser numeric,
   componentId numeric
-);
-
-drop table if exists sync;
-
-create table sync (
-  id SERIAL PRIMARY KEY,
-  internal_type varchar,
-  internal_id numeric,
-  remote_id  varchar,
-  UNIQUE(remote_id),
-  remote_system varchar
 );
 
