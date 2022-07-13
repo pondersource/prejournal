@@ -32,9 +32,9 @@ function getFromMovementAndSync($userId, $project, $min_id, $max_id)
     }
     $queryStr = "SELECT m.id, w.name as worker, p.name as project, m.timestamp_, m.amount FROM movements m INNER JOIN components w ON m.fromComponent = w.id
   INNER JOIN components p ON m.toComponent = p.id 
-  WHERE m.type_='worked' AND p.name=:project AND m.id >=:min_id AND m.id <=:max_id
+  WHERE m.type_='worked' AND m.userId=:userId AND p.name=:project AND m.id >=:min_id AND m.id <=:max_id
   AND w.id IN (:visibleWorkerComponents)";
-    $params = [ 'project' => $project, 'min_id' => $min_id, 'max_id' => $max_id, 'visibleWorkerComponents' => $visibleWorkerComponents ];
+    $params = [ 'userId' => $userId, 'project' => $project, 'min_id' => $min_id, 'max_id' => $max_id, 'visibleWorkerComponents' => $visibleWorkerComponents ];
     // var_dump($queryStr);
     // var_dump($params);
     $query = $conn->executeQuery(
