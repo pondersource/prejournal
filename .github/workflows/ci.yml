@@ -32,6 +32,8 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-
     - name: Lint
       run: composer run-script lint
+
+    - name: Test
+      run: composer run-script test
