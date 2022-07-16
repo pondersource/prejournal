@@ -49,9 +49,9 @@ function ensureStatement($context, $command)
         $ret1 = $conn->executeQuery($query1, $params);
         $numExist = $ret1->fetchAllAssociative()[0]["count"];
         if ($numExist == 0) {
-            $created = strval($conn->lastInsertId());
-            // echo "Statement $created was created about movement " . intval($command[1]) . "\n";
-            $ret2 = $conn->executeStatement($query2, $params);
+          $ret2 = $conn->executeStatement($query2, $params);
+          // echo "Statement $created was created about movement " . intval($command[1]) . "\n";
+          $created = strval($conn->lastInsertId());
             return [ "created $created" ];
         }
         return [ "already exists" ];

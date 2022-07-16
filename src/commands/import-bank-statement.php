@@ -5,6 +5,7 @@ declare(strict_types=1);
   require_once(__DIR__ . '/helpers/createMovement.php');
   require_once(__DIR__ . '/helpers/createStatement.php');
   require_once(__DIR__ . '/../parsers/asnbank-CSV.php');
+  require_once(__DIR__ . '/../parsers/ingbank-CSV.php');
 
 // E.g.: php src/cli-single.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0                    1           2             3
@@ -13,6 +14,7 @@ function importBankStatement($context, $command)
 {
     $parserFunctions = [
         "asnbank-CSV" => "parseAsnBankCSV",
+        "ingbank-CSV" => "parseIngBankCSV"
     ];
 
     if (isset($context["user"])) {
@@ -22,6 +24,7 @@ function importBankStatement($context, $command)
         $type_ = "payment";
         $entries = $parserFunctions[$format](file_get_contents($fileName), $context["user"]["username"]);
         for ($i = 0; $i < count($entries); $i++) {
+            // var_dump($entries[$i]);
             $movementIdsOutside = ensureMovementsLookalikeGroup($context, [
                 "type_" => $type_,
                 "fromComponent" => strval(getComponentId($entries[$i]["from"])),
