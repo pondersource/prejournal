@@ -12,6 +12,7 @@ function generateImpliedPurchases($context, $command)
         $fromAccount = $command[1];
         $filterString = $command[2];
         $budgetName = $command[3];
+        echo "\nGenerating implied purchases!\n";
         var_dump($command);
         if (strlen($command[2]) == 0) {
             throw new Error("Filter string cannot be zero length!");

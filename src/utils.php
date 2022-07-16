@@ -20,7 +20,7 @@ function reconcileQuotes($x)
     $reconciled = null;
     for ($i = 0; $i < count($x); $i++) {
         if (strlen($x[$i]) == 0) {
-            if ($reconciled == null) {
+            if (is_null($reconciled)) {
                 // print("zero-length word outside quotes\n");
                 array_push($ret, $x[$i]);
             } else {
@@ -28,7 +28,17 @@ function reconcileQuotes($x)
                 $reconciled .= " ";
             }
         } elseif ($x[$i][0] == '"') {
-            if ($x[$i][strlen($x[$i]) - 1] == '"') {
+            if (strlen($x[$i]) == 1) {
+                if (is_null($reconciled)) {
+                    // print("quote starts with space '$x[$i]'\n");
+                    $reconciled = '';
+                } else {
+                    $reconciled .= " ";
+                    // print("finish reconciled with space '$reconciled'\n");
+                    array_push($ret, $reconciled);
+                    $reconciled = null;
+                }
+            } else if ($x[$i][strlen($x[$i]) - 1] == '"') {
                 // print("solo quoted '$x[$i]'\n");
                 array_push($ret, substr($x[$i], 1, strlen($x[$i]) - 2));
             } else {
@@ -41,9 +51,9 @@ function reconcileQuotes($x)
             array_push($ret, $reconciled);
             $reconciled = null;
         } else {
-            if ($reconciled == null) {
+            if (is_null($reconciled)) {
                 array_push($ret, $x[$i]);
-            // print("unquoted '$x[$i]'\n");
+                // print("unquoted '$x[$i]'\n");
             } else {
                 $reconciled .= " " . $x[$i];
                 // print("quoted '$x[$i]'\n");

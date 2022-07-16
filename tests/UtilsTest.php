@@ -26,4 +26,13 @@ final class UtilsTest extends TestCase
             [ "approach...    friend" ]
         );
     }
+    public function testReconcileQuotesStartWithSpace(): void
+    {
+        $words = explode(" ", 'generate-implied-purchases NL12ASNB1234567890 " Boni " "Groceries"');
+        $result = reconcileQuotes($words);
+        $this->assertEquals(
+            $result,
+            [ "generate-implied-purchases", "NL12ASNB1234567890", " Boni ", "Groceries" ]
+        );
+    }
 }
