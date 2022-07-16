@@ -12,9 +12,17 @@ function checkHeaders($line, $COLUMN_NAMES)
         throw new Error("Found " . count($cells) . " columns in header line instead of " . count($COLUMN_NAMES));
     }
     for ( $i = 0; $i < count($COLUMN_NAMES); $i++) {
+        if ($cells[$i][0] != '"') {
+            throw new Error("Header cell $i does not start with quote! " . $cells[$i]);
+        }
+        if ($cells[$i][strlen($cells[$i]) - 1] != '"') {
+            throw new Error("Header cell $i does not end with quote! " . $cells[$i]);
+        }
+        $stripped = substr($cells[$i], 1, strlen($cells[$i]) - 2);
+
         // echo "Checking " . $cells[$i] . "\n";
-        if ($cells[$i] != '"' . $COLUMN_NAMES[$i] . '"') {
-            throw new Error ("Column $i is " . $cells[$i] . " instead of " . $COLUMN_NAMES[$i]);
+        if ($stripped != $COLUMN_NAMES[$i]) {
+            throw new Error ("Column $i is " . $stripped . " instead of " . $COLUMN_NAMES[$i]);
         }
     }
 }
@@ -30,16 +38,16 @@ function parseIngDate($str)
 }
 
 function parseIngDescription($obj) {
-    return str_replace('"', "", $obj["Mutatiesoort"])
+    return $obj["Mutatiesoort"]
         . ": "
-        . str_replace('"', "", $obj["Naam / Omschrijving"]);
+        . $obj["Naam / Omschrijving"];
 }
 
 function parseIngAccount2($obj) {
-    if ($obj["Mutatiesoort"] == '"Diversen"') {
+    if ($obj["Mutatiesoort"] == 'Diversen') {
         return "ING Bank Services";
     }
-    return str_replace('"', "", $obj["Tegenrekening"]);
+    return $obj["Tegenrekening"];
 }
 
 function parseIngAmount($str) {
@@ -73,11 +81,18 @@ function parseIngBankCSV($text, $owner)
                 throw new Error("Line $i has " . count($cells) . " columns instead of " . count($COLUMN_NAMES));
             }
             for ($j = 0; $j < count($cells); $j++) {
-                $obj[$COLUMN_NAMES[$j]] = trim($cells[$j]);
+                if ($cells[$j][0] != '"') {
+                    throw new Error("Line $i cell $j does not start with quote! " . $cells[$j]);
+                }
+                if ($cells[$j][strlen($cells[$j]) - 1] != '"') {
+                    throw new Error("Line $i cell $j does not end with quote! " . $cells[$j]);
+                }
+                $obj[$COLUMN_NAMES[$j]] = substr($cells[$j], 1, strlen($cells[$j]) - 2);
             }
-            if ($obj["Af Bij"] == '"Af"') {
+            // var_dump($obj);
+            if ($obj["Af Bij"] == 'Af') {
                 array_push($ret, [
-                    "date" => parseIngDate(str_replace('"', "", $obj["Datum"])),
+                    "date" => parseIngDate($obj["Datum"]),
                     "comment" => parseIngDescription($obj),
                     "from" => $obj["Rekening"],
                     "to" => parseIngAccount2($obj),
@@ -86,9 +101,9 @@ function parseIngBankCSV($text, $owner)
                     "insideFrom" => $owner,
                     "insideTo" => $obj["Rekening"]
                 ]);
-            } else if ($obj["Af Bij"] == '"Bij"') {
+            } else if ($obj["Af Bij"] == 'Bij') {
                 array_push($ret, [
-                    "date" => parseIngDate(str_replace('"', "", $obj["Datum"])),
+                    "date" => parseIngDate($obj["Datum"]),
                     "comment" => parseIngDescription($obj),
                     "from" => parseIngAccount2($obj),
                     "to" => $obj["Rekening"],
