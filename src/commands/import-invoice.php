@@ -26,6 +26,7 @@ function importInvoice($context, $command)
         for ($i = 0; $i < count($entries); $i++) {
             $movementId = intval(createMovement($context, [
         "create-movement",
+        $context["user"]["id"],
         $type_,
         strval(getComponentId($entries[$i]["from"])),
         strval(getComponentId($entries[$i]["to"])),

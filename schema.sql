@@ -21,6 +21,7 @@ drop table if exists movements;
 
 create table movements (
   id SERIAL PRIMARY KEY,
+  userId integer,
   type_ varchar(54), /* 'invoice', 'payment', 'worked' */
   fromComponent integer,
   toComponent integer,

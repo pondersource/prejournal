@@ -64,6 +64,7 @@ function importHours($context, $command)
             //var_dump($entries);
             $movementId = intval(createMovement($context, [
         "create-movement",
+        $context["user"]["id"],
         $type_,
         strval(getComponentId($entries[$i]["worker"])),
         strval(getComponentId($entries[$i]["project"])),
