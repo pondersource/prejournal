@@ -48,7 +48,7 @@ final class RegisterAndHelloTest extends TestCase
         $this->assertEquals(
             [
                 'user' => null,
-                'adminParty' => true,
+                'adminParty' => false,
                 'employer' => 'someemployer'
             ],
             getContext()
@@ -69,7 +69,7 @@ final class RegisterAndHelloTest extends TestCase
         $this->assertEquals(
             [
                 'user' => null,
-                'adminParty' => true,
+                'adminParty' => false,
                 'employer' => 'someemployer'
             ],
             getContext()

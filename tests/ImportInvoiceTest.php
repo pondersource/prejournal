@@ -41,7 +41,8 @@ final class ImportInvoiceTest extends TestCase
                     'fromcomponent' => 1,
                     'tocomponent' => 1,
                     'timestamp_' => '1970-01-01 00:00:00',
-                    'amount' => '0'
+                    'amount' => '0',
+                    'userid' => 1
                     ]
             ], getAllMovements());
         $this->assertEquals([
@@ -52,7 +53,10 @@ final class ImportInvoiceTest extends TestCase
                     'sourcedocumentformat' => null,
                     'sourcedocumentfilename' => null,
                     'timestamp_' => '2022-03-31 12:00:00',
-                    'description' => null
+                    'description' => null,
+                    'internal_type' => null,
+                    'remote_id' => null,
+                    'remote_system' => null
                     ]
             ], getAllStatements());
     }
@@ -90,7 +94,8 @@ final class ImportInvoiceTest extends TestCase
                     'fromcomponent' => 1,
                     'tocomponent' => 2,
                     'timestamp_' => '1970-01-01 00:33:42',
-                    'amount' => '0'
+                    'amount' => '0',
+                    'userid' => 1
                 ],
                 [
                         'id' => 2,
@@ -98,7 +103,8 @@ final class ImportInvoiceTest extends TestCase
                         'fromcomponent' => 1,
                         'tocomponent' => 3,
                         'timestamp_' => '1970-01-01 00:33:42',
-                        'amount' => '0'
+                        'amount' => '0',
+                        'userid' => 1
                 ],
                 [
                         'id' => 3,
@@ -106,7 +112,8 @@ final class ImportInvoiceTest extends TestCase
                         'fromcomponent' => 1,
                         'tocomponent' => 4,
                         'timestamp_' => '1970-01-01 00:33:42',
-                        'amount' => '0'
+                        'amount' => '0',
+                        'userid' => 1
                 ]
             ], getAllMovements());
         $this->assertEquals([
@@ -117,7 +124,10 @@ final class ImportInvoiceTest extends TestCase
                     'sourcedocumentformat' => null,
                     'sourcedocumentfilename' => null,
                     'timestamp_' => '2022-03-31 12:00:00',
-                    'description' => null
+                    'description' => null,
+                    'internal_type' => null,
+                    'remote_id' => null,
+                    'remote_system' => null
                 ],
                 [
                     'id' => 2,
@@ -126,7 +136,10 @@ final class ImportInvoiceTest extends TestCase
                     'sourcedocumentformat' => null,
                     'sourcedocumentfilename' => null,
                     'timestamp_' => '2022-03-31 12:00:00',
-                    'description' => null
+                    'description' => null,
+                    'internal_type' => null,
+                    'remote_id' => null,
+                    'remote_system' => null
                 ],
                 [
                     'id' => 3,
@@ -135,7 +148,10 @@ final class ImportInvoiceTest extends TestCase
                     'sourcedocumentformat' => null,
                     'sourcedocumentfilename' => null,
                     'timestamp_' => '2022-03-31 12:00:00',
-                    'description' => null
+                    'description' => null,
+                    'internal_type' => null,
+                    'remote_id' => null,
+                    'remote_system' => null
                 ]
             ], getAllStatements());
     }
