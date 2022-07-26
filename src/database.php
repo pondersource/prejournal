@@ -79,10 +79,14 @@ function createUser($username, $passwordGiven)
 {
     $conn  = getDbConn();
     $passwordHash = password_hash($passwordGiven, PASSWORD_BCRYPT, [ "cost" => 10 ]);
-    $query = "INSERT INTO users (username, passwordhash) VALUES (?, ?)";
+    $query = "INSERT INTO users (username, passwordhash) VALUES (?, ?) RETURNING uuid;";
     $conn->executeStatement($query, [ $username, $passwordHash ]);
     // tableDump("users");
-    return $conn->lastInsertId();
+
+    foreach ($conn->iterateAssociativeIndexed('SELECT id, uuid, username FROM users') as $id => $data) {
+        return "Your uuid is " . $data["uuid"] . " and username is " .$data["username"];
+    }
+    //return $conn->lastInsertId();
 }
 
 function getMovementsForUser($userId)
