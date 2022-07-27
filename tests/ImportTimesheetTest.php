@@ -34,7 +34,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-18 09:39:19',
-                'amount' => '5'
+                'amount' => '5',
+                'userid' => 1
                 ]
         ], getAllMovements());
         $this->assertEquals([
@@ -45,7 +46,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -74,7 +78,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-18 09:39:19',
-                'amount' => '5'
+                'amount' => '5',
+                'userid' => 1
                 ]
         ], getAllMovements());
         $this->assertEquals([
@@ -85,7 +90,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -115,7 +123,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-27 19:00:00',
-                'amount' => '104580'
+                'amount' => '104580',
+                'userid' => 1
                 ]
         ], getAllMovements());
         $this->assertEquals([
@@ -126,7 +135,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -156,7 +168,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-30 00:00:00',
-                'amount' => '15'
+                'amount' => '15',
+                'userid' => 1
                 ]
         ], getAllMovements());
         $this->assertEquals([
@@ -167,7 +180,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -196,7 +212,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-18 00:00:00',
-                'amount' => '0'
+                'amount' => '0',
+                'userid' => 1
                 ]
         ], getAllMovements());
         $this->assertEquals([
@@ -207,7 +224,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -237,7 +257,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-25 14:09:38',
-                'amount' => '560'
+                'amount' => '560',
+                'userid' => 1
             ]
         ], getAllMovements());
         $this->assertEquals([
@@ -248,7 +269,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -278,7 +302,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2017-03-13 16:00:00',
-                'amount' => '1'
+                'amount' => '1',
+                'userid' => 1
                 ]
         ], getAllMovements());
         $this->assertEquals([
@@ -289,7 +314,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -318,7 +346,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
-                'amount' => '0'
+                'amount' => '0',
+                'userid' => 1
               ]
         ], getAllMovements());
         $this->assertEquals([
@@ -329,7 +358,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -359,7 +391,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
-                'amount' => '1'
+                'amount' => '1',
+                'userid' => 1
            ]
         ], getAllMovements());
         $this->assertEquals([
@@ -370,7 +403,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-04-02 00:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -400,7 +436,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:04',
-                'amount' => '0'
+                'amount' => '0',
+                'userid' => 1
             ]
         ], getAllMovements());
         $this->assertEquals([
@@ -411,7 +448,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -441,7 +481,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
-                'amount' => '0'
+                'amount' => '0',
+                'userid' => 1
             ]
         ], getAllMovements());
         $this->assertEquals([
@@ -452,7 +493,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -482,7 +526,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-04-12 09:34:45',
-                'amount' => '3.75'
+                'amount' => '3.75',
+                'userid' => 1
                 ]
         ], getAllMovements());
         $this->assertEquals([
@@ -493,7 +538,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -523,7 +571,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-17 00:00:00',
-                'amount' => '0'
+                'amount' => '0',
+                'userid' => 1
                 ]
         ], getAllMovements());
         $this->assertEquals([
@@ -534,7 +583,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -564,7 +616,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
-                'amount' => '3.75'
+                'amount' => '3.75',
+                'userid' => 1
                 ]
         ], getAllMovements());
         $this->assertEquals([
@@ -575,7 +628,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -605,7 +661,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-29 15:30:00',
-                'amount' => '0'
+                'amount' => '0',
+                'userid' => 1
                 ]
         ], getAllMovements());
         $this->assertEquals([
@@ -616,7 +673,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -646,7 +706,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:08',
-                'amount' => '8'
+                'amount' => '8',
+                'userid' => 1
                 ]
         ], getAllMovements());
         $this->assertEquals([
@@ -657,7 +718,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -687,7 +751,8 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-30 00:00:00',
-                'amount' => '0'
+                'amount' => '0',
+                'userid' => 1
                 ]
         ], getAllMovements());
         $this->assertEquals([
@@ -698,7 +763,10 @@ final class ImportTimesheetTest extends TestCase
                 'sourcedocumentformat' => null,
                 'sourcedocumentfilename' => null,
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' => null
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
                 ]
         ], getAllStatements());
     }
@@ -750,7 +818,8 @@ final class ImportTimesheetTest extends TestCase
                     'fromcomponent' => 1,
                     'tocomponent' => 2,
                     'timestamp_' => '1970-01-01 00:00:00',
-                    'amount' => '1'
+                    'amount' => '1',
+                    'userid' => 1
                 ],
                 [
                     'id' => 2,
@@ -758,7 +827,8 @@ final class ImportTimesheetTest extends TestCase
                     'fromcomponent' => 1,
                     'tocomponent' => 3,
                     'timestamp_' => '2022-04-21 10:30:00',
-                    'amount' => '0'
+                    'amount' => '0',
+                    'userid' => 1
                 ],
                 [
                     'id' => 3,
@@ -766,7 +836,8 @@ final class ImportTimesheetTest extends TestCase
                     'fromcomponent' => 4,
                     'tocomponent' => 5,
                     'timestamp_' => '1970-01-01 00:00:00',
-                    'amount' => '1'
+                    'amount' => '1',
+                    'userid' => 1
                 ],
                 [
                     'id' => 4,
@@ -774,7 +845,8 @@ final class ImportTimesheetTest extends TestCase
                     'fromcomponent' => 6,
                     'tocomponent' => 7,
                     'timestamp_' => '1970-01-01 00:00:00',
-                    'amount' => '5'
+                    'amount' => '5',
+                    'userid' => 1
                 ],
                 [
                   'id' => 5,
@@ -782,7 +854,8 @@ final class ImportTimesheetTest extends TestCase
                   'fromcomponent' => 6,
                   'tocomponent' => 7,
                   'timestamp_' => '1970-01-01 00:00:00',
-                  'amount' => '5'
+                  'amount' => '5',
+                  'userid' => 1
                 ]
             ], getAllMovements());
         $this->assertEquals([
@@ -793,7 +866,11 @@ final class ImportTimesheetTest extends TestCase
                     'sourcedocumentformat' => null,
                     'sourcedocumentfilename' => null,
                     'timestamp_' => '2022-03-31 12:00:00',
-                    'description' => null
+                    'description' => null,
+                    'userid' => 1,
+                    'internal_type' => null,
+                    'remote_id' => null,
+                    'remote_system' => null
                 ],
                 [
                     'id' => 2,
@@ -802,7 +879,11 @@ final class ImportTimesheetTest extends TestCase
                     'sourcedocumentformat' => null,
                     'sourcedocumentfilename' => null,
                     'timestamp_' => '2022-03-31 12:00:00',
-                    'description' => null
+                    'description' => null,
+                    'userid' => 1,
+                    'internal_type' => null,
+                    'remote_id' => null,
+                    'remote_system' => null
                 ],
                 [
                     'id' => 3,
@@ -811,7 +892,10 @@ final class ImportTimesheetTest extends TestCase
                     'sourcedocumentformat' => null,
                     'sourcedocumentfilename' => null,
                     'timestamp_' => '2022-03-31 12:00:00',
-                    'description' => null
+                    'description' => null,
+                    'internal_type' => null,
+                    'remote_id' => null,
+                    'remote_system' => null
                 ],
                 [
                     'id' => 4,
@@ -820,7 +904,10 @@ final class ImportTimesheetTest extends TestCase
                     'sourcedocumentformat' => null,
                     'sourcedocumentfilename' => null,
                     'timestamp_' => '2022-03-31 12:00:00',
-                    'description' => null
+                    'description' => null,
+                    'internal_type' => null,
+                    'remote_id' => null,
+                    'remote_system' => null
                 ],
                 [
                   'id' => 5,
@@ -829,7 +916,10 @@ final class ImportTimesheetTest extends TestCase
                   'userid' => 1,
                   'sourcedocumentformat' => null,
                   'sourcedocumentfilename' => null,
-                  'description' => null
+                  'description' => null,
+                  'internal_type' => null,
+                  'remote_id' => null,
+                  'remote_system' => null
                   ]
             ], getAllStatements());
     }

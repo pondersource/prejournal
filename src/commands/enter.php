@@ -11,7 +11,7 @@ declare(strict_types=1);
 function enter($context, $command)
 {
     if (isset($context["user"])) {
-        // $userId = $context["user"]["id"];
+        $userId = $context["user"]["id"];
         $componentFromId = getComponentId($command[1]);
         $componentToId = getComponentId($command[2]);
         $amountStr = $command[3];
@@ -20,6 +20,7 @@ function enter($context, $command)
         // unused: $command[6]
         $movementId = intval(createMovement($context, [
       "create-movement",
+      $userId,
       $type_,
       strval($componentFromId),
       strval($componentToId),
