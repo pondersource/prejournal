@@ -242,7 +242,7 @@ function updateDataFromMovement($amount, $type_, $id) {
     ;
 
     if ($qb === 1) {
-        return ["Delete data from movement"];
+        return ["Update data from movement"];
     }
 }
 
