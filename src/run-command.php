@@ -28,6 +28,7 @@ declare(strict_types=1);
   require_once(__DIR__ . '/commands/print-timesheet-csv.php');
   require_once(__DIR__ . '/commands/import-timesheet.php');
   require_once(__DIR__ . '/commands/remove-entry.php');
+  require_once(__DIR__ . '/commands/update-entry.php');
   require_once(__DIR__ . '/commands/print-timesheet-json.php');
   require_once(__DIR__ . '/commands/print-timesheet-csv.php');
   require_once(__DIR__ . '/commands/import-timesheet.php');
@@ -67,6 +68,7 @@ function runCommand($context, $command)
         "wiki-api-import" => 2,
         "print-timesheet-json" => 3,
         "remove-entry" => 2,
+        "update-entry" => 2,
         "print-timesheet-csv" => 2,
         "print-timesheet-json" => 4,
         "print-timesheet-csv" => 4,
