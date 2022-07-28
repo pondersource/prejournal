@@ -61,7 +61,7 @@ function validateUser($username, $passwordGiven)
     if (count($arr) == 1) {
         $id = intval($arr[0][0]);
         //$uuid = strval($arr[0][1]);
-        $passwordHash = $arr[0][2];
+        $passwordHash = $arr[0][1];
         $conclusion = password_verify($passwordGiven, $passwordHash);
         if ($conclusion) {
             return [
@@ -228,6 +228,17 @@ function deleteDataFromMovement($type_, $id)
     $conn  = getDbConn();
     $qb = $conn
         ->delete('movements', ['type_' => $type_, 'id' => $id])
+    ;
+
+    if ($qb === 1) {
+        return ["Delete data from movement"];
+    }
+}
+
+function updateDataFromMovement($amount, $type_, $id) {
+    $conn  = getDbConn();
+    $qb = $conn
+        ->update('movements', ['amount' => $amount], ['type_' => $type_, 'id' => $id])
     ;
 
     if ($qb === 1) {
