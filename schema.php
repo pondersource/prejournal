@@ -8,7 +8,7 @@ function getTables()
 "drop table if exists users;",
 "create table users (
   id SERIAL PRIMARY KEY,
-  uuid uuid DEFAULT uuid_generate_v4 (),
+  /**uuid uuid DEFAULT uuid_generate_v4 (),**/
   username varchar(54) UNIQUE,
   passwordhash varchar
 );",
