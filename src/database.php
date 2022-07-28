@@ -235,10 +235,11 @@ function deleteDataFromMovement($type_, $id)
     }
 }
 
-function updateDataFromMovement($amount, $type_, $id) {
+function updateDataFromMovement($timestamp_, $project, $amount, $type_, $id) {
     $conn  = getDbConn();
     $qb = $conn
-        ->update('movements', ['amount' => $amount], ['type_' => $type_, 'id' => $id])
+        ->update('movements', ['amount' => $amount, 'timestamp_' => timestampToDateTime(intval($timestamp_)), 
+       'toComponent' => strval(getComponentId($project))], ['type_' => $type_, 'id' => $id])
     ;
 
     if ($qb === 1) {
