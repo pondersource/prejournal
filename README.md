@@ -46,6 +46,15 @@ curl -d'["remove-entry","worked", 1]' https://example:password123@time.pondersou
 
 ```
 
+4) Update timesheet entry
+
+
+```
+                            timestamp          project          amount     type     id
+ curl -d'["update-entry", "23 August 2021",   "ismoil:test",      2,      worked,    2]' https://example:password123@time.pondersource.com/v1/update-entry
+
+```
+
 
 
 ### PHP CS fix
