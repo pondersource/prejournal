@@ -38,7 +38,6 @@ function importHours($context, $command)
     "timecamp-CSV" =>"parseTimecampCSV",
     "timeDoctor-CSV" => "parseTimeDoctorCSV",
     "timely-CSV" => "parseTimelyCSV",
-    "timeManager-CSV" => "parseTimeManageCSV",
     "timeManager-CSV" => "parseTimeManagerCSV",
     "timeScoro-JSON" => "parseTimeScoroJSON",
     "timesheet-CSV" => "parseTimesheetCSV",
