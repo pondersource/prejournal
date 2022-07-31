@@ -18,6 +18,33 @@ DB_DRIVER=pdo_pgsql
 
 # Usage (time.pondersource.com)
 
+To export timesheet information, do something like the following snippet:
+```
+curl -d'["nlnet-timesh:Federated Timesheets","0","100"]' https://example:password123@time.pondersource.com/v1/print-timesheet-json
+[
+    {
+        "id": 1,
+        "worker": "ismoil",
+        "project": "nlnet-timesh:Federated Timesheets",
+        "timestamp_": "2022-09-12 00:00:00",
+        "amount": "40",
+        "description": ""
+    }
+]
+```
+
+In general, the structure for data submitted includes the following fields:  
+
+`command`: this can be `worked-hours`, `update-entry`, etc.
+`id`: the URI for the entry  
+`worker`: the user identity whose time is being recorded  
+`project`: the project the timesheet relates to  
+`timestamp`: the date of the timesheet entry  
+`amount`: the duration of time worked in the entry  
+`description`: optional 
+
+For each timesheet entry a "movement" and a "statement" are created. The movement is the real-world economic event. The statement is the source document from which time-pondersource-com learned about it. There can be multiple statements pointing to one movement.
+
 You can just working with import, export, remove entry. 
 
 1) Push timesheet entries you can use 
