@@ -45,6 +45,8 @@ In general, the structure for data submitted includes the following fields:
 
 For each timesheet entry a "movement" and a "statement" are created. The movement is the real-world economic event. The statement is the source document from which time-pondersource-com learned about it. There can be multiple statements pointing to one movement.
 
+Note that Prejournal (or at least this current configuration of it) uses a Source-as-Truth architecture, and its database contents will be reset from the original source documents periodically. This means write operations that you push to its API don't stick! You can push data to time-pondersource-com but it will only exist until the next time the server is reset. It will then reload its data from your system using API "pull", and (if all pushes were correct) reach the same state as before the server reset.
+
 You can just working with import, export, remove entry. 
 
 1) Push timesheet entries you can use 
