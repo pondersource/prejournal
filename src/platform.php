@@ -59,6 +59,9 @@ function getMode()
             if ($parts[1] == "v1") {
                 return 'single';
             }
+            if ($parts[1] == "v1-upload") {
+                return 'upload';
+            }
             if ($parts[1] == "v1-batch") {
                 return 'batch';
             }
@@ -92,6 +95,25 @@ function getCommand()
                         $parts = array_merge($parts, $arr);
                     }
                 }
+            } catch (Exception $e) {
+                // ...
+            }
+            return array_slice($parts, 2);
+        }
+    } else {
+        return array_slice($_SERVER["argv"], 1);
+    }
+    return [];
+}
+
+function getUploadCommand()
+{
+    if (isset($_SERVER["REQUEST_URI"])) {
+        $parts = explode("/", $_SERVER["REQUEST_URI"]);
+        if (count($parts) >=3 && $parts[0] == "" && $parts[1] == "v1-upload") {
+            try {
+                array_push($parts, $_SERVER["CONTENT_TYPE"]);
+                array_push($parts, file_get_contents('php://input'));
             } catch (Exception $e) {
                 // ...
             }

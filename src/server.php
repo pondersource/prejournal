@@ -16,6 +16,8 @@ if (getMode() === 'batch') {
         output(runCommand(getContext(), reconcileQuotes($words)));
     }
     fclose($handle);
+} else if (getMode() === 'upload') {
+    output(runCommandWithInlineData(getContext(), getUploadCommand()));
 } else {
     output(runCommand(getContext(), getCommand()));
 }

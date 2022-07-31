@@ -42,6 +42,17 @@ function toCamel($str)
     }, $parts));
 }
 
+function runCommandWithInlineData($context, $command) {
+    // TODO: support this for more commands - maybe in some more generic way to pass the data?
+    // Maybe command implementations shouldn't be doing their own file_get_contents
+    // to make them reusable across both runCommand and runCommandWithInlineData
+    error_log(var_export($command, true));
+    if ($command[0] == "import-hours") {
+        return importHoursInline($context, $command[1], $command[2], "2022-03-31 12:00:00");
+    }
+    throw new Error("command ${command[0]} does not support inline data yet!");
+}
+
 function runCommand($context, $command)
 {
     // print("running " . json_encode($command));

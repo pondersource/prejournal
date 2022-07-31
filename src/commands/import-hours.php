@@ -26,7 +26,7 @@ declare(strict_types=1);
 // E.g.: php src/cli-single.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0             1           2         3
 
-function importHours($context, $command)
+function importHoursInline($context, $format, $contents, $importTime)
 {
     $parserFunctions = [
     "muze-JSON" => "parseMuzeJSON",
@@ -54,12 +54,9 @@ function importHours($context, $command)
 
 
     if (isset($context["user"])) {
-        $format = $command[1];
-        $fileName = $command[2];
-
-        $importTime = strtotime($command[3]);
         $type_ = "worked";
-        $entries = $parserFunctions[$format](file_get_contents($fileName));
+        $entries = $parserFunctions[$format]($contents);
+
 
         for ($i = 0; $i < count($entries); $i++) {
             //var_dump($entries);
@@ -82,4 +79,13 @@ function importHours($context, $command)
     } else {
         return ["User not found or wrong password"];
     }
-}
+  }
+
+  function importHours($context, $command)
+  {
+    $format = $command[1];
+    $fileName = $command[2];
+    $contents = file_get_contents($fileName);
+    $importTime = strtotime($command[3]);
+    return importHoursInline($context, $format, $contents, $importTime);
+  }
