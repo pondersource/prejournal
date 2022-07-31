@@ -54,7 +54,7 @@ You can just working with import, export, remove entry.
 ```        
             command        timestamp             worker      project
 
-curl -d'["worked-hours", "20 September 2021", "stichting", "Peppol for the Masses"]' https://example:password123@time.pondersource.com/v1/worked-hours
+curl -d'["20 September 2021", "stichting", "Peppol for the Masses"]' https://example:password123@time.pondersource.com/v1/worked-hours
 ````
 
 2) pull timesheet information 
@@ -71,7 +71,7 @@ curl -d'["nlnet-timesh:Federated Timesheets","0","100"]' https://example:passwor
 ```
          command        type     id
 
-curl -d'["remove-entry","worked", 1]' https://example:password123@time.pondersource.com/v1/remove-entry
+curl -d'["worked", 1]' https://example:password123@time.pondersource.com/v1/remove-entry
 
 ```
 
@@ -80,7 +80,7 @@ curl -d'["remove-entry","worked", 1]' https://example:password123@time.pondersou
 
 ```
                             timestamp          project          amount     type     id
- curl -d'["update-entry", "23 August 2021",   "ismoil:test",      2,      worked,    2]' https://example:password123@time.pondersource.com/v1/update-entry
+ curl -d'["23 August 2021",   "ismoil:test",      2,      worked,    2]' https://example:password123@time.pondersource.com/v1/update-entry
 
 ```
 
