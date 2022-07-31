@@ -3,54 +3,54 @@
 declare(strict_types=1);
   require_once(__DIR__ . '/../platform.php');
   require_once(__DIR__ . '/helpers/createMovement.php');
+  require_once(__DIR__ . '/../parsers/muze-JSON.php');
   require_once(__DIR__ . '/helpers/createStatement.php');
-  require_once(__DIR__ . '/../parsers/time-CSV.php');
-  require_once(__DIR__ . '/../parsers/timeBro-CSV.php');
-  require_once(__DIR__ . '/../parsers/timeDoctor-CSV.php');
-  require_once(__DIR__ . '/../parsers/timetip-JSON.php');
-  require_once(__DIR__ . '/../parsers/timetracker-XML.php');
   require_once(__DIR__ . '/../parsers/saveMyTime-CSV.php');
   require_once(__DIR__ . '/../parsers/scoro-JSON.php');
   require_once(__DIR__ . '/../parsers/stratustime-JSON.php');
-  require_once(__DIR__ . '/../parsers/timeManager-CSV.php');
-  require_once(__DIR__ . '/../parsers/timeTrackerNextcloud-JSON.php');
-  require_once(__DIR__ . '/../parsers/timeTrackerCli-JSON.php');
-  require_once(__DIR__ . '/../parsers/verifyTime-JSON.php');
-  require_once(__DIR__ . '/../parsers/timeTrackerDaily-CSV.php');
-  require_once(__DIR__ . '/../parsers/timely-CSV.php');
-  require_once(__DIR__ . '/../parsers/timesheet-CSV.php');
+  require_once(__DIR__ . '/../parsers/time-CSV.php');
+  require_once(__DIR__ . '/../parsers/timeBro-CSV.php');
   require_once(__DIR__ . '/../parsers/timecamp-CSV.php');
+  require_once(__DIR__ . '/../parsers/timeDoctor-CSV.php');
+  require_once(__DIR__ . '/../parsers/timely-CSV.php');
+  require_once(__DIR__ . '/../parsers/timeManager-CSV.php');
+  require_once(__DIR__ . '/../parsers/timesheet-CSV.php');
   require_once(__DIR__ . '/../parsers/timesheetMobile-CSV.php');
+  require_once(__DIR__ . '/../parsers/timetip-JSON.php');
+  require_once(__DIR__ . '/../parsers/timetracker-XML.php');
+  require_once(__DIR__ . '/../parsers/timeTrackerCli-JSON.php');
+  require_once(__DIR__ . '/../parsers/timeTrackerDaily-CSV.php');
+  require_once(__DIR__ . '/../parsers/timeTrackerNextcloud-JSON.php');
+  require_once(__DIR__ . '/../parsers/verifyTime-JSON.php');
   require_once(__DIR__ . '/../parsers/wikiApi-JSON.php');
-  require_once(__DIR__ . '/../parsers/muze-JSON.php');
 // E.g.: php src/cli-single.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0             1           2         3
 
 function importHours($context, $command)
 {
     $parserFunctions = [
-    "time-CSV" => "parseTimeCSV",
-    "timeBro-CSV" => "parseTimeBroCSV",
-    "timeDoctor-CSV" => "parseTimeDoctorCSV",
-    "timetip-JSON" => "parseTimetipJSON",
-    "timetracker-XML" => "parseTimeTrackerXML",
+    "muze-JSON" => "parseMuzeJSON",
     "saveMyTime-CSV" => "parseSaveMyTimeCSV",
-    "timeScoro-JSON" => "parseTimeScoroJSON",
-    "timeManager-CSV" => "parseTimeManageCSV",
-    "timeTrackerCli-JSON" => "parseTimeTrackerCliJSON",
-    "timeStratustime-JSON" => "parseTimeStratustimeJSON",
     "scoro-JSON" => "parseScoroJSON",
     "stratustime-JSON" => "parseStratustimeJSON",
+    "time-CSV" => "parseTimeCSV",
+    "timeBro-CSV" => "parseTimeBroCSV",
+    "timecamp-CSV" =>"parseTimecampCSV",
+    "timeDoctor-CSV" => "parseTimeDoctorCSV",
+    "timely-CSV" => "parseTimelyCSV",
+    "timeManager-CSV" => "parseTimeManageCSV",
     "timeManager-CSV" => "parseTimeManagerCSV",
+    "timeScoro-JSON" => "parseTimeScoroJSON",
+    "timesheet-CSV" => "parseTimesheetCSV",
+    "timesheetMobile-CSV" => "parseTimesheetMobileCSV",
+    "timeStratustime-JSON" => "parseTimeStratustimeJSON",
+    "timetip-JSON" => "parseTimetipJSON",
+    "timetracker-XML" => "parseTimeTrackerXML",
+    "timeTrackerCli-JSON" => "parseTimeTrackerCliJSON",
+    "timeTrackerDaily-CSV" => "parseTimeTrackerDailyCSV",
     "timeTrackerNextcloud-JSON" => "parseTimeTrackerNextcloudJSON",
     "verifyTime-JSON" =>"parseVerifyTimeJSON",
-    "timeTrackerDaily-CSV" => "parseTimeTrackerDailyCSV",
-    "timely-CSV" => "parseTimelyCSV",
-    "timesheet-CSV" => "parseTimesheetCSV",
-    "timecamp-CSV" =>"parseTimecampCSV",
-    "timesheetMobile-CSV" => "parseTimesheetMobileCSV",
-    "wiki-suite-JSON" => "parseWikiApiJSON",
-    "muze-JSON" => "parseMuzeJSON"
+    "wiki-suite-JSON" => "parseWikiApiJSON"
   ];
 
 
