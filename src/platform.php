@@ -106,6 +106,7 @@ function getCommand()
 function getContext()
 {
     if (!isset($_SERVER["PREJOURNAL_DEFAULT_EMPLOYER"])) {
+        // $_SERVER["PREJOURNAL_DEFAULT_EMPLOYER"] = 'default-employer';
         throw new Error("Please set env var PREJOURNAL_DEFAULT_EMPLOYER to the component name to be used in the 7-word submit-expense command.");
     }
     return [

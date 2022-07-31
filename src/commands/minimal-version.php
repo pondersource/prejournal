@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 function minimalVersion($context, $command)
 {
-    $currentVersion = explode(".", json_decode(file_get_contents(__DIR__ . '/../../composer.json'))->version);
+    $currentVersion = explode(".", trim(file_get_contents(__DIR__ . '/../../pj-version.txt')));
     $required = explode(".", $command[1]);
 
     for ($i = 0; $i < count($required); $i++) {
