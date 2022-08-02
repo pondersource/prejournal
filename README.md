@@ -79,8 +79,8 @@ curl -d'["worked", 1]' https://example:password123@time.pondersource.com/v1/remo
 
 
 ```
-                            timestamp          project          amount     type     id
- curl -d'["23 August 2021",   "ismoil:test",      2,      worked,    2]' https://example:password123@time.pondersource.com/v1/update-entry
+            timestamp          project          amount        id
+ curl -d'["23 August 2021",   "test",      2,          2]' https://example:password123@time.pondersource.com/v1/update-entry
 
 ```
 
