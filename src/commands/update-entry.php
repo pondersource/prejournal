@@ -15,8 +15,9 @@ function updateEntry($context, $command)
         $project = $command[2];
 
         $amount = floatval($command[3]);
-        $id = intval($command[4]);
-        $result = updateDataFromMovement($timestamp, $project, $amount,$ $id);
+        $description = $command[4];
+        $id = intval($command[5]);
+        $result = updateDataFromMovement($timestamp, $project, $amount, $description, $id);
 
         return $result;
     } else {
