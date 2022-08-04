@@ -53,21 +53,21 @@ function validateUser($username, $passwordGiven)
 {
     // echo "Validating user $username $passwordGiven";
     $conn  = getDbConn();
-    $query = 'SELECT id,passwordhash FROM users WHERE username = ?';
+    $query = 'SELECT id,uuid,passwordhash FROM users WHERE username = ?';
     $result = $conn->executeQuery($query, [ $username ]);
     $arr = $result->fetchAllNumeric();
     //var_dump($arr);
     //exit;
     if (count($arr) == 1) {
         $id = intval($arr[0][0]);
-        //$uuid = strval($arr[0][1]);
-        $passwordHash = $arr[0][1];
+        $uuid = strval($arr[0][1]);
+        $passwordHash = $arr[0][2];
         $conclusion = password_verify($passwordGiven, $passwordHash);
         if ($conclusion) {
             return [
         "id" => $id,
         "username" => $username,
-        //"uuid" => $uuid,
+        "uuid" => $uuid,
       
       ];
         }
@@ -79,14 +79,14 @@ function createUser($username, $passwordGiven)
 {
     $conn  = getDbConn();
     $passwordHash = password_hash($passwordGiven, PASSWORD_BCRYPT, [ "cost" => 10 ]);
-    $query = "INSERT INTO users (username, passwordhash) VALUES (?, ?)";
+    $query = "INSERT INTO users (username, passwordhash) VALUES (?, ?) RETURNING uuid;";
     $conn->executeStatement($query, [ $username, $passwordHash ]);
     // tableDump("users");
 
-    //foreach ($conn->iterateAssociativeIndexed('SELECT id, uuid, username FROM users') as $id => $data) {
-      //  return "Your uuid is " . $data["uuid"] . " and username is " .$data["username"];
-    //}
-    return $conn->lastInsertId();
+    foreach ($conn->iterateAssociativeIndexed('SELECT id, uuid, username FROM users') as $id => $data) {
+       return "Your uuid is " . $data["uuid"] . " and username is " .$data["username"];
+    }
+    //return $conn->lastInsertId();
 }
 
 function getMovementsForUser($userId)
@@ -252,8 +252,9 @@ function updateDataFromMovement($timestamp_, $toComponent, $amount, $description
             ['amount' => $amount, 'timestamp_' => timestampToDateTime(intval($timestamp_)), 
             'toComponent' => strval(getComponentId($toComponent)), 'description' => $description, 'id' => $id]    
     );
+    //var_dump($result);
 
-    if($result  === 1) {
+    if($result) {
         return ["Update data from movement"];
     }
 }

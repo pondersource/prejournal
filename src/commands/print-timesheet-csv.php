@@ -5,11 +5,15 @@ declare(strict_types=1);
   require_once(__DIR__ . '/../database.php');
 
 /*
-  E.g.: php src/cli-single.php print-timesheet-csv timesheet
+  E.g.: php src/cli-single.php print-timesheet-csv 270e0144-8085-4366-9f7c-8aae59a3f11e timesheet 0 100
 */
 function printTimesheetCsv($context, $command)
 {
     if (isset($context["user"])) {
+
+        $uuid = $command[1];
+
+        if($context["user"]["uuid"] === $uuid) {
         $project_name = $command[1];
         $min_id = intval($command[2]);
         $max_id = intval($command[3]);
@@ -21,6 +25,7 @@ function printTimesheetCsv($context, $command)
         foreach ($jsondata as $row) {
             echo fputcsv($fp, $row);
         }
+      }
     } else {
         return ["User not found or wrong password"];
     }
