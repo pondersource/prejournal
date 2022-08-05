@@ -41,7 +41,6 @@ function importHoursInline($context, $format, $contents, $importTime)
     "timeManager-CSV" => "parseTimeManagerCSV",
     "timesheet-CSV" => "parseTimesheetCSV",
     "timesheetMobile-CSV" => "parseTimesheetMobileCSV",
-    "timeStratustime-JSON" => "parseTimeStratustimeJSON",
     "timetip-JSON" => "parseTimetipJSON",
     "timetracker-XML" => "parseTimeTrackerXML",
     "timeTrackerCli-JSON" => "parseTimeTrackerCliJSON",
