@@ -39,7 +39,6 @@ function importHoursInline($context, $format, $contents, $importTime)
     "timeDoctor-CSV" => "parseTimeDoctorCSV",
     "timely-CSV" => "parseTimelyCSV",
     "timeManager-CSV" => "parseTimeManagerCSV",
-    "timeScoro-JSON" => "parseTimeScoroJSON",
     "timesheet-CSV" => "parseTimesheetCSV",
     "timesheetMobile-CSV" => "parseTimesheetMobileCSV",
     "timeStratustime-JSON" => "parseTimeStratustimeJSON",
