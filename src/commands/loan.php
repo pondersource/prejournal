@@ -15,21 +15,22 @@ function loan($context, $command)
 
         /* Create Movement */
         $movementId = intval(createMovement($context, [
-      "create-movement",
-      "payment",
-      strval(getComponentId($payer)),
-      strval(getComponentId($receiver)),
-      $timestamp,
-      $amount,
-      "payment related to loan"
-    ])[0]);
+            "create-movement",
+            $context["user"]["id"],
+            "payment",
+            strval(getComponentId($payer)),
+            strval(getComponentId($receiver)),
+            $timestamp,
+            $amount,
+            "payment related to loan"
+        ])[0]);
 
         /* Create Statement */
         $statementId = intval(createStatement($context, [
-      "create-statement",
-      $movementId,
-      $timestamp,
-    ])[0]);
+            "create-statement",
+            $movementId,
+            $timestamp,
+        ])[0]);
         return ["Added loan, movement $movementId, statement $statementId"];
     } else {
         return ["User not found or wrong password"];

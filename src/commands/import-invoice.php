@@ -13,9 +13,9 @@ declare(strict_types=1);
 function importInvoice($context, $command)
 {
     $parserFunctions = [
-    "verifyInvoice-JSON" => "parseVerifyInvoiceJSON",
-    "timeHerokuInvoice-JSON" => "parsetimeHerokuInvoiceJSON"
-  ];
+        "verifyInvoice-JSON" => "parseVerifyInvoiceJSON",
+        "timeHerokuInvoice-JSON" => "parsetimeHerokuInvoiceJSON"
+    ];
 
     if (isset($context["user"])) {
         $format = $command[1];
@@ -25,19 +25,19 @@ function importInvoice($context, $command)
         $entries = $parserFunctions[$format](file_get_contents($fileName));
         for ($i = 0; $i < count($entries); $i++) {
             $movementId = intval(createMovement($context, [
-        "create-movement",
-        $context["user"]["id"],
-        $type_,
-        strval(getComponentId($entries[$i]["from"])),
-        strval(getComponentId($entries[$i]["to"])),
-        $entries[$i]["date"],
-        $entries[$i]["amount"]
-      ])[0]);
+                "create-movement",
+                $context["user"]["id"],
+                $type_,
+                strval(getComponentId($entries[$i]["from"])),
+                strval(getComponentId($entries[$i]["to"])),
+                $entries[$i]["date"],
+                $entries[$i]["amount"]
+            ])[0]);
             $statementId = intval(createStatement($context, [
-        "create-statement",
-        $movementId,
-        $importTime
-      ])[0]);
+                "create-statement",
+                $movementId,
+                $importTime
+            ])[0]);
         }
         return [strval(count($entries))];
     } else {

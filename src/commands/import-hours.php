@@ -29,61 +29,60 @@ declare(strict_types=1);
 function importHoursInline($context, $format, $contents, $importTime)
 {
     $parserFunctions = [
-    "muze-JSON" => "parseMuzeJSON",
-    "saveMyTime-CSV" => "parseSaveMyTimeCSV",
-    "scoro-JSON" => "parseScoroJSON",
-    "stratustime-JSON" => "parseStratustimeJSON",
-    "time-CSV" => "parseTimeCSV",
-    "timeBro-CSV" => "parseTimeBroCSV",
-    "timecamp-CSV" =>"parseTimecampCSV",
-    "timeDoctor-CSV" => "parseTimeDoctorCSV",
-    "timely-CSV" => "parseTimelyCSV",
-    "timeManager-CSV" => "parseTimeManagerCSV",
-    "timesheet-CSV" => "parseTimesheetCSV",
-    "timesheetMobile-CSV" => "parseTimesheetMobileCSV",
-    "timetip-JSON" => "parseTimetipJSON",
-    "timetracker-XML" => "parseTimeTrackerXML",
-    "timeTrackerCli-JSON" => "parseTimeTrackerCliJSON",
-    "timeTrackerDaily-CSV" => "parseTimeTrackerDailyCSV",
-    "timeTrackerNextcloud-JSON" => "parseTimeTrackerNextcloudJSON",
-    "verifyTime-JSON" =>"parseVerifyTimeJSON",
-    "wiki-suite-JSON" => "parseWikiApiJSON"
-  ];
+        "muze-JSON" => "parseMuzeJSON",
+        "saveMyTime-CSV" => "parseSaveMyTimeCSV",
+        "scoro-JSON" => "parseScoroJSON",
+        "stratustime-JSON" => "parseStratustimeJSON",
+        "time-CSV" => "parseTimeCSV",
+        "timeBro-CSV" => "parseTimeBroCSV",
+        "timecamp-CSV" =>"parseTimecampCSV",
+        "timeDoctor-CSV" => "parseTimeDoctorCSV",
+        "timely-CSV" => "parseTimelyCSV",
+        "timeManager-CSV" => "parseTimeManagerCSV",
+        "timesheet-CSV" => "parseTimesheetCSV",
+        "timesheetMobile-CSV" => "parseTimesheetMobileCSV",
+        "timetip-JSON" => "parseTimetipJSON",
+        "timetracker-XML" => "parseTimeTrackerXML",
+        "timeTrackerCli-JSON" => "parseTimeTrackerCliJSON",
+        "timeTrackerDaily-CSV" => "parseTimeTrackerDailyCSV",
+        "timeTrackerNextcloud-JSON" => "parseTimeTrackerNextcloudJSON",
+        "verifyTime-JSON" =>"parseVerifyTimeJSON",
+        "wiki-suite-JSON" => "parseWikiApiJSON"
+    ];
 
 
     if (isset($context["user"])) {
         $type_ = "worked";
         $entries = $parserFunctions[$format]($contents);
 
-
         for ($i = 0; $i < count($entries); $i++) {
             //var_dump($entries);
             $movementId = intval(createMovement($context, [
-        "create-movement",
-        $context["user"]["id"],
-        $type_,
-        strval(getComponentId($entries[$i]["worker"])),
-        strval(getComponentId($entries[$i]["project"])),
-        $entries[$i]["start"],
-        $entries[$i]["seconds"]
-      ])[0]);
+                "create-movement",
+                $context["user"]["id"],
+                $type_,
+                strval(getComponentId($entries[$i]["worker"])),
+                strval(getComponentId($entries[$i]["project"])),
+                $entries[$i]["start"],
+                $entries[$i]["seconds"]
+            ])[0]);
             $statementId = intval(createStatement($context, [
-        "create-statement",
-        $movementId,
-        $importTime
-      ])[0]);
+                "create-statement",
+                $movementId,
+                $importTime
+            ])[0]);
         }
         return [strval(count($entries))];
     } else {
         return ["User not found or wrong password"];
     }
-  }
+}
 
-  function importHours($context, $command)
-  {
+function importHours($context, $command)
+{
     $format = $command[1];
     $fileName = $command[2];
     $contents = file_get_contents($fileName);
     $importTime = strtotime($command[3]);
     return importHoursInline($context, $format, $contents, $importTime);
-  }
+}

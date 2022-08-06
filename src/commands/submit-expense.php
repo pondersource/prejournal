@@ -21,48 +21,50 @@ function submitExpense($context, $command)
 
         /* We have two types of movements  */
         $type = array(
-      "payment",
-      "invoice"
-    );
+            "payment",
+            "invoice"
+        );
 
         /* Create 2 Movements */
         $movementId_payment = intval(createMovement($context, [
-      "create-movement",
-      $type[0],
-      strval(getComponentId($payer)),
-      strval(getComponentId($receiver)),
-      $timestamp,
-      $amount,
-      "payment related to expense"
-    ])[0]);
+            "create-movement",
+            $context["user"]["id"],
+            $type[0],
+            strval(getComponentId($payer)),
+            strval(getComponentId($receiver)),
+            $timestamp,
+            $amount,
+            "payment related to expense"
+        ])[0]);
 
         $movementId_invoice = intval(createMovement($context, [
-      "create-movement",
-      $type[1],
-      strval(getComponentId($receiver)),
-      strval(getComponentId($shop)),
-      $timestamp,
-      $amount,
-      "invoice related to expense"
-    ])[0]);
+            "create-movement",
+            $context["user"]["id"],
+            $type[1],
+            strval(getComponentId($receiver)),
+            strval(getComponentId($shop)),
+            $timestamp,
+            $amount,
+            "invoice related to expense"
+        ])[0]);
 
         /* Create 2 Statements*/
         $statementId_payment = intval(createStatement($context, [
-      "create-statement",
-      $movementId_payment ,
-      $timestamp,
-    ])[0]);
+            "create-statement",
+            $movementId_payment ,
+            $timestamp,
+        ])[0]);
 
         $statementId_invoice = intval(createStatement($context, [
-      "create-statement",
-      $movementId_invoice ,
-      $timestamp,
-    ])[0]);
+            "create-statement",
+            $movementId_invoice ,
+            $timestamp,
+        ])[0]);
 
         return [
-      "Created movements $movementId_payment and $movementId_invoice",
-      "Created statements $statementId_payment and $statementId_invoice"
-    ];
+            "Created movements $movementId_payment and $movementId_invoice",
+            "Created statements $statementId_payment and $statementId_invoice"
+        ];
     } else {
         return ["User not found or wrong password"];
     }

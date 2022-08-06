@@ -22,28 +22,30 @@ function generateImpliedPurchases($context, $command)
         for ($i = 0; $i < count($movements); $i++) {
             if (str_contains($movements[$i]["description"], $filterString) || str_contains(getComponentName($movements[$i]["tocomponent"]), $filterString)) {
                 echo "Filter string match! " . $movements[$i]["description"]
-            . " - " . getComponentName($movements[$i]["tocomponent"])
-            . " - " . $filterString . "\n";
+                . " - " . getComponentName($movements[$i]["tocomponent"])
+                . " - " . $filterString . "\n";
                 // var_dump($movements[$i]);
                 createMovement($context, [
-          "create-movement",
-          "implied-delivery",
-          $movements[$i]["tocomponent"],
-          getComponentId($budgetName),
-          dateTimeToTimestamp($movements[$i]["timestamp_"]),
-          $movements[$i]["amount"],
-          "implied purchase: " . $movements[$i]["description"]
-        ]);
+                    "create-movement",
+                    $context["user"]["id"],
+                    "implied-delivery",
+                    $movements[$i]["tocomponent"],
+                    getComponentId($budgetName),
+                    dateTimeToTimestamp($movements[$i]["timestamp_"]),
+                    $movements[$i]["amount"],
+                    "implied purchase: " . $movements[$i]["description"]
+                ]);
                 // TODO: implement depreciation here
                 createMovement($context, [
-          "create-movement",
-          "implied-consumption",
-          getComponentId($budgetName),
-          $userComponent,
-          dateTimeToTimestamp($movements[$i]["timestamp_"]),
-          $movements[$i]["amount"],
-          "implied purchase: " . $movements[$i]["description"]
-        ]);
+                    "create-movement",
+                    $context["user"]["id"],
+                    "implied-consumption",
+                    getComponentId($budgetName),
+                    $userComponent,
+                    dateTimeToTimestamp($movements[$i]["timestamp_"]),
+                    $movements[$i]["amount"],
+                    "implied purchase: " . $movements[$i]["description"]
+                ]);
                 //  var_dump($movements[$i]);
             }
         }
