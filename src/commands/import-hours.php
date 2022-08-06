@@ -64,7 +64,7 @@ function importHoursInline($context, $format, $contents, $importTime)
                 strval(getComponentId($entries[$i]["worker"])),
                 strval(getComponentId($entries[$i]["project"])),
                 $entries[$i]["start"],
-                $entries[$i]["seconds"]
+                $entries[$i]["seconds"] / 3600
             ])[0]);
             $statementId = intval(createStatement($context, [
                 "create-statement",
