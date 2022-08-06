@@ -11,7 +11,7 @@ function checkHeaders($line, $COLUMN_NAMES)
     if (count($cells) != count($COLUMN_NAMES)) {
         throw new Error("Found " . count($cells) . " columns in header line instead of " . count($COLUMN_NAMES));
     }
-    for ( $i = 0; $i < count($COLUMN_NAMES); $i++) {
+    for ($i = 0; $i < count($COLUMN_NAMES); $i++) {
         if ($cells[$i][0] != '"') {
             throw new Error("Header cell $i does not start with quote! " . $cells[$i]);
         }
@@ -22,7 +22,7 @@ function checkHeaders($line, $COLUMN_NAMES)
 
         // echo "Checking " . $cells[$i] . "\n";
         if ($stripped != $COLUMN_NAMES[$i]) {
-            throw new Error ("Column $i is " . $stripped . " instead of " . $COLUMN_NAMES[$i]);
+            throw new Error("Column $i is " . $stripped . " instead of " . $COLUMN_NAMES[$i]);
         }
     }
 }
@@ -37,20 +37,23 @@ function parseIngDate($str)
     return strtotime(date("Y/m/d 12:00", mktime(0, 0, 0, $month, $day, $year)));
 }
 
-function parseIngDescription($obj) {
+function parseIngDescription($obj)
+{
     return $obj["Mutatiesoort"]
         . ": "
         . $obj["Naam / Omschrijving"];
 }
 
-function parseIngAccount2($obj) {
+function parseIngAccount2($obj)
+{
     if ($obj["Mutatiesoort"] == 'Diversen') {
         return "ING Bank Services";
     }
     return $obj["Tegenrekening"];
 }
 
-function parseIngAmount($str) {
+function parseIngAmount($str)
+{
     // https://stackoverflow.com/questions/4325363/converting-a-number-with-comma-as-decimal-point-to-float
     return floatval(str_replace(',', '.', str_replace('.', '', $str)));
 }
@@ -73,7 +76,7 @@ function parseIngBankCSV($text, $owner)
         "Tag"
     ];
     checkHeaders($lines[0], $COLUMN_NAMES);
-    
+
     for ($i = 1; $i < count($lines); $i++) {
         if (strlen($lines[$i]) > 0) {
             $cells = explode(";", $lines[$i]);
@@ -101,7 +104,7 @@ function parseIngBankCSV($text, $owner)
                     "insideFrom" => $owner,
                     "insideTo" => $obj["Rekening"]
                 ]);
-            } else if ($obj["Af Bij"] == 'Bij') {
+            } elseif ($obj["Af Bij"] == 'Bij') {
                 array_push($ret, [
                     "date" => parseIngDate($obj["Datum"]),
                     "comment" => parseIngDescription($obj),
@@ -112,7 +115,9 @@ function parseIngBankCSV($text, $owner)
                     "insideFrom" => $obj["Rekening"],
                     "insideTo" => $owner
                 ]);
-            } else throw new Error("Af Bij not parseable! " . $obj["Af Bij"]);
+            } else {
+                throw new Error("Af Bij not parseable! " . $obj["Af Bij"]);
+            }
         }
     }
     // var_dump($ret);

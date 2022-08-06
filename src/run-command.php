@@ -42,7 +42,8 @@ function toCamel($str)
     }, $parts));
 }
 
-function runCommandWithInlineData($context, $command) {
+function runCommandWithInlineData($context, $command)
+{
     // TODO: support this for more commands - maybe in some more generic way to pass the data?
     // Maybe command implementations shouldn't be doing their own file_get_contents
     // to make them reusable across both runCommand and runCommandWithInlineData

@@ -38,7 +38,7 @@ function reconcileQuotes($x)
                     array_push($ret, $reconciled);
                     $reconciled = null;
                 }
-            } else if ($x[$i][strlen($x[$i]) - 1] == '"') {
+            } elseif ($x[$i][strlen($x[$i]) - 1] == '"') {
                 // print("solo quoted '$x[$i]'\n");
                 array_push($ret, substr($x[$i], 1, strlen($x[$i]) - 2));
             } else {
@@ -53,7 +53,7 @@ function reconcileQuotes($x)
         } else {
             if (is_null($reconciled)) {
                 array_push($ret, $x[$i]);
-                // print("unquoted '$x[$i]'\n");
+            // print("unquoted '$x[$i]'\n");
             } else {
                 $reconciled .= " " . $x[$i];
                 // print("quoted '$x[$i]'\n");

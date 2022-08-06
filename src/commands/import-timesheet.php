@@ -33,7 +33,7 @@ function importTimesheet($context, $command)
             $amount = intval($result["seconds"]);
 
             if (!$res) {
-                $result = createMultipleMovement($context["user"]["id"],$type_, $fromComponent, $toComponent, $timestamp_, $amount);
+                $result = createMultipleMovement($context["user"]["id"], $type_, $fromComponent, $toComponent, $timestamp_, $amount);
             //var_dump($result);
             } else {
                 $res = getAllWorkedMovements();

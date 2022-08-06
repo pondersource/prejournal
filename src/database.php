@@ -68,7 +68,7 @@ function validateUser($username, $passwordGiven)
         "id" => $id,
         "username" => $username,
         //"uuid" => $uuid,
-      
+
       ];
         }
     }
@@ -84,7 +84,7 @@ function createUser($username, $passwordGiven)
     // tableDump("users");
 
     //foreach ($conn->iterateAssociativeIndexed('SELECT id, uuid, username FROM users') as $id => $data) {
-      //  return "Your uuid is " . $data["uuid"] . " and username is " .$data["username"];
+    //  return "Your uuid is " . $data["uuid"] . " and username is " .$data["username"];
     //}
     return $conn->lastInsertId();
 }
@@ -235,10 +235,12 @@ function deleteDataFromMovement($type_, $id)
     }
 }
 
-function updateDataFromMovement($timestamp_, $toComponent, $amount, $description, $id) {
+function updateDataFromMovement($timestamp_, $toComponent, $amount, $description, $id)
+{
     $conn  = getDbConn();
 
-    $result = $conn->executeQuery("WITH src AS (
+    $result = $conn->executeQuery(
+        "WITH src AS (
         UPDATE movements
         SET amount = :amount, timestamp_ = :timestamp_,
         toComponent = :toComponent 
@@ -248,12 +250,12 @@ function updateDataFromMovement($timestamp_, $toComponent, $amount, $description
         UPDATE statements dst
         SET description = :description
         FROM src
-        WHERE dst.movementId = :id", 
-            ['amount' => $amount, 'timestamp_' => timestampToDateTime(intval($timestamp_)), 
-            'toComponent' => strval(getComponentId($toComponent)), 'description' => $description, 'id' => $id]    
+        WHERE dst.movementId = :id",
+        ['amount' => $amount, 'timestamp_' => timestampToDateTime(intval($timestamp_)),
+            'toComponent' => strval(getComponentId($toComponent)), 'description' => $description, 'id' => $id]
     );
 
-    if($result  === 1) {
+    if ($result  === 1) {
         return ["Update data from movement"];
     }
 }

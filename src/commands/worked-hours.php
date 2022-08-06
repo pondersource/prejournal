@@ -27,7 +27,7 @@ function workedHours($context, $command)
             $timestamp,
             $worked_hours
         ])[0]);
-      $statementId = intval(createStatement($context, [
+        $statementId = intval(createStatement($context, [
           "create-statement",
           $movementId,
           $timestamp,
