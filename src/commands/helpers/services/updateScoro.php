@@ -1,9 +1,9 @@
 <?php
 
 declare(strict_types=1);
-  require_once(__DIR__ . '/../../../platform.php');
-  require_once(__DIR__ . '/../../../database.php');
-  require_once(__DIR__ . '/../../../api/scoro.php');
+require_once(__DIR__ . '/../../../platform.php');
+require_once(__DIR__ . '/../../../database.php');
+require_once(__DIR__ . '/../../../api/scoro.php');
 
 // creates new task
 // TODO update task when already exists
@@ -28,33 +28,33 @@ function updateScoro($movement_id, $event_id)
     $billable_hours = gmdate('H:i:s', ($amount * 3600));
 
     $token_request = [
-      'base_url' => $base_url,
-      'lang' => 'eng',
-      'company_account_id' => $company_account_id,
-      'username' => $username,
-      'password' => $password,
-      'device_type' => 'android',
-      'device_name' => 'my device',
-      'device_id' => 123456789987654321,
-      'request' => []
+        'base_url' => $base_url,
+        'lang' => 'eng',
+        'company_account_id' => $company_account_id,
+        'username' => $username,
+        'password' => $password,
+        'device_type' => 'android',
+        'device_name' => 'my device',
+        'device_id' => 123456789987654321,
+        'request' => []
     ];
     $user_token = getUserToken($token_request);
     if ($user_token == null) {
         return ["Failed to generate user token"];
     }
     $request =[
-      'base_url' => $base_url,
-      'lang' => 'eng',
-      'user_token' => $user_token,
-      'company_account_id' => $company_account_id,
-      'event_name' => $event_name,
-      'start_datetime' => $start_datetime,
-      'project_name' => $project_name,
-      'company_name' => $company_name,
-      'billable_hours' => $billable_hours,
-      'created_date' => $created_date,
-      'modified_date' => $modified_date,
-      'event_id' => $event_id
+        'base_url' => $base_url,
+        'lang' => 'eng',
+        'user_token' => $user_token,
+        'company_account_id' => $company_account_id,
+        'event_name' => $event_name,
+        'start_datetime' => $start_datetime,
+        'project_name' => $project_name,
+        'company_name' => $company_name,
+        'billable_hours' => $billable_hours,
+        'created_date' => $created_date,
+        'modified_date' => $modified_date,
+        'event_id' => $event_id
     ];
     return createTask($request);
 }

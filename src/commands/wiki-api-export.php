@@ -1,12 +1,12 @@
 <?php
 
 declare(strict_types=1);
-  require_once(__DIR__ . '/../platform.php');
-  require_once(__DIR__ . '/helpers/services/getWiki.php');
-  require_once(__DIR__ . '/helpers/createSync.php');
-  require_once(__DIR__ . '/../database.php');
-  /*
-  E.g.: php src/cli-single.php wiki-api-export wiki
+require_once(__DIR__ . '/../platform.php');
+require_once(__DIR__ . '/helpers/services/getWiki.php');
+require_once(__DIR__ . '/helpers/createSync.php');
+require_once(__DIR__ . '/../database.php');
+/*
+    E.g.: php src/cli-single.php wiki-api-export wiki
 */
 function wikiApiExport($context, $command)
 {
@@ -32,11 +32,11 @@ function wikiApiExport($context, $command)
             if ($sync == null || !$sync && !$result) {
                 foreach ($result as $syn) {
                     createSync($context, [
-                            $internal_type,
-                                $syn["id"],
-                                $syn["url"],
-                                $remote_system
-                            ]);
+                        $internal_type,
+                        $syn["id"],
+                        $syn["url"],
+                        $remote_system
+                    ]);
                 }
             }
             return ["Prejournal create a new data from Wiki"];
@@ -62,8 +62,6 @@ function addMovementForWiki($userId)
             $timestamp = timestampToDateTime(intval($remote->tsDate));
             $amount = intval($remote->tsMinutesCalculated);
 
-
-
             $movement = "INSERT INTO movements(userId, type_, fromComponent, toComponent,timestamp_, amount) VALUES ('".$userId. "','".$type. "',".intval(getComponentId($remote->tsUser)).",'".$toComponent."', '".$timestamp."','".$amount."'); ";
 
             $conn->exec($movement);
@@ -76,9 +74,9 @@ function addMovementForWiki($userId)
                 //exit;
                 if ($res["amount"] == $remote->tsMinutesCalculated) {
                     array_push($newArray, [
-                'id' => $res["id"],
-                "url" =>stripslashes($remote->tsURI)
-            ]);
+                        'id' => $res["id"],
+                        "url" =>stripslashes($remote->tsURI)
+                    ]);
                 }
             }
         }

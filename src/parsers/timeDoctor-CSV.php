@@ -15,11 +15,11 @@ function parseTimeDoctorCSV($str)
         //var_dump($cells);
         if (count($cells) == 7) {
             array_push($ret, [
-          "worker" => trim($cells[1]),
-          "project" => $cells[3],
-          "start" => strtotime($cells[4]),
-          "seconds" => strtotime($cells[5]) - strtotime($cells[4])
-        ]);
+                "worker" => trim($cells[1]),
+                "project" => $cells[3],
+                "start" => strtotime($cells[4]),
+                "seconds" => strtotime($cells[5]) - strtotime($cells[4])
+            ]);
         }
     }
     return $ret;

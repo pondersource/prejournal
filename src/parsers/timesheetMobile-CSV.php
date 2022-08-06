@@ -20,11 +20,11 @@ function parseTimesheetMobileCSV($str)
         //var_dump($cells);
         if (count($cells) == 20) {
             array_push($ret, [
-        "worker" => $cells[2],
-        "project" => "test",
-        "start" => strtotime($cells[6]),
-        "seconds" => strtotime($cells[9]) - strtotime($cells[6])
-      ]);
+                "worker" => $cells[2],
+                "project" => "test",
+                "start" => strtotime($cells[6]),
+                "seconds" => strtotime($cells[9]) - strtotime($cells[6])
+            ]);
         }
     }
     return $ret;

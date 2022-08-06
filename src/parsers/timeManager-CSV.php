@@ -14,11 +14,11 @@ function parseTimeManagerCSV($str)
         //var_dump($cells[0]);
         if (count($cells) == 8) {
             array_push($ret, [
-        "worker" => $cells[5],
-        "project" => $cells[6],
-        "start" => $cells[0],
-        "seconds" => $cells[4]
-      ]);
+                "worker" => $cells[5],
+                "project" => $cells[6],
+                "start" => $cells[0],
+                "seconds" => $cells[4]
+            ]);
         }
     }
     return $ret;

@@ -1,12 +1,12 @@
 <?php
 
 declare(strict_types=1);
-  require_once(__DIR__ . '/../platform.php');
-  require_once(__DIR__ . '/helpers/services/updateScoro.php');
-  require_once(__DIR__ . '/helpers/createSync.php');
-  require_once(__DIR__ . '/../database.php');
-  /*
-  E.g.: php src/cli-single.php  update-remote-service scoro
+require_once(__DIR__ . '/../platform.php');
+require_once(__DIR__ . '/helpers/services/updateScoro.php');
+require_once(__DIR__ . '/helpers/createSync.php');
+require_once(__DIR__ . '/../database.php');
+/*
+    E.g.: php src/cli-single.php  update-remote-service scoro
 */
 function updateRemoteService($context, $command)
 {

@@ -1,10 +1,10 @@
 <?php
 
 declare(strict_types=1);
-  require_once(__DIR__ . '/../platform.php');
-  require_once(__DIR__ . '/../database.php');
-  /*                                             timestamp          project       amount       id
-  E.g.: php src/cli-single.php update-entry    "23 August 2021"      test            2         2
+require_once(__DIR__ . '/../platform.php');
+require_once(__DIR__ . '/../database.php');
+/*                                               timestamp          project       amount       id
+    E.g.: php src/cli-single.php update-entry    "23 August 2021"      test            2         2
 */
 function updateEntry($context, $command)
 {

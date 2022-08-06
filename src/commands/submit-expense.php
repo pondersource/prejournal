@@ -1,14 +1,14 @@
 <?php
 
 declare(strict_types=1);
-  require_once(__DIR__ . '/../platform.php');
-  require_once(__DIR__ . '/helpers/createMovement.php');
-  require_once(__DIR__ . '/helpers/createStatement.php');
-  /*
-  E.g.: php src/cli-single.php submit-expense "28 August 2021" "stichting" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"
+require_once(__DIR__ . '/../platform.php');
+require_once(__DIR__ . '/helpers/createMovement.php');
+require_once(__DIR__ . '/helpers/createStatement.php');
+/*
+    E.g.: php src/cli-single.php submit-expense "28 August 2021" "stichting" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"
 
-  1st transaction michiel -> Dutch railways (PAYMENT)
-  2nd transaction Dutch railways->stichting (INVOICE)
+    1st transaction michiel -> Dutch railways (PAYMENT)
+    2nd transaction Dutch railways->stichting (INVOICE)
 */
 function submitExpense($context, $command)
 {

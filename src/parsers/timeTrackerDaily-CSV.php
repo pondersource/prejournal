@@ -16,11 +16,11 @@ function parseTimeTrackerDailyCSV($str)
         //var_dump($cells);
         if (count($cells) == 8) {
             array_push($ret, [
-          "worker" => trim($cells[1]),
-          "project" => $cells[0],
-          "start" => strtotime($cells[2]),
-          "seconds" => strtotime($cells[4]) - strtotime($cells[2])
-        ]);
+                "worker" => trim($cells[1]),
+                "project" => $cells[0],
+                "start" => strtotime($cells[2]),
+                "seconds" => strtotime($cells[4]) - strtotime($cells[2])
+            ]);
         }
     }
     return $ret;

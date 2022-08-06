@@ -14,11 +14,11 @@ function parseTimeCSV($str)
 
         if (count($cells) == 6) {
             array_push($ret, [
-        "worker" => $cells[0],
-        "project" => $cells[1],
-        "start" => strtotime($cells[4]),
-        "seconds" => strtotime($cells[5]) - strtotime($cells[4])
-      ]);
+                "worker" => $cells[0],
+                "project" => $cells[1],
+                "start" => strtotime($cells[4]),
+                "seconds" => strtotime($cells[5]) - strtotime($cells[4])
+            ]);
         }
     }
     return $ret;

@@ -10,11 +10,11 @@ function parseTimetipJSON($str)
 
     for ($i = 0; $i < count($lines->dates); $i++) {
         array_push($ret, [
-        "worker" => $_SERVER["PREJOURNAL_USERNAME"],
-        "project" => $lines->dates[$i]->last->reason,
-        "start" => strtotime($lines->dates[$i]->date),
-        "seconds" => $lines->dates[$i]->last->duration
-    ]);
+            "worker" => $_SERVER["PREJOURNAL_USERNAME"],
+            "project" => $lines->dates[$i]->last->reason,
+            "start" => strtotime($lines->dates[$i]->date),
+            "seconds" => $lines->dates[$i]->last->duration
+        ]);
     }
     return $ret;
 }

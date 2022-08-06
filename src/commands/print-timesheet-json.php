@@ -1,9 +1,9 @@
 <?php
 
 declare(strict_types=1);
-  require_once(__DIR__ . '/helpers/dataAccessObject.php');
-  /*
-  E.g.: php src/cli-single.php print-timesheet-json wiki 0 100
+require_once(__DIR__ . '/helpers/dataAccessObject.php');
+/*
+    E.g.: php src/cli-single.php print-timesheet-json wiki 0 100
 */
 function printTimesheetJson($context, $command)
 {

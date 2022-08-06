@@ -12,10 +12,10 @@ function parseTimeTrackerXML($str)
     //var_dump($xmlArr);
 
     array_push($ret, [
-            "worker" => $xmlArr->row->user,
-            "project" => "test",
-            "start" => strtotime($xmlArr->row->date),
-            "seconds" => $xmlArr->row->finish,
-        ]);
+        "worker" => $xmlArr->row->user,
+        "project" => "test",
+        "start" => strtotime($xmlArr->row->date),
+        "seconds" => $xmlArr->row->finish,
+    ]);
     return $ret;
 }

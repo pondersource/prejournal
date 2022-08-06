@@ -14,11 +14,11 @@ function parseTimelyCSV($str)
         $cells = explode(",", $lines[$i]);
         if (count($cells) == 24) {
             array_push($ret, [
-        "worker" => $cells[0],
-        "project" => $cells[1],
-        "start" => $cells[12],
-        "seconds" => $cells[14]
-      ]);
+                "worker" => $cells[0],
+                "project" => $cells[1],
+                "start" => $cells[12],
+                "seconds" => $cells[14]
+            ]);
         }
     }
     return $ret;

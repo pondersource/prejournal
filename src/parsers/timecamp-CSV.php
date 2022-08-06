@@ -14,11 +14,11 @@ function parseTimecampCSV($str)
 
         if (count($cells) == 3) {
             array_push($ret, [
-          "worker" =>  $_SERVER['PREJOURNAL_USERNAME'],
-          "project" => $cells[0],
-          "start" => $cells[1],
-          "seconds" => $cells[2]
-        ]);
+                "worker" =>  $_SERVER['PREJOURNAL_USERNAME'],
+                "project" => $cells[0],
+                "start" => $cells[1],
+                "seconds" => $cells[2]
+            ]);
         }
     }
     return $ret;

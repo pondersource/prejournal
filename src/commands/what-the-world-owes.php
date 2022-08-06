@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-  require_once(__DIR__ . '/../platform.php');
+require_once(__DIR__ . '/../platform.php');
 
 // E.g. "2022-04-24 12:00:00" ->  "2022-04-24"
 function toDate($str)

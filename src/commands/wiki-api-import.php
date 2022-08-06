@@ -1,10 +1,10 @@
 <?php
 
 declare(strict_types=1);
-  require_once(__DIR__ . '/../platform.php');
-  require_once(__DIR__ . '/helpers/services/getWiki.php');
-  require_once(__DIR__ . '/helpers/createSync.php');
-  require_once(__DIR__ . '/../database.php');
+require_once(__DIR__ . '/../platform.php');
+require_once(__DIR__ . '/helpers/services/getWiki.php');
+require_once(__DIR__ . '/helpers/createSync.php');
+require_once(__DIR__ . '/../database.php');
 /*
   E.g.: php src/cli-single.php wiki-api-import wiki
 */
@@ -25,10 +25,10 @@ function wikiApiImport($context, $command)
 
                 if ($sync == null) {
                     createSync($context, [
-                    "movement",
-                    $movement_id,
-                    "wiki"
-                ])[0];
+                        "movement",
+                        $movement_id,
+                        "wiki"
+                    ])[0];
                 }
             }
             echo $remote_id;

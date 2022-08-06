@@ -14,11 +14,11 @@ function parseTimeBroCSV($str)
 
         if (count($cells) == 7) {
             array_push($ret, [
-        "worker" => $cells[0],
-        "project" => $cells[3],
-        "start" => strtotime($cells[1]),
-        "seconds" => strtotime($cells[2]) - strtotime($cells[1])
-      ]);
+                "worker" => $cells[0],
+                "project" => $cells[3],
+                "start" => strtotime($cells[1]),
+                "seconds" => strtotime($cells[2]) - strtotime($cells[1])
+            ]);
         }
     }
     return $ret;

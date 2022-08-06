@@ -101,26 +101,26 @@ function parseAsnBankCSV($text, $owner)
 
             if (floatval($obj["transactiebedrag"]) > 0) {
                 array_push($ret, [
-          "date" => parseDate($obj),
-          "comment" => parseDescription($obj),
-          "from" => parseAccount2($obj),
-          "to" => $obj["opdrachtgeversrekening"],
-          "amount" => floatval($obj["transactiebedrag"]),
-          "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"]),
-          "insideFrom" => $obj["opdrachtgeversrekening"],
-          "insideTo" => $owner
-        ]);
+                    "date" => parseDate($obj),
+                    "comment" => parseDescription($obj),
+                    "from" => parseAccount2($obj),
+                    "to" => $obj["opdrachtgeversrekening"],
+                    "amount" => floatval($obj["transactiebedrag"]),
+                    "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"]),
+                    "insideFrom" => $obj["opdrachtgeversrekening"],
+                    "insideTo" => $owner
+                ]);
             } else {
                 array_push($ret, [
-          "date" => parseDate($obj),
-          "comment" => parseDescription($obj),
-          "from" => $obj["opdrachtgeversrekening"],
-          "to" => parseAccount2($obj),
-          "amount" => -floatval($obj["transactiebedrag"]),
-          "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"]),
-          "insideFrom" => $owner,
-          "insideTo" => $obj["opdrachtgeversrekening"]
-        ]);
+                    "date" => parseDate($obj),
+                    "comment" => parseDescription($obj),
+                    "from" => $obj["opdrachtgeversrekening"],
+                    "to" => parseAccount2($obj),
+                    "amount" => -floatval($obj["transactiebedrag"]),
+                    "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"]),
+                    "insideFrom" => $owner,
+                    "insideTo" => $obj["opdrachtgeversrekening"]
+                ]);
             }
         }
     }

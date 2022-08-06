@@ -782,146 +782,146 @@ final class ImportTimesheetTest extends TestCase
         $result = runCommand(getContext(), ["import-hours", "wiki-suite-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
         $this->assertEquals([
-                [
-                    'id' => 1,
-                    'name' => 'victor'
-                ],
-                [
-                    'id' => 2,
-                    'name' => 'Federated timesheets'
-                ],
-                [
-                    'id' => 3,
-                    'name' => 'Tiki'
-                ],
-                [
-                    'id' => 4,
-                    'name' => 'kroky'
-                ],
-                [
-                    'id' => 5,
-                    'name' => 'Timesheet tracking'
-                ],
-                [
-                    'id' => 6,
-                    'name' => 'ishifoev'
-                ],
-                [
-                    'id' => 7,
-                    'name' => 'Test'
-                ]
-            ], getAllComponents());
+            [
+                'id' => 1,
+                'name' => 'victor'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Federated timesheets'
+            ],
+            [
+                'id' => 3,
+                'name' => 'Tiki'
+            ],
+            [
+                'id' => 4,
+                'name' => 'kroky'
+            ],
+            [
+                'id' => 5,
+                'name' => 'Timesheet tracking'
+            ],
+            [
+                'id' => 6,
+                'name' => 'ishifoev'
+            ],
+            [
+                'id' => 7,
+                'name' => 'Test'
+            ]
+        ], getAllComponents());
         $this->assertEquals([
-                [
-                    'id' => 1,
-                    'type_' => 'worked',
-                    'fromcomponent' => 1,
-                    'tocomponent' => 2,
-                    'timestamp_' => '1970-01-01 00:00:00',
-                    'amount' => '1',
-                    'userid' => 1
-                ],
-                [
-                    'id' => 2,
-                    'type_' => 'worked',
-                    'fromcomponent' => 1,
-                    'tocomponent' => 3,
-                    'timestamp_' => '2022-04-21 10:30:00',
-                    'amount' => '0',
-                    'userid' => 1
-                ],
-                [
-                    'id' => 3,
-                    'type_' => 'worked',
-                    'fromcomponent' => 4,
-                    'tocomponent' => 5,
-                    'timestamp_' => '1970-01-01 00:00:00',
-                    'amount' => '1',
-                    'userid' => 1
-                ],
-                [
-                    'id' => 4,
-                    'type_' => 'worked',
-                    'fromcomponent' => 6,
-                    'tocomponent' => 7,
-                    'timestamp_' => '1970-01-01 00:00:00',
-                    'amount' => '5',
-                    'userid' => 1
-                ],
-                [
-                  'id' => 5,
-                  'type_' => 'worked',
-                  'fromcomponent' => 6,
-                  'tocomponent' => 7,
-                  'timestamp_' => '1970-01-01 00:00:00',
-                  'amount' => '5',
-                  'userid' => 1
-                ]
-            ], getAllMovements());
+            [
+                'id' => 1,
+                'type_' => 'worked',
+                'fromcomponent' => 1,
+                'tocomponent' => 2,
+                'timestamp_' => '1970-01-01 00:00:00',
+                'amount' => '1',
+                'userid' => 1
+            ],
+            [
+                'id' => 2,
+                'type_' => 'worked',
+                'fromcomponent' => 1,
+                'tocomponent' => 3,
+                'timestamp_' => '2022-04-21 10:30:00',
+                'amount' => '0',
+                'userid' => 1
+            ],
+            [
+                'id' => 3,
+                'type_' => 'worked',
+                'fromcomponent' => 4,
+                'tocomponent' => 5,
+                'timestamp_' => '1970-01-01 00:00:00',
+                'amount' => '1',
+                'userid' => 1
+            ],
+            [
+                'id' => 4,
+                'type_' => 'worked',
+                'fromcomponent' => 6,
+                'tocomponent' => 7,
+                'timestamp_' => '1970-01-01 00:00:00',
+                'amount' => '5',
+                'userid' => 1
+            ],
+            [
+                'id' => 5,
+                'type_' => 'worked',
+                'fromcomponent' => 6,
+                'tocomponent' => 7,
+                'timestamp_' => '1970-01-01 00:00:00',
+                'amount' => '5',
+                'userid' => 1
+            ]
+        ], getAllMovements());
         $this->assertEquals([
-                [
-                    'id' => 1,
-                    'movementid' => 1,
-                    'userid' => 1,
-                    'sourcedocumentformat' => null,
-                    'sourcedocumentfilename' => null,
-                    'timestamp_' => '2022-03-31 12:00:00',
-                    'description' => null,
-                    'userid' => 1,
-                    'internal_type' => null,
-                    'remote_id' => null,
-                    'remote_system' => null
-                ],
-                [
-                    'id' => 2,
-                    'movementid' => 2,
-                    'userid' => 1,
-                    'sourcedocumentformat' => null,
-                    'sourcedocumentfilename' => null,
-                    'timestamp_' => '2022-03-31 12:00:00',
-                    'description' => null,
-                    'userid' => 1,
-                    'internal_type' => null,
-                    'remote_id' => null,
-                    'remote_system' => null
-                ],
-                [
-                    'id' => 3,
-                    'movementid' => 3,
-                    'userid' => 1,
-                    'sourcedocumentformat' => null,
-                    'sourcedocumentfilename' => null,
-                    'timestamp_' => '2022-03-31 12:00:00',
-                    'description' => null,
-                    'internal_type' => null,
-                    'remote_id' => null,
-                    'remote_system' => null
-                ],
-                [
-                    'id' => 4,
-                    'movementid' => 4,
-                    'userid' => 1,
-                    'sourcedocumentformat' => null,
-                    'sourcedocumentfilename' => null,
-                    'timestamp_' => '2022-03-31 12:00:00',
-                    'description' => null,
-                    'internal_type' => null,
-                    'remote_id' => null,
-                    'remote_system' => null
-                ],
-                [
-                  'id' => 5,
-                  'timestamp_' => '2022-03-31 12:00:00',
-                  'movementid' => 5,
-                  'userid' => 1,
-                  'sourcedocumentformat' => null,
-                  'sourcedocumentfilename' => null,
-                  'description' => null,
-                  'internal_type' => null,
-                  'remote_id' => null,
-                  'remote_system' => null
-                  ]
-            ], getAllStatements());
+            [
+                'id' => 1,
+                'movementid' => 1,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-03-31 12:00:00',
+                'description' => null,
+                'userid' => 1,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
+            ],
+            [
+                'id' => 2,
+                'movementid' => 2,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-03-31 12:00:00',
+                'description' => null,
+                'userid' => 1,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
+            ],
+            [
+                'id' => 3,
+                'movementid' => 3,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-03-31 12:00:00',
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
+            ],
+            [
+                'id' => 4,
+                'movementid' => 4,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'timestamp_' => '2022-03-31 12:00:00',
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
+            ],
+            [
+                'id' => 5,
+                'timestamp_' => '2022-03-31 12:00:00',
+                'movementid' => 5,
+                'userid' => 1,
+                'sourcedocumentformat' => null,
+                'sourcedocumentfilename' => null,
+                'description' => null,
+                'internal_type' => null,
+                'remote_id' => null,
+                'remote_system' => null
+                ]
+        ], getAllStatements());
     }
 
     public function testWikiApiExport(): void

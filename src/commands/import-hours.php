@@ -1,28 +1,28 @@
 <?php
 
 declare(strict_types=1);
-  require_once(__DIR__ . '/../platform.php');
-  require_once(__DIR__ . '/helpers/createMovement.php');
-  require_once(__DIR__ . '/../parsers/muze-JSON.php');
-  require_once(__DIR__ . '/helpers/createStatement.php');
-  require_once(__DIR__ . '/../parsers/saveMyTime-CSV.php');
-  require_once(__DIR__ . '/../parsers/scoro-JSON.php');
-  require_once(__DIR__ . '/../parsers/stratustime-JSON.php');
-  require_once(__DIR__ . '/../parsers/time-CSV.php');
-  require_once(__DIR__ . '/../parsers/timeBro-CSV.php');
-  require_once(__DIR__ . '/../parsers/timecamp-CSV.php');
-  require_once(__DIR__ . '/../parsers/timeDoctor-CSV.php');
-  require_once(__DIR__ . '/../parsers/timely-CSV.php');
-  require_once(__DIR__ . '/../parsers/timeManager-CSV.php');
-  require_once(__DIR__ . '/../parsers/timesheet-CSV.php');
-  require_once(__DIR__ . '/../parsers/timesheetMobile-CSV.php');
-  require_once(__DIR__ . '/../parsers/timetip-JSON.php');
-  require_once(__DIR__ . '/../parsers/timetracker-XML.php');
-  require_once(__DIR__ . '/../parsers/timeTrackerCli-JSON.php');
-  require_once(__DIR__ . '/../parsers/timeTrackerDaily-CSV.php');
-  require_once(__DIR__ . '/../parsers/timeTrackerNextcloud-JSON.php');
-  require_once(__DIR__ . '/../parsers/verifyTime-JSON.php');
-  require_once(__DIR__ . '/../parsers/wikiApi-JSON.php');
+require_once(__DIR__ . '/../platform.php');
+require_once(__DIR__ . '/helpers/createMovement.php');
+require_once(__DIR__ . '/../parsers/muze-JSON.php');
+require_once(__DIR__ . '/helpers/createStatement.php');
+require_once(__DIR__ . '/../parsers/saveMyTime-CSV.php');
+require_once(__DIR__ . '/../parsers/scoro-JSON.php');
+require_once(__DIR__ . '/../parsers/stratustime-JSON.php');
+require_once(__DIR__ . '/../parsers/time-CSV.php');
+require_once(__DIR__ . '/../parsers/timeBro-CSV.php');
+require_once(__DIR__ . '/../parsers/timecamp-CSV.php');
+require_once(__DIR__ . '/../parsers/timeDoctor-CSV.php');
+require_once(__DIR__ . '/../parsers/timely-CSV.php');
+require_once(__DIR__ . '/../parsers/timeManager-CSV.php');
+require_once(__DIR__ . '/../parsers/timesheet-CSV.php');
+require_once(__DIR__ . '/../parsers/timesheetMobile-CSV.php');
+require_once(__DIR__ . '/../parsers/timetip-JSON.php');
+require_once(__DIR__ . '/../parsers/timetracker-XML.php');
+require_once(__DIR__ . '/../parsers/timeTrackerCli-JSON.php');
+require_once(__DIR__ . '/../parsers/timeTrackerDaily-CSV.php');
+require_once(__DIR__ . '/../parsers/timeTrackerNextcloud-JSON.php');
+require_once(__DIR__ . '/../parsers/verifyTime-JSON.php');
+require_once(__DIR__ . '/../parsers/wikiApi-JSON.php');
 // E.g.: php src/cli-single.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0             1           2         3
 

@@ -17,11 +17,11 @@ function parseTimesheetCSV($str)
         //var_dump($cells);
         if (count($cells) == 10) {
             array_push($ret, [
-        "worker" => $_SERVER["PREJOURNAL_USERNAME"],
-        "project" => "test",
-        "start" => strtotime($cells[0]),
-        "seconds" => strtotime($cells[1]) - strtotime($cells[0])
-      ]);
+                "worker" => $_SERVER["PREJOURNAL_USERNAME"],
+                "project" => "test",
+                "start" => strtotime($cells[0]),
+                "seconds" => strtotime($cells[1]) - strtotime($cells[0])
+            ]);
         }
     }
     return $ret;

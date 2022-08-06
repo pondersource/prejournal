@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-  require_once(__DIR__ . '/../platform.php');
+require_once(__DIR__ . '/../platform.php');
 
 // loan "21 January 2022" stichting 5000
 

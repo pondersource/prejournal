@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-  require_once(__DIR__ . '/../platform.php');
+require_once(__DIR__ . '/../platform.php');
 
 function parseSaveMyTimeCSV($str)
 {
@@ -18,11 +18,11 @@ function parseSaveMyTimeCSV($str)
 
         if (count($cells) == 8) {
             array_push($ret, [
-        "worker" => $_SERVER['PREJOURNAL_USERNAME'],
-        "project" => $project_name,
-        "start" => strtotime($cells[3]),
-        "seconds" => strtotime($cells[5]) - strtotime($cells[3])
-      ]);
+                "worker" => $_SERVER['PREJOURNAL_USERNAME'],
+                "project" => $project_name,
+                "start" => strtotime($cells[3]),
+                "seconds" => strtotime($cells[5]) - strtotime($cells[3])
+            ]);
         }
     }
     return $ret;
