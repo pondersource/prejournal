@@ -11,6 +11,7 @@ require_once(__DIR__ . '/helpers/createStatement.php');
 function workedHours($context, $command)
 {
     if (isset($context["user"])) {
+        $conn  = getDbConn();
         $timestamp = strtotime($command[1]);
         $worker = $context["user"]["username"];
         $project = $command[2].':'.$command[3];
@@ -34,8 +35,11 @@ function workedHours($context, $command)
           $description
       ])[0]);
 
+       $result = getMovementAndStatement($movementId, $statementId);
+       return $result;
+
         // return [json_encode($command), "Created movement $movementId", "Created statement $statementId"];
-        return [ "Created movement $movementId", "Created statement $statementId"];
+        //return [ "Created movement $movementId", "Created statement $statementId"];
     } else {
         return ["User not found or wrong password"];
     }
