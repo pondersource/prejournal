@@ -23,6 +23,7 @@ require_once(__DIR__ . '/../parsers/timeTrackerDaily-CSV.php');
 require_once(__DIR__ . '/../parsers/timeTrackerNextcloud-JSON.php');
 require_once(__DIR__ . '/../parsers/verifyTime-JSON.php');
 require_once(__DIR__ . '/../parsers/wikiApi-JSON.php');
+require_once(__DIR__ . '/../parsers/wikiApi-CSV.php');
 // E.g.: php src/cli-single.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0             1           2         3
 
@@ -47,7 +48,9 @@ function importHoursInline($context, $format, $contents, $importTime)
         "timeTrackerDaily-CSV" => "parseTimeTrackerDailyCSV",
         "timeTrackerNextcloud-JSON" => "parseTimeTrackerNextcloudJSON",
         "verifyTime-JSON" =>"parseVerifyTimeJSON",
-        "wiki-suite-JSON" => "parseWikiApiJSON"
+        "wiki-suite-JSON" => "parseWikiApiJSON",
+        "wikiApi-CSV" => "parseWikiApiCSV",
+        "timeld-JSON" => "parseTimeldJSON"
     ];
 
 
