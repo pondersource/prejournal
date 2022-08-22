@@ -13,8 +13,8 @@ function getFromMovementAndSync($project, $min_id, $max_id)
         INNER JOIN statements s ON m.id = s.movementId
         WHERE m.type_='worked' AND m.tocomponent = :componentId AND m.id >=:min_id AND m.id <=:max_id";
     $params = [ 'componentId' => $componentId, 'min_id' => $min_id, 'max_id' => $max_id ];
-    var_dump($queryStr);
-    var_dump($params);
+    // var_dump($queryStr);
+    // var_dump($params);
     $query = $conn->executeQuery(
         $queryStr,
         $params,
