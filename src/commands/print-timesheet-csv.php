@@ -9,7 +9,8 @@ require_once(__DIR__ . '/../database.php');
 */
 function printTimesheetCsv($context, $command)
 {
-    if (isset($context["openMode"])) {
+    if (isset($context["openMode"]) && $context["openMode"] == "true") {
+        // var_dump($command);
         $project_name = $command[1];
         $min_id = 0;
         if (count($command) > 2) {
@@ -19,7 +20,6 @@ function printTimesheetCsv($context, $command)
         if (count($command) > 3) {
             $max_id = intval($command[3]);
         }
-
         $jsondata = getFromMovementAndSync($context["user"]["id"], $project_name, $min_id, $max_id);
 
         header("Content-type: application/csv");

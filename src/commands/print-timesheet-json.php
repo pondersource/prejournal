@@ -7,9 +7,9 @@ require_once(__DIR__ . '/helpers/dataAccessObject.php');
 */
 function printTimesheetJson($context, $command)
 {
-    var_dump($context);
+    // var_dump($context);
     if (isset($context["openMode"]) && $context["openMode"] == "true") {
-        var_dump($command);
+        // var_dump($command);
         $project_name = $command[1];
         $min_id = 0;
         if (count($command) > 2) {
