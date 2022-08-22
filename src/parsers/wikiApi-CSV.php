@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once(__DIR__ . '/../utils.php');
+
 //  0   1     2      3     4              5         6         7    8            9                     10
 // URI,User,Project,Task,Description,"Start Time","End Time",Date,Duration,"Minutes (Calculated)","Hours (Calculated)"
 // https://timesheet.dev3.evoludata.com/api/trackers/2/items/45,
@@ -13,10 +15,6 @@ declare(strict_types=1);
 //                                                                 "1 hour, 9 minutes",
 //                                                                                69,
 //                                                                                                         1.15
-
-function debug($x) {
-    error_log(var_export($x, true));
-}
 
 function parseWikiApiCSV($str)
 {

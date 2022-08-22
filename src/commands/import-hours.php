@@ -12,6 +12,7 @@ require_once(__DIR__ . '/../parsers/time-CSV.php');
 require_once(__DIR__ . '/../parsers/timeBro-CSV.php');
 require_once(__DIR__ . '/../parsers/timecamp-CSV.php');
 require_once(__DIR__ . '/../parsers/timeDoctor-CSV.php');
+require_once(__DIR__ . '/../parsers/timeld-NDJSON.php');
 require_once(__DIR__ . '/../parsers/timely-CSV.php');
 require_once(__DIR__ . '/../parsers/timeManager-CSV.php');
 require_once(__DIR__ . '/../parsers/timesheet-CSV.php');
@@ -50,7 +51,7 @@ function importHoursInline($context, $format, $contents, $importTime)
         "verifyTime-JSON" =>"parseVerifyTimeJSON",
         "wiki-suite-JSON" => "parseWikiApiJSON",
         "wikiApi-CSV" => "parseWikiApiCSV",
-        "timeld-JSON" => "parseTimeldJSON"
+        "timeld-NDJSON" => "parseTimeldNDJSON"
     ];
 
 
