@@ -348,3 +348,14 @@ function getMovementAndStatement($movementId, $statementId) {
    }
    return [json_encode($rows, JSON_PRETTY_PRINT)];
 }
+
+function hasAccess($componentId, $userId) {
+    $query = "SELECT count(*) FROM accessControl WHERE componentid = :componentid AND userid = :userid";
+    $res = getDbConn()->executeQuery($query, [ "componentid" => $componentId, "userid" => $userId ]);
+    $ass = $res->fetchAllAssociative();
+    // var_dump($ass);
+    if ($ass[0]["count"] > 0) {
+        return true;
+    }
+    return false;
+}

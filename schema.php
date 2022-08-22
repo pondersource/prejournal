@@ -54,6 +54,10 @@ function getTables()
   componentId numeric
 );",
 
+        // when creating or updating a movement,
+        // the user needs to have access to the
+        // fromComponent of that movement
+        // via this table
         "drop table if exists accessControl;",
         "create table accessControl (
   id SERIAL PRIMARY KEY,
