@@ -5,44 +5,20 @@
     -->
 	<div id="content" class="app-prejournal">
 		<AppNavigation>
-			<!-- <AppNavigationNew v-if="!loading"
-				:text="t('prejournal', 'New note')"
-				:disabled="false"
-				button-id="new-prejournal-button"
-				button-class="icon-add"
-				@click="newNote" /> -->
 			<ul>
 				<AppNavigationItem v-for="note in notes"
 					:key="note.id"
-					:title="note.title ? note.title : t('prejournal', 'New note')"
+					:title="note.title"
 					:class="{active: currentNoteId === note.id}"
 					@click="openNote(note)">
-					<template slot="actions">
-						<!-- <ActionButton v-if="note.id === -1"
-							icon="icon-close"
-							@click="cancelNewNote(note)">
-							{{
-							t('prejournal', 'Cancel note creation') }}
-						</ActionButton>
-						<ActionButton v-else
-							icon="icon-delete"
-							@click="deleteNote(note)">
-							{{
-							 t('prejournal', 'Import file') }}
-						</ActionButton> -->
-					</template>
 				</AppNavigationItem>
 			</ul>
 		</AppNavigation>
 		<AppContent>
 			<div v-if="currentNote">
-				<!-- <input ref="title"
-					v-model="currentNote.title"
-					type="text"
-					:disabled="updating"> -->
 				<br><br>
 				Format:
-				<select ref="format" v-model="currentNote.format" :disabled="updating">
+				<select ref="content" v-model="currentNote.content" :disabled="updating">
 					<option value="">--Please choose an option--</option>
 					<option value="savemytime">Save My Time</option>
 					<option value="scoro">Scoro</option>
@@ -65,7 +41,7 @@
 					class="primary"
 					:value="t('prejournal', 'Import')"
 					:disabled="updating || !savePossible"
-					@click="saveNote">
+					@click="importFile">
 			</div>
 			<div v-else id="emptycontent">
 				<div class="icon-file" />
@@ -134,7 +110,7 @@ export default {
 			this.notes = response.data
 		} catch (e) {
 			console.error(e)
-			showError(t('notestutorial', 'Could not fetch notes'))
+			showError(t('prejournal', 'Could not fetch notes'))
 		}
 		this.loading = false
 	},
@@ -149,6 +125,7 @@ export default {
 				return
 			}
 			this.currentNoteId = note.id
+			console.log(`current note id ${this.currentNoteId}`);
 			this.$nextTick(() => {
 				this.$refs.content.focus()
 			})
@@ -157,12 +134,21 @@ export default {
 		 * Action tiggered when clicking the save button
 		 * create a new note or save
 		 */
-		saveNote() {
-			if (this.currentNoteId === -1) {
-				this.createNote(this.currentNote)
-			} else {
-				this.updateNote(this.currentNote)
+		async importFile() {
+			this.updating = true
+			console.log(this.currentNote);
+			console.log(this.currentNoteId);
+			
+			try {
+				await axios.post(generateUrl(`/apps/prejournal/import`), {
+					contentType: this.currentNote.content,
+					file: this.currentNote.title
+			  });
+			} catch (e) {
+				console.error(e)
+				showError(t('prejournal', 'Could not import the file'))
 			}
+			this.updating = false
 		},
 		/**
 		 * Create a new note and focus the note content field automatically
@@ -202,7 +188,7 @@ export default {
 				this.currentNoteId = response.data.id
 			} catch (e) {
 				console.error(e)
-				showError(t('notestutorial', 'Could not create the note'))
+				showError(t('prejournal', 'Could not create the note'))
 			}
 			this.updating = false
 		},
@@ -216,7 +202,7 @@ export default {
 				await axios.put(generateUrl(`/apps/prejournal/notes/${note.id}`), note)
 			} catch (e) {
 				console.error(e)
-				showError(t('notestutorial', 'Could not update the note'))
+				showError(t('prejournal', 'Could not update the note'))
 			}
 			this.updating = false
 		},

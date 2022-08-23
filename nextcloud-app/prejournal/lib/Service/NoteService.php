@@ -61,6 +61,7 @@ class NoteService {
 	}
 
 	public function update(int $id, string $title, string $content, string $userId): Note {
+		error_log("in update!");
 		try {
 			$note = $this->mapper->find($id, $userId);
 			$note->setTitle($title);

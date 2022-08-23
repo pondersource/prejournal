@@ -62,6 +62,10 @@ class NoteApiController extends ApiController {
 	 */
 	public function update(int $id, string $title,
 						   string $content): DataResponse {
+		error_log("importing!");
+		error_log(var_export($id, true));
+		error_log(var_export($title, true));
+		error_log(var_export($content, true));
 		return $this->handleNotFound(function () use ($id, $title, $content) {
 			return $this->service->update($id, $title, $content, $this->userId);
 		});

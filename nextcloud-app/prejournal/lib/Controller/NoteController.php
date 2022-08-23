@@ -30,6 +30,30 @@ class NoteController extends Controller {
 		$this->userFolder = $this->rootFolder->getUserFolder($userId);
 	}
 
+
+	/**
+	 * @NoAdminRequired
+	 */
+	public function import($contentType, $file): DataResponse {
+		error_log(var_export("import!", true));
+		error_log(var_export($contentType, true));
+		error_log(var_export($file, true));
+
+		// $list = $this->service->findAll($this->userId);
+		// $nodes = $this->userFolder->getDirectoryListing();
+		// $list = array_map(function (\OCP\Files\Node $node) {
+		// 	$prefixLen = strlen("/" . $this->userId . "/files/");
+		// 	return [
+		// 		"title" => substr($node->getPath(), $prefixLen),
+		// 		"content" => "sdv",
+		// 		"userId" => "admin",
+		// 		"id" => 123
+		// 	];
+		// }, $nodes);
+		// error_log(var_export($list, true));
+		return new DataResponse([]);
+	}
+
 	/**
 	 * @NoAdminRequired
 	 */
@@ -41,7 +65,8 @@ class NoteController extends Controller {
 			return [
 				"title" => substr($node->getPath(), $prefixLen),
 				"content" => "sdv",
-				"userId" => "admin"
+				"userId" => "admin",
+				"id" => 123
 			];
 		}, $nodes);
 		error_log(var_export($list, true));
