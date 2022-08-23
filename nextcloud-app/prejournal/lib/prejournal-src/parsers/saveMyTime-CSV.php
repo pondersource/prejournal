@@ -18,7 +18,7 @@ function parseSaveMyTimeCSV($str)
 
         if (count($cells) == 8) {
             array_push($ret, [
-                "worker" => $_SERVER['PREJOURNAL_USERNAME'],
+                "worker" => (isset($_SERVER['PREJOURNAL_USERNAME']) ? $_SERVER['PREJOURNAL_USERNAME'] : 'admin'),
                 "project" => $project_name,
                 "start" => strtotime($cells[3]),
                 "seconds" => strtotime($cells[5]) - strtotime($cells[3])

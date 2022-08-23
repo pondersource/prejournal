@@ -49,7 +49,7 @@ class NoteController extends Controller {
 		error_log(var_export($content, true));
 		error_log(var_export($file, true));
 
-		\PreJournal\RunCommand\runCommandWithInlineData(["user" => [
+		$ret = \PreJournal\RunCommand\runCommandWithInlineData(["user" => [
 			"username" => "admin",
 			"id" => 1
 			]
@@ -72,7 +72,7 @@ class NoteController extends Controller {
 		// 	];
 		// }, $nodes);
 		// error_log(var_export($list, true));
-		return new DataResponse([]);
+		return new DataResponse($ret);
 	}
 
 	/**
@@ -106,7 +106,7 @@ class NoteController extends Controller {
 				"title" => $pathForUser,
 				"content" => $content,
 				"userId" => "admin",
-				"id" => 123
+				"id" => $pathForUser,
 			];
 		}, $nodes);
 		error_log(var_export($list, true));
