@@ -5,12 +5,12 @@
     -->
 	<div id="content" class="app-prejournal">
 		<AppNavigation>
-			<AppNavigationNew v-if="!loading"
+			<!-- <AppNavigationNew v-if="!loading"
 				:text="t('prejournal', 'New note')"
 				:disabled="false"
 				button-id="new-prejournal-button"
 				button-class="icon-add"
-				@click="newNote" />
+				@click="newNote" /> -->
 			<ul>
 				<AppNavigationItem v-for="note in notes"
 					:key="note.id"
@@ -18,7 +18,7 @@
 					:class="{active: currentNoteId === note.id}"
 					@click="openNote(note)">
 					<template slot="actions">
-						<ActionButton v-if="note.id === -1"
+						<!-- <ActionButton v-if="note.id === -1"
 							icon="icon-close"
 							@click="cancelNewNote(note)">
 							{{
@@ -28,29 +28,49 @@
 							icon="icon-delete"
 							@click="deleteNote(note)">
 							{{
-							 t('prejournal', 'Delete note') }}
-						</ActionButton>
+							 t('prejournal', 'Import file') }}
+						</ActionButton> -->
 					</template>
 				</AppNavigationItem>
 			</ul>
 		</AppNavigation>
 		<AppContent>
 			<div v-if="currentNote">
-				<input ref="title"
+				<!-- <input ref="title"
 					v-model="currentNote.title"
 					type="text"
-					:disabled="updating">
-				<textarea ref="content" v-model="currentNote.content" :disabled="updating" />
+					:disabled="updating"> -->
+				<br><br>
+				Format:
+				<select ref="format" v-model="currentNote.format" :disabled="updating">
+					<option value="">--Please choose an option--</option>
+					<option value="savemytime">Save My Time</option>
+					<option value="scoro">Scoro</option>
+					<option value="stratus">Stratus</option>
+					<option value="wbblytime">Wbbly Time</option>
+					<option value="timebro">TimeBro</option>
+					<option value="timecamp">Timecamp</option>
+					<option value="timedoctor">Time Doctor</option>
+					<option value="timely">Timely</option>
+					<option value="timesheeturenapp">Timesheet Urenapp</option>
+					<option value="timesheetmobile">Timesheet Mobile</option>
+					<option value="veryfitimesheets">Veryfi Timesheets</option>
+					<option value="timetip">Timetip</option>
+					<option value="anukotimetracker">Anuko Timetracker</option>
+					<option value="timetrackercli">Time Tracker CLI</option>
+					<option value="ebillitytimetracker">eBillity Time tracker</option>
+					<option value="nextcloudtimetracker">Nextcloud Time Tracker</option>
+				</select>
 				<input type="button"
 					class="primary"
-					:value="t('prejournal', 'Save')"
+					:value="t('prejournal', 'Import')"
 					:disabled="updating || !savePossible"
 					@click="saveNote">
 			</div>
 			<div v-else id="emptycontent">
 				<div class="icon-file" />
 				<h2>{{
-				 t('prejournal', 'Create a note to get started') }}</h2>
+				 t('prejournal', 'Select a timetracker export file to get started') }}</h2>
 			</div>
 		</AppContent>
 	</div>
