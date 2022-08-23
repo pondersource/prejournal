@@ -357,5 +357,5 @@ function hasAccess($componentId, $userId) {
     if ($ass[0]["count"] > 0) {
         return true;
     }
-    return false;
+    throw new Error("UserId $userId is not allowed to create movements with fromComponent == $componentId");
 }

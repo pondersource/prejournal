@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 require_once(__DIR__ . '/../platform.php');
+require_once(__DIR__ . '/../utils.php');
 require_once(__DIR__ . '/helpers/createMovement.php');
 require_once(__DIR__ . '/../parsers/muze-JSON.php');
 require_once(__DIR__ . '/helpers/createStatement.php');
@@ -60,7 +61,7 @@ function importHoursInline($context, $format, $contents, $importTime)
         $entries = $parserFunctions[$format]($contents);
 
         for ($i = 0; $i < count($entries); $i++) {
-            //var_dump($entries);
+            debug($entries);
             $movementId = intval(createMovement($context, [
                 "create-movement",
                 $context["user"]["id"],
@@ -70,6 +71,7 @@ function importHoursInline($context, $format, $contents, $importTime)
                 $entries[$i]["start"],
                 $entries[$i]["seconds"] / 3600
             ])[0]);
+            debug("Movement created! $movementId");
             $statementId = intval(createStatement($context, [
                 "create-statement",
                 $movementId,
