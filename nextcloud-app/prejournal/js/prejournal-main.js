@@ -18750,8 +18750,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context2.prev = 3;
                 _context2.next = 6;
                 return _nextcloud_axios__WEBPACK_IMPORTED_MODULE_8__["default"].post((0,_nextcloud_router__WEBPACK_IMPORTED_MODULE_6__.generateUrl)("/apps/prejournal/import"), {
-                  contentType: _this4.currentNote.content,
-                  file: _this4.currentNote.title
+                  contentType: _this4.currentNote.contentType,
+                  file: _this4.currentNote.title,
+                  content: _this4.currentNote.content
                 });
 
               case 6:
@@ -18980,10 +18981,10 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.currentNote.content,
-      expression: "currentNote.content"
+      value: _vm.currentNote.contentType,
+      expression: "currentNote.contentType"
     }],
-    ref: "content",
+    ref: "contentType",
     attrs: {
       disabled: _vm.updating
     },
@@ -18996,7 +18997,7 @@ var render = function render() {
           return val;
         });
 
-        _vm.$set(_vm.currentNote, "content", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+        _vm.$set(_vm.currentNote, "contentType", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
       }
     }
   }, [_c("option", {
@@ -19005,69 +19006,94 @@ var render = function render() {
     }
   }, [_vm._v("--Please choose an option--")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "savemytime"
+      value: "saveMyTime-CSV"
     }
   }, [_vm._v("Save My Time")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "scoro"
+      value: "scoro-JSON"
     }
   }, [_vm._v("Scoro")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "stratus"
+      value: "stratustime-JSON"
     }
   }, [_vm._v("Stratus")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "wbblytime"
+      value: "time-CSV"
     }
   }, [_vm._v("Wbbly Time")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "timebro"
+      value: "timeBro-CSV"
     }
   }, [_vm._v("TimeBro")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "timecamp"
+      value: "timecamp-CSV"
     }
   }, [_vm._v("Timecamp")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "timedoctor"
+      value: "timeDoctor-CSV"
     }
   }, [_vm._v("Time Doctor")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "timely"
+      value: "timely-CSV"
     }
   }, [_vm._v("Timely")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "timesheeturenapp"
+      value: "timeManager-CSV"
+    }
+  }, [_vm._v("Time Manager")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "timesheet-CSV"
     }
   }, [_vm._v("Timesheet Urenapp")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "timesheetmobile"
+      value: "timesheetMobile-CSV"
     }
   }, [_vm._v("Timesheet Mobile")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "veryfitimesheets"
-    }
-  }, [_vm._v("Veryfi Timesheets")]), _vm._v(" "), _c("option", {
-    attrs: {
-      value: "timetip"
+      value: "timetip-JSON"
     }
   }, [_vm._v("Timetip")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "anukotimetracker"
+      value: "timetracker-XML"
     }
   }, [_vm._v("Anuko Timetracker")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "timetrackercli"
+      value: "timeTrackerCli-JSON"
     }
   }, [_vm._v("Time Tracker CLI")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "ebillitytimetracker"
+      value: "timeTrackerDaily-CSV"
     }
   }, [_vm._v("eBillity Time tracker")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "nextcloudtimetracker"
+      value: "timeTrackerNextcloud-JSON"
     }
-  }, [_vm._v("Nextcloud Time Tracker")])]), _vm._v(" "), _c("input", {
+  }, [_vm._v("Nextcloud Time Tracker")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "veryfiTime-JSON"
+    }
+  }, [_vm._v("Veryfi Timesheets")])]), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.currentNote.content,
+      expression: "currentNote.content"
+    }],
+    ref: "content",
+    attrs: {
+      disabled: _vm.updating
+    },
+    domProps: {
+      value: _vm.currentNote.content
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+
+        _vm.$set(_vm.currentNote, "content", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _c("input", {
     staticClass: "primary",
     attrs: {
       type: "button",
@@ -64211,4 +64237,4 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].mixin({
 
 /******/ })()
 ;
-//# sourceMappingURL=prejournal-main.js.map?v=44288b9ed7caf4c8abf3
+//# sourceMappingURL=prejournal-main.js.map?v=20451dbb6c4c995cb3fb

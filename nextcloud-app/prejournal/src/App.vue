@@ -18,25 +18,27 @@
 			<div v-if="currentNote">
 				<br><br>
 				Format:
-				<select ref="content" v-model="currentNote.content" :disabled="updating">
+				<select ref="contentType" v-model="currentNote.contentType" :disabled="updating">
 					<option value="">--Please choose an option--</option>
-					<option value="savemytime">Save My Time</option>
-					<option value="scoro">Scoro</option>
-					<option value="stratus">Stratus</option>
-					<option value="wbblytime">Wbbly Time</option>
-					<option value="timebro">TimeBro</option>
-					<option value="timecamp">Timecamp</option>
-					<option value="timedoctor">Time Doctor</option>
-					<option value="timely">Timely</option>
-					<option value="timesheeturenapp">Timesheet Urenapp</option>
-					<option value="timesheetmobile">Timesheet Mobile</option>
-					<option value="veryfitimesheets">Veryfi Timesheets</option>
-					<option value="timetip">Timetip</option>
-					<option value="anukotimetracker">Anuko Timetracker</option>
-					<option value="timetrackercli">Time Tracker CLI</option>
-					<option value="ebillitytimetracker">eBillity Time tracker</option>
-					<option value="nextcloudtimetracker">Nextcloud Time Tracker</option>
+					<option value="saveMyTime-CSV">Save My Time</option>
+					<option value="scoro-JSON">Scoro</option>
+					<option value="stratustime-JSON">Stratus</option>
+					<option value="time-CSV">Wbbly Time</option>
+					<option value="timeBro-CSV">TimeBro</option>
+					<option value="timecamp-CSV">Timecamp</option>
+					<option value="timeDoctor-CSV">Time Doctor</option>
+					<option value="timely-CSV">Timely</option>
+					<option value="timeManager-CSV">Time Manager</option>
+					<option value="timesheet-CSV">Timesheet Urenapp</option>
+					<option value="timesheetMobile-CSV">Timesheet Mobile</option>
+					<option value="timetip-JSON">Timetip</option>
+					<option value="timetracker-XML">Anuko Timetracker</option>
+					<option value="timeTrackerCli-JSON">Time Tracker CLI</option>
+					<option value="timeTrackerDaily-CSV">eBillity Time tracker</option>
+					<option value="timeTrackerNextcloud-JSON">Nextcloud Time Tracker</option>
+					<option value="veryfiTime-JSON">Veryfi Timesheets</option>
 				</select>
+				<textarea ref="content" v-model="currentNote.content" :disabled="updating" />
 				<input type="button"
 					class="primary"
 					:value="t('prejournal', 'Import')"
@@ -141,8 +143,9 @@ export default {
 			
 			try {
 				await axios.post(generateUrl(`/apps/prejournal/import`), {
-					contentType: this.currentNote.content,
-					file: this.currentNote.title
+					contentType: this.currentNote.contentType,
+					file: this.currentNote.title,
+					content: this.currentNote.content
 			  });
 			} catch (e) {
 				console.error(e)
