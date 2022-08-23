@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 require_once(__DIR__ . '/../platform.php');
+require_once(__DIR__ . '/../utils.php');
 require_once(__DIR__ . '/helpers/createMovement.php');
 require_once(__DIR__ . '/../parsers/muze-JSON.php');
 require_once(__DIR__ . '/helpers/createStatement.php');
@@ -12,6 +13,7 @@ require_once(__DIR__ . '/../parsers/time-CSV.php');
 require_once(__DIR__ . '/../parsers/timeBro-CSV.php');
 require_once(__DIR__ . '/../parsers/timecamp-CSV.php');
 require_once(__DIR__ . '/../parsers/timeDoctor-CSV.php');
+require_once(__DIR__ . '/../parsers/timeld-NDJSON.php');
 require_once(__DIR__ . '/../parsers/timely-CSV.php');
 require_once(__DIR__ . '/../parsers/timeManager-CSV.php');
 require_once(__DIR__ . '/../parsers/timesheet-CSV.php');
@@ -23,6 +25,7 @@ require_once(__DIR__ . '/../parsers/timeTrackerDaily-CSV.php');
 require_once(__DIR__ . '/../parsers/timeTrackerNextcloud-JSON.php');
 require_once(__DIR__ . '/../parsers/verifyTime-JSON.php');
 require_once(__DIR__ . '/../parsers/wikiApi-JSON.php');
+require_once(__DIR__ . '/../parsers/wikiApi-CSV.php');
 // E.g.: php src/cli-single.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0             1           2         3
 
@@ -47,7 +50,9 @@ function importHoursInline($context, $format, $contents, $importTime)
         "timeTrackerDaily-CSV" => "parseTimeTrackerDailyCSV",
         "timeTrackerNextcloud-JSON" => "parseTimeTrackerNextcloudJSON",
         "verifyTime-JSON" =>"parseVerifyTimeJSON",
-        "wiki-suite-JSON" => "parseWikiApiJSON"
+        "wiki-suite-JSON" => "parseWikiApiJSON",
+        "wikiApi-CSV" => "parseWikiApiCSV",
+        "timeld-NDJSON" => "parseTimeldNDJSON"
     ];
 
 
@@ -56,7 +61,7 @@ function importHoursInline($context, $format, $contents, $importTime)
         $entries = $parserFunctions[$format]($contents);
 
         for ($i = 0; $i < count($entries); $i++) {
-            //var_dump($entries);
+            debug($entries);
             $movementId = intval(createMovement($context, [
                 "create-movement",
                 $context["user"]["id"],
@@ -66,6 +71,7 @@ function importHoursInline($context, $format, $contents, $importTime)
                 $entries[$i]["start"],
                 $entries[$i]["seconds"] / 3600
             ])[0]);
+            debug("Movement created! $movementId");
             $statementId = intval(createStatement($context, [
                 "create-statement",
                 $movementId,
