@@ -1,0 +1,5 @@
+/vendor/
+.phpunit.result.cache
+service-account-file.json
+.env
+application_default_credentials.json

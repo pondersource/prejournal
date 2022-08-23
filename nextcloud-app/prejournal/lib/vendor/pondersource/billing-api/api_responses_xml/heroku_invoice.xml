@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<x1:invoice xmlns:x1="http://example.org/invoices">
+ <x1:InvoiceTeamItem xmlns:x1="http://example.org/invoices">
+  <x1:charges_total xmlns:x1="http://example.org/invoices">0</x1:charges_total>
+  <x1:created_at xmlns:x1="http://example.org/invoices">2022-02-17T02:45:30Z</x1:created_at>
+  <x1:credits_total xmlns:x1="http://example.org/invoices"/>
+  <x1:id xmlns:x1="http://example.org/invoices">22e1c650-291e-48b7-b462-4bbd9eba4a0e</x1:id>
+  <x1:number xmlns:x1="http://example.org/invoices">62983158</x1:number>
+  <x1:period_start xmlns:x1="http://example.org/invoices">2022-02-01</x1:period_start>
+  <x1:period_end xmlns:x1="http://example.org/invoices">2022-03-01</x1:period_end>
+  <x1:state xmlns:x1="http://example.org/invoices">1</x1:state>
+  <x1:total xmlns:x1="http://example.org/invoices">0</x1:total>
+  <x1:updated_at xmlns:x1="http://example.org/invoices">2022-03-01T12:59:11Z</x1:updated_at>
+ </x1:InvoiceTeamItem>
+ <x1:InvoiceTeamItem xmlns:x1="http://example.org/invoices">
+  <x1:charges_total xmlns:x1="http://example.org/invoices">0</x1:charges_total>
+  <x1:created_at xmlns:x1="http://example.org/invoices">2022-03-01T02:44:04Z</x1:created_at>
+  <x1:credits_total xmlns:x1="http://example.org/invoices"/>
+  <x1:id xmlns:x1="http://example.org/invoices">e4bbdb15-40db-4de8-b89f-d2f921766302</x1:id>
+  <x1:number xmlns:x1="http://example.org/invoices">63410419</x1:number>
+  <x1:period_start xmlns:x1="http://example.org/invoices">2022-03-01</x1:period_start>
+  <x1:period_end xmlns:x1="http://example.org/invoices">2022-03-17</x1:period_end>
+  <x1:state xmlns:x1="http://example.org/invoices">0</x1:state>
+  <x1:total xmlns:x1="http://example.org/invoices">0</x1:total>
+  <x1:updated_at xmlns:x1="http://example.org/invoices">2022-03-17T02:40:34Z</x1:updated_at>
+ </x1:InvoiceTeamItem>
+</x1:invoice>
