@@ -1,12 +1,12 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\Middleware;
+namespace Doctrine\DBAM\Driver\Middleware;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver;
-use Doctrine\DBAL\Driver\API\ExceptionConverter;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\VersionAwarePlatformDriver;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Driver;
+use Doctrine\DBAM\Driver\API\ExceptionConverter;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\VersionAwarePlatformDriver;
 
 abstract class AbstractDriverMiddleware implements VersionAwarePlatformDriver
 {

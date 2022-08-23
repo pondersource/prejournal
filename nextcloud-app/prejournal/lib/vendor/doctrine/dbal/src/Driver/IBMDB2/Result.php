@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Driver\IBMDB2;
+namespace Doctrine\DBAM\Driver\IBMDB2;
 
-use Doctrine\DBAL\Driver\FetchUtils;
-use Doctrine\DBAL\Driver\IBMDB2\Exception\StatementError;
-use Doctrine\DBAL\Driver\Result as ResultInterface;
+use Doctrine\DBAM\Driver\FetchUtils;
+use Doctrine\DBAM\Driver\IBMDB2\Exception\StatementError;
+use Doctrine\DBAM\Driver\Result as ResultInterface;
 
 use function db2_fetch_array;
 use function db2_fetch_assoc;

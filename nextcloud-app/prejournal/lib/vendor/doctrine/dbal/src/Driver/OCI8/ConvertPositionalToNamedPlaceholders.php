@@ -1,8 +1,8 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\OCI8;
+namespace Doctrine\DBAM\Driver\OCI8;
 
-use Doctrine\DBAL\SQL\Parser\Visitor;
+use Doctrine\DBAM\SQL\Parser\Visitor;
 
 use function count;
 use function implode;

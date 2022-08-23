@@ -1,16 +1,16 @@
 <?php
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAM;
 
-use Doctrine\DBAL\Driver\API\ExceptionConverter;
-use Doctrine\DBAL\Driver\Connection as DriverConnection;
-use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Schema\AbstractSchemaManager;
+use Doctrine\DBAM\Driver\API\ExceptionConverter;
+use Doctrine\DBAM\Driver\Connection as DriverConnection;
+use Doctrine\DBAM\Driver\Exception;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Schema\AbstractSchemaManager;
 
 /**
  * Driver interface.
- * Interface that all DBAL drivers must implement.
+ * Interface that all DBAM drivers must implement.
  */
 interface Driver
 {
@@ -42,7 +42,7 @@ interface Driver
     public function getSchemaManager(Connection $conn, AbstractPlatform $platform);
 
     /**
-     * Gets the ExceptionConverter that can be used to convert driver-level exceptions into DBAL exceptions.
+     * Gets the ExceptionConverter that can be used to convert driver-level exceptions into DBAM exceptions.
      */
     public function getExceptionConverter(): ExceptionConverter;
 }

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Doctrine\ORM\Tools\Event;
 
 use Doctrine\Common\EventArgs;
-use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Schema\Table;
+use Doctrine\DBAM\Schema\Schema;
+use Doctrine\DBAM\Schema\Table;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
 /**

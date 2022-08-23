@@ -1,9 +1,9 @@
 <?php
 
-namespace Doctrine\DBAL\Event;
+namespace Doctrine\DBAM\Event;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Schema\Index;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Schema\Index;
 
 /**
  * Event Arguments used when the portable index definition is generated inside {@see AbstractSchemaManager}.

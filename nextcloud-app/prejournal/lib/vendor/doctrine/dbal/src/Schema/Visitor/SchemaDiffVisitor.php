@@ -1,11 +1,11 @@
 <?php
 
-namespace Doctrine\DBAL\Schema\Visitor;
+namespace Doctrine\DBAM\Schema\Visitor;
 
-use Doctrine\DBAL\Schema\ForeignKeyConstraint;
-use Doctrine\DBAL\Schema\Sequence;
-use Doctrine\DBAL\Schema\Table;
-use Doctrine\DBAL\Schema\TableDiff;
+use Doctrine\DBAM\Schema\ForeignKeyConstraint;
+use Doctrine\DBAM\Schema\Sequence;
+use Doctrine\DBAM\Schema\Table;
+use Doctrine\DBAM\Schema\TableDiff;
 
 /**
  * Visit a SchemaDiff.

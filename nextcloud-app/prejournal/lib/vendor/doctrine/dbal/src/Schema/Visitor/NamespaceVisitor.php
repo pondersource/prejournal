@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Schema\Visitor;
+namespace Doctrine\DBAM\Schema\Visitor;
 
 /**
  * Visitor that can visit schema namespaces.

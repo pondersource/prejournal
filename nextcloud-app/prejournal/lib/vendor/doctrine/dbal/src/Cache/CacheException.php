@@ -1,8 +1,8 @@
 <?php
 
-namespace Doctrine\DBAL\Cache;
+namespace Doctrine\DBAM\Cache;
 
-use Doctrine\DBAL\Exception;
+use Doctrine\DBAM\Exception;
 
 /**
  * @psalm-immutable

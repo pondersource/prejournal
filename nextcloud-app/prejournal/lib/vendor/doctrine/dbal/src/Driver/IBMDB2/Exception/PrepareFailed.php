@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Driver\IBMDB2\Exception;
+namespace Doctrine\DBAM\Driver\IBMDB2\Exception;
 
-use Doctrine\DBAL\Driver\AbstractException;
+use Doctrine\DBAM\Driver\AbstractException;
 
 /**
  * @internal

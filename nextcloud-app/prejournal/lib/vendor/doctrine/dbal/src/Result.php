@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAM;
 
-use Doctrine\DBAL\Driver\Exception as DriverException;
-use Doctrine\DBAL\Driver\Result as DriverResult;
-use Doctrine\DBAL\Exception\NoKeyValue;
+use Doctrine\DBAM\Driver\Exception as DriverException;
+use Doctrine\DBAM\Driver\Result as DriverResult;
+use Doctrine\DBAM\Exception\NoKeyValue;
 use LogicException;
 use Traversable;
 
@@ -270,7 +270,7 @@ class Result
     }
 
     /**
-     * BC layer for a wide-spread use-case of old DBAL APIs
+     * BC layer for a wide-spread use-case of old DBAM APIs
      *
      * @deprecated This API is deprecated and will be removed after 2022
      *
@@ -296,11 +296,11 @@ class Result
             return $this->fetchOne();
         }
 
-        throw new LogicException('Only fetch modes declared on Doctrine\DBAL\FetchMode are supported by legacy API.');
+        throw new LogicException('Only fetch modes declared on Doctrine\DBAM\FetchMode are supported by legacy API.');
     }
 
     /**
-     * BC layer for a wide-spread use-case of old DBAL APIs
+     * BC layer for a wide-spread use-case of old DBAM APIs
      *
      * @deprecated This API is deprecated and will be removed after 2022
      *
@@ -326,6 +326,6 @@ class Result
             return $this->fetchFirstColumn();
         }
 
-        throw new LogicException('Only fetch modes declared on Doctrine\DBAL\FetchMode are supported by legacy API.');
+        throw new LogicException('Only fetch modes declared on Doctrine\DBAM\FetchMode are supported by legacy API.');
     }
 }

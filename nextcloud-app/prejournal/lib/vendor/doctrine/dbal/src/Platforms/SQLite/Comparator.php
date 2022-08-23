@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Platforms\SQLite;
+namespace Doctrine\DBAM\Platforms\SQLite;
 
-use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Doctrine\DBAL\Schema\Comparator as BaseComparator;
-use Doctrine\DBAL\Schema\Table;
+use Doctrine\DBAM\Platforms\SqlitePlatform;
+use Doctrine\DBAM\Schema\Comparator as BaseComparator;
+use Doctrine\DBAM\Schema\Table;
 
 use function strcasecmp;
 

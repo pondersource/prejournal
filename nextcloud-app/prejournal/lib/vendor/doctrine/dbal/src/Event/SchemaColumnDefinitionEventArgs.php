@@ -1,9 +1,9 @@
 <?php
 
-namespace Doctrine\DBAL\Event;
+namespace Doctrine\DBAM\Event;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Schema\Column;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Schema\Column;
 
 /**
  * Event Arguments used when the portable column definition is generated inside {@see AbstractPlatform}.

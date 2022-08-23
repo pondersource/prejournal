@@ -1,18 +1,18 @@
 <?php
 
-namespace Doctrine\DBAL\Platforms;
+namespace Doctrine\DBAM\Platforms;
 
-use Doctrine\DBAL\Schema\Column;
-use Doctrine\DBAL\Schema\ColumnDiff;
-use Doctrine\DBAL\Schema\ForeignKeyConstraint;
-use Doctrine\DBAL\Schema\Identifier;
-use Doctrine\DBAL\Schema\Index;
-use Doctrine\DBAL\Schema\Sequence;
-use Doctrine\DBAL\Schema\TableDiff;
-use Doctrine\DBAL\Types\BinaryType;
-use Doctrine\DBAL\Types\BlobType;
-use Doctrine\DBAL\Types\PhpIntegerMappingType;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Schema\Column;
+use Doctrine\DBAM\Schema\ColumnDiff;
+use Doctrine\DBAM\Schema\ForeignKeyConstraint;
+use Doctrine\DBAM\Schema\Identifier;
+use Doctrine\DBAM\Schema\Index;
+use Doctrine\DBAM\Schema\Sequence;
+use Doctrine\DBAM\Schema\TableDiff;
+use Doctrine\DBAM\Types\BinaryType;
+use Doctrine\DBAM\Types\BlobType;
+use Doctrine\DBAM\Types\PhpIntegerMappingType;
+use Doctrine\DBAM\Types\Type;
 use Doctrine\Deprecations\Deprecation;
 use UnexpectedValueException;
 
@@ -516,7 +516,7 @@ SQL
                 $columnDefinition                  = $column->toArray();
                 $columnDefinition['autoincrement'] = false;
 
-                // here was a server version check before, but DBAL API does not support this anymore.
+                // here was a server version check before, but DBAM API does not support this anymore.
                 $query = 'ALTER ' . $oldColumnName . ' TYPE ' . $type->getSQLDeclaration($columnDefinition, $this);
                 $sql[] = 'ALTER TABLE ' . $diff->getName($this)->getQuotedName($this) . ' ' . $query;
             }

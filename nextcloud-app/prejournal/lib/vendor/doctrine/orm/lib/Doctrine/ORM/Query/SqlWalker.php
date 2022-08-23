@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Doctrine\ORM\Query;
 
 use BadMethodCallException;
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\LockMode;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\LockMode;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Types\Type;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Doctrine\DBAL\Query;
+namespace Doctrine\DBAM\Query;
 
-use Doctrine\DBAL\Exception;
+use Doctrine\DBAM\Exception;
 
 use function implode;
 

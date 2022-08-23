@@ -1,35 +1,35 @@
 <?php
 
-namespace Doctrine\DBAL\Platforms;
+namespace Doctrine\DBAM\Platforms;
 
 use Doctrine\Common\EventManager;
-use Doctrine\DBAL\Event\SchemaAlterTableAddColumnEventArgs;
-use Doctrine\DBAL\Event\SchemaAlterTableChangeColumnEventArgs;
-use Doctrine\DBAL\Event\SchemaAlterTableEventArgs;
-use Doctrine\DBAL\Event\SchemaAlterTableRemoveColumnEventArgs;
-use Doctrine\DBAL\Event\SchemaAlterTableRenameColumnEventArgs;
-use Doctrine\DBAL\Event\SchemaCreateTableColumnEventArgs;
-use Doctrine\DBAL\Event\SchemaCreateTableEventArgs;
-use Doctrine\DBAL\Event\SchemaDropTableEventArgs;
-use Doctrine\DBAL\Events;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Exception\InvalidLockMode;
-use Doctrine\DBAL\LockMode;
-use Doctrine\DBAL\Platforms\Keywords\KeywordList;
-use Doctrine\DBAL\Schema\Column;
-use Doctrine\DBAL\Schema\ColumnDiff;
-use Doctrine\DBAL\Schema\Constraint;
-use Doctrine\DBAL\Schema\ForeignKeyConstraint;
-use Doctrine\DBAL\Schema\Identifier;
-use Doctrine\DBAL\Schema\Index;
-use Doctrine\DBAL\Schema\Sequence;
-use Doctrine\DBAL\Schema\Table;
-use Doctrine\DBAL\Schema\TableDiff;
-use Doctrine\DBAL\Schema\UniqueConstraint;
-use Doctrine\DBAL\SQL\Parser;
-use Doctrine\DBAL\TransactionIsolationLevel;
-use Doctrine\DBAL\Types;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Event\SchemaAlterTableAddColumnEventArgs;
+use Doctrine\DBAM\Event\SchemaAlterTableChangeColumnEventArgs;
+use Doctrine\DBAM\Event\SchemaAlterTableEventArgs;
+use Doctrine\DBAM\Event\SchemaAlterTableRemoveColumnEventArgs;
+use Doctrine\DBAM\Event\SchemaAlterTableRenameColumnEventArgs;
+use Doctrine\DBAM\Event\SchemaCreateTableColumnEventArgs;
+use Doctrine\DBAM\Event\SchemaCreateTableEventArgs;
+use Doctrine\DBAM\Event\SchemaDropTableEventArgs;
+use Doctrine\DBAM\Events;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Exception\InvalidLockMode;
+use Doctrine\DBAM\LockMode;
+use Doctrine\DBAM\Platforms\Keywords\KeywordList;
+use Doctrine\DBAM\Schema\Column;
+use Doctrine\DBAM\Schema\ColumnDiff;
+use Doctrine\DBAM\Schema\Constraint;
+use Doctrine\DBAM\Schema\ForeignKeyConstraint;
+use Doctrine\DBAM\Schema\Identifier;
+use Doctrine\DBAM\Schema\Index;
+use Doctrine\DBAM\Schema\Sequence;
+use Doctrine\DBAM\Schema\Table;
+use Doctrine\DBAM\Schema\TableDiff;
+use Doctrine\DBAM\Schema\UniqueConstraint;
+use Doctrine\DBAM\SQL\Parser;
+use Doctrine\DBAM\TransactionIsolationLevel;
+use Doctrine\DBAM\Types;
+use Doctrine\DBAM\Types\Type;
 use Doctrine\Deprecations\Deprecation;
 use InvalidArgumentException;
 use UnexpectedValueException;
@@ -80,7 +80,7 @@ abstract class AbstractPlatform
      * Contains a list of all columns that should generate parseable column comments for type-detection
      * in reverse engineering scenarios.
      *
-     * @deprecated This property is deprecated and will be removed in Doctrine DBAL 4.0.
+     * @deprecated This property is deprecated and will be removed in Doctrine DBAM 4.0.
      *
      * @var string[]|null
      */
@@ -422,7 +422,7 @@ abstract class AbstractPlatform
     /**
      * Initializes the Doctrine Type comments instance variable for in_array() checks.
      *
-     * @deprecated This API will be removed in Doctrine DBAL 4.0.
+     * @deprecated This API will be removed in Doctrine DBAM 4.0.
      *
      * @return void
      */
@@ -431,7 +431,7 @@ abstract class AbstractPlatform
         Deprecation::triggerIfCalledFromOutside(
             'doctrine/dbal',
             'https://github.com/doctrine/dbal/pull/5058',
-            '%s is deprecated and will be removed in Doctrine DBAL 4.0.',
+            '%s is deprecated and will be removed in Doctrine DBAM 4.0.',
             __METHOD__
         );
 
@@ -460,7 +460,7 @@ abstract class AbstractPlatform
         Deprecation::triggerIfCalledFromOutside(
             'doctrine/dbal',
             'https://github.com/doctrine/dbal/pull/5058',
-            '%s is deprecated and will be removed in Doctrine DBAL 4.0. Use Type::requiresSQLCommentHint() instead.',
+            '%s is deprecated and will be removed in Doctrine DBAM 4.0. Use Type::requiresSQLCommentHint() instead.',
             __METHOD__
         );
 
@@ -483,7 +483,7 @@ abstract class AbstractPlatform
         Deprecation::triggerIfCalledFromOutside(
             'doctrine/dbal',
             'https://github.com/doctrine/dbal/pull/5058',
-            '%s is deprecated and will be removed in Doctrine DBAL 4.0. Use Type::requiresSQLCommentHint() instead.',
+            '%s is deprecated and will be removed in Doctrine DBAM 4.0. Use Type::requiresSQLCommentHint() instead.',
             __METHOD__
         );
 
@@ -1562,7 +1562,7 @@ abstract class AbstractPlatform
      * ANSI SQL FOR UPDATE specification.
      *
      * @param string $fromClause The FROM clause to append the hint for the given lock mode to
-     * @param int    $lockMode   One of the Doctrine\DBAL\LockMode::* constants
+     * @param int    $lockMode   One of the Doctrine\DBAM\LockMode::* constants
      * @psalm-param LockMode::* $lockMode
      */
     public function appendLockHint(string $fromClause, int $lockMode): string
@@ -3895,7 +3895,7 @@ abstract class AbstractPlatform
     /**
      * Creates an instance of the reserved keyword list of this platform.
      *
-     * This method will become @abstract in DBAL 4.0.0.
+     * This method will become @abstract in DBAM 4.0.0.
      *
      * @throws Exception
      */

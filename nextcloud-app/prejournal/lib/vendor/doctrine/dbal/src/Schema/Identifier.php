@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Schema;
+namespace Doctrine\DBAM\Schema;
 
 /**
  * An abstraction class for an asset identifier.

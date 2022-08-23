@@ -1,12 +1,12 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\SQLSrv;
+namespace Doctrine\DBAM\Driver\SQLSrv;
 
-use Doctrine\DBAL\Driver\Result as ResultInterface;
-use Doctrine\DBAL\Driver\ServerInfoAwareConnection;
-use Doctrine\DBAL\Driver\SQLSrv\Exception\Error;
-use Doctrine\DBAL\Driver\Statement as DriverStatement;
-use Doctrine\DBAL\ParameterType;
+use Doctrine\DBAM\Driver\Result as ResultInterface;
+use Doctrine\DBAM\Driver\ServerInfoAwareConnection;
+use Doctrine\DBAM\Driver\SQLSrv\Exception\Error;
+use Doctrine\DBAM\Driver\Statement as DriverStatement;
+use Doctrine\DBAM\ParameterType;
 use Doctrine\Deprecations\Deprecation;
 
 use function is_float;

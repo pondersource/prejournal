@@ -1,12 +1,12 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\PDO\SQLSrv;
+namespace Doctrine\DBAM\Driver\PDO\SQLSrv;
 
-use Doctrine\DBAL\Driver\AbstractSQLServerDriver;
-use Doctrine\DBAL\Driver\AbstractSQLServerDriver\Exception\PortWithoutHost;
-use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\Driver\PDO\Connection as PDOConnection;
-use Doctrine\DBAL\Driver\PDO\Exception as PDOException;
+use Doctrine\DBAM\Driver\AbstractSQLServerDriver;
+use Doctrine\DBAM\Driver\AbstractSQLServerDriver\Exception\PortWithoutHost;
+use Doctrine\DBAM\Driver\Exception;
+use Doctrine\DBAM\Driver\PDO\Connection as PDOConnection;
+use Doctrine\DBAM\Driver\PDO\Exception as PDOException;
 use PDO;
 
 use function is_int;

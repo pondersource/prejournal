@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Driver;
+namespace Doctrine\DBAM\Driver;
 
 /**
  * Driver-level statement execution result.

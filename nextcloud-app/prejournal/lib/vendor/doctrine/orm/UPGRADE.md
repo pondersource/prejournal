@@ -199,14 +199,14 @@ downstream packages or applications, and were consequently removed:
 
 ## Deprecated: database-side UUID generation
 
-[DB-generated UUIDs are deprecated as of `doctrine/dbal` 2.8][DBAL deprecation].
+[DB-generated UUIDs are deprecated as of `doctrine/dbal` 2.8][DBAM deprecation].
 As a consequence, using the `UUID` strategy for generating identifiers is deprecated as well.
 Furthermore, relying on the following classes and methods is deprecated:
 
 - `Doctrine\ORM\Id\UuidGenerator`
 - `Doctrine\ORM\Mapping\ClassMetadataInfo::isIdentifierUuid()`
 
-[DBAL deprecation]: https://github.com/doctrine/dbal/pull/3212
+[DBAM deprecation]: https://github.com/doctrine/dbal/pull/3212
 
 ## Minor BC BREAK: Custom hydrators and `toIterable()`
 
@@ -263,7 +263,7 @@ now always cleared regardless of the cache adapter being used.
 ## Minor BC BREAK: Failed commit now throw OptimisticLockException
 
 Method `Doctrine\ORM\UnitOfWork#commit()` can throw an OptimisticLockException when a commit silently fails and returns false
-since `Doctrine\DBAL\Connection#commit()` signature changed from returning void to boolean
+since `Doctrine\DBAM\Connection#commit()` signature changed from returning void to boolean
 
 ## Deprecated: `Doctrine\ORM\AbstractQuery#iterate()`
 
@@ -727,7 +727,7 @@ the hydration mode. Affected areas are:
 2. Affects the array hydrator which now includes the overhead of hydration compared to caching the final result.
 
 The API is backwards compatible however most of the getter methods on the `AbstractQuery` object are now
-deprecated in favor of calling AbstractQuery#getQueryCacheProfile(). This method returns a `Doctrine\DBAL\Cache\QueryCacheProfile`
+deprecated in favor of calling AbstractQuery#getQueryCacheProfile(). This method returns a `Doctrine\DBAM\Cache\QueryCacheProfile`
 instance with access to result cache driver, lifetime and cache key.
 
 
@@ -854,9 +854,9 @@ EntityManager using `EntityManager#merge()`. See this example:
 
 ## Changed SQL implementation of Postgres and Oracle DateTime types
 
-The DBAL Type "datetime" included the Timezone Offset in both Postgres and Oracle. As of this version they are now
+The DBAM Type "datetime" included the Timezone Offset in both Postgres and Oracle. As of this version they are now
 generated without Timezone (TIMESTAMP WITHOUT TIME ZONE instead of TIMESTAMP WITH TIME ZONE).
-See [this comment to Ticket DBAL-22](http://www.doctrine-project.org/jira/browse/DBAL-22?focusedCommentId=13396&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#action_13396)
+See [this comment to Ticket DBAM-22](http://www.doctrine-project.org/jira/browse/DBAM-22?focusedCommentId=13396&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#action_13396)
 for more details as well as migration issues for PostgreSQL and Oracle.
 
 Both Postgres and Oracle will throw Exceptions during hydration of Objects with "DateTime" fields unless migration steps are taken!
@@ -924,7 +924,7 @@ You now have to configure the script like:
 
     [php]
     $helperSet = new \Symfony\Components\Console\Helper\HelperSet(array(
-        'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($em->getConnection()),
+        'db' => new \Doctrine\DBAM\Tools\Console\Helper\ConnectionHelper($em->getConnection()),
         'em' => new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($em)
     ));
 
@@ -1079,7 +1079,7 @@ With new required method AbstractTask::buildDocumentation, its implementation de
 
 ## Changes in Method Signatures
 
-    * A bunch of Methods on both Doctrine\DBAL\Platforms\AbstractPlatform and Doctrine\DBAL\Schema\AbstractSchemaManager
+    * A bunch of Methods on both Doctrine\DBAM\Platforms\AbstractPlatform and Doctrine\DBAM\Schema\AbstractSchemaManager
       have changed quite significantly by adopting the new Schema instance objects.
 
 ## Renamed Methods

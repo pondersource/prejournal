@@ -1,8 +1,8 @@
 <?php
 
-namespace Doctrine\DBAL\Driver;
+namespace Doctrine\DBAM\Driver;
 
-use Doctrine\DBAL\ParameterType;
+use Doctrine\DBAM\ParameterType;
 
 /**
  * Connection interface.

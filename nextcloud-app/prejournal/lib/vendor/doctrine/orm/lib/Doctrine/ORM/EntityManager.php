@@ -10,9 +10,9 @@ use Doctrine\Common\Cache\Psr6\CacheAdapter;
 use Doctrine\Common\EventManager;
 use Doctrine\Common\Persistence\PersistentObject;
 use Doctrine\Common\Util\ClassUtils;
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DriverManager;
-use Doctrine\DBAL\LockMode;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\DriverManager;
+use Doctrine\DBAM\LockMode;
 use Doctrine\Deprecations\Deprecation;
 use Doctrine\ORM\Exception\EntityManagerClosed;
 use Doctrine\ORM\Exception\InvalidHydrationMode;
@@ -403,7 +403,7 @@ use function strpos;
      *
      * @param string   $className   The class name of the entity to find.
      * @param mixed    $id          The identity of the entity to find.
-     * @param int|null $lockMode    One of the \Doctrine\DBAL\LockMode::* constants
+     * @param int|null $lockMode    One of the \Doctrine\DBAM\LockMode::* constants
      *    or NULL if no specific lock mode should be used
      *    during the search.
      * @param int|null $lockVersion The version of the entity to find when using

@@ -1,14 +1,14 @@
 <?php
 
-namespace Doctrine\DBAL\Id;
+namespace Doctrine\DBAM\Id;
 
-use Doctrine\DBAL\Schema\Column;
-use Doctrine\DBAL\Schema\ForeignKeyConstraint;
-use Doctrine\DBAL\Schema\Index;
-use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Schema\Sequence;
-use Doctrine\DBAL\Schema\Table;
-use Doctrine\DBAL\Schema\Visitor\Visitor;
+use Doctrine\DBAM\Schema\Column;
+use Doctrine\DBAM\Schema\ForeignKeyConstraint;
+use Doctrine\DBAM\Schema\Index;
+use Doctrine\DBAM\Schema\Schema;
+use Doctrine\DBAM\Schema\Sequence;
+use Doctrine\DBAM\Schema\Table;
+use Doctrine\DBAM\Schema\Visitor\Visitor;
 use Doctrine\Deprecations\Deprecation;
 
 /**

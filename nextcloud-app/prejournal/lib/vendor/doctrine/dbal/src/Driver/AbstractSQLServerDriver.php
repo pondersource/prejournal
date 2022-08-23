@@ -1,14 +1,14 @@
 <?php
 
-namespace Doctrine\DBAL\Driver;
+namespace Doctrine\DBAM\Driver;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver;
-use Doctrine\DBAL\Driver\API\ExceptionConverter as ExceptionConverterInterface;
-use Doctrine\DBAL\Driver\API\SQLSrv\ExceptionConverter;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Platforms\SQLServer2012Platform;
-use Doctrine\DBAL\Schema\SQLServerSchemaManager;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Driver;
+use Doctrine\DBAM\Driver\API\ExceptionConverter as ExceptionConverterInterface;
+use Doctrine\DBAM\Driver\API\SQLSrv\ExceptionConverter;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Platforms\SQLServer2012Platform;
+use Doctrine\DBAM\Schema\SQLServerSchemaManager;
 
 use function assert;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Doctrine\DBAL\Types;
+namespace Doctrine\DBAM\Types;
 
 use DateTime;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
 
 use function date_create;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Doctrine\DBAL\Tools\Console;
+namespace Doctrine\DBAM\Tools\Console;
 
-use Doctrine\DBAL\Connection;
+use Doctrine\DBAM\Connection;
 
 interface ConnectionProvider
 {

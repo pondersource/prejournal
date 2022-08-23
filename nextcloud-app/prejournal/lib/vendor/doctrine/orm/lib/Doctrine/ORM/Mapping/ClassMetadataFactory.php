@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Doctrine\ORM\Mapping;
 
 use Doctrine\Common\EventManager;
-use Doctrine\DBAL\Platforms;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Platforms;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
 use Doctrine\Deprecations\Deprecation;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;

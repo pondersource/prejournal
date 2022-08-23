@@ -1,11 +1,11 @@
 <?php
 
-namespace Doctrine\DBAL\Schema;
+namespace Doctrine\DBAM\Schema;
 
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Platforms\SQLServer;
-use Doctrine\DBAL\Platforms\SQLServerPlatform;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Platforms\SQLServer;
+use Doctrine\DBAM\Platforms\SQLServerPlatform;
+use Doctrine\DBAM\Types\Type;
 use Doctrine\Deprecations\Deprecation;
 
 use function assert;

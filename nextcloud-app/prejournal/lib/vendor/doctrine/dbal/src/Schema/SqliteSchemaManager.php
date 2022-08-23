@@ -1,14 +1,14 @@
 <?php
 
-namespace Doctrine\DBAL\Schema;
+namespace Doctrine\DBAM\Schema;
 
-use Doctrine\DBAL\DriverManager;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Platforms\SQLite;
-use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Doctrine\DBAL\Types\StringType;
-use Doctrine\DBAL\Types\TextType;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\DriverManager;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Platforms\SQLite;
+use Doctrine\DBAM\Platforms\SqlitePlatform;
+use Doctrine\DBAM\Types\StringType;
+use Doctrine\DBAM\Types\TextType;
+use Doctrine\DBAM\Types\Type;
 use Doctrine\Deprecations\Deprecation;
 
 use function array_change_key_case;

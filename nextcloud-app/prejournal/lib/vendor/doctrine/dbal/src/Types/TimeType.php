@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Types;
+namespace Doctrine\DBAM\Types;
 
 use DateTime;
 use DateTimeInterface;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
 
 /**
  * Type that maps an SQL TIME to a PHP DateTime object.

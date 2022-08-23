@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Driver;
+namespace Doctrine\DBAM\Driver;
 
 /**
  * Contract for a connection that is able to provide information about the server it is connected to.

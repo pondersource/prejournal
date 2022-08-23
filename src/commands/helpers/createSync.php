@@ -17,7 +17,7 @@ function createSync($context, $command)
             "remote_id" => $command[2],
             "remote_system" => $command[3]
             ]);
-        } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+        } catch (\Doctrine\DBAM\Exception\UniqueConstraintViolationException $e) {
             if ($e->getCode() === 7) {
                 return ["Duplication entry this movement exist in our statements table."];
             }
@@ -37,7 +37,7 @@ function createMultipleStatements($internal_type, $movementId, $remote_id, $remo
             "INSERT INTO statements (internal_type, movementId, remote_id, remote_system) VALUES (:internal_type, :movementId, :remote_id, :remote_system) ",
             [ "internal_type" => $internal_type, "movementId" => $movementId, "remote_id" => $remote_id, "remote_system" => $remote_system]
         );
-    } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+    } catch (\Doctrine\DBAM\Exception\UniqueConstraintViolationException $e) {
         if ($e->getCode() === 7) {
             return ["Duplication entry this movement exist in our sync table."];
         }

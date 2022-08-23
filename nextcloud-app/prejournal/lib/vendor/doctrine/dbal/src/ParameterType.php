@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAM;
 
 /**
  * Contains statement parameter types.

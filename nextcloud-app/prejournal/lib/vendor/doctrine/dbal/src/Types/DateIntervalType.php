@@ -1,9 +1,9 @@
 <?php
 
-namespace Doctrine\DBAL\Types;
+namespace Doctrine\DBAM\Types;
 
 use DateInterval;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
 use Throwable;
 
 use function substr;

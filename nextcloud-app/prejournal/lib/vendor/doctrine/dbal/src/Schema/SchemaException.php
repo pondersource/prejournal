@@ -1,8 +1,8 @@
 <?php
 
-namespace Doctrine\DBAL\Schema;
+namespace Doctrine\DBAM\Schema;
 
-use Doctrine\DBAL\Exception;
+use Doctrine\DBAM\Exception;
 
 use function implode;
 use function sprintf;

@@ -1,12 +1,12 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\Mysqli;
+namespace Doctrine\DBAM\Driver\Mysqli;
 
-use Doctrine\DBAL\Driver\Mysqli\Exception\ConnectionError;
-use Doctrine\DBAL\Driver\Result as ResultInterface;
-use Doctrine\DBAL\Driver\ServerInfoAwareConnection;
-use Doctrine\DBAL\Driver\Statement as DriverStatement;
-use Doctrine\DBAL\ParameterType;
+use Doctrine\DBAM\Driver\Mysqli\Exception\ConnectionError;
+use Doctrine\DBAM\Driver\Result as ResultInterface;
+use Doctrine\DBAM\Driver\ServerInfoAwareConnection;
+use Doctrine\DBAM\Driver\Statement as DriverStatement;
+use Doctrine\DBAM\ParameterType;
 use Doctrine\Deprecations\Deprecation;
 use mysqli;
 use mysqli_sql_exception;
@@ -32,7 +32,7 @@ final class Connection implements ServerInfoAwareConnection
     /**
      * Retrieves mysqli native resource handle.
      *
-     * Could be used if part of your application is not using DBAL.
+     * Could be used if part of your application is not using DBAM.
      *
      * @deprecated Call {@see getNativeConnection()} instead.
      */

@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Types;
+namespace Doctrine\DBAM\Types;
 
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\ParameterType;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\ParameterType;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
 
 use function array_map;
 use function get_class;

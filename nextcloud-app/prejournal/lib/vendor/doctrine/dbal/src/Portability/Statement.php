@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Portability;
+namespace Doctrine\DBAM\Portability;
 
-use Doctrine\DBAL\Driver\Middleware\AbstractStatementMiddleware;
-use Doctrine\DBAL\Driver\Result as ResultInterface;
-use Doctrine\DBAL\Driver\Statement as DriverStatement;
+use Doctrine\DBAM\Driver\Middleware\AbstractStatementMiddleware;
+use Doctrine\DBAM\Driver\Result as ResultInterface;
+use Doctrine\DBAM\Driver\Statement as DriverStatement;
 
 /**
  * Portability wrapper for a Statement.

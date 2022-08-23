@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAM;
 
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Types\Type;
 
 /**
  * An SQL query together with its bound parameters.

@@ -1,8 +1,8 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\Middleware;
+namespace Doctrine\DBAM\Driver\Middleware;
 
-use Doctrine\DBAL\Driver\Result;
+use Doctrine\DBAM\Driver\Result;
 
 abstract class AbstractResultMiddleware implements Result
 {

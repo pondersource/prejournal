@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Types;
+namespace Doctrine\DBAM\Types;
 
-use Doctrine\DBAL\ParameterType;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Platforms\DB2Platform;
+use Doctrine\DBAM\ParameterType;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Platforms\DB2Platform;
 
 /**
  * Type that maps an SQL boolean to a PHP boolean.

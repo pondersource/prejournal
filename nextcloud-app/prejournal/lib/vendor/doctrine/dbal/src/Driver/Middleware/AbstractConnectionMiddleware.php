@@ -1,12 +1,12 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\Middleware;
+namespace Doctrine\DBAM\Driver\Middleware;
 
-use Doctrine\DBAL\Driver\Connection;
-use Doctrine\DBAL\Driver\Result;
-use Doctrine\DBAL\Driver\ServerInfoAwareConnection;
-use Doctrine\DBAL\Driver\Statement;
-use Doctrine\DBAL\ParameterType;
+use Doctrine\DBAM\Driver\Connection;
+use Doctrine\DBAM\Driver\Result;
+use Doctrine\DBAM\Driver\ServerInfoAwareConnection;
+use Doctrine\DBAM\Driver\Statement;
+use Doctrine\DBAM\ParameterType;
 use Doctrine\Deprecations\Deprecation;
 use LogicException;
 

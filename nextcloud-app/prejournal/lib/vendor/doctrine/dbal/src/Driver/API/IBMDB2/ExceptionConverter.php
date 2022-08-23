@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Driver\API\IBMDB2;
+namespace Doctrine\DBAM\Driver\API\IBMDB2;
 
-use Doctrine\DBAL\Driver\API\ExceptionConverter as ExceptionConverterInterface;
-use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\Exception\ConnectionException;
-use Doctrine\DBAL\Exception\DriverException;
-use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
-use Doctrine\DBAL\Exception\InvalidFieldNameException;
-use Doctrine\DBAL\Exception\NonUniqueFieldNameException;
-use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
-use Doctrine\DBAL\Exception\SyntaxErrorException;
-use Doctrine\DBAL\Exception\TableExistsException;
-use Doctrine\DBAL\Exception\TableNotFoundException;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Doctrine\DBAL\Query;
+use Doctrine\DBAM\Driver\API\ExceptionConverter as ExceptionConverterInterface;
+use Doctrine\DBAM\Driver\Exception;
+use Doctrine\DBAM\Exception\ConnectionException;
+use Doctrine\DBAM\Exception\DriverException;
+use Doctrine\DBAM\Exception\ForeignKeyConstraintViolationException;
+use Doctrine\DBAM\Exception\InvalidFieldNameException;
+use Doctrine\DBAM\Exception\NonUniqueFieldNameException;
+use Doctrine\DBAM\Exception\NotNullConstraintViolationException;
+use Doctrine\DBAM\Exception\SyntaxErrorException;
+use Doctrine\DBAM\Exception\TableExistsException;
+use Doctrine\DBAM\Exception\TableNotFoundException;
+use Doctrine\DBAM\Exception\UniqueConstraintViolationException;
+use Doctrine\DBAM\Query;
 
 /**
  * @internal

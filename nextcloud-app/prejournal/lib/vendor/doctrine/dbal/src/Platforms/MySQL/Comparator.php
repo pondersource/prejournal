@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Platforms\MySQL;
+namespace Doctrine\DBAM\Platforms\MySQL;
 
-use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
-use Doctrine\DBAL\Schema\Comparator as BaseComparator;
-use Doctrine\DBAL\Schema\Table;
+use Doctrine\DBAM\Platforms\AbstractMySQLPlatform;
+use Doctrine\DBAM\Schema\Comparator as BaseComparator;
+use Doctrine\DBAM\Schema\Table;
 
 use function array_diff_assoc;
 use function array_intersect_key;

@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\AbstractLazyCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Selectable;
 use Doctrine\Common\Persistence\PersistentObject;
-use Doctrine\DBAL\LockMode;
+use Doctrine\DBAM\LockMode;
 use Doctrine\Deprecations\Deprecation;
 use Doctrine\Inflector\Inflector;
 use Doctrine\Inflector\InflectorFactory;
@@ -185,7 +185,7 @@ class EntityRepository implements ObjectRepository, Selectable
      * Finds an entity by its primary key / identifier.
      *
      * @param mixed    $id          The identifier.
-     * @param int|null $lockMode    One of the \Doctrine\DBAL\LockMode::* constants
+     * @param int|null $lockMode    One of the \Doctrine\DBAM\LockMode::* constants
      *                              or NULL if no specific lock mode should be used
      *                              during the search.
      * @param int|null $lockVersion The lock version.

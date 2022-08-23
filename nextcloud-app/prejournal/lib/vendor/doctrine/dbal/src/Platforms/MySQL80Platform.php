@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Platforms;
+namespace Doctrine\DBAM\Platforms;
 
 use Doctrine\Deprecations\Deprecation;
 

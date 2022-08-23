@@ -1,11 +1,11 @@
 <?php
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAM;
 
-use Doctrine\DBAL\ArrayParameters\Exception\MissingNamedParameter;
-use Doctrine\DBAL\ArrayParameters\Exception\MissingPositionalParameter;
-use Doctrine\DBAL\SQL\Parser\Visitor;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\ArrayParameters\Exception\MissingNamedParameter;
+use Doctrine\DBAM\ArrayParameters\Exception\MissingPositionalParameter;
+use Doctrine\DBAM\SQL\Parser\Visitor;
+use Doctrine\DBAM\Types\Type;
 
 use function array_fill;
 use function array_key_exists;

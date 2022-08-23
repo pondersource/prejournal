@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Doctrine\ORM\Mapping\Driver;
 
-use Doctrine\DBAL\Schema\AbstractSchemaManager;
-use Doctrine\DBAL\Schema\Column;
-use Doctrine\DBAL\Schema\ForeignKeyConstraint;
-use Doctrine\DBAL\Schema\SchemaException;
-use Doctrine\DBAL\Schema\Table;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\DBAM\Schema\AbstractSchemaManager;
+use Doctrine\DBAM\Schema\Column;
+use Doctrine\DBAM\Schema\ForeignKeyConstraint;
+use Doctrine\DBAM\Schema\SchemaException;
+use Doctrine\DBAM\Schema\Table;
+use Doctrine\DBAM\Types\Types;
 use Doctrine\Inflector\Inflector;
 use Doctrine\Inflector\InflectorFactory;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -39,7 +39,7 @@ class DatabaseDriver implements MappingDriver
     /**
      * Replacement for {@see Types::JSON_ARRAY}.
      *
-     * To be removed as soon as support for DBAL 2 is dropped.
+     * To be removed as soon as support for DBAM 2 is dropped.
      */
     private const JSON_ARRAY = 'json_array';
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Logging;
+namespace Doctrine\DBAM\Logging;
 
-use Doctrine\DBAL\Driver as DriverInterface;
-use Doctrine\DBAL\Driver\Middleware as MiddlewareInterface;
+use Doctrine\DBAM\Driver as DriverInterface;
+use Doctrine\DBAM\Driver\Middleware as MiddlewareInterface;
 use Psr\Log\LoggerInterface;
 
 final class Middleware implements MiddlewareInterface

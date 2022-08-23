@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\SQL\Parser;
+namespace Doctrine\DBAM\SQL\Parser;
 
 /**
  * SQL parser visitor

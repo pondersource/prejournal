@@ -680,7 +680,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Doctrine\\DBAL\\": "src"
+                    "Doctrine\\DBAM\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -705,7 +705,7 @@
                     "email": "jonwage@gmail.com"
                 }
             ],
-            "description": "Powerful PHP database abstraction layer (DBAL) with many features for database schema introspection and management.",
+            "description": "Powerful PHP database abstraction layer (DBAM) with many features for database schema introspection and management.",
             "homepage": "https://www.doctrine-project.org/projects/dbal.html",
             "keywords": [
                 "abstraction",

@@ -1,8 +1,8 @@
 <?php
 
-namespace Doctrine\DBAL\Query\Expression;
+namespace Doctrine\DBAM\Query\Expression;
 
-use Doctrine\DBAL\Connection;
+use Doctrine\DBAM\Connection;
 use Doctrine\Deprecations\Deprecation;
 
 use function func_get_arg;
@@ -24,7 +24,7 @@ class ExpressionBuilder
     public const GTE = '>=';
 
     /**
-     * The DBAL Connection.
+     * The DBAM Connection.
      *
      * @var Connection
      */
@@ -33,7 +33,7 @@ class ExpressionBuilder
     /**
      * Initializes a new <tt>ExpressionBuilder</tt>.
      *
-     * @param Connection $connection The DBAL Connection.
+     * @param Connection $connection The DBAM Connection.
      */
     public function __construct(Connection $connection)
     {

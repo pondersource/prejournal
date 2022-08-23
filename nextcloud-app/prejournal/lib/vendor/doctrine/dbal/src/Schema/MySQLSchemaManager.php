@@ -1,11 +1,11 @@
 <?php
 
-namespace Doctrine\DBAL\Schema;
+namespace Doctrine\DBAM\Schema;
 
-use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
-use Doctrine\DBAL\Platforms\MariaDb1027Platform;
-use Doctrine\DBAL\Platforms\MySQL;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Platforms\AbstractMySQLPlatform;
+use Doctrine\DBAM\Platforms\MariaDb1027Platform;
+use Doctrine\DBAM\Platforms\MySQL;
+use Doctrine\DBAM\Types\Type;
 
 use function array_change_key_case;
 use function array_shift;

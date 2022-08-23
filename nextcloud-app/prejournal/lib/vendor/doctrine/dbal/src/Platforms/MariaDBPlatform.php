@@ -1,8 +1,8 @@
 <?php
 
-namespace Doctrine\DBAL\Platforms;
+namespace Doctrine\DBAM\Platforms;
 
-use Doctrine\DBAL\Types\Types;
+use Doctrine\DBAM\Types\Types;
 use Doctrine\Deprecations\Deprecation;
 
 /**

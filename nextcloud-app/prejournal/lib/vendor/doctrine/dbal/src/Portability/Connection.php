@@ -1,11 +1,11 @@
 <?php
 
-namespace Doctrine\DBAL\Portability;
+namespace Doctrine\DBAM\Portability;
 
-use Doctrine\DBAL\Driver\Connection as ConnectionInterface;
-use Doctrine\DBAL\Driver\Middleware\AbstractConnectionMiddleware;
-use Doctrine\DBAL\Driver\Result as DriverResult;
-use Doctrine\DBAL\Driver\Statement as DriverStatement;
+use Doctrine\DBAM\Driver\Connection as ConnectionInterface;
+use Doctrine\DBAM\Driver\Middleware\AbstractConnectionMiddleware;
+use Doctrine\DBAM\Driver\Result as DriverResult;
+use Doctrine\DBAM\Driver\Statement as DriverStatement;
 
 /**
  * Portability wrapper for a Connection.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Platforms;
+namespace Doctrine\DBAM\Platforms;
 
 /**
  * Provides the behavior, features and SQL dialect of the MariaDB 10.2 (10.2.7 GA) database platform.

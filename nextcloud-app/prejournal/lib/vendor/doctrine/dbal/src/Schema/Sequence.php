@@ -1,8 +1,8 @@
 <?php
 
-namespace Doctrine\DBAL\Schema;
+namespace Doctrine\DBAM\Schema;
 
-use Doctrine\DBAL\Schema\Visitor\Visitor;
+use Doctrine\DBAM\Schema\Visitor\Visitor;
 
 use function count;
 use function sprintf;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Doctrine\DBAL\Types;
+namespace Doctrine\DBAM\Types;
 
 use DateTimeImmutable;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
 
 /**
  * Immutable type of {@see DateTimeTzType}.

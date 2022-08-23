@@ -1,11 +1,11 @@
 <?php
 
-namespace Doctrine\DBAL\Schema;
+namespace Doctrine\DBAM\Schema;
 
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Platforms\DB2Platform;
-use Doctrine\DBAL\Types\Type;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Platforms\DB2Platform;
+use Doctrine\DBAM\Types\Type;
+use Doctrine\DBAM\Types\Types;
 
 use function array_change_key_case;
 use function preg_match;

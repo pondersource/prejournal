@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Doctrine\ORM\Query\Exec;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Connections\PrimaryReadReplicaConnection;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Connections\PrimaryReadReplicaConnection;
+use Doctrine\DBAM\Types\Type;
 use Doctrine\ORM\Query\AST;
 use Doctrine\ORM\Query\AST\DeleteStatement;
 use Doctrine\ORM\Query\SqlWalker;

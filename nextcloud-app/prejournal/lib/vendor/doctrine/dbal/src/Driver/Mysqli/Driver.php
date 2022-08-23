@@ -1,13 +1,13 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\Mysqli;
+namespace Doctrine\DBAM\Driver\Mysqli;
 
-use Doctrine\DBAL\Driver\AbstractMySQLDriver;
-use Doctrine\DBAL\Driver\Mysqli\Exception\ConnectionFailed;
-use Doctrine\DBAL\Driver\Mysqli\Exception\HostRequired;
-use Doctrine\DBAL\Driver\Mysqli\Initializer\Charset;
-use Doctrine\DBAL\Driver\Mysqli\Initializer\Options;
-use Doctrine\DBAL\Driver\Mysqli\Initializer\Secure;
+use Doctrine\DBAM\Driver\AbstractMySQLDriver;
+use Doctrine\DBAM\Driver\Mysqli\Exception\ConnectionFailed;
+use Doctrine\DBAM\Driver\Mysqli\Exception\HostRequired;
+use Doctrine\DBAM\Driver\Mysqli\Initializer\Charset;
+use Doctrine\DBAM\Driver\Mysqli\Initializer\Options;
+use Doctrine\DBAM\Driver\Mysqli\Initializer\Secure;
 use mysqli;
 use mysqli_sql_exception;
 

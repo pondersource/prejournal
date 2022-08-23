@@ -1,11 +1,11 @@
 <?php
 
-namespace Doctrine\DBAL\Schema;
+namespace Doctrine\DBAM\Schema;
 
 use BadMethodCallException;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Types;
 use Doctrine\Deprecations\Deprecation;
 
 use function array_intersect_key;

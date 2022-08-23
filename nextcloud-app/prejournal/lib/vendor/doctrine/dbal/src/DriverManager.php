@@ -1,13 +1,13 @@
 <?php
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAM;
 
 use Doctrine\Common\EventManager;
-use Doctrine\DBAL\Driver\IBMDB2;
-use Doctrine\DBAL\Driver\Mysqli;
-use Doctrine\DBAL\Driver\OCI8;
-use Doctrine\DBAL\Driver\PDO;
-use Doctrine\DBAL\Driver\SQLSrv;
+use Doctrine\DBAM\Driver\IBMDB2;
+use Doctrine\DBAM\Driver\Mysqli;
+use Doctrine\DBAM\Driver\OCI8;
+use Doctrine\DBAM\Driver\PDO;
+use Doctrine\DBAM\Driver\SQLSrv;
 
 use function array_keys;
 use function array_merge;
@@ -117,7 +117,7 @@ final class DriverManager
 
     /**
      * Creates a connection object based on the specified parameters.
-     * This method returns a Doctrine\DBAL\Connection which wraps the underlying
+     * This method returns a Doctrine\DBAM\Connection which wraps the underlying
      * driver connection.
      *
      * $params must contain at least one of the following.
@@ -140,7 +140,7 @@ final class DriverManager
      *
      * <b>wrapperClass</b>:
      * You may specify a custom wrapper class through the 'wrapperClass'
-     * parameter but this class MUST inherit from Doctrine\DBAL\Connection.
+     * parameter but this class MUST inherit from Doctrine\DBAM\Connection.
      *
      * <b>driverClass</b>:
      * The driver class to use.
@@ -359,8 +359,8 @@ final class DriverManager
 
         $url['path'] = self::normalizeDatabaseUrlPath($url['path']);
 
-        // If we do not have a known DBAL driver, we do not know any connection URL path semantics to evaluate
-        // and therefore treat the path as regular DBAL connection URL path.
+        // If we do not have a known DBAM driver, we do not know any connection URL path semantics to evaluate
+        // and therefore treat the path as regular DBAM connection URL path.
         if (! isset($params['driver'])) {
             return self::parseRegularDatabaseUrlPath($url, $params);
         }

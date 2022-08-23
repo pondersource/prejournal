@@ -1,6 +1,6 @@
 <?php
 
-use Doctrine\DBAL\Tools\Console\ConsoleRunner;
+use Doctrine\DBAM\Tools\Console\ConsoleRunner;
 
 fwrite(
     STDERR,

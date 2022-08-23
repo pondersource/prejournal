@@ -1,15 +1,15 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\IBMDB2;
+namespace Doctrine\DBAM\Driver\IBMDB2;
 
-use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\Driver\IBMDB2\Exception\CannotCopyStreamToStream;
-use Doctrine\DBAL\Driver\IBMDB2\Exception\CannotCreateTemporaryFile;
-use Doctrine\DBAL\Driver\IBMDB2\Exception\CannotWriteToTemporaryFile;
-use Doctrine\DBAL\Driver\IBMDB2\Exception\StatementError;
-use Doctrine\DBAL\Driver\Result as ResultInterface;
-use Doctrine\DBAL\Driver\Statement as StatementInterface;
-use Doctrine\DBAL\ParameterType;
+use Doctrine\DBAM\Driver\Exception;
+use Doctrine\DBAM\Driver\IBMDB2\Exception\CannotCopyStreamToStream;
+use Doctrine\DBAM\Driver\IBMDB2\Exception\CannotCreateTemporaryFile;
+use Doctrine\DBAM\Driver\IBMDB2\Exception\CannotWriteToTemporaryFile;
+use Doctrine\DBAM\Driver\IBMDB2\Exception\StatementError;
+use Doctrine\DBAM\Driver\Result as ResultInterface;
+use Doctrine\DBAM\Driver\Statement as StatementInterface;
+use Doctrine\DBAM\ParameterType;
 
 use function assert;
 use function db2_bind_param;

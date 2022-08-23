@@ -1,18 +1,18 @@
 <?php
 
-namespace Doctrine\DBAL\Connections;
+namespace Doctrine\DBAM\Connections;
 
 use Doctrine\Common\EventManager;
-use Doctrine\DBAL\Configuration;
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver;
-use Doctrine\DBAL\Driver\Connection as DriverConnection;
-use Doctrine\DBAL\Driver\Exception as DriverException;
-use Doctrine\DBAL\DriverManager;
-use Doctrine\DBAL\Event\ConnectionEventArgs;
-use Doctrine\DBAL\Events;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Statement;
+use Doctrine\DBAM\Configuration;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Driver;
+use Doctrine\DBAM\Driver\Connection as DriverConnection;
+use Doctrine\DBAM\Driver\Exception as DriverException;
+use Doctrine\DBAM\DriverManager;
+use Doctrine\DBAM\Event\ConnectionEventArgs;
+use Doctrine\DBAM\Events;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Statement;
 use InvalidArgumentException;
 
 use function array_rand;
@@ -61,7 +61,7 @@ use function count;
  * @example
  *
  * $conn = DriverManager::getConnection(array(
- *    'wrapperClass' => 'Doctrine\DBAL\Connections\PrimaryReadReplicaConnection',
+ *    'wrapperClass' => 'Doctrine\DBAM\Connections\PrimaryReadReplicaConnection',
  *    'driver' => 'pdo_mysql',
  *    'primary' => array('user' => '', 'password' => '', 'host' => '', 'dbname' => ''),
  *    'replica' => array(

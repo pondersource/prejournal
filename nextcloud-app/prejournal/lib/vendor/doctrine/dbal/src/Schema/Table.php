@@ -1,11 +1,11 @@
 <?php
 
-namespace Doctrine\DBAL\Schema;
+namespace Doctrine\DBAM\Schema;
 
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Schema\Exception\InvalidTableName;
-use Doctrine\DBAL\Schema\Visitor\Visitor;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Schema\Exception\InvalidTableName;
+use Doctrine\DBAM\Schema\Visitor\Visitor;
+use Doctrine\DBAM\Types\Type;
 
 use function array_filter;
 use function array_keys;
@@ -568,7 +568,7 @@ class Table extends AbstractAsset
 
         $this->_fkConstraints[$name] = $constraint;
 
-        /* Add an implicit index (defined by the DBAL) on the foreign key
+        /* Add an implicit index (defined by the DBAM) on the foreign key
            columns. If there is already a user-defined index that fulfills these
            requirements drop the request. In the case of __construct() calling
            this method during hydration from schema-details, all the explicitly

@@ -1,12 +1,12 @@
 <?php
 
-namespace Doctrine\DBAL\Id;
+namespace Doctrine\DBAM\Id;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver;
-use Doctrine\DBAL\DriverManager;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\LockMode;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Driver;
+use Doctrine\DBAM\DriverManager;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\LockMode;
 use Doctrine\Deprecations\Deprecation;
 use Throwable;
 

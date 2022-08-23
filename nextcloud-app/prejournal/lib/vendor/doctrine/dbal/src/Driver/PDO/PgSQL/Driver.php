@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\PDO\PgSQL;
+namespace Doctrine\DBAM\Driver\PDO\PgSQL;
 
-use Doctrine\DBAL\Driver\AbstractPostgreSQLDriver;
-use Doctrine\DBAL\Driver\PDO\Connection;
-use Doctrine\DBAL\Driver\PDO\Exception;
+use Doctrine\DBAM\Driver\AbstractPostgreSQLDriver;
+use Doctrine\DBAM\Driver\PDO\Connection;
+use Doctrine\DBAM\Driver\PDO\Exception;
 use PDO;
 use PDOException;
 

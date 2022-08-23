@@ -142,7 +142,7 @@ class ComposerStaticInit51356ca20056f6b50d073a78563605d4
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\Inflector\\' => 19,
             'Doctrine\\Deprecations\\' => 22,
-            'Doctrine\\DBAL\\' => 14,
+            'Doctrine\\DBAM\\' => 14,
             'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Collections\\' => 28,
             'Doctrine\\Common\\Cache\\' => 22,
@@ -481,7 +481,7 @@ class ComposerStaticInit51356ca20056f6b50d073a78563605d4
         array (
             0 => __DIR__ . '/..' . '/doctrine/deprecations/lib/Doctrine/Deprecations',
         ),
-        'Doctrine\\DBAL\\' => 
+        'Doctrine\\DBAM\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/dbal/src',
         ),

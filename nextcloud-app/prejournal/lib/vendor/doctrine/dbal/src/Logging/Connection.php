@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Logging;
+namespace Doctrine\DBAM\Logging;
 
-use Doctrine\DBAL\Driver\Connection as ConnectionInterface;
-use Doctrine\DBAL\Driver\Middleware\AbstractConnectionMiddleware;
-use Doctrine\DBAL\Driver\Result;
-use Doctrine\DBAL\Driver\Statement as DriverStatement;
+use Doctrine\DBAM\Driver\Connection as ConnectionInterface;
+use Doctrine\DBAM\Driver\Middleware\AbstractConnectionMiddleware;
+use Doctrine\DBAM\Driver\Result;
+use Doctrine\DBAM\Driver\Statement as DriverStatement;
 use Psr\Log\LoggerInterface;
 
 final class Connection extends AbstractConnectionMiddleware

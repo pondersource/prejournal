@@ -1,11 +1,11 @@
 {
-    "name": "doctrine/dbal",
+    "name": "doctrine/dbam",
     "type": "library",
-    "description": "Powerful PHP database abstraction layer (DBAL) with many features for database schema introspection and management.",
+    "description": "Powerful PHP database abstraction layer (DBAM) with many features for database schema introspection and management.",
     "keywords": [
         "abstraction",
         "database",
-        "dbal",
+        "dbam",
         "db2",
         "mariadb",
         "mssql",
@@ -22,7 +22,7 @@
         "sqlserver",
         "sqlsrv"
     ],
-    "homepage": "https://www.doctrine-project.org/projects/dbal.html",
+    "homepage": "https://www.doctrine-project.org/projects/dbam.html",
     "license": "MIT",
     "authors": [
         {"name": "Guilherme Blanco", "email": "guilhermeblanco@gmail.com"},
@@ -54,7 +54,7 @@
     "suggest": {
         "symfony/console": "For helpful console commands such as SQL execution and import of files."
     },
-    "bin": ["bin/doctrine-dbal"],
+    "bin": ["bin/doctrine-dbam"],
     "config": {
         "sort-packages": true,
         "allow-plugins": {
@@ -63,9 +63,9 @@
         }
     },
     "autoload": {
-        "psr-4": { "Doctrine\\DBAL\\": "src" }
+        "psr-4": { "Doctrine\\DBAM\\": "src" }
     },
     "autoload-dev": {
-        "psr-4": { "Doctrine\\DBAL\\Tests\\": "tests" }
+        "psr-4": { "Doctrine\\DBAM\\Tests\\": "tests" }
     }
 }

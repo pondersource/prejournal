@@ -1,9 +1,9 @@
 <?php
 
-namespace Doctrine\DBAL\Event;
+namespace Doctrine\DBAM\Event;
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Schema\TableDiff;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Schema\TableDiff;
 
 use function array_merge;
 use function func_get_args;

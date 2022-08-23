@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\StaticAnalysis\DBAL;
+namespace Doctrine\StaticAnalysis\DBAM;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\DriverManager;
 
 final class MyConnection extends Connection
 {

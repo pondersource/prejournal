@@ -1,19 +1,19 @@
 <?php
 
-namespace Doctrine\DBAL\Driver;
+namespace Doctrine\DBAM\Driver;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\API\ExceptionConverter;
-use Doctrine\DBAL\Driver\API\MySQL;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Platforms\MariaDb1027Platform;
-use Doctrine\DBAL\Platforms\MySQL57Platform;
-use Doctrine\DBAL\Platforms\MySQL80Platform;
-use Doctrine\DBAL\Platforms\MySQLPlatform;
-use Doctrine\DBAL\Schema\MySQLSchemaManager;
-use Doctrine\DBAL\VersionAwarePlatformDriver;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Driver\API\ExceptionConverter;
+use Doctrine\DBAM\Driver\API\MySQL;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Platforms\AbstractMySQLPlatform;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Platforms\MariaDb1027Platform;
+use Doctrine\DBAM\Platforms\MySQL57Platform;
+use Doctrine\DBAM\Platforms\MySQL80Platform;
+use Doctrine\DBAM\Platforms\MySQLPlatform;
+use Doctrine\DBAM\Schema\MySQLSchemaManager;
+use Doctrine\DBAM\VersionAwarePlatformDriver;
 use Doctrine\Deprecations\Deprecation;
 
 use function assert;
@@ -52,7 +52,7 @@ abstract class AbstractMySQLDriver implements VersionAwarePlatformDriver
         Deprecation::trigger(
             'doctrine/dbal',
             'https://github.com/doctrine/dbal/pull/5060',
-            'MySQL 5.6 support is deprecated and will be removed in DBAL 4.'
+            'MySQL 5.6 support is deprecated and will be removed in DBAM 4.'
                 . ' Consider upgrading to MySQL 5.7 or later.'
         );
 

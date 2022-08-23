@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Driver\Mysqli;
+namespace Doctrine\DBAM\Driver\Mysqli;
 
-use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\Driver\FetchUtils;
-use Doctrine\DBAL\Driver\Mysqli\Exception\StatementError;
-use Doctrine\DBAL\Driver\Result as ResultInterface;
+use Doctrine\DBAM\Driver\Exception;
+use Doctrine\DBAM\Driver\FetchUtils;
+use Doctrine\DBAM\Driver\Mysqli\Exception\StatementError;
+use Doctrine\DBAM\Driver\Result as ResultInterface;
 use mysqli_sql_exception;
 use mysqli_stmt;
 

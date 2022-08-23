@@ -1,11 +1,11 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\PDO;
+namespace Doctrine\DBAM\Driver\PDO;
 
-use Doctrine\DBAL\Driver\Result as ResultInterface;
-use Doctrine\DBAL\Driver\ServerInfoAwareConnection;
-use Doctrine\DBAL\Driver\Statement as StatementInterface;
-use Doctrine\DBAL\ParameterType;
+use Doctrine\DBAM\Driver\Result as ResultInterface;
+use Doctrine\DBAM\Driver\ServerInfoAwareConnection;
+use Doctrine\DBAM\Driver\Statement as StatementInterface;
+use Doctrine\DBAM\ParameterType;
 use Doctrine\Deprecations\Deprecation;
 use PDO;
 use PDOException;

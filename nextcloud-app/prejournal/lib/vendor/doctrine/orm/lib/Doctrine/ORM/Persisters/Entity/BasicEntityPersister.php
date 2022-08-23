@@ -8,12 +8,12 @@ use BackedEnum;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\Common\Util\ClassUtils;
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\LockMode;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Result;
-use Doctrine\DBAL\Types\Type;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\LockMode;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Result;
+use Doctrine\DBAM\Types\Type;
+use Doctrine\DBAM\Types\Types;
 use Doctrine\Deprecations\Deprecation;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -113,7 +113,7 @@ class BasicEntityPersister implements EntityPersister
     protected $class;
 
     /**
-     * The underlying DBAL Connection of the used EntityManager.
+     * The underlying DBAM Connection of the used EntityManager.
      *
      * @var Connection $conn
      */
@@ -141,7 +141,7 @@ class BasicEntityPersister implements EntityPersister
     protected $queuedInserts = [];
 
     /**
-     * The map of column names to DBAL mapping types of all prepared columns used
+     * The map of column names to DBAM mapping types of all prepared columns used
      * when INSERTing or UPDATEing an entity.
      *
      * @see prepareInsertData($entity)
@@ -932,7 +932,7 @@ class BasicEntityPersister implements EntityPersister
     }
 
     /**
-     * Loads an array of entities from a given DBAL statement.
+     * Loads an array of entities from a given DBAM statement.
      *
      * @param mixed[] $assoc
      *
@@ -952,7 +952,7 @@ class BasicEntityPersister implements EntityPersister
     }
 
     /**
-     * Hydrates a collection from a given DBAL statement.
+     * Hydrates a collection from a given DBAM statement.
      *
      * @param mixed[] $assoc
      *
@@ -1574,7 +1574,7 @@ class BasicEntityPersister implements EntityPersister
     /**
      * Gets the FROM and optionally JOIN conditions to lock the entity managed by this persister.
      *
-     * @param int|null $lockMode One of the Doctrine\DBAL\LockMode::* constants.
+     * @param int|null $lockMode One of the Doctrine\DBAM\LockMode::* constants.
      * @psalm-param LockMode::*|null $lockMode
      *
      * @return string

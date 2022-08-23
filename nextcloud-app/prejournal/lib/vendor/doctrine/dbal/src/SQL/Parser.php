@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\SQL;
+namespace Doctrine\DBAM\SQL;
 
-use Doctrine\DBAL\SQL\Parser\Exception;
-use Doctrine\DBAL\SQL\Parser\Exception\RegularExpressionError;
-use Doctrine\DBAL\SQL\Parser\Visitor;
+use Doctrine\DBAM\SQL\Parser\Exception;
+use Doctrine\DBAM\SQL\Parser\Exception\RegularExpressionError;
+use Doctrine\DBAM\SQL\Parser\Visitor;
 
 use function array_merge;
 use function assert;

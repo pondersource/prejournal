@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Platforms\SQLServer;
+namespace Doctrine\DBAM\Platforms\SQLServer;
 
-use Doctrine\DBAL\Platforms\SQLServerPlatform;
-use Doctrine\DBAL\Schema\Comparator as BaseComparator;
-use Doctrine\DBAL\Schema\Table;
+use Doctrine\DBAM\Platforms\SQLServerPlatform;
+use Doctrine\DBAM\Schema\Comparator as BaseComparator;
+use Doctrine\DBAM\Schema\Table;
 
 /**
  * Compares schemas in the context of SQL Server platform.

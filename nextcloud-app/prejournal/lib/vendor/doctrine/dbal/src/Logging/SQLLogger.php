@@ -1,14 +1,14 @@
 <?php
 
-namespace Doctrine\DBAL\Logging;
+namespace Doctrine\DBAM\Logging;
 
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Types\Type;
 
 /**
  * Interface for SQL loggers.
  *
- * @deprecated Use {@see \Doctrine\DBAL\Logging\Middleware} or implement
- *            {@see \Doctrine\DBAL\Driver\Middleware} instead.
+ * @deprecated Use {@see \Doctrine\DBAM\Logging\Middleware} or implement
+ *            {@see \Doctrine\DBAM\Driver\Middleware} instead.
  */
 interface SQLLogger
 {

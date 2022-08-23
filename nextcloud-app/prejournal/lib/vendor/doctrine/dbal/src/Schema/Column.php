@@ -1,9 +1,9 @@
 <?php
 
-namespace Doctrine\DBAL\Schema;
+namespace Doctrine\DBAM\Schema;
 
-use Doctrine\DBAL\Schema\Exception\UnknownColumnOption;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Schema\Exception\UnknownColumnOption;
+use Doctrine\DBAM\Types\Type;
 
 use function array_merge;
 use function is_numeric;

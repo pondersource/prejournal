@@ -1,8 +1,8 @@
 <?php
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAM;
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
 
 /**
  * Contract for a driver that is able to create platform instances by version.

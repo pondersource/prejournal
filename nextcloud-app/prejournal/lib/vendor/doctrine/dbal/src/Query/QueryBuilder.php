@@ -1,15 +1,15 @@
 <?php
 
-namespace Doctrine\DBAL\Query;
+namespace Doctrine\DBAM\Query;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\ParameterType;
-use Doctrine\DBAL\Query\Expression\CompositeExpression;
-use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
-use Doctrine\DBAL\Result;
-use Doctrine\DBAL\Statement;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\ParameterType;
+use Doctrine\DBAM\Query\Expression\CompositeExpression;
+use Doctrine\DBAM\Query\Expression\ExpressionBuilder;
+use Doctrine\DBAM\Result;
+use Doctrine\DBAM\Statement;
+use Doctrine\DBAM\Types\Type;
 use Doctrine\Deprecations\Deprecation;
 
 use function array_key_exists;
@@ -52,7 +52,7 @@ class QueryBuilder
     public const STATE_CLEAN = 1;
 
     /**
-     * The DBAL Connection.
+     * The DBAM Connection.
      *
      * @var Connection
      */
@@ -140,7 +140,7 @@ class QueryBuilder
     /**
      * Initializes a new <tt>QueryBuilder</tt>.
      *
-     * @param Connection $connection The DBAL Connection.
+     * @param Connection $connection The DBAM Connection.
      */
     public function __construct(Connection $connection)
     {
@@ -179,7 +179,7 @@ class QueryBuilder
     }
 
     /**
-     * Gets the associated DBAL Connection for this query builder.
+     * Gets the associated DBAM Connection for this query builder.
      *
      * @return Connection
      */

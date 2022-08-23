@@ -1,19 +1,19 @@
 <?php
 
-namespace Doctrine\DBAL\Driver;
+namespace Doctrine\DBAM\Driver;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver;
-use Doctrine\DBAL\Driver\API\ExceptionConverter;
-use Doctrine\DBAL\Driver\API\SQLite;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Doctrine\DBAL\Schema\SqliteSchemaManager;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Driver;
+use Doctrine\DBAM\Driver\API\ExceptionConverter;
+use Doctrine\DBAM\Driver\API\SQLite;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Platforms\SqlitePlatform;
+use Doctrine\DBAM\Schema\SqliteSchemaManager;
 
 use function assert;
 
 /**
- * Abstract base implementation of the {@see Doctrine\DBAL\Driver} interface for SQLite based drivers.
+ * Abstract base implementation of the {@see Doctrine\DBAM\Driver} interface for SQLite based drivers.
  */
 abstract class AbstractSQLiteDriver implements Driver
 {

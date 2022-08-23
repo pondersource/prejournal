@@ -1,14 +1,14 @@
 <?php
 
-namespace Doctrine\DBAL\Platforms;
+namespace Doctrine\DBAM\Platforms;
 
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Schema\ColumnDiff;
-use Doctrine\DBAL\Schema\Identifier;
-use Doctrine\DBAL\Schema\Index;
-use Doctrine\DBAL\Schema\TableDiff;
-use Doctrine\DBAL\Types\Type;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Schema\ColumnDiff;
+use Doctrine\DBAM\Schema\Identifier;
+use Doctrine\DBAM\Schema\Index;
+use Doctrine\DBAM\Schema\TableDiff;
+use Doctrine\DBAM\Types\Type;
+use Doctrine\DBAM\Types\Types;
 use Doctrine\Deprecations\Deprecation;
 
 use function array_merge;
@@ -98,7 +98,7 @@ class DB2Platform extends AbstractPlatform
         Deprecation::trigger(
             'doctrine/dbal',
             'https://github.com/doctrine/dbal/pull/5058',
-            '%s is deprecated and will be removed in Doctrine DBAL 4.0. Use Type::requiresSQLCommentHint() instead.',
+            '%s is deprecated and will be removed in Doctrine DBAM 4.0. Use Type::requiresSQLCommentHint() instead.',
             __METHOD__
         );
 

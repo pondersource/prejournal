@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Driver\SQLSrv\Exception;
+namespace Doctrine\DBAM\Driver\SQLSrv\Exception;
 
-use Doctrine\DBAL\Driver\AbstractException;
+use Doctrine\DBAM\Driver\AbstractException;
 
 use function rtrim;
 use function sqlsrv_errors;

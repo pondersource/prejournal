@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Platforms\Keywords;
+namespace Doctrine\DBAM\Platforms\Keywords;
 
 /**
  * PostgreSQL 10.0 reserved keywords list.

@@ -1,9 +1,9 @@
 <?php
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAM;
 
 /**
- * Container for all DBAL events.
+ * Container for all DBAM events.
  *
  * This class cannot be instantiated.
  */

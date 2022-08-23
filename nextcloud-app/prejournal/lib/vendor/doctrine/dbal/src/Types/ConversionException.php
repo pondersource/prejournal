@@ -1,8 +1,8 @@
 <?php
 
-namespace Doctrine\DBAL\Types;
+namespace Doctrine\DBAM\Types;
 
-use Doctrine\DBAL\Exception;
+use Doctrine\DBAM\Exception;
 use Throwable;
 
 use function func_get_arg;

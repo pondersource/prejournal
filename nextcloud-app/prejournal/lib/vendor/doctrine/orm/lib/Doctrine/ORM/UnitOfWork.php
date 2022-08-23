@@ -9,8 +9,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\EventManager;
 use Doctrine\Common\Proxy\Proxy;
-use Doctrine\DBAL\Connections\PrimaryReadReplicaConnection;
-use Doctrine\DBAL\LockMode;
+use Doctrine\DBAM\Connections\PrimaryReadReplicaConnection;
+use Doctrine\DBAM\LockMode;
 use Doctrine\Deprecations\Deprecation;
 use Doctrine\ORM\Cache\Persister\CachedPersister;
 use Doctrine\ORM\Event\LifecycleEventArgs;
@@ -958,7 +958,7 @@ class UnitOfWork implements PropertyChangedListener
 
                 case self::STATE_DETACHED:
                     // Can actually not happen right now as we assume STATE_NEW,
-                    // so the exception will be raised from the DBAL layer (constraint violation).
+                    // so the exception will be raised from the DBAM layer (constraint violation).
                     throw ORMInvalidArgumentException::detachedEntityFoundThroughRelationship($assoc, $entry);
 
                 default:

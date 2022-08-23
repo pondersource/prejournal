@@ -7,7 +7,7 @@ and define the ``doInitialize`` method. Here is an example where
 we lazily query the database for a collection of user records:
 
 .. code-block:: php
-    use Doctrine\DBAL\Connection;
+    use Doctrine\DBAM\Connection;
 
     class UsersLazyCollection extends AbstractLazyCollection
     {

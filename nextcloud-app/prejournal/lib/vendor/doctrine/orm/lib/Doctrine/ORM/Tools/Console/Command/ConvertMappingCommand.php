@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Doctrine\ORM\Tools\Console\Command;
 
-use Doctrine\DBAL\Connection;
+use Doctrine\DBAM\Connection;
 use Doctrine\ORM\Mapping\Driver\DatabaseDriver;
 use Doctrine\ORM\Tools\Console\MetadataFilter;
 use Doctrine\ORM\Tools\DisconnectedClassMetadataFactory;
@@ -72,7 +72,7 @@ every time you make changes. All mapping drivers are first class citizens
 in Doctrine 2 and can be used as runtime mapping for the ORM.
 
 <comment>Hint:</comment> If you have a database with tables that should not be managed
-by the ORM, you can use a DBAL functionality to filter the tables and sequences down
+by the ORM, you can use a DBAM functionality to filter the tables and sequences down
 on a global level:
 
     \$config->setFilterSchemaAssetsExpression(\$regexp);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAM;
 
 /**
  * Legacy Class that keeps BC for using the legacy APIs fetch()/fetchAll().

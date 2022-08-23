@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\PDO\MySQL;
+namespace Doctrine\DBAM\Driver\PDO\MySQL;
 
-use Doctrine\DBAL\Driver\AbstractMySQLDriver;
-use Doctrine\DBAL\Driver\PDO\Connection;
-use Doctrine\DBAL\Driver\PDO\Exception;
+use Doctrine\DBAM\Driver\AbstractMySQLDriver;
+use Doctrine\DBAM\Driver\PDO\Connection;
+use Doctrine\DBAM\Driver\PDO\Exception;
 use PDO;
 use PDOException;
 

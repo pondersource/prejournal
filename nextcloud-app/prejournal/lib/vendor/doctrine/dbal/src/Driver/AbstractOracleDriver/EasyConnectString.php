@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Driver\AbstractOracleDriver;
+namespace Doctrine\DBAM\Driver\AbstractOracleDriver;
 
 use function implode;
 use function is_array;
@@ -39,7 +39,7 @@ final class EasyConnectString
     }
 
     /**
-     * Creates the object from the given DBAL connection parameters.
+     * Creates the object from the given DBAM connection parameters.
      *
      * @param mixed[] $params
      */

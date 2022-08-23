@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Event;
+namespace Doctrine\DBAM\Event;
 
 use Doctrine\Common\EventArgs;
 

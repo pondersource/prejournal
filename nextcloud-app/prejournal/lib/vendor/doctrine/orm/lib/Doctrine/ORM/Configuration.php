@@ -55,13 +55,13 @@ use function trim;
 
 /**
  * Configuration container for all configuration options of Doctrine.
- * It combines all configuration options from DBAL & ORM.
+ * It combines all configuration options from DBAM & ORM.
  *
  * Internal note: When adding a new configuration option just write a getter/setter pair.
  *
  * @psalm-import-type AutogenerateMode from ProxyFactory
  */
-class Configuration extends \Doctrine\DBAL\Configuration
+class Configuration extends \Doctrine\DBAM\Configuration
 {
     /** @var mixed[] */
     protected $_attributes = [];
@@ -289,7 +289,7 @@ class Configuration extends \Doctrine\DBAL\Configuration
      */
     public function getResultCache(): ?CacheItemPoolInterface
     {
-        // Compatibility with DBAL 2
+        // Compatibility with DBAM 2
         if (! method_exists(parent::class, 'getResultCache')) {
             $cacheImpl = $this->getResultCacheImpl();
 
@@ -304,7 +304,7 @@ class Configuration extends \Doctrine\DBAL\Configuration
      */
     public function setResultCache(CacheItemPoolInterface $cache): void
     {
-        // Compatibility with DBAL 2
+        // Compatibility with DBAM 2
         if (! method_exists(parent::class, 'setResultCache')) {
             $this->setResultCacheImpl(DoctrineProvider::wrap($cache));
 

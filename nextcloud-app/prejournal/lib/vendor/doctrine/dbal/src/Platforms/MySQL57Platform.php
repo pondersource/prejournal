@@ -1,11 +1,11 @@
 <?php
 
-namespace Doctrine\DBAL\Platforms;
+namespace Doctrine\DBAM\Platforms;
 
-use Doctrine\DBAL\Schema\Index;
-use Doctrine\DBAL\Schema\TableDiff;
-use Doctrine\DBAL\SQL\Parser;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\DBAM\Schema\Index;
+use Doctrine\DBAM\Schema\TableDiff;
+use Doctrine\DBAM\SQL\Parser;
+use Doctrine\DBAM\Types\Types;
 use Doctrine\Deprecations\Deprecation;
 
 /**

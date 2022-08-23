@@ -1,15 +1,15 @@
 <?php
 
-namespace Doctrine\DBAL\Driver;
+namespace Doctrine\DBAM\Driver;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver;
-use Doctrine\DBAL\Driver\AbstractOracleDriver\EasyConnectString;
-use Doctrine\DBAL\Driver\API\ExceptionConverter;
-use Doctrine\DBAL\Driver\API\OCI;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Platforms\OraclePlatform;
-use Doctrine\DBAL\Schema\OracleSchemaManager;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Driver;
+use Doctrine\DBAM\Driver\AbstractOracleDriver\EasyConnectString;
+use Doctrine\DBAM\Driver\API\ExceptionConverter;
+use Doctrine\DBAM\Driver\API\OCI;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Platforms\OraclePlatform;
+use Doctrine\DBAM\Schema\OracleSchemaManager;
 
 use function assert;
 

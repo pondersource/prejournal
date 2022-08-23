@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\SQLSrv;
+namespace Doctrine\DBAM\Driver\SQLSrv;
 
-use Doctrine\DBAL\Driver\AbstractSQLServerDriver;
-use Doctrine\DBAL\Driver\AbstractSQLServerDriver\Exception\PortWithoutHost;
-use Doctrine\DBAL\Driver\SQLSrv\Exception\Error;
+use Doctrine\DBAM\Driver\AbstractSQLServerDriver;
+use Doctrine\DBAM\Driver\AbstractSQLServerDriver\Exception\PortWithoutHost;
+use Doctrine\DBAM\Driver\SQLSrv\Exception\Error;
 
 use function sqlsrv_configure;
 use function sqlsrv_connect;

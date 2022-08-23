@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Doctrine\ORM\Mapping;
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
 use Doctrine\ORM\Internal\SQLResultCasing;
 
 use function array_map;
@@ -33,7 +33,7 @@ class DefaultQuoteStrategy implements QuoteStrategy
     /**
      * {@inheritdoc}
      *
-     * @todo Table names should be computed in DBAL depending on the platform
+     * @todo Table names should be computed in DBAM depending on the platform
      */
     public function getTableName(ClassMetadata $class, AbstractPlatform $platform)
     {

@@ -5,9 +5,9 @@ includes:
 parameters:
     ignoreErrors:
         # deprecations from doctrine/dbal:3.x
-        - '/^Call to an undefined method Doctrine\\DBAL\\Platforms\\AbstractPlatform::getGuidExpression\(\).$/'
+        - '/^Call to an undefined method Doctrine\\DBAM\\Platforms\\AbstractPlatform::getGuidExpression\(\).$/'
 
-        # Fallback logic for DBAL 2
+        # Fallback logic for DBAM 2
         -
             message: '/HelperSet constructor expects/'
             path: lib/Doctrine/ORM/Tools/Console/ConsoleRunner.php
@@ -15,20 +15,20 @@ parameters:
             message: '/Application::add\(\) expects Symfony\\Component\\Console\\Command\\Command/'
             path: lib/Doctrine/ORM/Tools/Console/ConsoleRunner.php
 
-        - '/^Class Doctrine\\DBAL\\Platforms\\SQLAnywherePlatform not found\.$/'
-        - '/^Call to method \w+\(\) on an unknown class Doctrine\\DBAL\\Platforms\\SQLAnywherePlatform\.$/'
+        - '/^Class Doctrine\\DBAM\\Platforms\\SQLAnywherePlatform not found\.$/'
+        - '/^Call to method \w+\(\) on an unknown class Doctrine\\DBAM\\Platforms\\SQLAnywherePlatform\.$/'
 
         -
-        	message: '/^Call to an undefined method Doctrine\\DBAL\\Platforms\\AbstractPlatform::getSQLResultCasing\(\)\.$/'
+        	message: '/^Call to an undefined method Doctrine\\DBAM\\Platforms\\AbstractPlatform::getSQLResultCasing\(\)\.$/'
         	path: lib/Doctrine/ORM/Internal/SQLResultCasing.php
         -
-        	message: '/^Parameter \$stmt of method .* has invalid type Doctrine\\DBAL\\Driver\\ResultStatement\.$/'
+        	message: '/^Parameter \$stmt of method .* has invalid type Doctrine\\DBAM\\Driver\\ResultStatement\.$/'
         	path: lib/Doctrine/ORM/Internal/Hydration/AbstractHydrator.php
         -
-        	message: '/^Class Doctrine\\DBAL\\Driver\\ResultStatement not found\.$/'
+        	message: '/^Class Doctrine\\DBAM\\Driver\\ResultStatement not found\.$/'
         	path: lib/Doctrine/ORM/Internal/Hydration/AbstractHydrator.php
         -
-        	message: '/^Call to static method ensure\(\) on an unknown class Doctrine\\DBAL\\ForwardCompatibility\\Result\.$/'
+        	message: '/^Call to static method ensure\(\) on an unknown class Doctrine\\DBAM\\ForwardCompatibility\\Result\.$/'
         	path: lib/Doctrine/ORM/Internal/Hydration/AbstractHydrator.php
 
         # False positive

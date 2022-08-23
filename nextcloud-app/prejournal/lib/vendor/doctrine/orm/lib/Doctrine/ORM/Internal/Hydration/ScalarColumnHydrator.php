@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Doctrine\ORM\Internal\Hydration;
 
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAM\Driver\Exception;
 use Doctrine\ORM\Exception\MultipleSelectorsFoundException;
 
 use function array_column;

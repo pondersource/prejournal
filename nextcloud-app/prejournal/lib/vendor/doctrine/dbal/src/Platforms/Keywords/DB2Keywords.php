@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Platforms\Keywords;
+namespace Doctrine\DBAM\Platforms\Keywords;
 
 /**
  * DB2 Keywords.

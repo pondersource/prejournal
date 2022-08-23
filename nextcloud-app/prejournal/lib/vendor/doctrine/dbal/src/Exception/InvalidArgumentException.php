@@ -1,11 +1,11 @@
 <?php
 
-namespace Doctrine\DBAL\Exception;
+namespace Doctrine\DBAM\Exception;
 
-use Doctrine\DBAL\Exception;
+use Doctrine\DBAM\Exception;
 
 /**
- * Exception to be thrown when invalid arguments are passed to any DBAL API
+ * Exception to be thrown when invalid arguments are passed to any DBAM API
  *
  * @psalm-immutable
  */

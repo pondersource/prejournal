@@ -1,13 +1,13 @@
 <?php
 
-namespace Doctrine\DBAL\Schema;
+namespace Doctrine\DBAM\Schema;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Event\SchemaColumnDefinitionEventArgs;
-use Doctrine\DBAL\Event\SchemaIndexDefinitionEventArgs;
-use Doctrine\DBAL\Events;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Event\SchemaColumnDefinitionEventArgs;
+use Doctrine\DBAM\Event\SchemaIndexDefinitionEventArgs;
+use Doctrine\DBAM\Events;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
 use Doctrine\Deprecations\Deprecation;
 use Throwable;
 

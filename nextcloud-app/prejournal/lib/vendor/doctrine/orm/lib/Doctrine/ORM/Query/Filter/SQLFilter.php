@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Doctrine\ORM\Query\Filter;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\ParameterTypeInferer;

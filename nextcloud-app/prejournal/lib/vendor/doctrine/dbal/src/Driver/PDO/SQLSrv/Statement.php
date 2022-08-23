@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\PDO\SQLSrv;
+namespace Doctrine\DBAM\Driver\PDO\SQLSrv;
 
-use Doctrine\DBAL\Driver\Middleware\AbstractStatementMiddleware;
-use Doctrine\DBAL\Driver\PDO\Statement as PDOStatement;
-use Doctrine\DBAL\ParameterType;
+use Doctrine\DBAM\Driver\Middleware\AbstractStatementMiddleware;
+use Doctrine\DBAM\Driver\PDO\Statement as PDOStatement;
+use Doctrine\DBAM\ParameterType;
 use Doctrine\Deprecations\Deprecation;
 use PDO;
 

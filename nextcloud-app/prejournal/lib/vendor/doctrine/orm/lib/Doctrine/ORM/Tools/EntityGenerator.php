@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Doctrine\ORM\Tools;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Type;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\DBAM\Types\Type;
+use Doctrine\DBAM\Types\Types;
 use Doctrine\Deprecations\Deprecation;
 use Doctrine\Inflector\Inflector;
 use Doctrine\Inflector\InflectorFactory;

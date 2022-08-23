@@ -1,22 +1,22 @@
 <?php
 
-namespace Doctrine\DBAL\Tools\Console\Command;
+namespace Doctrine\DBAM\Tools\Console\Command;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Platforms\Keywords\DB2Keywords;
-use Doctrine\DBAL\Platforms\Keywords\KeywordList;
-use Doctrine\DBAL\Platforms\Keywords\MariaDb102Keywords;
-use Doctrine\DBAL\Platforms\Keywords\MySQL57Keywords;
-use Doctrine\DBAL\Platforms\Keywords\MySQL80Keywords;
-use Doctrine\DBAL\Platforms\Keywords\MySQLKeywords;
-use Doctrine\DBAL\Platforms\Keywords\OracleKeywords;
-use Doctrine\DBAL\Platforms\Keywords\PostgreSQL100Keywords;
-use Doctrine\DBAL\Platforms\Keywords\PostgreSQL94Keywords;
-use Doctrine\DBAL\Platforms\Keywords\ReservedKeywordsValidator;
-use Doctrine\DBAL\Platforms\Keywords\SQLiteKeywords;
-use Doctrine\DBAL\Platforms\Keywords\SQLServer2012Keywords;
-use Doctrine\DBAL\Tools\Console\ConnectionProvider;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Platforms\Keywords\DB2Keywords;
+use Doctrine\DBAM\Platforms\Keywords\KeywordList;
+use Doctrine\DBAM\Platforms\Keywords\MariaDb102Keywords;
+use Doctrine\DBAM\Platforms\Keywords\MySQL57Keywords;
+use Doctrine\DBAM\Platforms\Keywords\MySQL80Keywords;
+use Doctrine\DBAM\Platforms\Keywords\MySQLKeywords;
+use Doctrine\DBAM\Platforms\Keywords\OracleKeywords;
+use Doctrine\DBAM\Platforms\Keywords\PostgreSQL100Keywords;
+use Doctrine\DBAM\Platforms\Keywords\PostgreSQL94Keywords;
+use Doctrine\DBAM\Platforms\Keywords\ReservedKeywordsValidator;
+use Doctrine\DBAM\Platforms\Keywords\SQLiteKeywords;
+use Doctrine\DBAM\Platforms\Keywords\SQLServer2012Keywords;
+use Doctrine\DBAM\Tools\Console\ConnectionProvider;
 use Doctrine\Deprecations\Deprecation;
 use InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Types;
+namespace Doctrine\DBAM\Types;
 
 /**
  * Implementations should map a database type to a PHP DateTimeInterface instance.

@@ -1,12 +1,12 @@
 <?php
 
-namespace Doctrine\DBAL\Schema;
+namespace Doctrine\DBAM\Schema;
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Schema\Visitor\CreateSchemaSqlCollector;
-use Doctrine\DBAL\Schema\Visitor\DropSchemaSqlCollector;
-use Doctrine\DBAL\Schema\Visitor\NamespaceVisitor;
-use Doctrine\DBAL\Schema\Visitor\Visitor;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Schema\Visitor\CreateSchemaSqlCollector;
+use Doctrine\DBAM\Schema\Visitor\DropSchemaSqlCollector;
+use Doctrine\DBAM\Schema\Visitor\NamespaceVisitor;
+use Doctrine\DBAM\Schema\Visitor\Visitor;
 use Doctrine\Deprecations\Deprecation;
 
 use function array_keys;

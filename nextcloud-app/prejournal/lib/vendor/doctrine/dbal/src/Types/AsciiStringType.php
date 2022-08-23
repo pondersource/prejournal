@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Types;
+namespace Doctrine\DBAM\Types;
 
-use Doctrine\DBAL\ParameterType;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAM\ParameterType;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
 
 final class AsciiStringType extends StringType
 {

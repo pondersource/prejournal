@@ -6,7 +6,7 @@ namespace Doctrine\ORM\Persisters\Collection;
 
 use BadMethodCallException;
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\DBAL\Exception as DBALException;
+use Doctrine\DBAM\Exception as DBAMException;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\PersistentCollection;
 use Doctrine\ORM\Persisters\SqlValueVisitor;
@@ -758,7 +758,7 @@ class ManyToManyPersister extends AbstractCollectionPersister
     }
 
     /**
-     * @throws DBALException
+     * @throws DBAMException
      */
     private function getLimitSql(Criteria $criteria): string
     {

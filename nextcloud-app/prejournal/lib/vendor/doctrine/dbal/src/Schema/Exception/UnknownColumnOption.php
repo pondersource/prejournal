@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Schema\Exception;
+namespace Doctrine\DBAM\Schema\Exception;
 
-use Doctrine\DBAL\Schema\SchemaException;
+use Doctrine\DBAM\Schema\SchemaException;
 
 use function sprintf;
 

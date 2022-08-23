@@ -1,12 +1,12 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\SQLSrv;
+namespace Doctrine\DBAM\Driver\SQLSrv;
 
-use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\Driver\Result as ResultInterface;
-use Doctrine\DBAL\Driver\SQLSrv\Exception\Error;
-use Doctrine\DBAL\Driver\Statement as StatementInterface;
-use Doctrine\DBAL\ParameterType;
+use Doctrine\DBAM\Driver\Exception;
+use Doctrine\DBAM\Driver\Result as ResultInterface;
+use Doctrine\DBAM\Driver\SQLSrv\Exception\Error;
+use Doctrine\DBAM\Driver\Statement as StatementInterface;
+use Doctrine\DBAM\ParameterType;
 
 use function assert;
 use function is_int;

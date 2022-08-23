@@ -1,15 +1,15 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\Mysqli;
+namespace Doctrine\DBAM\Driver\Mysqli;
 
-use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\Driver\Exception\UnknownParameterType;
-use Doctrine\DBAL\Driver\Mysqli\Exception\FailedReadingStreamOffset;
-use Doctrine\DBAL\Driver\Mysqli\Exception\NonStreamResourceUsedAsLargeObject;
-use Doctrine\DBAL\Driver\Mysqli\Exception\StatementError;
-use Doctrine\DBAL\Driver\Result as ResultInterface;
-use Doctrine\DBAL\Driver\Statement as StatementInterface;
-use Doctrine\DBAL\ParameterType;
+use Doctrine\DBAM\Driver\Exception;
+use Doctrine\DBAM\Driver\Exception\UnknownParameterType;
+use Doctrine\DBAM\Driver\Mysqli\Exception\FailedReadingStreamOffset;
+use Doctrine\DBAM\Driver\Mysqli\Exception\NonStreamResourceUsedAsLargeObject;
+use Doctrine\DBAM\Driver\Mysqli\Exception\StatementError;
+use Doctrine\DBAM\Driver\Result as ResultInterface;
+use Doctrine\DBAM\Driver\Statement as StatementInterface;
+use Doctrine\DBAM\ParameterType;
 use mysqli_sql_exception;
 use mysqli_stmt;
 

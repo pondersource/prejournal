@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Portability;
+namespace Doctrine\DBAM\Portability;
 
 use function array_change_key_case;
 use function array_map;

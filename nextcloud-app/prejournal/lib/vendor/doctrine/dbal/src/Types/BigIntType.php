@@ -1,9 +1,9 @@
 <?php
 
-namespace Doctrine\DBAL\Types;
+namespace Doctrine\DBAM\Types;
 
-use Doctrine\DBAL\ParameterType;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAM\ParameterType;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
 
 /**
  * Type that maps a database BIGINT to a PHP string.

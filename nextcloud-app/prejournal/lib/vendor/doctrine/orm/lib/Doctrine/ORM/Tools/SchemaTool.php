@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Doctrine\ORM\Tools;
 
 use BackedEnum;
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Schema\AbstractAsset;
-use Doctrine\DBAL\Schema\AbstractSchemaManager;
-use Doctrine\DBAL\Schema\Comparator;
-use Doctrine\DBAL\Schema\Index;
-use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Schema\Table;
-use Doctrine\DBAL\Schema\Visitor\DropSchemaSqlCollector;
-use Doctrine\DBAL\Schema\Visitor\RemoveNamespacedAssets;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Schema\AbstractAsset;
+use Doctrine\DBAM\Schema\AbstractSchemaManager;
+use Doctrine\DBAM\Schema\Comparator;
+use Doctrine\DBAM\Schema\Index;
+use Doctrine\DBAM\Schema\Schema;
+use Doctrine\DBAM\Schema\Table;
+use Doctrine\DBAM\Schema\Visitor\DropSchemaSqlCollector;
+use Doctrine\DBAM\Schema\Visitor\RemoveNamespacedAssets;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\MappingException;
@@ -414,7 +414,7 @@ class SchemaTool
     }
 
     /**
-     * Gets a portable column definition as required by the DBAL for the discriminator
+     * Gets a portable column definition as required by the DBAM for the discriminator
      * column of a class.
      */
     private function addDiscriminatorColumnDefinition(ClassMetadata $class, Table $table): void
@@ -442,7 +442,7 @@ class SchemaTool
     }
 
     /**
-     * Gathers the column definitions as required by the DBAL of all field mappings
+     * Gathers the column definitions as required by the DBAM of all field mappings
      * found in the given class.
      */
     private function gatherColumns(ClassMetadata $class, Table $table): void
@@ -463,7 +463,7 @@ class SchemaTool
     }
 
     /**
-     * Creates a column definition as required by the DBAL from an ORM field mapping definition.
+     * Creates a column definition as required by the DBAM from an ORM field mapping definition.
      *
      * @param ClassMetadata $class The class that owns the field mapping.
      * @psalm-param array<string, mixed> $mapping The field mapping.

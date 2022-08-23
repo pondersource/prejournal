@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\ArrayParameters;
+namespace Doctrine\DBAM\ArrayParameters;
 
 use Throwable;
 

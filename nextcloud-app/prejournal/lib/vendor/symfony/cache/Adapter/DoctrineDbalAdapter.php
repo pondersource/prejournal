@@ -11,13 +11,13 @@
 
 namespace Symfony\Component\Cache\Adapter;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\ServerInfoAwareConnection;
-use Doctrine\DBAL\DriverManager;
-use Doctrine\DBAL\Exception as DBALException;
-use Doctrine\DBAL\Exception\TableNotFoundException;
-use Doctrine\DBAL\ParameterType;
-use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Driver\ServerInfoAwareConnection;
+use Doctrine\DBAM\DriverManager;
+use Doctrine\DBAM\Exception as DBAMException;
+use Doctrine\DBAM\Exception\TableNotFoundException;
+use Doctrine\DBAM\ParameterType;
+use Doctrine\DBAM\Schema\Schema;
 use Symfony\Component\Cache\Exception\InvalidArgumentException;
 use Symfony\Component\Cache\Marshaller\DefaultMarshaller;
 use Symfony\Component\Cache\Marshaller\MarshallerInterface;
@@ -39,7 +39,7 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
     private $namespace;
 
     /**
-     * You can either pass an existing database Doctrine DBAL Connection or
+     * You can either pass an existing database Doctrine DBAM Connection or
      * a DSN string that will be used to connect to the database.
      *
      * The cache table is created automatically when possible.
@@ -90,7 +90,7 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
      * Cache ID are saved in a column of maximum length 255. Cache data is
      * saved in a BLOB.
      *
-     * @throws DBALException When the table already exists
+     * @throws DBAMException When the table already exists
      */
     public function createTable()
     {
@@ -325,7 +325,7 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
             if (null === $platformName && 0 === $rowCount) {
                 try {
                     $insertStmt->executeStatement();
-                } catch (DBALException $e) {
+                } catch (DBAMException $e) {
                     // A concurrent write won, let it be
                 }
             }
@@ -343,22 +343,22 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         $platform = $this->conn->getDatabasePlatform();
 
         switch (true) {
-            case $platform instanceof \Doctrine\DBAL\Platforms\MySQLPlatform:
-            case $platform instanceof \Doctrine\DBAL\Platforms\MySQL57Platform:
+            case $platform instanceof \Doctrine\DBAM\Platforms\MySQLPlatform:
+            case $platform instanceof \Doctrine\DBAM\Platforms\MySQL57Platform:
                 return $this->platformName = 'mysql';
 
-            case $platform instanceof \Doctrine\DBAL\Platforms\SqlitePlatform:
+            case $platform instanceof \Doctrine\DBAM\Platforms\SqlitePlatform:
                 return $this->platformName = 'sqlite';
 
-            case $platform instanceof \Doctrine\DBAL\Platforms\PostgreSQLPlatform:
-            case $platform instanceof \Doctrine\DBAL\Platforms\PostgreSQL94Platform:
+            case $platform instanceof \Doctrine\DBAM\Platforms\PostgreSQLPlatform:
+            case $platform instanceof \Doctrine\DBAM\Platforms\PostgreSQL94Platform:
                 return $this->platformName = 'pgsql';
 
-            case $platform instanceof \Doctrine\DBAL\Platforms\OraclePlatform:
+            case $platform instanceof \Doctrine\DBAM\Platforms\OraclePlatform:
                 return $this->platformName = 'oci';
 
-            case $platform instanceof \Doctrine\DBAL\Platforms\SQLServerPlatform:
-            case $platform instanceof \Doctrine\DBAL\Platforms\SQLServer2012Platform:
+            case $platform instanceof \Doctrine\DBAM\Platforms\SQLServerPlatform:
+            case $platform instanceof \Doctrine\DBAM\Platforms\SQLServer2012Platform:
                 return $this->platformName = 'sqlsrv';
 
             default:

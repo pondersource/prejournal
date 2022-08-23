@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Doctrine\ORM\Tools\Console;
 
 use Composer\InstalledVersions;
-use Doctrine\DBAL\Tools\Console as DBALConsole;
+use Doctrine\DBAM\Tools\Console as DBAMConsole;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\ConnectionFromManagerProvider;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\HelperSetManagerProvider;
@@ -32,8 +32,8 @@ final class ConsoleRunner
     {
         $helpers = ['em' => new EntityManagerHelper($entityManager)];
 
-        if (class_exists(DBALConsole\Helper\ConnectionHelper::class)) {
-            $helpers['db'] = new DBALConsole\Helper\ConnectionHelper($entityManager->getConnection());
+        if (class_exists(DBAMConsole\Helper\ConnectionHelper::class)) {
+            $helpers['db'] = new DBAMConsole\Helper\ConnectionHelper($entityManager->getConnection());
         }
 
         return new HelperSet($helpers);
@@ -88,15 +88,15 @@ final class ConsoleRunner
 
         $connectionProvider = new ConnectionFromManagerProvider($entityManagerProvider);
 
-        if (class_exists(DBALConsole\Command\ImportCommand::class)) {
-            $cli->add(new DBALConsole\Command\ImportCommand());
+        if (class_exists(DBAMConsole\Command\ImportCommand::class)) {
+            $cli->add(new DBAMConsole\Command\ImportCommand());
         }
 
         $cli->addCommands(
             [
-                // DBAL Commands
-                new DBALConsole\Command\ReservedWordsCommand($connectionProvider),
-                new DBALConsole\Command\RunSqlCommand($connectionProvider),
+                // DBAM Commands
+                new DBAMConsole\Command\ReservedWordsCommand($connectionProvider),
+                new DBAMConsole\Command\RunSqlCommand($connectionProvider),
 
                 // ORM Commands
                 new Command\ClearCache\CollectionRegionCommand($entityManagerProvider),

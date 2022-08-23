@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Driver\Mysqli\Initializer;
+namespace Doctrine\DBAM\Driver\Mysqli\Initializer;
 
-use Doctrine\DBAL\Driver\Mysqli\Exception\InvalidOption;
-use Doctrine\DBAL\Driver\Mysqli\Initializer;
+use Doctrine\DBAM\Driver\Mysqli\Exception\InvalidOption;
+use Doctrine\DBAM\Driver\Mysqli\Initializer;
 use mysqli;
 
 use function mysqli_options;

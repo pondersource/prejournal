@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Exception;
+namespace Doctrine\DBAM\Exception;
 
 /**
  * Exception for an already existing table referenced in a statement detected in the driver.

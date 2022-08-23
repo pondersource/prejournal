@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Logging;
+namespace Doctrine\DBAM\Logging;
 
 use Doctrine\Deprecations\Deprecation;
 

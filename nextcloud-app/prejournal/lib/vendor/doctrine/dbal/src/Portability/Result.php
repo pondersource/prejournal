@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Portability;
+namespace Doctrine\DBAM\Portability;
 
-use Doctrine\DBAL\Driver\Middleware\AbstractResultMiddleware;
-use Doctrine\DBAL\Driver\Result as ResultInterface;
+use Doctrine\DBAM\Driver\Middleware\AbstractResultMiddleware;
+use Doctrine\DBAM\Driver\Result as ResultInterface;
 
 final class Result extends AbstractResultMiddleware
 {

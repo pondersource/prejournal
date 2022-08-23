@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Doctrine\ORM\Tools\Pagination;
 
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Types\Type;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\AST\Functions\IdentityFunction;
@@ -26,7 +26,7 @@ class LimitSubqueryWalker extends TreeWalkerAdapter
 {
     public const IDENTIFIER_TYPE = 'doctrine_paginator.id.type';
 
-    public const FORCE_DBAL_TYPE_CONVERSION = 'doctrine_paginator.scalar_result.force_dbal_type_conversion';
+    public const FORCE_DBAM_TYPE_CONVERSION = 'doctrine_paginator.scalar_result.force_dbal_type_conversion';
 
     /**
      * Counter for generating unique order column aliases.
@@ -64,7 +64,7 @@ class LimitSubqueryWalker extends TreeWalkerAdapter
             Type::getType($rootClass->fieldMappings[$identifier]['type'])
         );
 
-        $this->_getQuery()->setHint(self::FORCE_DBAL_TYPE_CONVERSION, true);
+        $this->_getQuery()->setHint(self::FORCE_DBAM_TYPE_CONVERSION, true);
 
         $pathExpression = new PathExpression(
             PathExpression::TYPE_STATE_FIELD | PathExpression::TYPE_SINGLE_VALUED_ASSOCIATION,

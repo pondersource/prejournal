@@ -1,12 +1,12 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\OCI8;
+namespace Doctrine\DBAM\Driver\OCI8;
 
-use Doctrine\DBAL\Driver\OCI8\Exception\Error;
-use Doctrine\DBAL\Driver\OCI8\Exception\UnknownParameterIndex;
-use Doctrine\DBAL\Driver\Result as ResultInterface;
-use Doctrine\DBAL\Driver\Statement as StatementInterface;
-use Doctrine\DBAL\ParameterType;
+use Doctrine\DBAM\Driver\OCI8\Exception\Error;
+use Doctrine\DBAM\Driver\OCI8\Exception\UnknownParameterIndex;
+use Doctrine\DBAM\Driver\Result as ResultInterface;
+use Doctrine\DBAM\Driver\Statement as StatementInterface;
+use Doctrine\DBAM\ParameterType;
 
 use function is_int;
 use function oci_bind_by_name;
@@ -88,7 +88,7 @@ final class Statement implements StatementInterface
     }
 
     /**
-     * Converts DBAL parameter type to oci8 parameter type
+     * Converts DBAM parameter type to oci8 parameter type
      */
     private function convertParameterType(int $type): int
     {

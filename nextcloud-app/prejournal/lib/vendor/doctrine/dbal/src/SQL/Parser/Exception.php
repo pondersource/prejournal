@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\SQL\Parser;
+namespace Doctrine\DBAM\SQL\Parser;
 
 use Throwable;
 

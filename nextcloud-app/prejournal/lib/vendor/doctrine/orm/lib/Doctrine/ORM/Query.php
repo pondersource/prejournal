@@ -8,9 +8,9 @@ use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Cache\Psr6\CacheAdapter;
 use Doctrine\Common\Cache\Psr6\DoctrineProvider;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\DBAL\Cache\QueryCacheProfile;
-use Doctrine\DBAL\LockMode;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Cache\QueryCacheProfile;
+use Doctrine\DBAM\LockMode;
+use Doctrine\DBAM\Types\Type;
 use Doctrine\Deprecations\Deprecation;
 use Doctrine\ORM\Internal\Hydration\IterableResult;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -750,7 +750,7 @@ final class Query extends AbstractQuery
     /**
      * Set the lock mode for this Query.
      *
-     * @see \Doctrine\DBAL\LockMode
+     * @see \Doctrine\DBAM\LockMode
      *
      * @param int $lockMode
      * @psalm-param LockMode::* $lockMode

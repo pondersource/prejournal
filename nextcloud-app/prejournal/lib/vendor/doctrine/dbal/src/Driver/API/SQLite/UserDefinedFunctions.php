@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\API\SQLite;
+namespace Doctrine\DBAM\Driver\API\SQLite;
 
 use function strpos;
 

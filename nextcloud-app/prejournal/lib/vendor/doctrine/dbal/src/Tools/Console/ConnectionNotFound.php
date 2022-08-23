@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Tools\Console;
+namespace Doctrine\DBAM\Tools\Console;
 
 use OutOfBoundsException;
 

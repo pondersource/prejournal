@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Portability;
+namespace Doctrine\DBAM\Portability;
 
-use Doctrine\DBAL\ColumnCase;
-use Doctrine\DBAL\Driver as DriverInterface;
-use Doctrine\DBAL\Driver\Middleware\AbstractDriverMiddleware;
+use Doctrine\DBAM\ColumnCase;
+use Doctrine\DBAM\Driver as DriverInterface;
+use Doctrine\DBAM\Driver\Middleware\AbstractDriverMiddleware;
 use LogicException;
 use PDO;
 

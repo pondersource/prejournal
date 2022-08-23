@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Doctrine\ORM\Tools\Console\EntityManagerProvider;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Tools\Console\ConnectionProvider;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Tools\Console\ConnectionProvider;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider;
 
 final class ConnectionFromManagerProvider implements ConnectionProvider

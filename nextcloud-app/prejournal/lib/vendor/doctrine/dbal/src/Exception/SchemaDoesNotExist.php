@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Exception;
+namespace Doctrine\DBAM\Exception;
 
 /**
  * @psalm-immutable

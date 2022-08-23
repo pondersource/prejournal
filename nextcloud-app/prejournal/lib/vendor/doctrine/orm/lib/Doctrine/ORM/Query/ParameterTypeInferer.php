@@ -8,9 +8,9 @@ use BackedEnum;
 use DateInterval;
 use DateTimeImmutable;
 use DateTimeInterface;
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\ParameterType;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\ParameterType;
+use Doctrine\DBAM\Types\Types;
 
 use function current;
 use function is_array;
@@ -26,8 +26,8 @@ class ParameterTypeInferer
 {
     /**
      * Infers type of a given value, returning a compatible constant:
-     * - Type (\Doctrine\DBAL\Types\Type::*)
-     * - Connection (\Doctrine\DBAL\Connection::PARAM_*)
+     * - Type (\Doctrine\DBAM\Types\Type::*)
+     * - Connection (\Doctrine\DBAM\Connection::PARAM_*)
      *
      * @param mixed $value Parameter value.
      *

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\SQL\Parser\Exception;
+namespace Doctrine\DBAM\SQL\Parser\Exception;
 
-use Doctrine\DBAL\SQL\Parser\Exception;
+use Doctrine\DBAM\SQL\Parser\Exception;
 use RuntimeException;
 
 use function preg_last_error;

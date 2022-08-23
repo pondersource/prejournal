@@ -1,19 +1,19 @@
 <?php
 
-namespace Doctrine\DBAL\Platforms;
+namespace Doctrine\DBAM\Platforms;
 
-use Doctrine\DBAL\Driver\API\SQLite\UserDefinedFunctions;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Schema\Column;
-use Doctrine\DBAL\Schema\Constraint;
-use Doctrine\DBAL\Schema\ForeignKeyConstraint;
-use Doctrine\DBAL\Schema\Identifier;
-use Doctrine\DBAL\Schema\Index;
-use Doctrine\DBAL\Schema\SchemaException;
-use Doctrine\DBAL\Schema\Table;
-use Doctrine\DBAL\Schema\TableDiff;
-use Doctrine\DBAL\TransactionIsolationLevel;
-use Doctrine\DBAL\Types;
+use Doctrine\DBAM\Driver\API\SQLite\UserDefinedFunctions;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Schema\Column;
+use Doctrine\DBAM\Schema\Constraint;
+use Doctrine\DBAM\Schema\ForeignKeyConstraint;
+use Doctrine\DBAM\Schema\Identifier;
+use Doctrine\DBAM\Schema\Index;
+use Doctrine\DBAM\Schema\SchemaException;
+use Doctrine\DBAM\Schema\Table;
+use Doctrine\DBAM\Schema\TableDiff;
+use Doctrine\DBAM\TransactionIsolationLevel;
+use Doctrine\DBAM\Types;
 use Doctrine\Deprecations\Deprecation;
 
 use function array_combine;
@@ -169,7 +169,7 @@ class SqlitePlatform extends AbstractPlatform
      * The SQLite platform doesn't support the concept of a database, therefore, it always returns an empty string
      * as an indicator of an implicitly selected database.
      *
-     * @see \Doctrine\DBAL\Connection::getDatabase()
+     * @see \Doctrine\DBAM\Connection::getDatabase()
      */
     public function getCurrentDatabaseExpression(): string
     {

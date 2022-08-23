@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Doctrine\ORM\Persisters\Entity;
 
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\DBAL\LockMode;
+use Doctrine\DBAM\LockMode;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\MappingException;
 use Doctrine\ORM\PersistentCollection;
@@ -179,7 +179,7 @@ interface EntityPersister
      * @param mixed[]|null  $assoc    The association that connects the entity
      *                                to load to another entity, if any.
      * @param mixed[]       $hints    Hints for entity creation.
-     * @param int|null      $lockMode One of the \Doctrine\DBAL\LockMode::* constants
+     * @param int|null      $lockMode One of the \Doctrine\DBAM\LockMode::* constants
      *                                or NULL if no specific lock mode should be used
      *                                for loading the entity.
      * @param int|null      $limit    Limit number of results.
@@ -236,7 +236,7 @@ interface EntityPersister
      * Refreshes a managed entity.
      *
      * @param object   $entity   The entity to refresh.
-     * @param int|null $lockMode One of the \Doctrine\DBAL\LockMode::* constants
+     * @param int|null $lockMode One of the \Doctrine\DBAM\LockMode::* constants
      *                           or NULL if no specific lock mode should be used
      *                           for refreshing the managed entity.
      * @psalm-param array<string, mixed> $id The identifier of the entity as an
@@ -302,7 +302,7 @@ interface EntityPersister
     /**
      * Locks all rows of this entity matching the given criteria with the specified pessimistic lock mode.
      *
-     * @param int $lockMode One of the Doctrine\DBAL\LockMode::* constants.
+     * @param int $lockMode One of the Doctrine\DBAM\LockMode::* constants.
      * @psalm-param array<string, mixed> $criteria
      * @psalm-param LockMode::* $lockMode
      *

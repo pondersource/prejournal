@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Cache\Adapter;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Schema\Schema;
 use Psr\Cache\CacheItemInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Cache\Exception\InvalidArgumentException;
@@ -65,7 +65,7 @@ class PdoAdapter extends AbstractAdapter implements PruneableInterface
     public function __construct($connOrDsn, string $namespace = '', int $defaultLifetime = 0, array $options = [], MarshallerInterface $marshaller = null)
     {
         if ($connOrDsn instanceof Connection || (\is_string($connOrDsn) && str_contains($connOrDsn, '://'))) {
-            trigger_deprecation('symfony/cache', '5.4', 'Usage of a DBAL Connection with "%s" is deprecated and will be removed in symfony 6.0. Use "%s" instead.', __CLASS__, DoctrineDbalAdapter::class);
+            trigger_deprecation('symfony/cache', '5.4', 'Usage of a DBAM Connection with "%s" is deprecated and will be removed in symfony 6.0. Use "%s" instead.', __CLASS__, DoctrineDbalAdapter::class);
             $this->dbalAdapter = new DoctrineDbalAdapter($connOrDsn, $namespace, $defaultLifetime, $options, $marshaller);
 
             return;
@@ -84,7 +84,7 @@ class PdoAdapter extends AbstractAdapter implements PruneableInterface
         } elseif (\is_string($connOrDsn)) {
             $this->dsn = $connOrDsn;
         } else {
-            throw new InvalidArgumentException(sprintf('"%s" requires PDO or Doctrine\DBAL\Connection instance or DSN string as first argument, "%s" given.', __CLASS__, get_debug_type($connOrDsn)));
+            throw new InvalidArgumentException(sprintf('"%s" requires PDO or Doctrine\DBAM\Connection instance or DSN string as first argument, "%s" given.', __CLASS__, get_debug_type($connOrDsn)));
         }
 
         $this->table = $options['db_table'] ?? $this->table;

@@ -1,16 +1,16 @@
 <?php
 
-namespace Doctrine\DBAL\Platforms;
+namespace Doctrine\DBAM\Platforms;
 
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Schema\ForeignKeyConstraint;
-use Doctrine\DBAL\Schema\Identifier;
-use Doctrine\DBAL\Schema\Index;
-use Doctrine\DBAL\Schema\Table;
-use Doctrine\DBAL\Schema\TableDiff;
-use Doctrine\DBAL\TransactionIsolationLevel;
-use Doctrine\DBAL\Types\BlobType;
-use Doctrine\DBAL\Types\TextType;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Schema\ForeignKeyConstraint;
+use Doctrine\DBAM\Schema\Identifier;
+use Doctrine\DBAM\Schema\Index;
+use Doctrine\DBAM\Schema\Table;
+use Doctrine\DBAM\Schema\TableDiff;
+use Doctrine\DBAM\TransactionIsolationLevel;
+use Doctrine\DBAM\Types\BlobType;
+use Doctrine\DBAM\Types\TextType;
 use Doctrine\Deprecations\Deprecation;
 use InvalidArgumentException;
 

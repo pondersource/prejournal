@@ -5,8 +5,8 @@ CHANGELOG
 ---
 
  * Deprecate `DoctrineProvider` and `DoctrineAdapter` because these classes have been added to the `doctrine/cache` package
- * Add `DoctrineDbalAdapter` identical to `PdoAdapter` for `Doctrine\DBAL\Connection` or DBAL URL
- * Deprecate usage of `PdoAdapter` with `Doctrine\DBAL\Connection` or DBAL URL
+ * Add `DoctrineDbalAdapter` identical to `PdoAdapter` for `Doctrine\DBAM\Connection` or DBAM URL
+ * Deprecate usage of `PdoAdapter` with `Doctrine\DBAM\Connection` or DBAM URL
 
 5.3
 ---
@@ -64,7 +64,7 @@ CHANGELOG
  * implemented `CacheInterface`, which provides stampede protection via probabilistic early expiration and should become the preferred way to use a cache
  * added sub-second expiry accuracy for backends that support it
  * added support for phpredis 4 `compression` and `tcp_keepalive` options
- * added automatic table creation when using Doctrine DBAL with PDO-based backends
+ * added automatic table creation when using Doctrine DBAM with PDO-based backends
  * throw `LogicException` when `CacheItem::tag()` is called on an item coming from a non tag-aware pool
  * deprecated `CacheItem::getPreviousTags()`, use `CacheItem::getMetadata()` instead
  * deprecated the `AbstractAdapter::unserialize()` and `AbstractCache::unserialize()` methods
@@ -95,7 +95,7 @@ CHANGELOG
 -----
 
  * added TagAwareAdapter for tags-based invalidation
- * added PdoAdapter with PDO and Doctrine DBAL support
+ * added PdoAdapter with PDO and Doctrine DBAM support
  * added PhpArrayAdapter and PhpFilesAdapter for OPcache-backed shared memory storage (PHP 7+ only)
  * added NullAdapter
 

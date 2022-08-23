@@ -1,8 +1,8 @@
 <?php
 
-namespace Doctrine\DBAL\ArrayParameters\Exception;
+namespace Doctrine\DBAM\ArrayParameters\Exception;
 
-use Doctrine\DBAL\ArrayParameters\Exception;
+use Doctrine\DBAM\ArrayParameters\Exception;
 use LogicException;
 
 use function sprintf;

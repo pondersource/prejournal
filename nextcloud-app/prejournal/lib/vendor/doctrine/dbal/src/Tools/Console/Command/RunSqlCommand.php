@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Tools\Console\Command;
+namespace Doctrine\DBAM\Tools\Console\Command;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Tools\Console\ConnectionProvider;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Tools\Console\ConnectionProvider;
 use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

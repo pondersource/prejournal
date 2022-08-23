@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\PDO\SQLSrv;
+namespace Doctrine\DBAM\Driver\PDO\SQLSrv;
 
-use Doctrine\DBAL\Driver\Middleware\AbstractConnectionMiddleware;
-use Doctrine\DBAL\Driver\PDO\Connection as PDOConnection;
-use Doctrine\DBAL\Driver\Statement as StatementInterface;
+use Doctrine\DBAM\Driver\Middleware\AbstractConnectionMiddleware;
+use Doctrine\DBAM\Driver\PDO\Connection as PDOConnection;
+use Doctrine\DBAM\Driver\Statement as StatementInterface;
 use Doctrine\Deprecations\Deprecation;
 use PDO;
 

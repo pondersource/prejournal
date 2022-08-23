@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Event;
+namespace Doctrine\DBAM\Event;
 
 class TransactionBeginEventArgs extends TransactionEventArgs
 {

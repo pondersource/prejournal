@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\PDO\OCI;
+namespace Doctrine\DBAM\Driver\PDO\OCI;
 
-use Doctrine\DBAL\Driver\AbstractOracleDriver;
-use Doctrine\DBAL\Driver\PDO\Connection;
-use Doctrine\DBAL\Driver\PDO\Exception;
+use Doctrine\DBAM\Driver\AbstractOracleDriver;
+use Doctrine\DBAM\Driver\PDO\Connection;
+use Doctrine\DBAM\Driver\PDO\Exception;
 use PDO;
 use PDOException;
 

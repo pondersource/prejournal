@@ -1,11 +1,11 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\PDO\SQLite;
+namespace Doctrine\DBAM\Driver\PDO\SQLite;
 
-use Doctrine\DBAL\Driver\AbstractSQLiteDriver;
-use Doctrine\DBAL\Driver\PDO\Connection;
-use Doctrine\DBAL\Driver\PDO\Exception;
-use Doctrine\DBAL\Platforms\SqlitePlatform;
+use Doctrine\DBAM\Driver\AbstractSQLiteDriver;
+use Doctrine\DBAM\Driver\PDO\Connection;
+use Doctrine\DBAM\Driver\PDO\Exception;
+use Doctrine\DBAM\Platforms\SqlitePlatform;
 use PDO;
 use PDOException;
 

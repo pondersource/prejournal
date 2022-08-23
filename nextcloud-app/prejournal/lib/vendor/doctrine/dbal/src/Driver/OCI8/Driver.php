@@ -1,9 +1,9 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\OCI8;
+namespace Doctrine\DBAM\Driver\OCI8;
 
-use Doctrine\DBAL\Driver\AbstractOracleDriver;
-use Doctrine\DBAL\Driver\OCI8\Exception\ConnectionFailed;
+use Doctrine\DBAM\Driver\AbstractOracleDriver;
+use Doctrine\DBAM\Driver\OCI8\Exception\ConnectionFailed;
 
 use function oci_connect;
 use function oci_pconnect;
@@ -11,7 +11,7 @@ use function oci_pconnect;
 use const OCI_NO_AUTO_COMMIT;
 
 /**
- * A Doctrine DBAL driver for the Oracle OCI8 PHP extensions.
+ * A Doctrine DBAM driver for the Oracle OCI8 PHP extensions.
  */
 final class Driver extends AbstractOracleDriver
 {

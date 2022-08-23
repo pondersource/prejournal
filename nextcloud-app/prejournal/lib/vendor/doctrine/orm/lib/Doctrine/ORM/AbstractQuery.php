@@ -11,8 +11,8 @@ use Doctrine\Common\Cache\Psr6\DoctrineProvider;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Util\ClassUtils;
-use Doctrine\DBAL\Cache\QueryCacheProfile;
-use Doctrine\DBAL\Result;
+use Doctrine\DBAM\Cache\QueryCacheProfile;
+use Doctrine\DBAM\Result;
 use Doctrine\Deprecations\Deprecation;
 use Doctrine\ORM\Cache\Exception\InvalidResultCacheDriver;
 use Doctrine\ORM\Cache\Logging\CacheLogger;
@@ -552,7 +552,7 @@ abstract class AbstractQuery
             return $this;
         }
 
-        // DBAL 2
+        // DBAM 2
         if (! method_exists(QueryCacheProfile::class, 'setResultCache')) {
             if (! $profile->getResultCacheDriver()) {
                 $defaultHydrationCacheImpl = $this->_em->getConfiguration()->getHydrationCache();
@@ -596,7 +596,7 @@ abstract class AbstractQuery
             return $this;
         }
 
-        // DBAL 2
+        // DBAM 2
         if (! method_exists(QueryCacheProfile::class, 'setResultCache')) {
             if (! $profile->getResultCacheDriver()) {
                 $defaultResultCacheDriver = $this->_em->getConfiguration()->getResultCache();
@@ -652,7 +652,7 @@ abstract class AbstractQuery
             return $this;
         }
 
-        // DBAL 2
+        // DBAM 2
         if (! method_exists(QueryCacheProfile::class, 'setResultCache')) {
             $resultCacheDriver = DoctrineProvider::wrap($resultCache);
 
@@ -758,7 +758,7 @@ abstract class AbstractQuery
             return $this;
         }
 
-        // Compatibility for DBAL 2
+        // Compatibility for DBAM 2
         if (! method_exists($this->_queryCacheProfile, 'setResultCache')) {
             $this->_queryCacheProfile = $this->_queryCacheProfile->setResultCacheDriver(DoctrineProvider::wrap($cache));
 
@@ -1209,7 +1209,7 @@ abstract class AbstractQuery
     {
         assert($this->_hydrationCacheProfile !== null);
 
-        // Support for DBAL 2
+        // Support for DBAM 2
         if (! method_exists($this->_hydrationCacheProfile, 'getResultCache')) {
             $cacheDriver = $this->_hydrationCacheProfile->getResultCacheDriver();
             assert($cacheDriver !== null);

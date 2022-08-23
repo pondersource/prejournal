@@ -1,11 +1,11 @@
 <?php
 
-namespace Doctrine\DBAL\Cache;
+namespace Doctrine\DBAM\Cache;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Cache\Psr6\CacheAdapter;
 use Doctrine\Common\Cache\Psr6\DoctrineProvider;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Types\Type;
 use Doctrine\Deprecations\Deprecation;
 use Psr\Cache\CacheItemPoolInterface;
 use TypeError;

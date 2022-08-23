@@ -1,9 +1,9 @@
 <?php
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAM;
 
 /**
- * Contains all DBAL LockModes.
+ * Contains all DBAM LockModes.
  */
 class LockMode
 {

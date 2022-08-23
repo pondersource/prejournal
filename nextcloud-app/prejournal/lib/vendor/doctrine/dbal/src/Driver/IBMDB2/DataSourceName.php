@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Driver\IBMDB2;
+namespace Doctrine\DBAM\Driver\IBMDB2;
 
 use function implode;
 use function sprintf;
@@ -43,7 +43,7 @@ final class DataSourceName
     }
 
     /**
-     * Creates the object from the given DBAL connection parameters.
+     * Creates the object from the given DBAM connection parameters.
      *
      * @param array<string,mixed> $params
      */

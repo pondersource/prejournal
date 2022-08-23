@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Types;
+namespace Doctrine\DBAM\Types;
 
-use Doctrine\DBAL\Exception;
+use Doctrine\DBAM\Exception;
 
 use function array_search;
 use function in_array;
 
 /**
- * The type registry is responsible for holding a map of all known DBAL types.
+ * The type registry is responsible for holding a map of all known DBAM types.
  * The types are stored using the flyweight pattern so that one type only exists as exactly one instance.
  */
 final class TypeRegistry

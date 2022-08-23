@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Doctrine\ORM\Internal\Hydration;
 
 use BackedEnum;
-use Doctrine\DBAL\Driver\ResultStatement;
-use Doctrine\DBAL\ForwardCompatibility\Result as ForwardCompatibilityResult;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Result;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Driver\ResultStatement;
+use Doctrine\DBAM\ForwardCompatibility\Result as ForwardCompatibilityResult;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Result;
+use Doctrine\DBAM\Types\Type;
 use Doctrine\Deprecations\Deprecation;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
@@ -582,7 +582,7 @@ abstract class AbstractHydrator
                     'class'                => new ReflectionClass($mapping['className']),
                 ];
 
-            case isset($this->_rsm->scalarMappings[$key], $this->_hints[LimitSubqueryWalker::FORCE_DBAL_TYPE_CONVERSION]):
+            case isset($this->_rsm->scalarMappings[$key], $this->_hints[LimitSubqueryWalker::FORCE_DBAM_TYPE_CONVERSION]):
                 return $this->_cache[$key] = [
                     'fieldName' => $this->_rsm->scalarMappings[$key],
                     'type'      => Type::getType($this->_rsm->typeMappings[$key]),

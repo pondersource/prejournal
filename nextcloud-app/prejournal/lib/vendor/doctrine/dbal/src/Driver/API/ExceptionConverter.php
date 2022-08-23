@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Driver\API;
+namespace Doctrine\DBAM\Driver\API;
 
-use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\Exception\DriverException;
-use Doctrine\DBAL\Query;
+use Doctrine\DBAM\Driver\Exception;
+use Doctrine\DBAM\Exception\DriverException;
+use Doctrine\DBAM\Query;
 
 interface ExceptionConverter
 {
     /**
-     * Converts a given driver-level exception into a DBAL-level driver exception.
+     * Converts a given driver-level exception into a DBAM-level driver exception.
      *
      * Implementors should use the vendor-specific error code and SQLSTATE of the exception
      * and instantiate the most appropriate specialized {@see DriverException} subclass.

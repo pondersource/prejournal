@@ -1,17 +1,17 @@
 <?php
 
-namespace Doctrine\DBAL\Platforms;
+namespace Doctrine\DBAM\Platforms;
 
-use Doctrine\DBAL\Exception\InvalidLockMode;
-use Doctrine\DBAL\LockMode;
-use Doctrine\DBAL\Schema\Column;
-use Doctrine\DBAL\Schema\ColumnDiff;
-use Doctrine\DBAL\Schema\ForeignKeyConstraint;
-use Doctrine\DBAL\Schema\Identifier;
-use Doctrine\DBAL\Schema\Index;
-use Doctrine\DBAL\Schema\Sequence;
-use Doctrine\DBAL\Schema\Table;
-use Doctrine\DBAL\Schema\TableDiff;
+use Doctrine\DBAM\Exception\InvalidLockMode;
+use Doctrine\DBAM\LockMode;
+use Doctrine\DBAM\Schema\Column;
+use Doctrine\DBAM\Schema\ColumnDiff;
+use Doctrine\DBAM\Schema\ForeignKeyConstraint;
+use Doctrine\DBAM\Schema\Identifier;
+use Doctrine\DBAM\Schema\Index;
+use Doctrine\DBAM\Schema\Sequence;
+use Doctrine\DBAM\Schema\Table;
+use Doctrine\DBAM\Schema\TableDiff;
 use Doctrine\Deprecations\Deprecation;
 use InvalidArgumentException;
 

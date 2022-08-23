@@ -1,17 +1,17 @@
 <?php
 
-namespace Doctrine\DBAL\Driver;
+namespace Doctrine\DBAM\Driver;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\API\ExceptionConverter;
-use Doctrine\DBAL\Driver\API\PostgreSQL;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
-use Doctrine\DBAL\Platforms\PostgreSQL94Platform;
-use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
-use Doctrine\DBAL\Schema\PostgreSQLSchemaManager;
-use Doctrine\DBAL\VersionAwarePlatformDriver;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Driver\API\ExceptionConverter;
+use Doctrine\DBAM\Driver\API\PostgreSQL;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Platforms\PostgreSQL100Platform;
+use Doctrine\DBAM\Platforms\PostgreSQL94Platform;
+use Doctrine\DBAM\Platforms\PostgreSQLPlatform;
+use Doctrine\DBAM\Schema\PostgreSQLSchemaManager;
+use Doctrine\DBAM\VersionAwarePlatformDriver;
 use Doctrine\Deprecations\Deprecation;
 
 use function assert;
@@ -47,7 +47,7 @@ abstract class AbstractPostgreSQLDriver implements VersionAwarePlatformDriver
         Deprecation::trigger(
             'doctrine/dbal',
             'https://github.com/doctrine/dbal/pull/5060',
-            'PostgreSQL 9 support is deprecated and will be removed in DBAL 4.'
+            'PostgreSQL 9 support is deprecated and will be removed in DBAM 4.'
                 . ' Consider upgrading to Postgres 10 or later.'
         );
 

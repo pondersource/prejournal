@@ -1,12 +1,12 @@
 <?php
 
-namespace Doctrine\DBAL\Event;
+namespace Doctrine\DBAM\Event;
 
 use Doctrine\Common\EventArgs;
-use Doctrine\DBAL\Connection;
+use Doctrine\DBAM\Connection;
 
 /**
- * Event Arguments used when a Driver connection is established inside Doctrine\DBAL\Connection.
+ * Event Arguments used when a Driver connection is established inside Doctrine\DBAM\Connection.
  */
 class ConnectionEventArgs extends EventArgs
 {

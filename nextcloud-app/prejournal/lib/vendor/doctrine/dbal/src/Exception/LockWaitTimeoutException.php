@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Exception;
+namespace Doctrine\DBAM\Exception;
 
 /**
  * Exception for a lock wait timeout error of a transaction detected in the driver.

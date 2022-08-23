@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\Middleware;
+namespace Doctrine\DBAM\Driver\Middleware;
 
-use Doctrine\DBAL\Driver\Result;
-use Doctrine\DBAL\Driver\Statement;
-use Doctrine\DBAL\ParameterType;
+use Doctrine\DBAM\Driver\Result;
+use Doctrine\DBAM\Driver\Statement;
+use Doctrine\DBAM\ParameterType;
 
 abstract class AbstractStatementMiddleware implements Statement
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\IBMDB2;
+namespace Doctrine\DBAM\Driver\IBMDB2;
 
-use Doctrine\DBAL\Driver\IBMDB2\Exception\ConnectionError;
-use Doctrine\DBAL\Driver\IBMDB2\Exception\PrepareFailed;
-use Doctrine\DBAL\Driver\IBMDB2\Exception\StatementError;
-use Doctrine\DBAL\Driver\Result as ResultInterface;
-use Doctrine\DBAL\Driver\ServerInfoAwareConnection;
-use Doctrine\DBAL\Driver\Statement as DriverStatement;
-use Doctrine\DBAL\ParameterType;
+use Doctrine\DBAM\Driver\IBMDB2\Exception\ConnectionError;
+use Doctrine\DBAM\Driver\IBMDB2\Exception\PrepareFailed;
+use Doctrine\DBAM\Driver\IBMDB2\Exception\StatementError;
+use Doctrine\DBAM\Driver\Result as ResultInterface;
+use Doctrine\DBAM\Driver\ServerInfoAwareConnection;
+use Doctrine\DBAM\Driver\Statement as DriverStatement;
+use Doctrine\DBAM\ParameterType;
 use Doctrine\Deprecations\Deprecation;
 use stdClass;
 

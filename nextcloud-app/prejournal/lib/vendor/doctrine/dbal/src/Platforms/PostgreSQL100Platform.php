@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Platforms;
+namespace Doctrine\DBAM\Platforms;
 
-use Doctrine\DBAL\Platforms\Keywords\PostgreSQL100Keywords;
+use Doctrine\DBAM\Platforms\Keywords\PostgreSQL100Keywords;
 use Doctrine\Deprecations\Deprecation;
 
 /**

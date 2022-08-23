@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Exception;
+namespace Doctrine\DBAM\Exception;
 
 /**
  * Base class for all constraint violation related errors detected in the driver.

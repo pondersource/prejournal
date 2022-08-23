@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Tools\Console\ConnectionProvider;
+namespace Doctrine\DBAM\Tools\Console\ConnectionProvider;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Tools\Console\ConnectionNotFound;
-use Doctrine\DBAL\Tools\Console\ConnectionProvider;
+use Doctrine\DBAM\Connection;
+use Doctrine\DBAM\Tools\Console\ConnectionNotFound;
+use Doctrine\DBAM\Tools\Console\ConnectionProvider;
 
 use function sprintf;
 

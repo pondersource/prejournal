@@ -1,14 +1,14 @@
 <?php
 
-namespace Doctrine\DBAL\Schema\Visitor;
+namespace Doctrine\DBAM\Schema\Visitor;
 
-use Doctrine\DBAL\Schema\Column;
-use Doctrine\DBAL\Schema\ForeignKeyConstraint;
-use Doctrine\DBAL\Schema\Index;
-use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Schema\SchemaException;
-use Doctrine\DBAL\Schema\Sequence;
-use Doctrine\DBAL\Schema\Table;
+use Doctrine\DBAM\Schema\Column;
+use Doctrine\DBAM\Schema\ForeignKeyConstraint;
+use Doctrine\DBAM\Schema\Index;
+use Doctrine\DBAM\Schema\Schema;
+use Doctrine\DBAM\Schema\SchemaException;
+use Doctrine\DBAM\Schema\Sequence;
+use Doctrine\DBAM\Schema\Table;
 
 /**
  * Schema Visitor used for Validation or Generation purposes.

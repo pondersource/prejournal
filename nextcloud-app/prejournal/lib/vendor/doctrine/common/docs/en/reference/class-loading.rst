@@ -85,7 +85,7 @@ loaders, one for each used Doctrine project:
     use Doctrine\Common\ClassLoader;
     require '/path/to/Doctrine/Common/ClassLoader.php';
     $commonLoader = new ClassLoader('Doctrine\Common', '/path/to/common/lib');
-    $dbalLoader = new ClassLoader('Doctrine\DBAL', '/path/to/dbal/lib');
+    $dbalLoader = new ClassLoader('Doctrine\DBAM', '/path/to/dbal/lib');
     $ormLoader = new ClassLoader('Doctrine\ORM', '/path/to/orm/lib');
     $commonLoader->register();
     $dbalLoader->register();

@@ -1,28 +1,28 @@
 <?php
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAM;
 
 use Closure;
 use Doctrine\Common\EventManager;
-use Doctrine\DBAL\Cache\ArrayResult;
-use Doctrine\DBAL\Cache\CacheException;
-use Doctrine\DBAL\Cache\QueryCacheProfile;
-use Doctrine\DBAL\Driver\API\ExceptionConverter;
-use Doctrine\DBAL\Driver\Connection as DriverConnection;
-use Doctrine\DBAL\Driver\ServerInfoAwareConnection;
-use Doctrine\DBAL\Driver\Statement as DriverStatement;
-use Doctrine\DBAL\Event\TransactionBeginEventArgs;
-use Doctrine\DBAL\Event\TransactionCommitEventArgs;
-use Doctrine\DBAL\Event\TransactionRollBackEventArgs;
-use Doctrine\DBAL\Exception\ConnectionLost;
-use Doctrine\DBAL\Exception\DriverException;
-use Doctrine\DBAL\Exception\InvalidArgumentException;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
-use Doctrine\DBAL\Query\QueryBuilder;
-use Doctrine\DBAL\Schema\AbstractSchemaManager;
-use Doctrine\DBAL\SQL\Parser;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Cache\ArrayResult;
+use Doctrine\DBAM\Cache\CacheException;
+use Doctrine\DBAM\Cache\QueryCacheProfile;
+use Doctrine\DBAM\Driver\API\ExceptionConverter;
+use Doctrine\DBAM\Driver\Connection as DriverConnection;
+use Doctrine\DBAM\Driver\ServerInfoAwareConnection;
+use Doctrine\DBAM\Driver\Statement as DriverStatement;
+use Doctrine\DBAM\Event\TransactionBeginEventArgs;
+use Doctrine\DBAM\Event\TransactionCommitEventArgs;
+use Doctrine\DBAM\Event\TransactionRollBackEventArgs;
+use Doctrine\DBAM\Exception\ConnectionLost;
+use Doctrine\DBAM\Exception\DriverException;
+use Doctrine\DBAM\Exception\InvalidArgumentException;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Query\Expression\ExpressionBuilder;
+use Doctrine\DBAM\Query\QueryBuilder;
+use Doctrine\DBAM\Schema\AbstractSchemaManager;
+use Doctrine\DBAM\SQL\Parser;
+use Doctrine\DBAM\Types\Type;
 use Doctrine\Deprecations\Deprecation;
 use LogicException;
 use Throwable;
@@ -70,7 +70,7 @@ class Connection
     /**
      * The wrapped driver connection.
      *
-     * @var \Doctrine\DBAL\Driver\Connection|null
+     * @var \Doctrine\DBAM\Driver\Connection|null
      */
     protected $_conn;
 
@@ -146,7 +146,7 @@ class Connection
     protected $_schemaManager;
 
     /**
-     * The used DBAL driver.
+     * The used DBAM driver.
      *
      * @var Driver
      */
@@ -242,7 +242,7 @@ class Connection
     }
 
     /**
-     * Gets the DBAL driver instance.
+     * Gets the DBAM driver instance.
      *
      * @return Driver
      */
@@ -318,7 +318,7 @@ class Connection
     /**
      * Establishes the connection with the database.
      *
-     * @internal This method will be made protected in DBAL 4.0.
+     * @internal This method will be made protected in DBAM 4.0.
      *
      * @return bool TRUE if the connection was successfully established, FALSE if
      *              the connection is already open.
@@ -1120,7 +1120,7 @@ class Connection
      *  - Session control statements: ALTER SESSION, SET, DECLARE, etc.
      *  - Other statements that don't yield a row set.
      *
-     * This method supports PDO binding types as well as DBAL mapping types.
+     * This method supports PDO binding types as well as DBAM mapping types.
      *
      * @param string                                                               $sql    SQL statement
      * @param list<mixed>|array<string, mixed>                                     $params Statement parameters
@@ -1627,10 +1627,10 @@ class Connection
 
     /**
      * Converts a given value to its database representation according to the conversion
-     * rules of a specific DBAL mapping type.
+     * rules of a specific DBAM mapping type.
      *
      * @param mixed  $value The value to convert.
-     * @param string $type  The name of the DBAL mapping type.
+     * @param string $type  The name of the DBAM mapping type.
      *
      * @return mixed The converted value.
      *
@@ -1643,10 +1643,10 @@ class Connection
 
     /**
      * Converts a given value to its PHP representation according to the conversion
-     * rules of a specific DBAL mapping type.
+     * rules of a specific DBAM mapping type.
      *
      * @param mixed  $value The value to convert.
-     * @param string $type  The name of the DBAL mapping type.
+     * @param string $type  The name of the DBAM mapping type.
      *
      * @return mixed The converted type.
      *
@@ -1659,7 +1659,7 @@ class Connection
 
     /**
      * Binds a set of parameters, some or all of which are typed with a PDO binding type
-     * or DBAL mapping type, to a given statement.
+     * or DBAM mapping type, to a given statement.
      *
      * @param DriverStatement                                                      $stmt   Prepared statement
      * @param list<mixed>|array<string, mixed>                                     $params Statement parameters
@@ -1702,7 +1702,7 @@ class Connection
      * Gets the binding type of a given type.
      *
      * @param mixed                $value The value to bind.
-     * @param int|string|Type|null $type  The type to bind (PDO or DBAL).
+     * @param int|string|Type|null $type  The type to bind (PDO or DBAM).
      *
      * @return array{mixed, int} [0] => the (escaped) value, [1] => the binding type.
      *
@@ -1821,7 +1821,7 @@ class Connection
     }
 
     /**
-     * BC layer for a wide-spread use-case of old DBAL APIs
+     * BC layer for a wide-spread use-case of old DBAM APIs
      *
      * @deprecated This API is deprecated and will be removed after 2022
      *
@@ -1834,7 +1834,7 @@ class Connection
     }
 
     /**
-     * BC layer for a wide-spread use-case of old DBAL APIs
+     * BC layer for a wide-spread use-case of old DBAM APIs
      *
      * @deprecated This API is deprecated and will be removed after 2022
      */
@@ -1844,7 +1844,7 @@ class Connection
     }
 
     /**
-     * BC layer for a wide-spread use-case of old DBAL APIs
+     * BC layer for a wide-spread use-case of old DBAM APIs
      *
      * @deprecated This API is deprecated and will be removed after 2022
      */

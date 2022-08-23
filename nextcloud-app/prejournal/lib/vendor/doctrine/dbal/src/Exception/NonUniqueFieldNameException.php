@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\DBAL\Exception;
+namespace Doctrine\DBAM\Exception;
 
 /**
  * Exception for a non-unique/ambiguous specified field name in a statement detected in the driver.

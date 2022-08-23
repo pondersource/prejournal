@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Doctrine\DBAL\Event;
+namespace Doctrine\DBAM\Event;
 
 use Doctrine\Common\EventArgs;
-use Doctrine\DBAL\Connection;
+use Doctrine\DBAM\Connection;
 
 abstract class TransactionEventArgs extends EventArgs
 {

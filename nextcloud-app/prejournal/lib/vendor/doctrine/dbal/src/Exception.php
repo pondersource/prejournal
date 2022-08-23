@@ -1,9 +1,9 @@
 <?php
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAM;
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Types\Type;
 
 use function get_class;
 use function gettype;
@@ -95,7 +95,7 @@ class Exception extends \Exception
     public static function invalidWrapperClass(string $wrapperClass): self
     {
         return new self("The given 'wrapperClass' " . $wrapperClass . ' has to be a ' .
-            'subtype of \Doctrine\DBAL\Connection.');
+            'subtype of \Doctrine\DBAM\Connection.');
     }
 
     public static function invalidDriverClass(string $driverClass): self
@@ -118,8 +118,8 @@ class Exception extends \Exception
     public static function unknownColumnType(string $name): self
     {
         return new self('Unknown column type "' . $name . '" requested. Any Doctrine type that you use has ' .
-            'to be registered with \Doctrine\DBAL\Types\Type::addType(). You can get a list of all the ' .
-            'known types with \Doctrine\DBAL\Types\Type::getTypesMap(). If this error occurs during database ' .
+            'to be registered with \Doctrine\DBAM\Types\Type::addType(). You can get a list of all the ' .
+            'known types with \Doctrine\DBAM\Types\Type::getTypesMap(). If this error occurs during database ' .
             'introspection then you might have forgotten to register all database types for a Doctrine Type. Use ' .
             'AbstractPlatform#registerDoctrineTypeMapping() or have your custom types implement ' .
             'Type#getMappedDatabaseTypes(). If the type name is empty you might ' .

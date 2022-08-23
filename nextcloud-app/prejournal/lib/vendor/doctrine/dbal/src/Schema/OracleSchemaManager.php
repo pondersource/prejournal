@@ -1,10 +1,10 @@
 <?php
 
-namespace Doctrine\DBAL\Schema;
+namespace Doctrine\DBAM\Schema;
 
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Platforms\OraclePlatform;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAM\Exception;
+use Doctrine\DBAM\Platforms\OraclePlatform;
+use Doctrine\DBAM\Types\Type;
 
 use function array_change_key_case;
 use function array_values;

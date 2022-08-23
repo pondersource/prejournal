@@ -1,9 +1,9 @@
 <?php
 
-namespace Doctrine\DBAL\Cache;
+namespace Doctrine\DBAM\Cache;
 
-use Doctrine\DBAL\Driver\FetchUtils;
-use Doctrine\DBAL\Driver\Result;
+use Doctrine\DBAM\Driver\FetchUtils;
+use Doctrine\DBAM\Driver\Result;
 
 use function array_values;
 use function count;

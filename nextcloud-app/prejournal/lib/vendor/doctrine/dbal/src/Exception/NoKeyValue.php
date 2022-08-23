@@ -1,8 +1,8 @@
 <?php
 
-namespace Doctrine\DBAL\Exception;
+namespace Doctrine\DBAM\Exception;
 
-use Doctrine\DBAL\Exception;
+use Doctrine\DBAM\Exception;
 
 use function sprintf;
 

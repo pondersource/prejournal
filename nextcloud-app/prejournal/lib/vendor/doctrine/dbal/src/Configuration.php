@@ -1,17 +1,17 @@
 <?php
 
-namespace Doctrine\DBAL;
+namespace Doctrine\DBAM;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Cache\Psr6\CacheAdapter;
 use Doctrine\Common\Cache\Psr6\DoctrineProvider;
-use Doctrine\DBAL\Driver\Middleware;
-use Doctrine\DBAL\Logging\SQLLogger;
+use Doctrine\DBAM\Driver\Middleware;
+use Doctrine\DBAM\Logging\SQLLogger;
 use Doctrine\Deprecations\Deprecation;
 use Psr\Cache\CacheItemPoolInterface;
 
 /**
- * Configuration container for the Doctrine DBAL.
+ * Configuration container for the Doctrine DBAM.
  */
 class Configuration
 {

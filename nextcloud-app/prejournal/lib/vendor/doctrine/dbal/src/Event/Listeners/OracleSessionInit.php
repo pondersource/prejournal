@@ -1,11 +1,11 @@
 <?php
 
-namespace Doctrine\DBAL\Event\Listeners;
+namespace Doctrine\DBAM\Event\Listeners;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\DBAL\Event\ConnectionEventArgs;
-use Doctrine\DBAL\Events;
-use Doctrine\DBAL\Exception;
+use Doctrine\DBAM\Event\ConnectionEventArgs;
+use Doctrine\DBAM\Events;
+use Doctrine\DBAM\Exception;
 
 use function array_change_key_case;
 use function array_merge;

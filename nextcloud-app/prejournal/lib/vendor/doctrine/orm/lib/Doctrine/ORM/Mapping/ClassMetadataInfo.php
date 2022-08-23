@@ -9,9 +9,9 @@ use BadMethodCallException;
 use DateInterval;
 use DateTime;
 use DateTimeImmutable;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\Type;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\DBAM\Platforms\AbstractPlatform;
+use Doctrine\DBAM\Types\Type;
+use Doctrine\DBAM\Types\Types;
 use Doctrine\Deprecations\Deprecation;
 use Doctrine\Instantiator\Instantiator;
 use Doctrine\Instantiator\InstantiatorInterface;
@@ -3821,7 +3821,7 @@ class ClassMetadataInfo implements ClassMetadata
      *
      * @return string
      *
-     * @todo Sequence names should be computed in DBAL depending on the platform
+     * @todo Sequence names should be computed in DBAM depending on the platform
      */
     public function getSequenceName(AbstractPlatform $platform)
     {
@@ -3836,7 +3836,7 @@ class ClassMetadataInfo implements ClassMetadata
      *
      * @return string
      *
-     * @todo Sequence names should be computed in DBAL depending on the platform
+     * @todo Sequence names should be computed in DBAM depending on the platform
      */
     public function getSequencePrefix(AbstractPlatform $platform)
     {

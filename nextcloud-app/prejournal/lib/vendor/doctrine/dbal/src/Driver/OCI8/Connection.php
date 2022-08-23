@@ -1,15 +1,15 @@
 <?php
 
-namespace Doctrine\DBAL\Driver\OCI8;
+namespace Doctrine\DBAM\Driver\OCI8;
 
-use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\Driver\OCI8\Exception\Error;
-use Doctrine\DBAL\Driver\OCI8\Exception\SequenceDoesNotExist;
-use Doctrine\DBAL\Driver\Result as ResultInterface;
-use Doctrine\DBAL\Driver\ServerInfoAwareConnection;
-use Doctrine\DBAL\Driver\Statement as DriverStatement;
-use Doctrine\DBAL\ParameterType;
-use Doctrine\DBAL\SQL\Parser;
+use Doctrine\DBAM\Driver\Exception;
+use Doctrine\DBAM\Driver\OCI8\Exception\Error;
+use Doctrine\DBAM\Driver\OCI8\Exception\SequenceDoesNotExist;
+use Doctrine\DBAM\Driver\Result as ResultInterface;
+use Doctrine\DBAM\Driver\ServerInfoAwareConnection;
+use Doctrine\DBAM\Driver\Statement as DriverStatement;
+use Doctrine\DBAM\ParameterType;
+use Doctrine\DBAM\SQL\Parser;
 use Doctrine\Deprecations\Deprecation;
 
 use function addcslashes;
