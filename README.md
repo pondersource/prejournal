@@ -118,6 +118,20 @@ Time: 00:05.803, Memory: 6.00 MB
 OK (34 tests, 79 assertions)
 ```
 
+### Timeld API Call
+You need first go to Timeld for configuration need a username and password, that can do a setup mannualy with CLI. Copy from ```.env.example.``` to '''.env```. The Timeld host, username and password. You need to see all of this steps go to https://github.com/m-ld/timeld/blob/main/doc/api.md. After it you can use inside our project.
+
+````
+TIMELD_HOST=https://timeld.org/api
+TIMELD_USERNAME=YOUR_USERNAME
+TIMELD_PASSWORD=YOUR_PASSWORD
+````
+
+````                    command name      type        id             external
+php src/cli-single.php timeld-api-import "Timesheet" "ismoil/ismoil" 1234
+````
+
+
 ### Wiki API Call
 
 You need first have a token for authorize with API Wiki Suite and take the host from Wiki Suite. This API call for getting tabulars and export and import timedata. Change in ```env``` file your credentials to your own. Add below information inside ```env``` file. You can take here https://timesheet.dev3.evoludata.com/Timesheets-homepage the first need register username and password, after you take token from Wiki Victor can send. By example you can ask me for sending token. After register you can check API sending by this link https://timesheet.dev3.evoludata.com/api/.
