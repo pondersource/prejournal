@@ -63,3 +63,11 @@ create table accessControl (
   userId numeric
 );
 
+drop table if exists commandLog;
+
+create table commandLog (
+  id SERIAL PRIMARY KEY,
+  contextJson varchar,
+  commandJson varchar
+);
+
