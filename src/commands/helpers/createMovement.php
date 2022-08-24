@@ -12,27 +12,24 @@ function createMovement($context, $command)
 
     // var_dump($command);
     $conn  = getDbConn();
-    $query = "INSERT INTO movements (userId, type_, fromComponent, toComponent, timestamp_, amount) "
-        . "VALUES (:userId, :type_, :fromComponent, :toComponent, :timestamp_, :amount);";
-
-    $ret = $conn->executeStatement($query, [
-        "userId" => $command[1],
+    $params = [
+        "userId" => $context["user"]["id"],
         "type_" => $command[2],
         "fromComponent" => intval($command[3]),
         "toComponent" => intval($command[4]),
         "timestamp_" => timestampToDateTime(intval($command[5])),
         "amount" => floatval($command[6])
-    ]);
+    ];
+
+    if(!hasAccess($params["fromComponent"], $params["userId"])) {
+        return [ "User has no access to from-component"];
+    }
+    $query = "INSERT INTO movements (userId, type_, fromComponent, toComponent, timestamp_, amount) "
+        . "VALUES (:userId, :type_, :fromComponent, :toComponent, :timestamp_, :amount);";
+
+    $ret = $conn->executeStatement($query, $params);
     return [ strval($conn->lastInsertId()) ];
 }
-
-// HAVOC: there is no check at all that the user who is logged in has anything
-// to say about the components they edit.
-// Maybe the only way forward is to say each movement and each component belongs
-// to a user, and then voluntarily you can observe the statements from others?
-// The situation where each local edit is automatically accepted globally doesn't work
-// Neither is the opposite situation, where each edit needs to be approved.
-// Maybe a federated application automatically has complex access control.
 
 // UNUSED:
 function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)

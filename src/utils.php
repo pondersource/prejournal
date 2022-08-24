@@ -65,3 +65,7 @@ function reconcileQuotes($x)
     // var_dump($ret);
     return $ret;
 }
+
+function debug($x) {
+    error_log(var_export($x, true));
+}

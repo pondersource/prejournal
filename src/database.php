@@ -342,7 +342,20 @@ function getMovementAndStatement($movementId, $statementId) {
     $rows = array();
     foreach ($conn->iterateAssociativeIndexed("SELECT m.id, w.name as worker, p.name as project, m.timestamp_, m.amount, s.description FROM movements m INNER JOIN components w ON m.fromComponent = w.id
     INNER JOIN components p ON m.toComponent = p.id INNER JOIN statements s ON m.id = s.movementId WHERE m.id=:id AND s.movementId =:movementId", ['id' => $movementId, 'movementId' => $statementId]) as $data) {
+      $data["movementId"] = $movementId;
+      $data["statementId"] = $statementId;
       $rows[] = $data;
    }
-   echo json_encode($rows, JSON_PRETTY_PRINT);
+   return [json_encode($rows, JSON_PRETTY_PRINT)];
+}
+
+function hasAccess($componentId, $userId) {
+    $query = "SELECT count(*) FROM accessControl WHERE componentid = :componentid AND userid = :userid";
+    $res = getDbConn()->executeQuery($query, [ "componentid" => $componentId, "userid" => $userId ]);
+    $ass = $res->fetchAllAssociative();
+    // var_dump($ass);
+    if ($ass[0]["count"] > 0) {
+        return true;
+    }
+    throw new Error("UserId $userId is not allowed to create movements with fromComponent == $componentId; did you forget to run the claim-component command first?");
 }

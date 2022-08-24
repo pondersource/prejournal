@@ -131,9 +131,12 @@ function getContext()
         // $_SERVER["PREJOURNAL_DEFAULT_EMPLOYER"] = 'default-employer';
         throw new Error("Please set env var PREJOURNAL_DEFAULT_EMPLOYER to the component name to be used in the 7-word submit-expense command.");
     }
+    $user =  getUser();
+
     return [
-    'user' => getUser(),
+    'user' => $user,
     'adminParty' => (isset($_SERVER["PREJOURNAL_ADMIN_PARTY"]) && $_SERVER["PREJOURNAL_ADMIN_PARTY"] == "true"),
+    'openMode' => ($user && isset($_SERVER["PREJOURNAL_OPEN_MODE"]) && $_SERVER["PREJOURNAL_OPEN_MODE"] == "true"),
     'employer' => $_SERVER["PREJOURNAL_DEFAULT_EMPLOYER"]
   ];
 }
