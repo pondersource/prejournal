@@ -64,7 +64,13 @@ function getTables()
   componentId numeric,
   userId numeric
 );",
-    ];
+        "drop table if exists commandLog;",
+        "create table commandLog (
+  id SERIAL PRIMARY KEY,
+  contextJson varchar,
+  commandJson varchar
+);",
+];
 }
 
 if (isset($_SERVER["GEN_SQL"])) {
