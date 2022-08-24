@@ -17,9 +17,11 @@ function timeldApiImport($context, $command) {
         $data = array(
             '@type'      => $command[1],
             '@id'    => $command[2],
-            'project'       => [],
+            'project'       => [
+                ["@id" => $command[3]]
+            ],
             'external' => [
-                "@id" => $command[3]
+                "@id" => $command[4]
             ],
           );
 
