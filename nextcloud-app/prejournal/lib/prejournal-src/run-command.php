@@ -60,7 +60,7 @@ function appendToCommandLog($context, $command) {
     //
     // $command is e.g. [ "worked-hours", "20 September 2021", "stichting", "Peppol for the Masses", 4]
     $conn = getDbConn();
-    $conn->executeQuery("INSERT INTO commandLog (contextJson, commandJson) VALUES (:contextJson, :commandJSON)", [
+    $conn->executeStatement("INSERT INTO commandLog (contextJson, commandJson) VALUES (:contextJson, :commandJson)", [
         "contextJson" => json_encode($context),
         "commandJson" => json_encode($command)
     ]);
