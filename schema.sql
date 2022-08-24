@@ -59,7 +59,7 @@ drop table if exists accessControl;
 
 create table accessControl (
   id SERIAL PRIMARY KEY,
-  componentId numeric,
+  componentId numeric UNIQUE,
   userId numeric
 );
 
