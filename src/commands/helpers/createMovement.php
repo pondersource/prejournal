@@ -31,6 +31,42 @@ function createMovement($context, $command)
     return [ strval($conn->lastInsertId()) ];
 }
 
+
+function updateMovement($context, $command) {
+    debug("UpdateMovement!");
+    debug($context);
+    debug($command);
+    if (!isset($context["user"])) {
+        return ["User not found or wrong password"];
+    }
+    $conn  = getDbConn();
+    $params = [
+        "existingId" => $command[0], // FIXME: it is confusing to use the $command[0] slot this way!
+        "userId" => $context["user"]["id"],
+        "type_" => $command[2],
+        "fromComponent" => intval($command[3]),
+        "toComponent" => intval($command[4]),
+        "timestamp_" => timestampToDateTime(intval($command[5])),
+        "amount" => floatval($command[6])
+    ];
+
+    if(!hasAccess($params["fromComponent"], $params["userId"])) {
+        return [ "User has no access to from-component"];
+    }
+    $query = "UPDATE movements SET "
+        . "userId = :userId, "
+        . "type_ = :type_, "
+        . "fromComponent = :fromComponent, "
+        . "toComponent = :toComponent, "
+        . "timestamp_ = :timestamp_, "
+        . "amount = :amount "
+        . "WHERE id = :existingId";
+
+    $ret = $conn->executeStatement($query, $params);
+    return [ strval($conn->lastInsertId()) ];
+
+}
+
 // UNUSED:
 function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
 {
