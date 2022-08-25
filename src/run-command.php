@@ -34,6 +34,7 @@ require_once(__DIR__ . '/commands/print-timesheet-csv.php');
 require_once(__DIR__ . '/commands/import-timesheet.php');
 require_once(__DIR__ . '/commands/generate-implied-purchases.php');
 require_once(__DIR__ . '/commands/timeld-api-import.php');
+require_once(__DIR__ . '/commands/timeld-api-export.php');
 require_once(__DIR__ . '/commands/claim-component.php');
 
 function toCamel($str)
@@ -91,6 +92,7 @@ function runCommand($context, $command)
         "what-the-world-owes" => 2,
         "generate-implied-purchases" => 3,
         "timeld-api-import" => 2,
+        "timeld-api-export" => 2,
         "claim-component" => 2
     ];
     if (isset($commands[$command[0]]) && count($command) >= $commands[$command[0]]) {
