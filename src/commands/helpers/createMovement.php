@@ -21,9 +21,10 @@ function createMovement($context, $command)
         "amount" => floatval($command[6])
     ];
 
-    if(!hasAccess($params["fromComponent"], $params["userId"])) {
-        return [ "User has no access to from-component"];
+    if (!$context["adminParty"]) {
+        checkAccess($params["fromComponent"], $params["userId"]);
     }
+
     $query = "INSERT INTO movements (userId, type_, fromComponent, toComponent, timestamp_, amount) "
         . "VALUES (:userId, :type_, :fromComponent, :toComponent, :timestamp_, :amount);";
 
@@ -50,9 +51,10 @@ function updateMovement($context, $command) {
         "amount" => floatval($command[6])
     ];
 
-    if(!hasAccess($params["fromComponent"], $params["userId"])) {
-        return [ "User has no access to from-component"];
+    if (!$context["adminParty"]) {
+        checkAccess($params["fromComponent"], $params["userId"]);
     }
+
     $query = "UPDATE movements SET "
         . "userId = :userId, "
         . "type_ = :type_, "

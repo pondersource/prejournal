@@ -16,7 +16,7 @@ function workedHours($context, $command)
         $conn  = getDbConn();
         $timestamp = strtotime($command[1]);
         // Note that you cannot just enter any worker's name here,
-        // you will still have to go through the `hasAccess` check
+        // you will still have to go through the `checkAccess` check
         // which checks whether the authenticated user has claimed
         // the worker component.
         // In the current setup, claiming components is first-come-first-server
