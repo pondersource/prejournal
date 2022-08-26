@@ -69,7 +69,6 @@ function updateMovement($context, $command) {
 
 }
 
-// UNUSED:
 function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
 {
     if (!isset($context["user"])) {
