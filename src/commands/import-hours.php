@@ -37,7 +37,7 @@ function movementForSourceId($sourceId) {
             "sourceId" => $sourceId
         ]);
     $arr = $res->fetchAllAssociative();
-    debug($arr);
+    // debug($arr);
     if (count($arr) >= 1) {
         return $arr[0]["id"];
     } 
@@ -76,8 +76,8 @@ function importHoursInline($context, $format, $contents, $importTime)
         $entries = $parserFunctions[$format]($contents);
 
         for ($i = 0; $i < count($entries); $i++) {
-            debug($entries[$i]);
-            $sourceId = $entries[$i]["sourceId"];
+            // debug($entries[$i]);
+            $sourceId = (isset($entries[$i]["sourceId"]) ? $entries[$i]["sourceId"] : NULL);
             $existingMovement = movementForSourceId($sourceId);
             if ($existingMovement == NULL) {
                 $movementId = intval(createMovement($context, [
@@ -89,12 +89,12 @@ function importHoursInline($context, $format, $contents, $importTime)
                     $entries[$i]["start"],
                     $entries[$i]["seconds"] / 3600
                 ])[0]);
-                debug("Movement created! $movementId");
+                // debug("Movement created! $movementId");
                 $statementId = intval(createStatement($context, [
                     "create-statement",
                     $movementId,
                     $importTime,
-                    $entries[$i]["description"],
+                    (isset($entries[$i]["description"]) ? $entries[$i]["description"] : NULL),
                     $format,
                     $sourceId,
                 ])[0]);    

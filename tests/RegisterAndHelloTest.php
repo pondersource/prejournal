@@ -27,8 +27,9 @@ final class RegisterAndHelloTest extends TestCase
                     'id' => $lastInsertId,
                     'username' => 'someuser',
                 ],
-                'adminParty' => true,
-                'employer' => 'someemployer'
+                'adminParty' => false,
+                'employer' => 'someemployer',
+                'openMode' => false
             ],
             getContext()
         );
@@ -49,7 +50,8 @@ final class RegisterAndHelloTest extends TestCase
             [
                 'user' => null,
                 'adminParty' => false,
-                'employer' => 'someemployer'
+                'employer' => 'someemployer',
+                'openMode' => false
             ],
             getContext()
         );
@@ -70,7 +72,8 @@ final class RegisterAndHelloTest extends TestCase
             [
                 'user' => null,
                 'adminParty' => false,
-                'employer' => 'someemployer'
+                'employer' => 'someemployer',
+                'openMode' => false
             ],
             getContext()
         );

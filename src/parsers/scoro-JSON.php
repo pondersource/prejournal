@@ -12,7 +12,7 @@ function parseScoroJSON($str)
             "worker" => $_SERVER["PREJOURNAL_USERNAME"],
             "project" => $response->data[$i]->activity_id,
             "start" => strtotime($response->data[$i]->start_datetime),
-            "seconds" => $response->data[$i]->duration
+            "seconds" => strtotime($response->data[$i]->duration)
         ]);
     }
     return $ret;

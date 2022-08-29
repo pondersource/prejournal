@@ -14,6 +14,7 @@ final class EnterThenGrantThenListNewTest extends TestCase
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         $bobId = intval(runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0]);
         setUser('alice', 'alice123', 'employer');
+        runCommand(getContext(), ["claim-component", "from component" ]);
         runCommand(getContext(), ["enter", "from component", "to component", "1.23", "1234567890", "invoice", "ponder-source-agreement-192" ]);
         runCommand(getContext(), ["grant", "bob", "from component"]);
         setUser('bob', 'bob123', 'employer');

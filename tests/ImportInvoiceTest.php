@@ -14,6 +14,7 @@ final class ImportInvoiceTest extends TestCase
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         $bobId = intval(runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0]);
         setUser('alice', 'alice123', 'employer');
+        runCommand(getContext(), ["claim-component", "ismoil" ]);
         runCommand(getContext(), ["enter", "ismoil", "alex", "4.00", "1123211312", "invoice", "ponder-source" ]);
         setUser('bob', 'bob123', 'employer');
         $this->assertEquals([
@@ -26,6 +27,7 @@ final class ImportInvoiceTest extends TestCase
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/verifyInvoice-JSON.json";
+        runCommand(getContext(), ['claim-component', 'Alex Malikov']);
         $result = runCommand(getContext(), ["import-invoice", "verifyInvoice-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
         $this->assertEquals([
@@ -67,6 +69,7 @@ final class ImportInvoiceTest extends TestCase
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timeHerokuInvoice-JSON.json";
+        runCommand(getContext(), ['claim-component', 'alice']);
         $result = runCommand(getContext(), ["import-invoice", "timeHerokuInvoice-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
         $this->assertEquals([
