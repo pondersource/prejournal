@@ -25,7 +25,9 @@ function generateImpliedPurchases($context, $command)
                 . " - " . getComponentName($movements[$i]["tocomponent"])
                 . " - " . $filterString . "\n";
                 // var_dump($movements[$i]);
-                createMovement($context, [
+                // FIXME: this will probably still create only one entry
+                // in case of actual lookalikes!
+                ensureMovementsLookalikeGroup($context, [
                     "create-movement",
                     $context["user"]["id"],
                     "implied-delivery",
@@ -33,10 +35,12 @@ function generateImpliedPurchases($context, $command)
                     getComponentId($budgetName),
                     dateTimeToTimestamp($movements[$i]["timestamp_"]),
                     $movements[$i]["amount"],
-                    "implied purchase: " . $movements[$i]["description"]
-                ]);
+                    "implied delivery: " . $movements[$i]["description"]
+                ], 1);
                 // TODO: implement depreciation here
-                createMovement($context, [
+                // FIXME: this will probably still create only one entry
+                // in case of actual lookalikes!
+                ensureMovementsLookalikeGroup($context, [
                     "create-movement",
                     $context["user"]["id"],
                     "implied-consumption",
@@ -44,8 +48,8 @@ function generateImpliedPurchases($context, $command)
                     $userComponent,
                     dateTimeToTimestamp($movements[$i]["timestamp_"]),
                     $movements[$i]["amount"],
-                    "implied purchase: " . $movements[$i]["description"]
-                ]);
+                    "implied consumption: " . $movements[$i]["description"]
+                ], 1);
                 //  var_dump($movements[$i]);
             }
         }

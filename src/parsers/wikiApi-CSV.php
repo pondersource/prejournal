@@ -31,18 +31,19 @@ function parseWikiApiCSV($str)
         throw new Error('Header line is not what we were expecting!');
     }
     for ($i = 1; $i < count($lines); $i++) {
-        $cells = str_getcsv($lines[$i]);
-        if (count($cells) != 11) {
-            debug($cells);
+        $entry = str_getcsv($lines[$i]);
+        if (count($entry) != 11) {
+            debug($entry);
             debug("ignoring incomplete line");
             continue;
         }
         array_push($ret, [
-            "worker" => $cells[1], // e.g. "victor"
-            "project" => $cells[2], // e.g. "Federated timesheets"
-            "start" => strtotime($cells[5]), // e.g. strtotime("Thursday March 10, 2022 00:00:00 UTC")
-            "seconds" => intval($cells[9]) * 60, // e.g. 69 * 60
-            "description" => $cells[4], // e.g. "Meeting with Michiel, George and others to discuss ..."
+            "worker" => $entry[1], // e.g. "victor"
+            "project" => $entry[2], // e.g. "Federated timesheets"
+            "start" => strtotime($entry[5]), // e.g. strtotime("Thursday March 10, 2022 00:00:00 UTC")
+            "seconds" => intval($entry[9]) * 60, // e.g. 69 * 60
+            "description" => $entry[4], // e.g. "Meeting with Michiel, George and others to discuss ..."
+            "sourceId" => $entry[0] // e.g. "https://timesheet.dev3.evoludata.com/api/trackers/2/items/45"
         ]);
     }
     return $ret;

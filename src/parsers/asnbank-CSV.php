@@ -17,7 +17,7 @@ function normalizeAccountName($str)
 function parseAccount2($obj)
 {
     if (strlen($obj["tegenrekeningnummer"]) > 0) {
-        return $obj["tegenrekeningnummer"];
+        return $obj["tegenrekeningnummer"] . " " . $obj["naamTegenrekening"];
     }
     if ($obj["globaleTransactiecode"] == "BEA") {
         return normalizeAccountName(substr($obj["omschrijving"], 1, 22));
@@ -53,7 +53,11 @@ function parseAccount2($obj)
 
 function parseDescription($obj)
 {
-    return str_replace("*", " ", $obj["naamTegenrekening"] . " " .$obj["globaleTransactiecode"] . "  " . $obj["omschrijving"]);
+    return str_replace("*", " ", 
+        $obj["interneTransactiecode"] . " " .
+        $obj["globaleTransactiecode"] . " " .
+        $obj["betalingskenmerk"] . "  " .
+        $obj["omschrijving"]);
 }
 
 function parseAsnBankCSV($text, $owner)
@@ -108,7 +112,9 @@ function parseAsnBankCSV($text, $owner)
                     "amount" => floatval($obj["transactiebedrag"]),
                     "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"]),
                     "insideFrom" => $obj["opdrachtgeversrekening"],
-                    "insideTo" => $owner
+                    "insideTo" => $owner,
+                    "lineNum" => $i + 1,
+                    "remoteId" => $obj["journaaldatum"] . " " . $obj["volgnummerTransactie"]
                 ]);
             } else {
                 array_push($ret, [
@@ -119,7 +125,9 @@ function parseAsnBankCSV($text, $owner)
                     "amount" => -floatval($obj["transactiebedrag"]),
                     "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"]),
                     "insideFrom" => $owner,
-                    "insideTo" => $obj["opdrachtgeversrekening"]
+                    "insideTo" => $obj["opdrachtgeversrekening"],
+                    "lineNum" => $i + 1,
+                    "remoteId" => $obj["journaaldatum"] . " " . $obj["volgnummerTransactie"]
                 ]);
             }
         }

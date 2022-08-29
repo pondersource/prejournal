@@ -36,6 +36,7 @@ require_once(__DIR__ . '/commands/generate-implied-purchases.php');
 require_once(__DIR__ . '/commands/timeld-api-import.php');
 require_once(__DIR__ . '/commands/timeld-api-export.php');
 require_once(__DIR__ . '/commands/claim-component.php');
+require_once(__DIR__ . '/commands/purchase-implications-batch.php');
 
 function toCamel($str)
 {
@@ -45,12 +46,33 @@ function toCamel($str)
     }, $parts));
 }
 
+function appendToCommandLog($context, $command) {
+    // $context is e.g.:
+    // [
+    //     "user" => [
+    //     "id" => 1,
+    //     "username" => "admin"
+    //     ],
+    //     "adminParty" => false,
+    //     "openMode" => false,
+    //     "employer" => "stichting"
+    // ]
+    //
+    // $command is e.g. [ "worked-hours", "20 September 2021", "stichting", "Peppol for the Masses", 4]
+    $conn = getDbConn();
+    $conn->executeStatement("INSERT INTO commandLog (contextJson, commandJson) VALUES (:contextJson, :commandJson)", [
+        "contextJson" => json_encode($context),
+        "commandJson" => json_encode($command)
+    ]);
+}
+
 function runCommandWithInlineData($context, $command)
 {
     // TODO: support this for more commands - maybe in some more generic way to pass the data?
     // Maybe command implementations shouldn't be doing their own file_get_contents
     // to make them reusable across both runCommand and runCommandWithInlineData
     error_log(var_export($command, true));
+    appendToCommandLog($context, $command);
     if ($command[0] == "import-hours") {
         return importHoursInline($context, $command[1], $command[2], "2022-03-31 12:00:00");
     }
@@ -59,6 +81,7 @@ function runCommandWithInlineData($context, $command)
 
 function runCommand($context, $command)
 {
+    appendToCommandLog($context, $command);
     // print("running " . json_encode($command));
     $commands = [
         "register" => 3,
@@ -93,7 +116,8 @@ function runCommand($context, $command)
         "generate-implied-purchases" => 3,
         "timeld-api-import" => 2,
         "timeld-api-export" => 2,
-        "claim-component" => 2
+        "claim-component" => 2,
+        "purchase-implications-batch" => 2
     ];
     if (isset($commands[$command[0]]) && count($command) >= $commands[$command[0]]) {
         $function = toCamel($command[0]);

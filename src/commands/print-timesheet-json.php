@@ -24,7 +24,7 @@ function printTimesheetJson($context, $command)
 
         $result = json_encode($jsondata, JSON_PRETTY_PRINT);
 
-        echo $result;
+        return $result;
     } else {
         return ["This command only works if the server is running in open mode! See https://github.com/pondersource/prejournal/issues/133"];
     }

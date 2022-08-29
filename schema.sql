@@ -59,7 +59,15 @@ drop table if exists accessControl;
 
 create table accessControl (
   id SERIAL PRIMARY KEY,
-  componentId numeric,
+  componentId numeric UNIQUE,
   userId numeric
+);
+
+drop table if exists commandLog;
+
+create table commandLog (
+  id SERIAL PRIMARY KEY,
+  contextJson varchar,
+  commandJson varchar
 );
 

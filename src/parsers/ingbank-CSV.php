@@ -1,7 +1,7 @@
 <?php
 
 // Example of the 2022 format of ING NL CSV download:
-// "Datum";"Naam / Omschrijving";"Rekening";"Tegenrekening";"Code";"Af Bij";"Bedrag (EUR)";"Mutatiesoort";"Mededelingen";"Saldo na mutatie";"Tag"
+// "Datum";"Naam / Omschrijving";"Rekening";"Tegenrekening";"Code";"Af Bij";"Bedrag (EUR)";"Mutatiesoort";"Mededelingen";"Saldo na mutatie"; 
 // "20220713";"Kosten OranjePakket";"NL08INGB0006130373";"";"DV";"Af";"2,35";"Diversen";"1 jun t/m 30 jun 2022 ING BANK N.V. Valutadatum: 13-07-2022";"256,31";""
 
 function checkHeaders($line, $COLUMN_NAMES)
@@ -38,10 +38,18 @@ function parseIngDate($str)
 }
 
 function parseIngDescription($obj)
-{
-    return $obj["Mutatiesoort"]
+{ // description:
+    // "Code" | "Mutatiesoort" | "Naam / Omschrijving" | "Mededelingen" | "Tag"
+    
+    return $obj["Code"]
         . ": "
-        . $obj["Naam / Omschrijving"];
+        . $obj["Mutatiesoort"]
+        . ": "
+        . $obj["Naam / Omschrijving"]
+        . ": "
+        . $obj["Mededelingen"]
+        . ": "
+        . $obj["Tag"];
 }
 
 function parseIngAccount2($obj)
@@ -102,7 +110,8 @@ function parseIngBankCSV($text, $owner)
                     "amount" => parseIngAmount($obj["Bedrag (EUR)"]),
                     "balanceAfter" => parseIngAmount($obj["Saldo na mutatie"]),
                     "insideFrom" => $owner,
-                    "insideTo" => $obj["Rekening"]
+                    "insideTo" => $obj["Rekening"],
+                    "lineNum" => $i + 1
                 ]);
             } elseif ($obj["Af Bij"] == 'Bij') {
                 array_push($ret, [
@@ -113,7 +122,8 @@ function parseIngBankCSV($text, $owner)
                     "amount" => parseIngAmount($obj["Bedrag (EUR)"]),
                     "balanceAfter" => parseIngAmount($obj["Saldo na mutatie"]),
                     "insideFrom" => $obj["Rekening"],
-                    "insideTo" => $owner
+                    "insideTo" => $owner,
+                    "lineNum" => $i + 1
                 ]);
             } else {
                 throw new Error("Af Bij not parseable! " . $obj["Af Bij"]);

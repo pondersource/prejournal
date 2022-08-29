@@ -15,7 +15,7 @@ function parseTimeldNDJSON($str)
 
     $projectName = "Project Unknown";
     for ($i = 0; $i < count($lines); $i++) {
-        $cells = json_decode($lines[$i], true);
+        $entry = json_decode($lines[$i], true);
         // e.g.
         // {
         //   "@id":"tes3V6N73CboUyHzvHY7TE/2",
@@ -34,20 +34,21 @@ function parseTimeldNDJSON($str)
         //   }
         // }
 
-        debug($cells);
-        if ($cells["@type"] == "Project") {
-            $projectName = $cells["@id"];
-        } else if ($cells["@type"] == "Entry") {
-                array_push($ret, [
-                "worker" => $cells["vf:provider"]["@id"],
-                "start" => strtotime($cells["start"]["@value"]),
-                "seconds" => $cells["duration"] * 60,
-                "description" => $cells["activity"],
-                "project" => $projectName
+        debug($entry);
+        if (isset($entry["@type"]) && $entry["@type"] == "Project") {
+            $projectName = $entry["@id"];
+        } else if (isset($entry["@type"]) && $entry["@type"] == "Entry") {
+            array_push($ret, [
+                "worker" => $entry["vf:provider"]["@id"],
+                "start" => strtotime($entry["start"]["@value"]),
+                "seconds" => $entry["duration"] * 60,
+                "description" => $entry["activity"],
+                "project" => $projectName,
+                "sourceId" => $entry["@id"]
             ]);
         } else {
             debug("Line is not a Project or Entry");
-            debug($cells);
+            debug($entry);
         }
     }
     return $ret;

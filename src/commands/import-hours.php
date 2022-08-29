@@ -29,6 +29,21 @@ require_once(__DIR__ . '/../parsers/wikiApi-CSV.php');
 // E.g.: php src/cli-single.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0             1           2         3
 
+
+function movementForSourceId($sourceId) {
+    $conn = getDbConn();
+    $res = $conn->executeQuery("SELECT m.id FROM movements m INNER JOIN statements s ON "
+        . "s.movementid = m.id WHERE s.sourcedocumentfilename = :sourceId;", [
+            "sourceId" => $sourceId
+        ]);
+    $arr = $res->fetchAllAssociative();
+    // debug($arr);
+    if (count($arr) >= 1) {
+        return $arr[0]["id"];
+    } 
+    return NULL;
+}
+
 function importHoursInline($context, $format, $contents, $importTime)
 {
     $parserFunctions = [
@@ -61,22 +76,39 @@ function importHoursInline($context, $format, $contents, $importTime)
         $entries = $parserFunctions[$format]($contents);
 
         for ($i = 0; $i < count($entries); $i++) {
-            debug($entries);
-            $movementId = intval(createMovement($context, [
-                "create-movement",
-                $context["user"]["id"],
-                $type_,
-                strval(getComponentId($entries[$i]["worker"])),
-                strval(getComponentId($entries[$i]["project"])),
-                $entries[$i]["start"],
-                $entries[$i]["seconds"] / 3600
-            ])[0]);
-            debug("Movement created! $movementId");
-            $statementId = intval(createStatement($context, [
-                "create-statement",
-                $movementId,
-                $importTime
-            ])[0]);
+            // debug($entries[$i]);
+            $sourceId = (isset($entries[$i]["sourceId"]) ? $entries[$i]["sourceId"] : NULL);
+            $existingMovement = movementForSourceId($sourceId);
+            if ($existingMovement == NULL) {
+                $movementId = intval(createMovement($context, [
+                    "create-movement",
+                    $context["user"]["id"],
+                    $type_,
+                    strval(getComponentId($entries[$i]["worker"])),
+                    strval(getComponentId($entries[$i]["project"])),
+                    $entries[$i]["start"],
+                    $entries[$i]["seconds"] / 3600
+                ])[0]);
+                // debug("Movement created! $movementId");
+                $statementId = intval(createStatement($context, [
+                    "create-statement",
+                    $movementId,
+                    $importTime,
+                    (isset($entries[$i]["description"]) ? $entries[$i]["description"] : NULL),
+                    $format,
+                    $sourceId,
+                ])[0]);    
+            } else {
+                updateMovement($context, [
+                    $existingMovement,
+                    $context["user"]["id"],
+                    $type_,
+                    strval(getComponentId($entries[$i]["worker"])),
+                    strval(getComponentId($entries[$i]["project"])),
+                    $entries[$i]["start"],
+                    $entries[$i]["seconds"] / 3600
+                ]);
+            }
         }
         return [strval(count($entries))];
     } else {
