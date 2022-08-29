@@ -61,7 +61,8 @@ function importBankStatement($context, $command)
                     $importTime,
                     "inside movement from bank statement: " .$entries[$i]["comment"],
                     $format,
-                    "$fileName#" . $entries[$i]["lineNum"] . " " . $entries[$i]["remoteID"]
+                    "$fileName#" . $entries[$i]["lineNum"] . 
+                        (isset($entries[$i]["remoteID"]) ? " " . $entries[$i]["remoteID"] : "")
                 ]);
             }
         }

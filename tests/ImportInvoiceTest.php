@@ -14,6 +14,7 @@ final class ImportInvoiceTest extends TestCase
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         $bobId = intval(runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0]);
         setUser('alice', 'alice123', 'employer');
+        runCommand(getContext(), ["claim-component", "ismoil" ]);
         runCommand(getContext(), ["enter", "ismoil", "alex", "4.00", "1123211312", "invoice", "ponder-source" ]);
         setUser('bob', 'bob123', 'employer');
         $this->assertEquals([

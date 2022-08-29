@@ -357,5 +357,6 @@ function checkAccess($componentId, $userId) {
     if ($ass[0]["count"] > 0) {
         return true;
     }
-    throw new Error("UserId $userId is not allowed to create movements with fromComponent == $componentId; did you forget to run the claim-component command first?");
+    $componentName = getComponentName($componentId);
+    throw new Error("UserId $userId is not allowed to create movements with fromComponent $componentId (\"$componentName\"); did you forget to run the claim-component command first?");
 }

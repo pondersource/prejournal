@@ -687,6 +687,7 @@ final class ImportTimesheetTest extends TestCase
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timecamp-CSV.csv";
+        runCommand(getContext(), [ "claim-component", "alice"]);
         $result = runCommand(getContext(), ["import-hours", "timecamp-CSV", $fixture,  "2022-03-31 12:00:00" ]);
 
         $this->assertEquals([
@@ -732,6 +733,7 @@ final class ImportTimesheetTest extends TestCase
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/timesheetMobile-CSV.csv";
+        runCommand(getContext(), [ "claim-component", "alice"]);
         $result = runCommand(getContext(), ["import-hours", "timesheetMobile-CSV", $fixture,  "2022-03-31 12:00:00" ]);
 
         $this->assertEquals([
@@ -779,6 +781,7 @@ final class ImportTimesheetTest extends TestCase
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/wiki-suite-JSON.json";
+        runCommand(getContext(), [ "claim-component", "alice"]);
         $result = runCommand(getContext(), ["import-hours", "wiki-suite-JSON", $fixture,  "2022-03-31 12:00:00" ]);
 
         $this->assertEquals([
@@ -930,6 +933,7 @@ final class ImportTimesheetTest extends TestCase
         runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
         runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
         setUser('alice', 'alice123', 'employer');
+        runCommand(getContext(), [ "claim-component", "alice"]);
         $result = runCommand(getContext(), ["wiki-api-export", "wiki"]);
         $this->assertEquals([
             0 => 'Try again to insert data inside sync and movement'
@@ -947,6 +951,7 @@ final class ImportTimesheetTest extends TestCase
         runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
         runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
         setUser('alice', 'alice123', 'employer');
+        runCommand(getContext(), [ "claim-component", "alice"]);
         $result = runCommand(getContext(), ["wiki-api-import", "wiki"]);
         $this->assertEquals(null, $result);
         //var_dump($result);
@@ -965,7 +970,7 @@ final class ImportTimesheetTest extends TestCase
         $fixture = __DIR__ . "/fixtures/wiki-suite-JSON.json";
         $result = runCommand(getContext(), ["import-timesheet", "wikiApi-JSON", $fixture, "2022-03-31 12:00:00" ]);
         $this->assertEquals([
-            0 => '5'
+            0 => '23' // number of entries in ../fixtures/wiki-suite-JSON.json
         ], $result);
         //var_dump($result);
         setUser('bob', 'bob123', 'employer');
@@ -980,8 +985,11 @@ final class ImportTimesheetTest extends TestCase
         runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
         runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
         setUser('alice', 'alice123', 'employer');
-        $result =  runCommand(getContext(), ["print-timesheet-json", "Test", 2, 4]);
-        $this->assertEquals(null, $result);
+        $context = getContext();
+        $context["openMode"] = true;
+        $result =  runCommand($context, ["print-timesheet-json", "Test", 2, 4]);
+        var_dump($result);
+        $this->assertEquals([], $result);
     }
 
     public function testRemove(): void
@@ -1001,7 +1009,10 @@ final class ImportTimesheetTest extends TestCase
         runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
         runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
         setUser('alice', 'alice123', 'employer');
-        $result =  runCommand(getContext(), [ "worked-day", "23 August 2021", "stichting", "Peppol for the Masses" ]);
+        $context = getContext();
+        // $context["openMode"] = true;
+        runCommand($context, [ "claim-component", "alice"]);
+        $result =  runCommand($context, [ "worked-day", "23 August 2021", "stichting", "Peppol for the Masses" ]);
         $this->assertEquals([
           0 => 'Created movement 1',
           1 => 'Created statement 1'
@@ -1015,6 +1026,7 @@ final class ImportTimesheetTest extends TestCase
         runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
         runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
         setUser('alice', 'alice123', 'employer');
+        runCommand(getContext(), [ "claim-component", "alice"]);
         $result =  runCommand(getContext(), [ "worked-week", "22 November 2021", "stichting", "ScienceMesh", "Almost done"]);
         $this->assertEquals([
           0 => 'Created movement 1',
@@ -1029,10 +1041,18 @@ final class ImportTimesheetTest extends TestCase
         runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0];
         runCommand([ 'adminParty' => true ], ['register', 'bob', 'bob123'])[0];
         setUser('alice', 'alice123', 'employer');
+        runCommand(getContext(), [ "claim-component", "alice"]);
         $result =  runCommand(getContext(), [ "worked-hours", "20 September 2021", "stichting", "Peppol for the Masses", 4]);
         $this->assertEquals([
-          0 => 'Created movement 1',
-          1 => 'Created statement 1'
+            [
+                "worker" => "alice",
+                "project" => "stichting:Peppol for the Masses",
+                "timestamp_" => "2021-09-20 00:00:00",
+                "amount" => "4",
+                "description" => "",
+                "movementId" => 1,
+                "statementId" => 1
+            ]
         ], $result);
         //var_dump($result);
     }

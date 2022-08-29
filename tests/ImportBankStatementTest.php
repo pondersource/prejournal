@@ -12,7 +12,7 @@ final class ImportBankStatementTest extends TestCase
         $this->assertEquals([
             [
                 'id' => 1,
-                'name' => 'NL12ASNB1234567890'
+                'name' => 'alice'
             ],
             [
                 'id' => 2,
@@ -20,7 +20,7 @@ final class ImportBankStatementTest extends TestCase
             ],
             [
                 'id' => 3,
-                'name' => 'alice'
+                'name' => 'NL08BUNQ2040937927 stichting blockchain promotie'
             ]
         ], getAllComponents());
         $this->assertEquals([
@@ -77,6 +77,7 @@ final class ImportBankStatementTest extends TestCase
         $aliceId = intval(runCommand([ 'adminParty' => true ], ['register', 'alice', 'alice123'])[0]);
         setUser('alice', 'alice123', 'employer');
         $fixture = __DIR__ . "/fixtures/asnbank-CSV.csv";
+        runCommand(getContext(), ["claim-component", "alice" ]);
         runCommand(getContext(), ["import-bank-statement", "asnbank-CSV", $fixture,  "2022-03-31 12:00:00" ]);
         $this->checkResult($fixture);
         // run it again to test idempotency, second run should have no effect:
