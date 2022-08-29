@@ -39,10 +39,10 @@ jobs:
         run: composer install
 
       - name: Install dependencies
-        run: echo "CREATE DATABASE prejournal_test" | psql
+        run: echo "CREATE DATABASE prejournal_test" | psql -h localhost
 
       - name: Create db
-        run: cat schema.sql | psql prejournal_test
+        run: cat schema.sql | psql -h localhost prejournal_test
 
       - name: Connect to PostgreSQL
         # Runs a script that creates a PostgreSQL table, populates
