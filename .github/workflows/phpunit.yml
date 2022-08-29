@@ -38,11 +38,11 @@ jobs:
       - name: Install dependencies
         run: composer install
 
-      - name: Install dependencies
+      - name: Create db
         run: echo "CREATE DATABASE prejournal_test" | PGPASSWORD=postgres psql -h localhost -U postgres
 
-      - name: Create db
-        run: cat schema.sql | psql -h localhost prejournal_test
+      # - name: Create tables
+      #   run: cat schema.sql | PGPASSWORD=postgres psql -h localhost -U postgres prejournal_test
 
       - name: Connect to PostgreSQL
         # Runs a script that creates a PostgreSQL table, populates
