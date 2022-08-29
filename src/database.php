@@ -198,7 +198,11 @@ function getComponentName($id)
         "SELECT name FROM components WHERE id = :id",
         [ "id" => $id ]
     );
-    return $result->fetchAllAssociative()[0]["name"];
+    $rows = $result->fetchAllAssociative();
+    if (count($rows) == 1) {
+        return $rows[0]["name"];
+    }
+   return "N/A";
 }
 
 function getMovement($id)
