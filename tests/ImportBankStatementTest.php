@@ -33,6 +33,8 @@ final class ImportBankStatementTest extends TestCase
                 'timestamp_' => '2021-01-01 12:00:00',
                 'amount' => '60.5',
                 'unit' => 'EUR',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => null
             ],
             [
@@ -43,6 +45,8 @@ final class ImportBankStatementTest extends TestCase
                 'timestamp_' => '2021-01-01 12:00:00',
                 'amount' => '60.5',
                 'unit' => 'EUR',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => null
             ]
         ];

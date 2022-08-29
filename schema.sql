@@ -28,7 +28,9 @@ create table movements (
   toComponent integer,
   timestamp_ timestamp,
   amount decimal,
-  unit varchar
+  unit varchar,
+  subIndex integer default 0,
+  deleted boolean default false
 );
 
 drop table if exists implications;
@@ -36,7 +38,7 @@ drop table if exists implications;
 create table implications (
 id SERIAL PRIMARY KEY,
 userId integer,
-relation varchar(54), /* 'inner', 'outer', 'delivery', 'consumption' */
+relation varchar(54), /* 'inner', 'outer', 'delivery', 'consumption', 'production' */
 statementId integer,
 movementId integer
 );
@@ -55,6 +57,17 @@ create table statements (
   remote_id  varchar,
   UNIQUE(remote_id),
   remote_system varchar
+);
+
+drop table if exists documents;
+
+create table documents (
+id SERIAL PRIMARY KEY,
+userId integer,
+content varchar,
+language varchar,
+origin varchar,
+speechAct varchar
 );
 
 drop table if exists componentGrants;
