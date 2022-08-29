@@ -11,8 +11,25 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    # Service containers to run with `container-job`
+
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
 
     steps:
     - uses: actions/checkout@v3
@@ -32,6 +49,17 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-
     - name: Lint
       run: composer run-script lint
+
+    - name: Create db
+      run: echo "CREATE DATABASE prejournal_test" | PGPASSWORD=postgres psql -h localhost -U postgres
+
+    - name: Run the unit tests
+      run: ./vendor/bin/phpunit tests
+      env:
+        DB_DATABASE: prejournal_test
+        DB_USER: postgres
+        DB_PASSWORD: postgres
+        DB_HOST: localhost
+        DB_DRIVER: pdo_pgsql
