@@ -45,5 +45,5 @@ jobs:
           DB_DATABASE: prejournal_test
           DB_USER: prejournal_test
           DB_PASSWORD: test
-          DB_HOST: postgres
+          DB_HOST: localhost
           DB_DRIVER: pdo_pgsql
