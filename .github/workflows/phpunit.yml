@@ -1,4 +1,4 @@
-name: PostgreSQL service example
+name: PHPUNIT
 
 on:
   push:
@@ -33,22 +33,14 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
 
-      # Performs a clean installation of all dependencies in the `package.json` file
-      # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Install dependencies
         run: composer install
 
       - name: Create db
         run: echo "CREATE DATABASE prejournal_test" | PGPASSWORD=postgres psql -h localhost -U postgres
 
-      # - name: Create tables
-      #   run: cat schema.sql | PGPASSWORD=postgres psql -h localhost -U postgres prejournal_test
-
-      - name: Connect to PostgreSQL
-        # Runs a script that creates a PostgreSQL table, populates
-        # the table with data, and then retrieves the data.
+      - name: Run the unit tests
         run: ./vendor/bin/phpunit tests
-        # Environment variables used by the `client.js` script to create a new PostgreSQL table.
         env:
           DB_DATABASE: prejournal_test
           DB_USER: postgres
