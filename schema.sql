@@ -27,7 +27,18 @@ create table movements (
   fromComponent integer,
   toComponent integer,
   timestamp_ timestamp,
-  amount decimal
+  amount decimal,
+  unit varchar
+);
+
+drop table if exists implications;
+
+create table implications (
+id SERIAL PRIMARY KEY,
+userId integer,
+relation varchar(54), /* 'inner', 'outer', 'delivery', 'consumption' */
+statementId integer,
+movementId integer
 );
 
 drop table if exists statements;
