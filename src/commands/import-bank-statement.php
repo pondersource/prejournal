@@ -21,30 +21,34 @@ function importBankStatement($context, $command)
         $format = $command[1];
         $fileName = $command[2];
         $importTime = strtotime($command[3]);
-        $type_ = "payment";
         $entries = $parserFunctions[$format](file_get_contents($fileName), $context["user"]["username"]);
         for ($i = 0; $i < count($entries); $i++) {
             // var_dump($entries[$i]);
             $movementIdsOutside = ensureMovementsLookalikeGroup($context, [
-                "type_" => $type_,
+                "type_" => "outer",
                 "fromComponent" => strval(getComponentId($entries[$i]["from"])),
                 "toComponent" => strval(getComponentId($entries[$i]["to"])),
                 "timestamp_" => $entries[$i]["date"],
                 "amount" => $entries[$i]["amount"]
             ], 1);
-            for ($j = 0; $j < count($movementIdsOutside); $j++) {
-                ensureStatement($context, [
-                    "create-statement",
-                    intval($movementIdsOutside[$j]),
-                    $importTime,
-                    "outside movement from bank statement: " .$entries[$i]["comment"],
-                    $format,
-                    "$fileName#$i"
-                ]);
-            }
+            // for ($j = 0; $j < count($movementIdsOutside); $j++) {
+            //     ensureStatement($context, [
+            //         "create-statement",
+            //         intval($movementIdsOutside[$j]),
+            //         $importTime,
+            //         "outside movement from bank statement: " .$entries[$i]["comment"],
+            //         $format,
+            //         // FIXME: statement is about a message
+            //         // remoteID is about the subject of that message
+            //         // so maybe we need an extra table for tracking
+            //         // data object at neighbouring systems?
+            //         // 
+            //         "$fileName#" . $entries[$i]["lineNum"] . " " . $entries[$i]["remoteID"]
+            //     ]);
+            // }
 
             $movementIdsInside = ensureMovementsLookalikeGroup($context, [
-                "type_" => $type_,
+                "type_" => "inner",
                 "fromComponent" => strval(getComponentId($entries[$i]["insideFrom"])),
                 "toComponent" => strval(getComponentId($entries[$i]["insideTo"])),
                 "timestamp_" => $entries[$i]["date"],
@@ -57,7 +61,7 @@ function importBankStatement($context, $command)
                     $importTime,
                     "inside movement from bank statement: " .$entries[$i]["comment"],
                     $format,
-                    "$fileName#$i"
+                    "$fileName#" . $entries[$i]["lineNum"] . " " . $entries[$i]["remoteID"]
                 ]);
             }
         }
