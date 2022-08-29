@@ -44,6 +44,7 @@ final class ImportInvoiceTest extends TestCase
                 'tocomponent' => 1,
                 'timestamp_' => '1970-01-01 00:00:00',
                 'amount' => '0',
+                'unit' => 'EUR',
                 'userid' => 1
                 ]
         ], getAllMovements());
@@ -98,6 +99,7 @@ final class ImportInvoiceTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:33:42',
                 'amount' => '0',
+                'unit' => 'EUR',
                 'userid' => 1
             ],
             [
@@ -107,6 +109,7 @@ final class ImportInvoiceTest extends TestCase
                     'tocomponent' => 3,
                     'timestamp_' => '1970-01-01 00:33:42',
                     'amount' => '0',
+                    'unit' => 'EUR',
                     'userid' => 1
             ],
             [
@@ -116,6 +119,7 @@ final class ImportInvoiceTest extends TestCase
                     'tocomponent' => 4,
                     'timestamp_' => '1970-01-01 00:33:42',
                     'amount' => '0',
+                    'unit' => 'EUR',
                     'userid' => 1
             ]
         ], getAllMovements());

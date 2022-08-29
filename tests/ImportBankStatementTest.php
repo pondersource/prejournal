@@ -32,6 +32,7 @@ final class ImportBankStatementTest extends TestCase
                 'tocomponent' => 3,
                 'timestamp_' => '2021-01-01 12:00:00',
                 'amount' => '60.5',
+                'unit' => 'EUR',
                 'userid' => null
             ],
             [
@@ -41,16 +42,8 @@ final class ImportBankStatementTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '2021-01-01 12:00:00',
                 'amount' => '60.5',
+                'unit' => 'EUR',
                 'userid' => null
-            // ],
-            // [
-            //     'id' => 3,
-            //     'type_' => 'outer',
-            //     'fromcomponent' => 1,
-            //     'tocomponent' => 2,
-            //     'timestamp_' => '2021-01-01 12:00:00',
-            //     'amount' => '60.5',
-            //     'userid' => null
             ]
         ];
         // debug("ACTUAL:");

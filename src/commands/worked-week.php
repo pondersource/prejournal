@@ -27,7 +27,8 @@ function workedWeek($context, $command)
             strval(getComponentId($worker)),
             strval(getComponentId($project)),
             $timestamp,
-            $worked_hours
+            $worked_hours,
+            'hours'
         ])[0]);
         $statementId = intval(createStatement($context, [
             "create-statement",

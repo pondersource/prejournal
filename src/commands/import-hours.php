@@ -87,7 +87,8 @@ function importHoursInline($context, $format, $contents, $importTime)
                     strval(getComponentId($entries[$i]["worker"])),
                     strval(getComponentId($entries[$i]["project"])),
                     $entries[$i]["start"],
-                    $entries[$i]["seconds"] / 3600
+                    $entries[$i]["seconds"] / 3600,
+                    'hours'
                 ])[0]);
                 // debug("Movement created! $movementId");
                 $statementId = intval(createStatement($context, [
@@ -106,7 +107,8 @@ function importHoursInline($context, $format, $contents, $importTime)
                     strval(getComponentId($entries[$i]["worker"])),
                     strval(getComponentId($entries[$i]["project"])),
                     $entries[$i]["start"],
-                    $entries[$i]["seconds"] / 3600
+                    $entries[$i]["seconds"] / 3600,
+                    'hours'
                 ]);
             }
         }

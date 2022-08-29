@@ -29,7 +29,8 @@ function importBankStatement($context, $command)
                 "fromComponent" => strval(getComponentId($entries[$i]["from"])),
                 "toComponent" => strval(getComponentId($entries[$i]["to"])),
                 "timestamp_" => $entries[$i]["date"],
-                "amount" => $entries[$i]["amount"]
+                "amount" => $entries[$i]["amount"],
+                "unit" => "EUR"
             ], 1);
             // for ($j = 0; $j < count($movementIdsOutside); $j++) {
             //     ensureStatement($context, [
@@ -52,7 +53,8 @@ function importBankStatement($context, $command)
                 "fromComponent" => strval(getComponentId($entries[$i]["insideFrom"])),
                 "toComponent" => strval(getComponentId($entries[$i]["insideTo"])),
                 "timestamp_" => $entries[$i]["date"],
-                "amount" => $entries[$i]["amount"]
+                "amount" => $entries[$i]["amount"],
+                "unit" => "EUR"
             ], 1);
             for ($j = 0; $j < count($movementIdsInside); $j++) {
                 ensureStatement($context, [

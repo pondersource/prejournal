@@ -18,15 +18,16 @@ function createMovement($context, $command)
         "fromComponent" => intval($command[3]),
         "toComponent" => intval($command[4]),
         "timestamp_" => timestampToDateTime(intval($command[5])),
-        "amount" => floatval($command[6])
+        "amount" => floatval($command[6]),
+        "unit" => $command[7]
     ];
 
     if (!$context["adminParty"]) {
         checkAccess($params["fromComponent"], $params["userId"]);
     }
 
-    $query = "INSERT INTO movements (userId, type_, fromComponent, toComponent, timestamp_, amount) "
-        . "VALUES (:userId, :type_, :fromComponent, :toComponent, :timestamp_, :amount);";
+    $query = "INSERT INTO movements (userId, type_, fromComponent, toComponent, timestamp_, amount, unit) "
+        . "VALUES (:userId, :type_, :fromComponent, :toComponent, :timestamp_, :amount, :unit);";
 
     $ret = $conn->executeStatement($query, $params);
     return [ strval($conn->lastInsertId()) ];
@@ -48,7 +49,8 @@ function updateMovement($context, $command) {
         "fromComponent" => intval($command[3]),
         "toComponent" => intval($command[4]),
         "timestamp_" => timestampToDateTime(intval($command[5])),
-        "amount" => floatval($command[6])
+        "amount" => floatval($command[6]),
+        "unit" => $command[7]
     ];
 
     if (!$context["adminParty"]) {
@@ -89,7 +91,8 @@ function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
         "toComponent" => $movement["toComponent"],
         "mintimestamp_" => timestampToDateTime($movement["timestamp_"] - 12 * 3600),
         "maxtimestamp_" => timestampToDateTime($movement["timestamp_"] + 12 * 3600),
-        "amount" => $movement["amount"]
+        "amount" => $movement["amount"],
+        "unit" => $movement["unit"]
     ];
     $ret = $conn->executeQuery($query, $fields);
     $ass = $ret->fetchAllAssociative();
@@ -107,8 +110,8 @@ function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
     } elseif (count($arr) == $numNeeded) {
         // echo ("Already have $numNeeded movements with these details!\n");
     } else {
-        $query = "INSERT INTO movements (type_, fromComponent, toComponent, timestamp_, amount) "
-        . "VALUES (:type_, :fromComponent, :toComponent, :timestamp_, :amount);";
+        $query = "INSERT INTO movements (type_, fromComponent, toComponent, timestamp_, amount, unit) "
+        . "VALUES (:type_, :fromComponent, :toComponent, :timestamp_, :amount, :unit);";
         $numToAdd = $numNeeded - count($arr);
         for ($i = 0; $i < $numToAdd; $i++) {
             $conn->executeStatement($query, [
@@ -116,7 +119,8 @@ function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
                 "fromComponent" => $movement["fromComponent"],
                 "toComponent" => $movement["toComponent"],
                 "timestamp_" => timestampToDateTime($movement["timestamp_"]),
-                "amount" => $movement["amount"]
+                "amount" => $movement["amount"],
+                "unit" => $movement["unit"]
             ]);
             $created = $conn->lastInsertId();
             // echo("Movement $created was created\n");
@@ -126,12 +130,12 @@ function ensureMovementsLookalikeGroup($context, $movement, $numNeeded)
     return $arr;
 }
 
-function createMultipleMovement($userId, $type_, $fromComponent, $toComponent, $timestamp_, $amount)
+function createMultipleMovement($userId, $type_, $fromComponent, $toComponent, $timestamp_, $amount, $unit)
 {
     $conn  = getDbConn();
     $conn->executeQuery(
-        "INSERT INTO movements (userId, type_, fromComponent, toComponent,timestamp_, amount) VALUES (:userId, :type_, :fromComponent, :toComponent, :timestamp_,:amount) ",
-        [ "userId" => $userId, "type_" => $type_, "fromComponent" => $fromComponent, "toComponent" => $toComponent, "timestamp_" => $timestamp_, "amount" => $amount]
+        "INSERT INTO movements (userId, type_, fromComponent, toComponent,timestamp_, amount, unit) VALUES (:userId, :type_, :fromComponent, :toComponent, :timestamp_,:amount, :unit) ",
+        [ "userId" => $userId, "type_" => $type_, "fromComponent" => $fromComponent, "toComponent" => $toComponent, "timestamp_" => $timestamp_, "amount" => $amount, "unit" => $unit]
     );
     return [ strval($conn->lastInsertId()) ];
 }
