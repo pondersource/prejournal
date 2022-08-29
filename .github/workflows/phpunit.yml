@@ -39,7 +39,7 @@ jobs:
         run: composer install
 
       - name: Install dependencies
-        run: echo "CREATE DATABASE prejournal_test" | psql -h localhost -U postgres
+        run: echo "CREATE DATABASE prejournal_test" | PGPASSWORD=postgres psql -h localhost -U postgres
 
       - name: Create db
         run: cat schema.sql | psql -h localhost prejournal_test
