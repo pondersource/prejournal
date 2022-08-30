@@ -10,64 +10,187 @@ require_once(__DIR__ . '/../parsers/ingbank-CSV.php');
 // E.g.: php src/cli-single.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"
 //                             0                    1           2             3
 
+function implyMovement($params) {
+    $conn = getDbConn();
+    $conn->executeStatement("INSERT INTO movements "
+        . "(fromComponent, toComponent, timestamp_, amount, unit, type_) VALUES "
+        . "(:fromComponent, :toComponent, :timestamp_, :amount, :unit, NULL)", [
+        "fromComponent" => getComponentId($params["from"]),
+        "toComponent" => getComponentId($params["to"]),
+        "timestamp_" => timestampToDateTime($params["date"]),
+        "amount" => $params["amount"],
+        "unit" => $params["unit"]
+    ]);
+    $movementId = $conn->lastInsertId();
+    $conn->executeStatement("INSERT INTO implications "
+        . "(statementId, movementId, relation) VALUES "
+        . "(:statementId, :movementId, :relation)", [
+        "statementId" => $params["statementId"],
+        "movementId" => $movementId,
+        "relation" => $params["relation"]
+    ]);
+}
+
 function importBankStatement($context, $command)
 {
+    var_dump('importBankStatement');
+    var_dump($context);
+    var_dump($command);
     $parserFunctions = [
         "asnbank-CSV" => "parseAsnBankCSV",
         "ingbank-CSV" => "parseIngBankCSV"
     ];
 
-    if (isset($context["user"])) {
-        $format = $command[1];
-        $fileName = $command[2];
-        $importTime = strtotime($command[3]);
-        $entries = $parserFunctions[$format](file_get_contents($fileName), $context["user"]["username"]);
-        for ($i = 0; $i < count($entries); $i++) {
-            // var_dump($entries[$i]);
-            $movementIdsOutside = ensureMovementsLookalikeGroup($context, [
-                "type_" => "outer",
-                "fromComponent" => strval(getComponentId($entries[$i]["from"])),
-                "toComponent" => strval(getComponentId($entries[$i]["to"])),
-                "timestamp_" => $entries[$i]["date"],
-                "amount" => $entries[$i]["amount"]
-            ], 1);
-            // for ($j = 0; $j < count($movementIdsOutside); $j++) {
-            //     ensureStatement($context, [
-            //         "create-statement",
-            //         intval($movementIdsOutside[$j]),
-            //         $importTime,
-            //         "outside movement from bank statement: " .$entries[$i]["comment"],
-            //         $format,
-            //         // FIXME: statement is about a message
-            //         // remoteID is about the subject of that message
-            //         // so maybe we need an extra table for tracking
-            //         // data object at neighbouring systems?
-            //         // 
-            //         "$fileName#" . $entries[$i]["lineNum"] . " " . $entries[$i]["remoteID"]
-            //     ]);
-            // }
+    if (!isset($context["user"])) {
+        return ["User not found or wrong password"];
+    }
 
-            $movementIdsInside = ensureMovementsLookalikeGroup($context, [
-                "type_" => "inner",
-                "fromComponent" => strval(getComponentId($entries[$i]["insideFrom"])),
-                "toComponent" => strval(getComponentId($entries[$i]["insideTo"])),
-                "timestamp_" => $entries[$i]["date"],
-                "amount" => $entries[$i]["amount"]
-            ], 1);
-            for ($j = 0; $j < count($movementIdsInside); $j++) {
-                ensureStatement($context, [
-                    "create-statement",
-                    intval($movementIdsInside[$j]),
-                    $importTime,
-                    "inside movement from bank statement: " .$entries[$i]["comment"],
-                    $format,
-                    "$fileName#" . $entries[$i]["lineNum"] . 
-                        (isset($entries[$i]["remoteID"]) ? " " . $entries[$i]["remoteID"] : "")
+    $format = $command[1];
+    $fileName = $command[2];
+    $importTime = strtotime($command[3]);
+    $documentId = $fileName;
+    // $otherSystemId = (isset($command[5]) ? $command[5] : $fileName);
+    $rules = [];
+    if (isset($command[4])) {
+        $rules = json_decode(file_get_contents($command[4]), true);
+    }
+    $entries = $parserFunctions[$format](file_get_contents($fileName), $context["user"]["username"]);
+    // var_dump($entries);
+    for ($i = 0; $i < count($entries); $i++) {
+        // $objectId = $otherSystemId . $entries[$i]["remoteId"];
+        $statementIdStr = $documentId . "#" . $entries[$i]["lineNum"];
+        $command = ['create-statement', null, $importTime, $entries[$i]["comment"], $format, $statementIdStr];
+        $statementId = intval(createStatement($context, $command)[0]);
+        if (!isset($rules[$entries[$i]["bankAccountComponent"]])) {
+            // throw new Error("have no rules!");
+            $rules[$entries[$i]["bankAccountComponent"]] = [];
+        }
+
+        $submap = $rules[$entries[$i]["bankAccountComponent"]];
+        $budget = "Other";
+        foreach ($submap as $searchString => $impliedBudget) {
+            // var_dump(["comparing", $entries[$i]["otherComponent"], $searchString]);
+            if (str_contains($entries[$i]["otherComponent"], $searchString)) {
+                $budget = $impliedBudget;
+                break;
+            }
+            // var_dump(["comparing", $entries[$i]["comment"], $searchString]);
+            if (str_contains($entries[$i]["comment"], $searchString)) {
+                $budget = $impliedBudget;
+                break;
+            }
+        }
+        if ($budget == "Self") {
+            if ($entries[$i]["amount"] > 0) {
+                // transfer to self, only process it once
+                implyMovement([
+                    "from" => $entries[$i]["otherComponent"],
+                    "to" => $entries[$i]["bankAccountComponent"],
+                    "date" => $entries[$i]["date"],
+                    "amount" => $entries[$i]["amount"],
+                    "unit" => $entries[$i]["unit"],
+                    "statementId" => $statementId,
+                    "relation" => "outer-self"
+                ]);
+                implyMovement([
+                    "from" => $entries[$i]["bankAccountComponent"],
+                    "to" => $context["user"]["username"],
+                    "date" => $entries[$i]["date"],
+                    "amount" => $entries[$i]["amount"],
+                    "unit" => $entries[$i]["unit"],
+                    "statementId" => $statementId,
+                    "relation" => "self-inward"
+                ]);
+                implyMovement([
+                    "from" => $context["user"]["username"],
+                    "to" => $entries[$i]["otherComponent"],
+                    "date" => $entries[$i]["date"],
+                    "amount" => $entries[$i]["amount"],
+                    "unit" => $entries[$i]["unit"],
+                    "statementId" => $statementId,
+                    "relation" => "self-outward"
+                ]);
+            }
+        } else {
+            // echo "$budget\n";
+            if ($entries[$i]["amount"] > 0) {
+                // income
+                implyMovement([
+                    "from" => $entries[$i]["otherComponent"],
+                    "to" => $entries[$i]["bankAccountComponent"],
+                    "date" => $entries[$i]["date"],
+                    "amount" => $entries[$i]["amount"],
+                    "unit" => $entries[$i]["unit"],
+                    "statementId" => $statementId,
+                    "relation" => "outer"
+                ]);
+                implyMovement([
+                    "from" => $entries[$i]["bankAccountComponent"],
+                    "to" => $context["user"]["username"],
+                    "date" => $entries[$i]["date"],
+                    "amount" => $entries[$i]["amount"],
+                    "unit" => $entries[$i]["unit"],
+                    "statementId" => $statementId,
+                    "relation" => "inner"
+                ]);
+                implyMovement([
+                    "from" => $context["user"]["username"],
+                    "to" => $budget,
+                    "date" => $entries[$i]["date"],
+                    "amount" => $entries[$i]["amount"],
+                    "unit" => $entries[$i]["unit"],
+                    "statementId" => $statementId,
+                    "relation" => "production"
+                ]);
+                implyMovement([
+                    "from" => $budget,
+                    "to" => $entries[$i]["otherComponent"],
+                    "date" => $entries[$i]["date"],
+                    "amount" => $entries[$i]["amount"],
+                    "unit" => $entries[$i]["unit"],
+                    "statementId" => $statementId,
+                    "relation" => "work-delivery"
+                ]);
+            } else {
+                // purchase
+                implyMovement([
+                    "from" => $context["user"]["username"],
+                    "to" => $entries[$i]["bankAccountComponent"],
+                    "date" => $entries[$i]["date"],
+                    "amount" => -$entries[$i]["amount"],
+                    "unit" => $entries[$i]["unit"],
+                    "statementId" => $statementId,
+                    "relation" => "inner"
+                ]);
+                implyMovement([
+                    "from" => $entries[$i]["bankAccountComponent"],
+                    "to" => $entries[$i]["otherComponent"],
+                    "date" => $entries[$i]["date"],
+                    "amount" => -$entries[$i]["amount"],
+                    "unit" => $entries[$i]["unit"],
+                    "statementId" => $statementId,
+                    "relation" => "outer"
+                ]);
+                implyMovement([
+                    "from" => $entries[$i]["otherComponent"],
+                    "to" => $budget,
+                    "date" => $entries[$i]["date"],
+                    "amount" => -$entries[$i]["amount"],
+                    "unit" => $entries[$i]["unit"],
+                    "statementId" => $statementId,
+                    "relation" => "purchase-delivery"
+                ]);
+                implyMovement([
+                    "from" => $budget,
+                    "to" => $context["user"]["username"],
+                    "date" => $entries[$i]["date"],
+                    "amount" => -$entries[$i]["amount"],
+                    "unit" => $entries[$i]["unit"],
+                    "statementId" => $statementId,
+                    "relation" => "consumption"
                 ]);
             }
         }
-        return [strval(count($entries))];
-    } else {
-        return ["User not found or wrong password"];
     }
+    return [strval(count($entries))];
 }

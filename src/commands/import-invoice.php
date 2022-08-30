@@ -31,7 +31,8 @@ function importInvoice($context, $command)
                 strval(getComponentId($entries[$i]["from"])),
                 strval(getComponentId($entries[$i]["to"])),
                 $entries[$i]["date"],
-                $entries[$i]["amount"]
+                $entries[$i]["amount"],
+                'EUR'
             ])[0]);
             $statementId = intval(createStatement($context, [
                 "create-statement",

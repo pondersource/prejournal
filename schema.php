@@ -24,17 +24,29 @@ function getTables()
         "create table movements (
   id SERIAL PRIMARY KEY,
   userId integer,
-  type_ varchar(54), /* 'invoice', 'payment', 'worked' */
+  type_ varchar(54), /* DEPRECATED */
   fromComponent integer,
   toComponent integer,
   timestamp_ timestamp,
-  amount decimal
+  amount decimal,
+  unit varchar,
+  subIndex integer default 0,
+  deleted boolean default false
+);",
+
+        "drop table if exists implications;",
+        "create table implications (
+id SERIAL PRIMARY KEY,
+userId integer,
+relation varchar(54), /* 'inner', 'outer', 'delivery', 'consumption', 'production' */
+statementId integer,
+movementId integer
 );",
 
         "drop table if exists statements;",
         "create table statements (
   id SERIAL PRIMARY KEY,
-  movementId integer,
+  movementId integer, /* DEPRECATED */
   userId integer,
   sourceDocumentFormat varchar, /* could be an invoice, bank statement csv file, API call etc */
   sourceDocumentFilename varchar, /* TODO: work out how to store files when on Heroku */

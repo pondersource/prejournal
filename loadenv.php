@@ -6,6 +6,6 @@ if (isset($_SERVER['PREJOURNAL_ENV_FILE_DIR'])) {
 } else {
     $envFileDir = __DIR__;
 }
-echo "Looking for .env in $envFileDir\n";
+// echo "Looking for .env in $envFileDir\n";
 $dotenv = Dotenv\Dotenv::createImmutable($envFileDir);
 $dotenv->load();

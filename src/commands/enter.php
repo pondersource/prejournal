@@ -25,7 +25,8 @@ function enter($context, $command)
             strval($componentFromId),
             strval($componentToId),
             $dateStr,
-            $amountStr
+            $amountStr,
+            'EUR'
         ])[0]);
         $statementId = intval(createStatement($context, [
             "create-statement",

@@ -26,7 +26,7 @@ function PurchaseImplicationsBatch($context, $command)
                 $implicationsMap[$fromAccount][$searchString] = $impliedBudget;
             }
         }
-        var_dump($implicationsMap);
+        echo json_encode($implicationsMap, JSON_PRETTY_PRINT);
         $userComponent = getComponentId($context["user"]["username"]);
         foreach ($implicationsMap as $fromAccount => $submap) {
             $movements = getAllMovementsFromId(getComponentId($fromAccount));

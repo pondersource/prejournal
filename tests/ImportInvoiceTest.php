@@ -44,6 +44,9 @@ final class ImportInvoiceTest extends TestCase
                 'tocomponent' => 1,
                 'timestamp_' => '1970-01-01 00:00:00',
                 'amount' => '0',
+                'unit' => 'EUR',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
                 ]
         ], getAllMovements());
@@ -98,25 +101,34 @@ final class ImportInvoiceTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:33:42',
                 'amount' => '0',
+                'unit' => 'EUR',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
             ],
             [
-                    'id' => 2,
-                    'type_' => 'invoice',
-                    'fromcomponent' => 1,
-                    'tocomponent' => 3,
-                    'timestamp_' => '1970-01-01 00:33:42',
-                    'amount' => '0',
-                    'userid' => 1
+                'id' => 2,
+                'type_' => 'invoice',
+                'fromcomponent' => 1,
+                'tocomponent' => 3,
+                'timestamp_' => '1970-01-01 00:33:42',
+                'amount' => '0',
+                'unit' => 'EUR',
+                'subindex' => 0,
+                'deleted' => false,
+                'userid' => 1
             ],
             [
-                    'id' => 3,
-                    'type_' => 'invoice',
-                    'fromcomponent' => 1,
-                    'tocomponent' => 4,
-                    'timestamp_' => '1970-01-01 00:33:42',
-                    'amount' => '0',
-                    'userid' => 1
+                'id' => 3,
+                'type_' => 'invoice',
+                'fromcomponent' => 1,
+                'tocomponent' => 4,
+                'timestamp_' => '1970-01-01 00:33:42',
+                'amount' => '0',
+                'unit' => 'EUR',
+                'subindex' => 0,
+                'deleted' => false,
+                'userid' => 1
             ]
         ], getAllMovements());
         $this->assertEquals([

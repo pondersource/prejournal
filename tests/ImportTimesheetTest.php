@@ -36,6 +36,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-18 09:39:19',
                 'amount' => '0.0013888888888889',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
                 ]
         ], getAllMovements());
@@ -81,6 +84,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-18 09:39:19',
                 'amount' => '0.0013888888888889',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
                 ]
         ], getAllMovements());
@@ -128,6 +134,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-27 19:00:00',
                 'amount' => '29.05',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
                 ]
         ], getAllMovements());
@@ -174,6 +183,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-30 14:34:00',
                 'amount' => '1',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
             ]
         ], getAllMovements());
@@ -219,6 +231,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-18 00:00:00',
                 'amount' => '0',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
                 ]
         ], getAllMovements());
@@ -265,6 +280,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-25 14:09:38',
                 'amount' => '0.15555555555556',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
             ]
         ], getAllMovements());
@@ -310,7 +328,10 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2017-03-13 16:00:00',
-                'amount' => '461593',
+                'amount' => '461617',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
                 ]
         ], getAllMovements());
@@ -356,6 +377,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
                 'amount' => '0',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
               ]
         ], getAllMovements());
@@ -402,6 +426,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
                 'amount' => '0.00027777777777778',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
            ]
         ], getAllMovements());
@@ -448,6 +475,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:04',
                 'amount' => '0',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
             ]
         ], getAllMovements());
@@ -494,6 +524,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
                 'amount' => '0',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
             ]
         ], getAllMovements());
@@ -540,6 +573,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '2022-04-12 09:34:45',
                 'amount' => '0.0010416666666667',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
                 ]
         ], getAllMovements());
@@ -586,6 +622,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-17 00:00:00',
                 'amount' => '0',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
                 ]
         ], getAllMovements());
@@ -632,6 +671,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '1970-01-01 00:00:00',
                 'amount' => '0.0010416666666667',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
                 ]
         ], getAllMovements());
@@ -678,6 +720,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-29 15:30:00',
                 'amount' => '0',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
                 ]
         ], getAllMovements());
@@ -772,6 +817,9 @@ final class ImportTimesheetTest extends TestCase
                 'tocomponent' => 2,
                 'timestamp_' => '2022-03-30 00:00:00',
                 'amount' => '0',
+                'unit' => 'hours',
+                'subindex' => 0,
+                'deleted' => false,
                 'userid' => 1
                 ]
         ], getAllMovements());

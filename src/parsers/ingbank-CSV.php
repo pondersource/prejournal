@@ -68,6 +68,7 @@ function parseIngAmount($str)
 
 function parseIngBankCSV($text, $owner)
 {
+    // echo "Parsing as ING!\n";
     $lines = explode("\r\n", $text);
     $ret = [];
     $COLUMN_NAMES = [
@@ -102,32 +103,23 @@ function parseIngBankCSV($text, $owner)
             }
             // var_dump($obj);
             if ($obj["Af Bij"] == 'Af') {
-                array_push($ret, [
-                    "date" => parseIngDate($obj["Datum"]),
-                    "comment" => parseIngDescription($obj),
-                    "from" => $obj["Rekening"],
-                    "to" => parseIngAccount2($obj),
-                    "amount" => parseIngAmount($obj["Bedrag (EUR)"]),
-                    "balanceAfter" => parseIngAmount($obj["Saldo na mutatie"]),
-                    "insideFrom" => $owner,
-                    "insideTo" => $obj["Rekening"],
-                    "lineNum" => $i + 1
-                ]);
+                $amount = -parseIngAmount($obj["Bedrag (EUR)"]);
             } elseif ($obj["Af Bij"] == 'Bij') {
-                array_push($ret, [
-                    "date" => parseIngDate($obj["Datum"]),
-                    "comment" => parseIngDescription($obj),
-                    "from" => parseIngAccount2($obj),
-                    "to" => $obj["Rekening"],
-                    "amount" => parseIngAmount($obj["Bedrag (EUR)"]),
-                    "balanceAfter" => parseIngAmount($obj["Saldo na mutatie"]),
-                    "insideFrom" => $obj["Rekening"],
-                    "insideTo" => $owner,
-                    "lineNum" => $i + 1
-                ]);
+                $amount = parseIngAmount($obj["Bedrag (EUR)"]);
             } else {
                 throw new Error("Af Bij not parseable! " . $obj["Af Bij"]);
             }
+                
+            array_push($ret, [
+                "otherComponent" => parseIngAccount2($obj),
+                "bankAccountComponent" => $obj["Rekening"],
+                "date" => parseIngDate($obj["Datum"]),
+                "comment" => parseIngDescription($obj),
+                "amount" => $amount, // may be pos or neg!
+                "unit" => "EUR",
+                "balanceAfter" => parseIngAmount($obj["Saldo na mutatie"]),
+                "lineNum" => $i + 1
+            ]);
         }
     }
     // var_dump($ret);
