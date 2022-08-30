@@ -50,7 +50,10 @@ function importBankStatement($context, $command)
     $importTime = strtotime($command[3]);
     $documentId = $fileName;
     // $otherSystemId = (isset($command[5]) ? $command[5] : $fileName);
-    $rules = json_decode(file_get_contents($command[4]), true);
+    $rules = [];
+    if (isset($command[4])) {
+        $rules = json_decode(file_get_contents($command[4]), true);
+    }
     $entries = $parserFunctions[$format](file_get_contents($fileName), $context["user"]["username"]);
     for ($i = 0; $i < count($entries); $i++) {
         // $objectId = $otherSystemId . $entries[$i]["remoteId"];
@@ -58,7 +61,8 @@ function importBankStatement($context, $command)
         $command = ['create-statement', null, $importTime, $entries[$i]["comment"], $format, $statementIdStr];
         $statementId = intval(createStatement($context, $command)[0]);
         if (!isset($rules[$entries[$i]["bankAccountComponent"]])) {
-            throw new Error("have no rules!");
+            // throw new Error("have no rules!");
+            $rules[$entries[$i]["bankAccountComponent"]] = [];
         }
 
         $submap = $rules[$entries[$i]["bankAccountComponent"]];
