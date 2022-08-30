@@ -109,6 +109,7 @@ function parseAsnBankCSV($text)
                 "date" => parseDate($obj),
                 "comment" => parseDescription($obj),
                 "amount" => floatval($obj["transactiebedrag"]), // may be pos or neg!
+                "unit" => "EUR",
                 "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"]),
                 "lineNum" => $i + 1,
                 "remoteId" => $obj["journaaldatum"] . " " . $obj["volgnummerTransactie"]

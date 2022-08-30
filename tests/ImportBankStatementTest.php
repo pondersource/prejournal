@@ -27,7 +27,19 @@ final class ImportBankStatementTest extends TestCase
         $expected = [
             [
                 'id' => 1,
-                'type_' => 'outer',
+                'type_' => NULL,
+                'fromcomponent' => 1,
+                'tocomponent' => 2,
+                'timestamp_' => '2021-01-01 12:00:00',
+                'amount' => '60.5',
+                'unit' => 'EUR',
+                'subindex' => 0,
+                'deleted' => false,
+                'userid' => null
+            ],
+            [
+                'id' => 2,
+                'type_' => NULL,
                 'fromcomponent' => 2,
                 'tocomponent' => 3,
                 'timestamp_' => '2021-01-01 12:00:00',
@@ -38,10 +50,10 @@ final class ImportBankStatementTest extends TestCase
                 'userid' => null
             ],
             [
-                'id' => 2,
-                'type_' => 'inner',
-                'fromcomponent' => 1,
-                'tocomponent' => 2,
+                'id' => 3,
+                'type_' => NULL,
+                'fromcomponent' => 3,
+                'tocomponent' => 1,
                 'timestamp_' => '2021-01-01 12:00:00',
                 'amount' => '60.5',
                 'unit' => 'EUR',
@@ -59,27 +71,15 @@ final class ImportBankStatementTest extends TestCase
         $this->assertEquals([
             [
                 'id' => 1,
-                'movementid' => 2,
+                'movementid' => 0,
                 'userid' => 1,
                 'sourcedocumentformat' => 'asnbank-CSV',
                 'sourcedocumentfilename' => "$fixture#1",
                 'timestamp_' => '2022-03-31 12:00:00',
-                'description' =>  "inside movement from bank statement: 9802 OVB   'Fictional transaction'",
+                'description' =>  "9802 OVB   'Fictional transaction'",
                 'internal_type' => null,
                 'remote_id' => null,
                 'remote_system' => null
-            // ],
-            // [
-            //     'id' => 2,
-            //     'movementid' => 1,
-            //     'userid' => 1,
-            //     'sourcedocumentformat' => 'asnbank-CSV',
-            //     'sourcedocumentfilename' => "$fixture#1",
-            //     'timestamp_' => '2022-03-31 12:00:00',
-            //     'description' => 'outside movement from bank statement: 9802 OVB   \'Fictional transaction\'',
-            //     'internal_type' => null,
-            //     'remote_id' => null,
-            //     'remote_system' => null
             ]
         ], getAllStatements());
     }

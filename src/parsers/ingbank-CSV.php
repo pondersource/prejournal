@@ -115,6 +115,7 @@ function parseIngBankCSV($text, $owner)
                 "date" => parseIngDate($obj["Datum"]),
                 "comment" => parseIngDescription($obj),
                 "amount" => $amount, // may be pos or neg!
+                "unit" => "EUR",
                 "balanceAfter" => parseIngAmount($obj["Saldo na mutatie"]),
                 "lineNum" => $i + 1
             ]);

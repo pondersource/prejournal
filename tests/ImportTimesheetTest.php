@@ -328,7 +328,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2017-03-13 16:00:00',
-                'amount' => '461593',
+                'amount' => '461617',
                 'unit' => 'hours',
                 'subindex' => 0,
                 'deleted' => false,

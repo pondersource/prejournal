@@ -17,14 +17,14 @@ function implyMovement($params) {
         . "(:fromComponent, :toComponent, :timestamp_, :amount, :unit, NULL)", [
         "fromComponent" => getComponentId($params["from"]),
         "toComponent" => getComponentId($params["to"]),
-        "timestamp_" => strtotime($params["date"]),
+        "timestamp_" => timestampToDateTime($params["date"]),
         "amount" => $params["amount"],
         "unit" => $params["unit"]
     ]);
     $movementId = $conn->lastInsertId();
     $conn->executeStatement("INSERT INTO implications "
         . "(statementId, movementId, relation) VALUES "
-        . "(:statementId, :movementId, relation)", [
+        . "(:statementId, :movementId, :relation)", [
         "statementId" => $params["statementId"],
         "movementId" => $movementId,
         "relation" => $params["relation"]
@@ -49,7 +49,7 @@ function importBankStatement($context, $command)
             // $objectId = $otherSystemId . $entries[$i]["remoteId"];
             $statementIdStr = $documentId . "#" . $entries[$i]["lineNum"];
             $command = ['create-statement', NULL, $importTime, $entries[$i]["comment"], $format, $statementIdStr];
-            $statementId = createStatement($context, $command);
+            $statementId = intval(createStatement($context, $command)[0]);
             if ($entries[$i]["amount"] > 0) {
                 implyMovement([
                     "from" => $entries[$i]["otherComponent"],
@@ -105,58 +105,6 @@ function importBankStatement($context, $command)
                     "unit" => $entries[$i]["unit"],
                     "statementId" => $statementId,
                     "relation" => "delivery"
-                ]);
-            }
-            // "otherComponent" => parseAccount2($obj),
-            // "bankAccountComponent" => $obj["Rekening"],
-            // "date" => parseIngDate($obj["Datum"]),
-            // "comment" => parseIngDescription($obj),
-            // "amount" => $amount, // may be pos or neg!
-            // "balanceAfter" => parseIngAmount($obj["Saldo na mutatie"]),
-            // "lineNum" => $i + 1
-        
-            // var_dump($entries[$i]);
-            $movementIdsOutside = ensureMovementsLookalikeGroup($context, [
-                "type_" => "outer",
-                "fromComponent" => strval(getComponentId($entries[$i]["from"])),
-                "toComponent" => strval(getComponentId($entries[$i]["to"])),
-                "timestamp_" => $entries[$i]["date"],
-                "amount" => $entries[$i]["amount"],
-                "unit" => "EUR"
-            ], 1);
-            // for ($j = 0; $j < count($movementIdsOutside); $j++) {
-            //     ensureStatement($context, [
-            //         "create-statement",
-            //         intval($movementIdsOutside[$j]),
-            //         $importTime,
-            //         "outside movement from bank statement: " .$entries[$i]["comment"],
-            //         $format,
-            //         // FIXME: statement is about a message
-            //         // remoteID is about the subject of that message
-            //         // so maybe we need an extra table for tracking
-            //         // data object at neighbouring systems?
-            //         // 
-            //         "$fileName#" . $entries[$i]["lineNum"] . " " . $entries[$i]["remoteID"]
-            //     ]);
-            // }
-
-            $movementIdsInside = ensureMovementsLookalikeGroup($context, [
-                "type_" => "inner",
-                "fromComponent" => strval(getComponentId($entries[$i]["insideFrom"])),
-                "toComponent" => strval(getComponentId($entries[$i]["insideTo"])),
-                "timestamp_" => $entries[$i]["date"],
-                "amount" => $entries[$i]["amount"],
-                "unit" => "EUR"
-            ], 1);
-            for ($j = 0; $j < count($movementIdsInside); $j++) {
-                ensureStatement($context, [
-                    "create-statement",
-                    intval($movementIdsInside[$j]),
-                    $importTime,
-                    "inside movement from bank statement: " .$entries[$i]["comment"],
-                    $format,
-                    "$fileName#" . $entries[$i]["lineNum"] . 
-                        (isset($entries[$i]["remoteID"]) ? " " . $entries[$i]["remoteID"] : "")
                 ]);
             }
         }
