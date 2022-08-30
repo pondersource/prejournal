@@ -46,25 +46,17 @@ movementId integer
         "drop table if exists statements;",
         "create table statements (
   id SERIAL PRIMARY KEY,
+  movementId integer, /* DEPRECATED */
   userId integer,
-  documentId integer,
-  entryId integer,
-  attributes varchar, /* JSON */
-  remote_id varchar,
+  sourceDocumentFormat varchar, /* could be an invoice, bank statement csv file, API call etc */
+  sourceDocumentFilename varchar, /* TODO: work out how to store files when on Heroku */
+  timestamp_ timestamp,
+  description varchar,
+  internal_type varchar,
+  remote_id  varchar,
   UNIQUE(remote_id),
   remote_system varchar
 );",
-
-        "drop table if exists documents;",
-        "create table documents (
-id SERIAL PRIMARY KEY,
-userId integer,
-content varchar,
-language varchar,
-origin varchar,
-speechAct varchar
-);",
-
 
         "drop table if exists componentGrants;",
         "create table componentGrants (

@@ -23,7 +23,7 @@ drop table if exists movements;
 create table movements (
   id SERIAL PRIMARY KEY,
   userId integer,
-  type_ varchar(54), /* 'invoice', 'payment', 'worked' */
+  type_ varchar(54), /* DEPRECATED */
   fromComponent integer,
   toComponent integer,
   timestamp_ timestamp,
@@ -47,7 +47,7 @@ drop table if exists statements;
 
 create table statements (
   id SERIAL PRIMARY KEY,
-  movementId integer,
+  movementId integer, /* DEPRECATED */
   userId integer,
   sourceDocumentFormat varchar, /* could be an invoice, bank statement csv file, API call etc */
   sourceDocumentFilename varchar, /* TODO: work out how to store files when on Heroku */
@@ -57,17 +57,6 @@ create table statements (
   remote_id  varchar,
   UNIQUE(remote_id),
   remote_system varchar
-);
-
-drop table if exists documents;
-
-create table documents (
-id SERIAL PRIMARY KEY,
-userId integer,
-content varchar,
-language varchar,
-origin varchar,
-speechAct varchar
 );
 
 drop table if exists componentGrants;
