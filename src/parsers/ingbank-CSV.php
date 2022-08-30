@@ -68,6 +68,7 @@ function parseIngAmount($str)
 
 function parseIngBankCSV($text, $owner)
 {
+    // echo "Parsing as ING!\n";
     $lines = explode("\r\n", $text);
     $ret = [];
     $COLUMN_NAMES = [
@@ -110,7 +111,7 @@ function parseIngBankCSV($text, $owner)
             }
                 
             array_push($ret, [
-                "otherComponent" => parseAccount2($obj),
+                "otherComponent" => parseIngAccount2($obj),
                 "bankAccountComponent" => $obj["Rekening"],
                 "date" => parseIngDate($obj["Datum"]),
                 "comment" => parseIngDescription($obj),

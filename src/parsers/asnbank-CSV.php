@@ -62,6 +62,8 @@ function parseDescription($obj)
 
 function parseAsnBankCSV($text)
 {
+    // echo "Parsing as ASN!\n";
+
     // This list uses the exact names as documented in Dutch
     // at https://www.asnbank.nl/web/file?uuid=fc28db9c-d91e-4a2c-bd3a-30cffb057e8b&owner=6916ad14-918d-4ea8-80ac-f71f0ff1928e&contentid=852
     $ASN_BANK_CSV_COLUMNS = [
