@@ -60,7 +60,7 @@ function parseDescription($obj)
         $obj["omschrijving"]);
 }
 
-function parseAsnBankCSV($text, $owner)
+function parseAsnBankCSV($text)
 {
     // This list uses the exact names as documented in Dutch
     // at https://www.asnbank.nl/web/file?uuid=fc28db9c-d91e-4a2c-bd3a-30cffb057e8b&owner=6916ad14-918d-4ea8-80ac-f71f0ff1928e&contentid=852
@@ -103,33 +103,16 @@ function parseAsnBankCSV($text, $owner)
         // }
             }
 
-            if (floatval($obj["transactiebedrag"]) > 0) {
-                array_push($ret, [
-                    "date" => parseDate($obj),
-                    "comment" => parseDescription($obj),
-                    "from" => parseAccount2($obj),
-                    "to" => $obj["opdrachtgeversrekening"],
-                    "amount" => floatval($obj["transactiebedrag"]),
-                    "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"]),
-                    "insideFrom" => $obj["opdrachtgeversrekening"],
-                    "insideTo" => $owner,
-                    "lineNum" => $i + 1,
-                    "remoteId" => $obj["journaaldatum"] . " " . $obj["volgnummerTransactie"]
-                ]);
-            } else {
-                array_push($ret, [
-                    "date" => parseDate($obj),
-                    "comment" => parseDescription($obj),
-                    "from" => $obj["opdrachtgeversrekening"],
-                    "to" => parseAccount2($obj),
-                    "amount" => -floatval($obj["transactiebedrag"]),
-                    "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"]),
-                    "insideFrom" => $owner,
-                    "insideTo" => $obj["opdrachtgeversrekening"],
-                    "lineNum" => $i + 1,
-                    "remoteId" => $obj["journaaldatum"] . " " . $obj["volgnummerTransactie"]
-                ]);
-            }
+            array_push($ret, [
+                "otherComponent" => parseAccount2($obj),
+                "bankAccountComponent" => $obj["opdrachtgeversrekening"],
+                "date" => parseDate($obj),
+                "comment" => parseDescription($obj),
+                "amount" => floatval($obj["transactiebedrag"]), // may be pos or neg!
+                "balanceAfter" => floatval($obj["saldoRekeningVoorMutatie"]) + floatval($obj["transactiebedrag"]),
+                "lineNum" => $i + 1,
+                "remoteId" => $obj["journaaldatum"] . " " . $obj["volgnummerTransactie"]
+            ]);
         }
     }
     // var_dump($ret);

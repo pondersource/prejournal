@@ -24,7 +24,7 @@ function getTables()
         "create table movements (
   id SERIAL PRIMARY KEY,
   userId integer,
-  type_ varchar(54), /* 'invoice', 'payment', 'worked' */
+  type_ varchar(54), /* DEPRECATED */
   fromComponent integer,
   toComponent integer,
   timestamp_ timestamp,
@@ -46,14 +46,11 @@ movementId integer
         "drop table if exists statements;",
         "create table statements (
   id SERIAL PRIMARY KEY,
-  movementId integer,
   userId integer,
-  sourceDocumentFormat varchar, /* could be an invoice, bank statement csv file, API call etc */
-  sourceDocumentFilename varchar, /* TODO: work out how to store files when on Heroku */
-  timestamp_ timestamp,
-  description varchar,
-  internal_type varchar,
-  remote_id  varchar,
+  documentId integer,
+  entryId integer,
+  attributes varchar, /* JSON */
+  remote_id varchar,
   UNIQUE(remote_id),
   remote_system varchar
 );",
