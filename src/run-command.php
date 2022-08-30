@@ -5,6 +5,7 @@ require_once(__DIR__ . '/platform.php');
 require_once(__DIR__ . '/commands/hello.php');
 require_once(__DIR__ . '/commands/register.php');
 require_once(__DIR__ . '/commands/pta-me.php');
+require_once(__DIR__ . '/commands/budgets-tool.php');
 require_once(__DIR__ . '/commands/enter.php');
 require_once(__DIR__ . '/commands/grant.php');
 require_once(__DIR__ . '/commands/list-new.php');
@@ -86,6 +87,7 @@ function runCommand($context, $command)
         "register" => 3,
         "hello" => 1,
         "pta-me" => 1,
+        "budgets-tool" => 1,
         "enter" => 7,
         "grant" => 3,
         "list-new" => 1,

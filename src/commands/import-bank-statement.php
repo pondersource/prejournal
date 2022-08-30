@@ -55,6 +55,7 @@ function importBankStatement($context, $command)
         $rules = json_decode(file_get_contents($command[4]), true);
     }
     $entries = $parserFunctions[$format](file_get_contents($fileName), $context["user"]["username"]);
+    // var_dump($entries);
     for ($i = 0; $i < count($entries); $i++) {
         // $objectId = $otherSystemId . $entries[$i]["remoteId"];
         $statementIdStr = $documentId . "#" . $entries[$i]["lineNum"];
@@ -68,7 +69,13 @@ function importBankStatement($context, $command)
         $submap = $rules[$entries[$i]["bankAccountComponent"]];
         $budget = "Other";
         foreach ($submap as $searchString => $impliedBudget) {
+            // var_dump(["comparing", $entries[$i]["otherComponent"], $searchString]);
             if (str_contains($entries[$i]["otherComponent"], $searchString)) {
+                $budget = $impliedBudget;
+                break;
+            }
+            // var_dump(["comparing", $entries[$i]["comment"], $searchString]);
+            if (str_contains($entries[$i]["comment"], $searchString)) {
                 $budget = $impliedBudget;
                 break;
             }
@@ -83,7 +90,7 @@ function importBankStatement($context, $command)
                     "amount" => $entries[$i]["amount"],
                     "unit" => $entries[$i]["unit"],
                     "statementId" => $statementId,
-                    "relation" => "outer"
+                    "relation" => "outer-self"
                 ]);
                 implyMovement([
                     "from" => $entries[$i]["bankAccountComponent"],
@@ -92,7 +99,7 @@ function importBankStatement($context, $command)
                     "amount" => $entries[$i]["amount"],
                     "unit" => $entries[$i]["unit"],
                     "statementId" => $statementId,
-                    "relation" => "inner"
+                    "relation" => "self-inward"
                 ]);
                 implyMovement([
                     "from" => $context["user"]["username"],
@@ -101,11 +108,11 @@ function importBankStatement($context, $command)
                     "amount" => $entries[$i]["amount"],
                     "unit" => $entries[$i]["unit"],
                     "statementId" => $statementId,
-                    "relation" => "delivery"
+                    "relation" => "self-outward"
                 ]);
             }
         } else {
-            echo "$budget\n";
+            // echo "$budget\n";
             if ($entries[$i]["amount"] > 0) {
                 // income
                 implyMovement([
@@ -128,12 +135,21 @@ function importBankStatement($context, $command)
                 ]);
                 implyMovement([
                     "from" => $context["user"]["username"],
+                    "to" => $budget,
+                    "date" => $entries[$i]["date"],
+                    "amount" => $entries[$i]["amount"],
+                    "unit" => $entries[$i]["unit"],
+                    "statementId" => $statementId,
+                    "relation" => "production"
+                ]);
+                implyMovement([
+                    "from" => $budget,
                     "to" => $entries[$i]["otherComponent"],
                     "date" => $entries[$i]["date"],
                     "amount" => $entries[$i]["amount"],
                     "unit" => $entries[$i]["unit"],
                     "statementId" => $statementId,
-                    "relation" => "delivery"
+                    "relation" => "work-delivery"
                 ]);
             } else {
                 // purchase
@@ -157,12 +173,21 @@ function importBankStatement($context, $command)
                 ]);
                 implyMovement([
                     "from" => $entries[$i]["otherComponent"],
+                    "to" => $budget,
+                    "date" => $entries[$i]["date"],
+                    "amount" => -$entries[$i]["amount"],
+                    "unit" => $entries[$i]["unit"],
+                    "statementId" => $statementId,
+                    "relation" => "purchase-delivery"
+                ]);
+                implyMovement([
+                    "from" => $budget,
                     "to" => $context["user"]["username"],
                     "date" => $entries[$i]["date"],
                     "amount" => -$entries[$i]["amount"],
                     "unit" => $entries[$i]["unit"],
                     "statementId" => $statementId,
-                    "relation" => "delivery"
+                    "relation" => "consumption"
                 ]);
             }
         }
