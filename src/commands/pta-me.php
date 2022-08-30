@@ -14,8 +14,8 @@ function ptaMe($context)
         $ret = [];
         for ($i = 0; $i < count($movements); $i++) {
             array_push($ret, $movements[$i]["timestamp_"] . "  " . $movements[$i]["description"]);
-            array_push($ret, "expenses  " . $movements[$i]["amount"]);
-            array_push($ret, "bank");
+            array_push($ret, "    expenses  " . $movements[$i]["amount"]);
+            array_push($ret, "    bank");
             array_push($ret, "");
         }
         return $ret;
