@@ -21,3 +21,17 @@ function importTimld($data = array()) {
    
     return $resp;
 }
+
+function exportTimeLd() {
+    $url = $_SERVER["TIMELD_HOST"] . "/rpt/" . $_SERVER["TIMELD_USERNAME"] . "/own/" . $_SERVER["TIMELD_USERNAME"];
+    
+
+    $headers = array(
+        "Accept: Content-Type: application/x-ndjson",
+        'Authorization: Basic '. base64_encode($_SERVER["TIMELD_USERNAME"].':'.$_SERVER["TIMELD_PASSWORD"]),
+     );
+
+     $resp = callGetEndpoint($headers, $url);
+
+    return $resp;
+}
