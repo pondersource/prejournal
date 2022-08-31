@@ -36,8 +36,8 @@ function workedWeek($context, $command)
             $description
         ])[0]);
 
-        // return [json_encode($command), "Created movement $movementId", "Created statement $statementId"];
-        return ["Created movement $movementId", "Created statement $statementId"];
+        $result = getMovementAndStatement($movementId, $statementId);
+        return $result;
     } else {
         return ["User not found or wrong password"];
     }

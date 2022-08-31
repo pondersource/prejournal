@@ -34,8 +34,10 @@ function workedDay($context, $command)
             $timestamp,
             $description
         ])[0]);
+        $result = getMovementAndStatement($movementId, $statementId);
+        return $result;
         // return [json_encode($command), "Created movement $movementId", "Created statement $statementId"];
-        return ["Created movement $movementId", "Created statement $statementId"];
+        //return ["Created movement $movementId", "Created statement $statementId"];
     } else {
         return ["User not found or wrong password"];
     }
