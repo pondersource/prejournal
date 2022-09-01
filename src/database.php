@@ -239,15 +239,18 @@ function deleteDataFromMovement($type_, $id)
     }
 }
 
-function updateDataFromMovement($timestamp_, $toComponent, $amount, $description, $id)
+function updateDataFromMovement($timestamp_, $fromComponent, $toComponent, $amount, $description, $id)
 {
+    //var_dump($id);
+    //exit;
     $conn  = getDbConn();
 
     $result = $conn->executeQuery(
         "WITH src AS (
         UPDATE movements
         SET amount = :amount, timestamp_ = :timestamp_,
-        toComponent = :toComponent 
+        fromComponent = :fromComponent,
+        toComponent = :toComponent
         WHERE id = :id
         RETURNING *
         )
@@ -256,8 +259,9 @@ function updateDataFromMovement($timestamp_, $toComponent, $amount, $description
         FROM src
         WHERE dst.movementId = :id",
         ['amount' => $amount, 'timestamp_' => timestampToDateTime(intval($timestamp_)),
-            'toComponent' => strval(getComponentId($toComponent)), 'description' => $description, 'id' => $id]
+            'fromComponent' => strval(getComponentId($fromComponent)),  'toComponent' => strval(getComponentId($toComponent)),'description' => $description, 'id' => $id]
     );
+
 
     if ($result  === 1) {
         return ["Update data from movement"];

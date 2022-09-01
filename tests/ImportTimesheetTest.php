@@ -310,7 +310,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2017-03-13 16:00:00',
-                'amount' => '461593',
+                'amount' => '461641',
                 'userid' => 1
                 ]
         ], getAllMovements());
@@ -1048,10 +1048,18 @@ final class ImportTimesheetTest extends TestCase
         runCommand($context, [ "claim-component", "alice"]);
         $result =  runCommand($context, [ "worked-day", "23 August 2021", "stichting", "Peppol for the Masses" ]);
         $this->assertEquals([
-            "Created movement 1",
-            "Created statement 1"
+            '[
+    {
+        "worker": "alice",
+        "project": "stichting:Peppol for the Masses",
+        "timestamp_": "2021-08-23 00:00:00",
+        "amount": "8",
+        "description": "",
+        "movementId": 1,
+        "statementId": 1
+    }
+]'
         ], $result);
-        //var_dump($result);
     }
 
     public function testWorkedWeek(): void
@@ -1063,8 +1071,17 @@ final class ImportTimesheetTest extends TestCase
         runCommand(getContext(), [ "claim-component", "alice"]);
         $result =  runCommand(getContext(), [ "worked-week", "22 November 2021", "stichting", "ScienceMesh", "Almost done"]);
         $this->assertEquals([
-            "Created movement 1",
-            "Created statement 1"
+            '[
+    {
+        "worker": "alice",
+        "project": "stichting:ScienceMesh",
+        "timestamp_": "2021-11-22 00:00:00",
+        "amount": "40",
+        "description": "Almost done",
+        "movementId": 1,
+        "statementId": 1
+    }
+]'
         ], $result);
         //var_dump($result);
     }
