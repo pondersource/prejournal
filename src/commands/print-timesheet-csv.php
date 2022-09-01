@@ -9,8 +9,9 @@ require_once(__DIR__ . '/../database.php');
 */
 function printTimesheetCsv($context, $command)
 {
-    if (isset($context["openMode"]) && $context["openMode"] == "true") {
+    //if (isset($context["openMode"]) && $context["openMode"] == "true") {
         // var_dump($command);
+    if (isset($context["user"])) {
         $project_name = $command[1];
         $min_id = 0;
         if (count($command) > 2) {
