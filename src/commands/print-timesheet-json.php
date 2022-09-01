@@ -21,13 +21,13 @@ function printTimesheetJson($context, $command)
             $max_id = intval($command[3]);
         }
 
-        $jsondata = getFromMovementAndSync($project_name, $min_id, $max_id);
+        $jsondata = json_encode(getFromMovementAndSync($project_name, $min_id, $max_id), JSON_PRETTY_PRINT);
 
-        $result = json_encode($jsondata, JSON_PRETTY_PRINT);
+        //$result = json_encode($jsondata, JSON_PRETTY_PRINT);
 
-        return $result;
+        echo $jsondata;
     } else {
-        return ["User not found or wrong password"];
+         return ["User not found or wrong password"];
         //return ["This command only works if the server is running in open mode! See https://github.com/pondersource/prejournal/issues/133"];
     }
 }
