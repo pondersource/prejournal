@@ -310,7 +310,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2017-03-13 16:00:00',
-                'amount' => '461641',
+                'amount' => '461665',
                 'userid' => 1
                 ]
         ], getAllMovements());
@@ -1013,7 +1013,7 @@ final class ImportTimesheetTest extends TestCase
         // var_dump($result);
         // FIXME: this doesn't match the format of run-command
         // because a command should always return an array of strings
-        $this->assertEquals('[]', $result);
+        $this->assertEquals(['[]'], $result);
             // [
             //     "worker" => "alice",
             //     "project" => "stichting:Peppol for the Masses",

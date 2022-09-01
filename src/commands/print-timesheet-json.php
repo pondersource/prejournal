@@ -23,7 +23,7 @@ function printTimesheetJson($context, $command)
 
         $jsondata = getFromMovementAndSync($project_name, $min_id, $max_id);
 
-        $result = json_encode($jsondata, JSON_PRETTY_PRINT);
+        $result = [ json_encode($jsondata, JSON_PRETTY_PRINT) ];
 
         return $result;
     } else {
