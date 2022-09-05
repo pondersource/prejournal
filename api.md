@@ -1,8 +1,10 @@
 # Usage (time.pondersource.com)
 
-To export timesheet information, do something like the following snippet:
+To export timesheet information, do something like the following snippet, the project is optional argument:
 ```
-curl -d'["nlnet-timesh:Federated Timesheets","0","100"]' https://example:password123@time.pondersource.com/v1/print-timesheet-json
+curl -d'["0","100", "nlnet-timesh:Federated Timesheets"]' https://example:password123@time.pondersource.com/v1/print-timesheet-json
+
+curl -d'["0","100"]' https://example:password123@time.pondersource.com/v1/print-timesheet-json
 [
     {
         "id": 1,
