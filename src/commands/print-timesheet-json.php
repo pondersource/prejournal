@@ -11,9 +11,9 @@ require_once(__DIR__ . '/helpers/dataAccessObject.php');
 function printTimesheetJson($context, $command)
 {
     // var_dump($context);
-    //if (isset($context["openMode"]) && $context["openMode"] == "true") {
+    if (isset($context["openMode"]) && $context["openMode"] == "true") {
         // var_dump($command);
-    if (isset($context["user"])) {
+    //if (isset($context["user"])) {
         //var_dump($command[3]);
         
         $min_id = 0;
@@ -33,7 +33,7 @@ function printTimesheetJson($context, $command)
 
         return $result;
     } else {
-        return ["User not found or wrong password"];
-        //return ["This command only works if the server is running in open mode! See https://github.com/pondersource/prejournal/issues/133"];
+        //return ["User not found or wrong password"];
+       return ["This command only works if the server is running in open mode! See https://github.com/pondersource/prejournal/issues/133"];
     }
 }
