@@ -39,12 +39,16 @@ You can just working with import, export, remove entry.
 curl -d'["20 September 2021", "stichting", "Peppol for the Masses"]' https://example:password123@time.pondersource.com/v1/worked-hours
 ````
 
-2) pull timesheet information 
+2) pull timesheet information project name can be optional
 
 ```
-          project_name                       min  max
+         min  max     projectName
 
-curl -d'["nlnet-timesh:Federated Timesheets","0","100"]' https://example:password123@time.pondersource.com/v1/print-timesheet-json
+curl -d'["0","100", "nlnet-timesh:Federated Timesheets"]' https://example:password123@time.pondersource.com/v1/print-timesheet-json
+
+         min   max
+curl -d'["0","100"]' https://example:password123@time.pondersource.com/v1/print-timesheet-json
+
 ```
 
 3) Remove timesheet information 
