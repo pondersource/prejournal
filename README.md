@@ -16,82 +16,6 @@ DB_HOST=localhost
 DB_DRIVER=pdo_pgsql
 ``` 
 
-# Usage (time.pondersource.com)
-
-To export timesheet information, do something like the following snippet, the project is optional argument:
-```
-curl -d'["0","100", "nlnet-timesh:Federated Timesheets"]' https://example:password123@time.pondersource.com/v1/print-timesheet-json
-
-curl -d'["0","100"]' https://example:password123@time.pondersource.com/v1/print-timesheet-json
-[
-    {
-        "id": 1,
-        "worker": "ismoil",
-        "project": "nlnet-timesh:Federated Timesheets",
-        "timestamp_": "2022-09-12 00:00:00",
-        "amount": "40",
-        "description": ""
-    }
-]
-```
-
-In general, the structure for data submitted includes the following fields:  
-
-`command`: this can be `worked-hours`, `update-entry`, etc.
-`id`: the URI for the entry  
-`worker`: the user identity whose time is being recorded  
-`project`: the project the timesheet relates to  
-`timestamp`: the date of the timesheet entry  
-`amount`: the duration of time worked in the entry  
-`description`: optional 
-
-For each timesheet entry a "movement" and a "statement" are created. The movement is the real-world economic event. The statement is the source document from which time-pondersource-com learned about it. There can be multiple statements pointing to one movement.
-
-Note that Prejournal (or at least this current configuration of it) uses a Source-as-Truth architecture, and its database contents will be reset from the original source documents periodically. This means write operations that you push to its API don't stick! You can push data to time-pondersource-com but it will only exist until the next time the server is reset. It will then reload its data from your system using API "pull", and (if all pushes were correct) reach the same state as before the server reset.
-
-You can just working with import, export, remove entry. 
-
-1) Push timesheet entries you can use 
-
-```        
-            command        timestamp             worker      project
-
-curl -d'["20 September 2021", "stichting", "Peppol for the Masses"]' https://example:password123@time.pondersource.com/v1/worked-hours
-````
-
-2) pull timesheet information project name is optional
-
-
-```
-         min  max     projectName
-
-curl -d'["0","100", "nlnet-timesh:Federated Timesheets"]' https://example:password123@time.pondersource.com/v1/print-timesheet-json
-
-         min   max
-curl -d'["0","100"]' https://example:password123@time.pondersource.com/v1/print-timesheet-json
-
-```
-
-3) Remove timesheet information 
-
-
-```
-         command        type     id
-
-curl -d'["worked", 1]' https://example:password123@time.pondersource.com/v1/remove-entry
-
-```
-
-4) Update timesheet entry
-
-
-```
-            timestamp            worker        project                 amount   description          id
- curl -d'["23 August 2021"      "Add worker"    "Add Project"        2        "Add Description"              2]' https://example:password123@time.pondersource.com/v1/update-entry
-
-```
-
-
 
 ### PHP CS fix
 
@@ -125,41 +49,8 @@ Time: 00:05.803, Memory: 6.00 MB
 OK (34 tests, 79 assertions)
 ```
 
-### Timeld API Call
-You need first go to Timeld for configuration need a username and password, that can do a setup mannualy with CLI. Copy from ```.env.example.``` to '''.env```. The Timeld host, username and password. You need to see all of this steps go to https://github.com/m-ld/timeld/blob/main/doc/api.md. After it you can use inside our project.
-
-````
-TIMELD_HOST=https://timeld.org/api
-TIMELD_USERNAME=YOUR_USERNAME
-TIMELD_PASSWORD=YOUR_PASSWORD
-````
-
-````                    command name      type        id             external
-php src/cli-single.php timeld-api-import "Timesheet" "ismoil/ismoil" 1234
-````
-
-
-### Wiki API Call
-
-You need first have a token for authorize with API Wiki Suite and take the host from Wiki Suite. This API call for getting tabulars and export and import timedata. Change in ```env``` file your credentials to your own. Add below information inside ```env``` file. You can take here https://timesheet.dev3.evoludata.com/Timesheets-homepage the first need register username and password, after you take token from Wiki Victor can send. By example you can ask me for sending token. After register you can check API sending by this link https://timesheet.dev3.evoludata.com/api/.
-
-```
-WIKI_TOKEN=GET_WIKI_TOKEN
-WIKI_HOST=GET_WIKI_HOST
 ```
 
-### Verify API Call
-
-Export and Import API call POST to send invoice, and another GET documents and import invoice in JSON. First you need to sign up here [Verify](https://hub.veryfi.com/), you can find secret, username, and api key, for sending call. Change in ```env``` file your credentials to your own.
-
-```
-VERIFY_USERNAME=YOUR_USERNAME
-VERIFY_CLIENT_ID=YOUR_CLIENT_ID
-VERIFY_ENVIROMENT_URL=https://api.veryfi.com/
-VERIFY_API_KEY=YOUR_KEY
-```
-
-After it go to the folder ```cd src/api``` You can first POST data or you can use exists documents if you have just get information. Run this command ```php verify-get.php```.
 
 # Usage (batch processing from .pj file)
 
@@ -245,74 +136,6 @@ curl https://alice:alice123@api.prejournal.org/v1/hello
 ```
 You can also create a Heroku app yourself and deploy a branch of the code there. Feel free, it's open source!
 
-# Database schema (version 1)
-
-See [schema.sql](./schema.sql).
-
-## TABLES
-
-### 1. Users
-
-| KEY | TYPE | DESCRIPTION |
-| --- | --- | --- |
-| id | SERIAL PRIMARY KEY | User ID |
-| username | varchar(54) UNIQUE | Current Username |
-| passwordhash | varchar | password |
-
-### 2. components
-
- A _component_ is can be an organisation, a department, a person, or a budget / asset group. Components will often map to accounts in GAAP, or to Agents in REA, but this mapping is not exact.
-
-| KEY | TYPE | DESCRIPTION |
-| --- | --- | --- |
-| id | SERIAL PRIMARY KEY | Component's ID |
-| name | varchar  UNIQUE | Component's name |
-
-
-
-### 3. movements
-
-Movements can be invoices or payments.
-
-| KEY | TYPE | DESCRIPTION |
-| --- |  --- |  --- |
-| id | SERIAL PRIMARY KEY | Movement's ID |
-| type_ | varchar(54) |'invoice', 'payment', 'worker', 'transport'| Type of movement |
-| fromComponent | Integer |  From which component(ID) |
-| toComponent | Integer |  To which component(ID) |
-| timestamp_ | timestamp |  When the transaction happened |
-| amount | decimal |   Amount of transer money |
-
-
-### 4. statements
-
-| KEY | TYPE | DESCRIPTION |
-| --- | --- |  --- |
-| id | SERIAL PRIMARY KEY |  Statement's ID |
-| movementId | Integer |  n/a |
-| userId | Integer |  Whose User's is the statement |
-| sourceDocumentFormat | character |  invoice, bank statement csv file, API call etc |
-| sourceDocumentFilename | character |  TODO: work out how to store files when on Heroku |
-| timestamp_ | timestamp |  n/a |
-
-
-### 5. componentGrants
-
-| KEY | TYPE | DESCRIPTION |
-| --- |  --- |  --- |
-| id | SERIAL PRIMARY KEY | componentGrants's ID |
-| fromUser | numeric | Sender(User ID) of component() |
-| toUser | numeric | Receiver(ID) of component(?) |
-| componentId | numeric | Which component(ID) is tranfered |
-
-### 6. sync 
-
-| KEY | TYPE | DESCRIPTION |
-| --- |  --- |  --- |
-|  internal_type |  varchar | “component” or “movement” | 
-|  internal_id | numeric | Matching the internal component_id or movement_id |
-|  remote_id | varchar | The identifier for this component or movement in a time tracker application | 
-|  remote_system | varchar | Time tracker application | 
 
 ### The idea behind
 
