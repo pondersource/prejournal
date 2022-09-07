@@ -3,6 +3,7 @@
 declare(strict_types=1);
 require_once(__DIR__ . '/../platform.php');
 
+// E.g.: php src/cli-single.php claim-component "admin"
 function claimComponent($context, $command)
 {
     if (isset($context["user"])) {

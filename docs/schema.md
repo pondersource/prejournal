@@ -1,6 +1,6 @@
-# Database schema (version 1)
+# Database schema (version 2)
 
-See [schema.sql](./schema.sql).
+See [schema.sql](https://github.com/pondersource/prejournal/blob/main/schema.sql).
 
 ## TABLES
 
@@ -49,10 +49,10 @@ Movements can be invoices or payments.
 | sourceDocumentFilename | character |  TODO: work out how to store files when on Heroku |
 | timestamp_ | timestamp |  n/a |
 | description | varchar |  Description about each movement |
-|  internal_type |  varchar | “component” or “movement” | 
-|  internal_id | numeric | Matching the internal component_id or movement_id |
-|  remote_id | varchar | The identifier for this component or movement in a time tracker application | 
-|  remote_system | varchar | Time tracker application | 
+| internal_type |  varchar | “component” or “movement” | 
+| internal_id | numeric | Matching the internal component_id or movement_id |
+| remote_id | varchar | The identifier for this component or movement in a time tracker application | 
+| remote_system | varchar | Time tracker application | 
 
 
 ### 5. componentGrants
