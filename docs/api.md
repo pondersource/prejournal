@@ -27,7 +27,12 @@ After it you can use the commands, that you can see bellow.
 
 ## Export timesheet Entry 
 
-To export timesheet information, do something like the following snippet, the project is optional argument:
+To export timesheet information, do something like the following snippet
+
+The first agrugment in curl command `min` value 
+The second argument in curl command `max` value
+The third argument in curl command `project` is optional
+
 ```
 curl -d'["0","100", "nlnet-timesh:Federated Timesheets"]' https://example:password123@time.pondersource.com/v1/print-timesheet-json
 
@@ -91,6 +96,14 @@ curl -d'["worked", 1]' https://example:password123@time.pondersource.com/v1/remo
 ## Update timesheet Entry
 
 
+`timestamp`  the date of the timesheet entry 
+`worker`: the user identity whose time is being recorded  
+`project`: the project the timesheet relates to  
+`amount`: the duration of time worked in the entry  
+`description`: Your description that you would like to update
+`id`: ID of the timesheet that you would like update
+
+
 ```
             timestamp            worker        project                 amount   description          id
  curl -d'["23 August 2021"      "Add worker"    "Add Project"        2        "Add Description"              2]' https://example:password123@time.pondersource.com/v1/update-entry
@@ -106,9 +119,15 @@ TIMELD_USERNAME=YOUR_USERNAME
 TIMELD_PASSWORD=YOUR_PASSWORD
 ````
 
-````                    
-         type               id        external      
- curl -d'["Timesheet", "ismoil/ismoil", 1234]' https://example:password123@time.pondersource.com/v1/timeld-api-import
+`type` for example Timesheet, Entry .etc
+`id` for example ismoil/ismoil,
+`project` name.
+`external` url of id of timesheet
+`timestamp` the date that will be save
+`amount` amount of working
+
+````                      
+ curl -d'["Timesheet", "ismoil/ismoil", "fedb/fedb", http://ex.org/timesheet/1, "22 August 2021", 8]' https://example:password123@time.pondersource.com/v1/timeld-api-import
 ````
 
 ### Wiki API Call
@@ -120,14 +139,14 @@ WIKI_TOKEN=GET_WIKI_TOKEN
 WIKI_HOST=GET_WIKI_HOST
 ```
 
+`remote` for example with be wiki remote name.
+
 ````
-          remote
  curl -d'["wiki"]' https://example:password123@time.pondersource.com/v1/wiki-api-export
 
 ````
 
 ````
-          remote
  curl -d'["wiki"]' https://example:password123@time.pondersource.com/v1/wiki-api-import
 
 ````
