@@ -186,26 +186,3 @@ In traditional (GAAP / double entry) bookkeeping, the journal already makes impo
 
 Assets, liabilities, and expenses are fundamentally different in traditional bookkeeping, but the act of buying a laptop with your debit card is not fundamentally different from the act of buying a banana with your credit card, and when you federate bookkeeping systems, the local choices about what is an expense (something that lasts less than a month, like a banana) and what is an asset (something that lasts more than a month, like a laptop) should not get exported. That's why we are now experimenting with the federation of bookkeeping systems at the pre-journal phase.
 
-
-## Commands
-
-| Command | minimal PJ version | Usage | Example |
-| ------- | ------- | ------- |  ------- |
-| `createMovement` | 1.0 | Create a new Movement entry | - |
-| `createStatement` | 1.0 | Create a new Statement entry | - |
-| `createCompany` | 1.0 | Create a new Company entry | - |
-| `enter` | 1.0 | Enter a new data for every step component,movement and statement | php src/cli-single.php enter "from component" "to component" "1.23" "2021-12-31T23:00:00.000Z" "invoice" "ponder-source-agreement-192" |
-| `grant` | 1.0 | Add a new data to componentGrant | curl -d'["bob", "from component"]' http://alice:alice123@localhost:8080/v1/grant |
-| `hello` | 1.0 | Works more as a test command, to check if registration was successful | `php src/cli-single.php hello` |
-| `import-bank-statement` | 1.0 | - | `php src/cli-single.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"` |
-| `import-hours` | 1.1 | Import timesheet data through CSV/JSON/XML files | `php src/cli-single.php import-hours time-CSV ./example.csv "2022-03-31 12:00:00"` |
-| `import-invoice` | 1.1 | Import invoice throuh CSV/JSON/XML | `php src/cli-single.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"` |
-| `list-new` | 1.1 | - |
-| `minimal-version` | 1.0 | Check the prejournal version | `php src/cli-single.php minimal-version 1.0` |
-| `pta-me` | 1.0 | - | - |
-| `register <username> <password>` | 1.0 | Register a new user | `php src/cli-single.php register <username> <password>` |
-| `submit-expense` (7 words) | 1.1 | Includes two movements(payment/invoice) | `php src/cli-single.php submit-expense "28 August 2021" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"`|
-| `submit-expense` (8 words) | 1.2 | Includes two movements(payment/invoice) | `php src/cli-single.php submit-expense "28 August 2021" "stichting" "Dutch railways" "Degrowth Conference train tickets" "transport" 100 "michiel"`|
-| `wiki-api-export` | 1.2 | Save data from Wiki API like a JSON file and save Information in database | `php src/cli-single.php wiki-api-export wiki`|
-| `wiki-api-import` | 1.2 | Import data inside Wiki | `php src/cli-single.php wiki-api-import wiki`|
-
