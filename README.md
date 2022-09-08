@@ -49,10 +49,12 @@ Time: 00:05.803, Memory: 6.00 MB
 OK (34 tests, 79 assertions)
 ```
 
-```
+### Documentation
+
+If you would like to see **API** integration you can see [here](https://github.com/pondersource/prejournal/blob/main/docs/api.md). We can talk about **Database Schema** and you can see [here](https://github.com/pondersource/prejournal/blob/main/docs/schema.md). If you would like to see the all **commands** you can see [here](https://github.com/pondersource/prejournal/blob/main/docs/commands.md).
 
 
-# Usage (batch processing from .pj file)
+### Usage (batch processing from .pj file)
 
 The `.pj` file format is a very simple batch processing file format.
 Each line is a command.
