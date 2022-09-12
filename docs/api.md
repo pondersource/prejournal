@@ -97,10 +97,15 @@ curl -d'["worked", 1]' https://example:password123@time.pondersource.com/v1/remo
 
 
 `timestamp`  the date of the timesheet entry 
+
 `worker`: the user identity whose time is being recorded  
+
 `project`: the project the timesheet relates to  
+
 `amount`: the duration of time worked in the entry  
+
 `description`: Your description that you would like to update
+
 `id`: ID of the timesheet that you would like update
 
 

@@ -25,6 +25,8 @@ If you need to fix your PHP standard working you can go to terminal and run this
 ./vendor/bin/php-cs-fixer fix your_folder_that_you_would_like_to_fix
 ```
 
+### Usage Prejournal locally
+
 ```
 composer install
 sudo apt install postgresql postgresql-contrib
@@ -32,9 +34,10 @@ cp .env.example .env
 GEN_SQL=1 php schema.php > schema.sql
 psql -h localhost -d prejournal -U your_username -f schema.sql
 php src/cli-single.php register admin secret
+php src/cli-single.php claim-component "admin"
 perl -i -pe's/PREJOURNAL_ADMIN_PARTY=true/PREJOURNAL_ADMIN_PARTY=false/g' .env
 ```
-If you don't have perl on your system, you can also open `.env` with a text editor and change the value for 'PREJOURNAL_ADMIN_PARTY' from 'true' to 'false' by hand.
+Set in `env` file `PREJOURNAL_OPEN_MODE` to true. If you don't have perl on your system, you can also open `.env` with a text editor and change the value for 'PREJOURNAL_ADMIN_PARTY' from 'true' to 'false' by hand.
 
 ### Run tests
 ```
