@@ -310,7 +310,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2017-03-13 16:00:00',
-                'amount' => '461833',
+                'amount' => '461929',
                 'userid' => 1
                 ]
         ], getAllMovements());
