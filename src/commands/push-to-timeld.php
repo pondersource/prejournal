@@ -10,7 +10,7 @@ TIMELD_HOST=https://timeld.org/api
 TIMELD_USERNAME=michielbdejong (username at Timeld instance)
 TIMELD_PASSWORD=...
 TIMELD_PROJECT=fedb/fedt
-TIMELD_TIMESHEET=pondersource/federated-timesheet
+TIMELD_TIMESHEET=fedb/fedt
 PREJOURNAL_USERNAME=michiel (username at Prejournal instance)
 PREJOURNAL_PASSWORD=...
                                                       worker                           project
@@ -35,12 +35,15 @@ function pushToTimeld($context, $command) {
         var_dump($arr);
         $data = array(
             '{"@id":"' . $_SERVER["TIMELD_PROJECT"] . '","@type":"Project"}',
-            '{"@id":"' . $_SERVER["TIMELD_TIMESHEET"] . '","project":{"@id":"' . $_SERVER["TIMELD_PROJECT"] . '"},"@type":"Timesheet"}',
+            '{"@id":"' . $_SERVER["TIMELD_TIMESHEET"] . '","project":[{"@id":"' . $_SERVER["TIMELD_PROJECT"] . '"}],"@type":"Timesheet"}',
         );
         date_default_timezone_set('UTC');
         for ($i = 0; $i < count($arr); $i++) {
             $data[] = json_encode([
                 "activity" => "Worked",
+                "session" => [
+                    "@id" =>  $_SERVER["TIMELD_TIMESHEET"]
+                ],
                 "duration" => intval($arr[$i]["amount"]) * 60,
                 "start" => [
                     "@value" => date(DATE_ATOM, strtotime($arr[$i]["timestamp_"])),
@@ -55,27 +58,26 @@ function pushToTimeld($context, $command) {
                 ]
             ]);
         }
-        var_dump($data);
 
-        // $result = importTimld($json);
+        $result = importTimld(implode("\n", $data));
 
-         //var_dump($result);
+         var_dump($result);
 
-        // if(isset($result["code"])) {
-        //     if($result["code"] === "Forbidden") {
-        //         return ["You have forbidden access you need right username"];
-        //         //exit;
-        //     } else if($result["code"] === "BadRequest") {
-        //         return ["Malformed domain entity"];
-        //     }
-        // }
+        if(isset($result["code"])) {
+            if($result["code"] === "Forbidden") {
+                return ["You have forbidden access you need right username"];
+                //exit;
+            } else if($result["code"] === "BadRequest") {
+                return ["Malformed domain entity"];
+            }
+        }
        
-        // if($result  === null) {
+        if($result  === null) {
     
-        //     return ["The API timeld was import succesfully"];
-        // }
+            return ["The API timeld was import succesfully"];
+        }
 
-        //var_dump($result["code"]);
+        var_dump($result["code"]);
 
      } else {
         return ["This command only works in admin party mode"];

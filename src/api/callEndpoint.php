@@ -17,7 +17,7 @@ function callEndpoint($headers, $data, $url)
     var_dump($data);
     var_dump($url);
     $response = curl_exec($ch);
-    var_dump($response);
     curl_close($ch);
+    var_dump($response);
     return json_decode($response, true);
 }
