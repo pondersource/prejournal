@@ -13,24 +13,14 @@ TIMELD_PROJECT=fedb/fedt
 TIMELD_TIMESHEET=fedb/fedt
 PREJOURNAL_USERNAME=michiel (username at Prejournal instance)
 PREJOURNAL_PASSWORD=...
-                                                      worker                           project
-Then run: php src/cli-single.php push-to-timeld http://time.pondersource.com/michiel federated-timesheets
 
-{"@id":"fedb/fedt","@type":"Project"}
-{"@id":"angus/ts-agm-2022-08-08","project":{"@id":"fedb/fedt"},"@type":"Timesheet"}
-```
+Then run: php src/cli-single.php push-to-timeld
 */
 
 function pushToTimeld($context, $command) {
      if($context["adminParty"]) {
         $conn = getDbConn();
-        $worker = $command[1];
-        $project = $command[2];
-        $params = [
-            "worker" => getComponentId($worker),
-            "project" => getComponentId($project)
-        ];
-        $res = $conn->executeQuery("SELECT id, timestamp_, amount FROM movements WHERE fromcomponent=:worker and tocomponent=:project and type_='worked'", $params);
+        $res = $conn->executeQuery("SELECT m.id, m.timestamp_, m.amount, c1.name as worker, c2.name as project FROM movements m INNER JOIN components c1 ON m.fromcomponent=c1.id INNER JOIN components c2 ON m.tocomponent=c2.id WHERE m.type_='worked'");
         $arr = $res->fetchAllAssociative();
         var_dump($arr);
         $data = array(
@@ -51,7 +41,7 @@ function pushToTimeld($context, $command) {
                 ],
                 "@type" => "Entry",
                 "vf:provider" => [
-                    "@id" => $worker
+                    "@id" => $arr[$i]["worker"]
                 ],
                 "external" => [
                     "@id" => "http://time.pondersource.com/movement/" . $arr[$i]["id"]
