@@ -38,6 +38,7 @@ require_once(__DIR__ . '/commands/timeld-api-export.php');
 require_once(__DIR__ . '/commands/claim-component.php');
 require_once(__DIR__ . '/commands/purchase-implications-batch.php');
 require_once(__DIR__ . '/commands/component-correction.php');
+require_once(__DIR__ . '/commands/push-to-timeld.php');
 
 function toCamel($str)
 {
@@ -119,7 +120,8 @@ function runCommand($context, $command)
         "timeld-api-export" => 2,
         "claim-component" => 2,
         "purchase-implications-batch" => 2,
-        "component-correction" => 3
+        "component-correction" => 3,
+        "push-to-timeld" => 1
     ];
     if (isset($commands[$command[0]]) && count($command) >= $commands[$command[0]]) {
         $function = toCamel($command[0]);
