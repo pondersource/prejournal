@@ -311,7 +311,7 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2017-03-13 16:00:00',
-                'amount' => $movements[0]['amount'], // keeps increassing in subsequent test runs
+                'amount' => $movements[0]['amount'], // keeps increasing in subsequent test runs
                 'userid' => 1
                 ]
         ], $movements);
