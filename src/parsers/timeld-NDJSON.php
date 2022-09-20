@@ -34,10 +34,14 @@ function parseTimeldNDJSON($str)
         //   }
         // }
 
-        debug($entry);
         if (isset($entry["@type"]) && $entry["@type"] == "Project") {
             $projectName = $entry["@id"];
         } else if (isset($entry["@type"]) && $entry["@type"] == "Entry") {
+            debug("Entry!");
+            if (!isset($entry["duration"])) {
+                debug("Setting duration to zero, see https://github.com/pondersource/prejournal/issues/169");
+                $entry["duration"] = 0;
+            }
             array_push($ret, [
                 "worker" => $entry["vf:provider"]["@id"],
                 "start" => strtotime($entry["start"]["@value"]),

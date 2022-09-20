@@ -34,9 +34,9 @@ function createMovement($context, $command)
 
 
 function updateMovement($context, $command) {
-    debug("UpdateMovement!");
-    debug($context);
-    debug($command);
+    // debug("UpdateMovement!");
+    // debug($context);
+    // debug($command);
     if (!isset($context["user"])) {
         return ["User not found or wrong password"];
     }
