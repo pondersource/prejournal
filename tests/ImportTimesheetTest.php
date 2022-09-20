@@ -1010,21 +1010,24 @@ final class ImportTimesheetTest extends TestCase
         setUser('alice', 'alice123', 'employer');
         $context = getContext();
         $context["openMode"] = true;
-        $result =  runCommand($context, ["print-timesheet-json", "Test", 2, 4]);
+
+        runCommand(getContext(), ['claim-component', 'alice']);
+        runCommand(getContext(), [ "worked-hours", "20 September 2021", "stichting", "Peppol for the Masses", 4, "Trying this out"]);
+        $result =  runCommand($context, ["print-timesheet-json", 0, 999999]);
         // var_dump($result);
         // FIXME: this doesn't match the format of run-command
         // because a command should always return an array of strings
-        $this->assertEquals(['[]'], $result);
-            // [
-            //     "worker" => "alice",
-            //     "project" => "stichting:Peppol for the Masses",
-            //     "timestamp_" => "2021-09-20 00:00:00",
-            //     "amount" => "4",
-            //     "description" => "",
-            //     "movementId" => 1,
-            //     "statementId" => 1
-            // ]
-        // ], $result);
+        $this->assertEquals([
+            json_encode([
+                [
+                    "id" => 1,
+                    "worker" => "alice",
+                    "timestamp_" => "2021-09-20 00:00:00",
+                    "amount" => "4",
+                    "description" => "Trying this out",
+                ]
+            ], JSON_PRETTY_PRINT)
+        ], $result);
     }
 
     public function testRemove(): void
