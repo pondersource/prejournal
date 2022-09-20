@@ -41,7 +41,7 @@ Set in `env` file `PREJOURNAL_OPEN_MODE` to true. If you don't have perl on your
 
 ### Run tests
 ```
-DB_DATABASE=prejournal_test DB_USER=prejournal_test  DB_PASSWORD=123456 DB_HOST=localhost DB_DRIVER=pdo_pgsql WIKI_HOST=https://timesheet.dev3.evoludata.com/api/tabulars WIKI_TOKEN=YOUR_TOKEN ./vendor/bin/phpunit tests
+DB_DATABASE=prejournal_test DB_USER=prejournal_test  DB_PASSWORD=123456 DB_HOST=localhost DB_DRIVER=pdo_pgsql WIKI_HOST=https://timesheet.dev3.evoludata.com/api/tabulars WIKI_TOKEN=YOUR_TOKEN  PREJOURNAL_OPEN_MODE=false ./vendor/bin/phpunit tests
 PHPUnit 9.5.20 #StandWithUkraine
 
 ...........................hello

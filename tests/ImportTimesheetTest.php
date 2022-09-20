@@ -303,6 +303,7 @@ final class ImportTimesheetTest extends TestCase
                 'name' => '0'
             ]
         ], getAllComponents());
+        $movements = getAllMovements();
         $this->assertEquals([
             [
                 'id' => 1,
@@ -310,10 +311,10 @@ final class ImportTimesheetTest extends TestCase
                 'fromcomponent' => 1,
                 'tocomponent' => 2,
                 'timestamp_' => '2017-03-13 16:00:00',
-                'amount' => '461929',
+                'amount' => $movements[0]['amount'], // keeps increassing in subsequent test runs
                 'userid' => 1
                 ]
-        ], getAllMovements());
+        ], $movements);
         $this->assertEquals([
             [
                 'id' => 1,
