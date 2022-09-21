@@ -95,8 +95,9 @@ function pushToTimeld($context, $command) {
             "worker" => getComponentId($worker)
         ];
         var_dump($params);
-        $query = "SELECT m.id, m.timestamp_, m.amount, c2.name as project " .
+        $query = "SELECT m.id, m.timestamp_, m.amount, c2.name as project, s.description " .
         "FROM movements m INNER JOIN components c2 ON m.tocomponent=c2.id " .
+        "INNER JOIN statements s ON s.movementid = m.id " .
         "WHERE m.type_='worked' and m.fromcomponent = :worker";
         var_dump($query);
         $res = $conn->executeQuery($query, $params);
