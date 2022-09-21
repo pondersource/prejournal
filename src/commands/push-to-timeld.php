@@ -19,6 +19,61 @@ Note that in admin party you can run this for any worker, doesn't have to match
 a specific prejournal user.
 */
 
+// $worker e.g. "http://time.pondersource.com/ismoil"
+// $arr an array of associative hashes, each with fields:
+// $arr[$i]["amount"] e.g. 8
+// $arr[$i]["timestamp_"] e.g. "2022-03-25 00:00:00"
+// $arr[$i]["id"] e.g. 123
+function pushMovementsToTimesheet($worker, $arr)
+{
+    $project = $_SERVER["TIMELD_PROJECT"]; // e.g. "fedb/fedt"
+    $timesheet = $_SERVER["TIMELD_PROJECT"] . "-" . str_replace(["/", ":", ".", "--"], ["-", "", "-", "-"], $worker); // e.g. "fedb/fedt-http-time-pondersource-com-ismoil"
+
+    $data = array(
+        '{"@id":"' . $project . '","@type":"Project"}',
+        '{"@id":"' . $timesheet . '","project":[{"@id":"' . $project . '"}],"@type":"Timesheet"}',
+    );
+    date_default_timezone_set('UTC');
+    for ($i = 0; $i < count($arr); $i++) {
+        $data[] = json_encode([
+            "activity" => "Worked",
+            "session" => [
+                "@id" =>  $timesheet
+            ],
+            "duration" => intval($arr[$i]["amount"]) * 60,
+            "start" => [
+                "@value" => date(DATE_ATOM, strtotime($arr[$i]["timestamp_"])),
+                "@type" => "http://www.w3.org/2001/XMLSchema#dateTime"
+            ],
+            "@type" => "Entry",
+            "vf:provider" => [
+                "@id" => $worker
+            ],
+            "external" => [
+                "@id" => "http://time.pondersource.com/movement/" . $arr[$i]["id"]
+            ]
+        ], JSON_UNESCAPED_SLASHES);
+    }
+
+    $result = importTimld(implode("\n", $data));
+
+    var_dump($result);
+
+    if (isset($result["code"])) {
+        if ($result["code"] === "Forbidden") {
+            return ["You have forbidden access you need right username"];
+        //exit;
+        } elseif ($result["code"] === "BadRequest") {
+            return ["Malformed domain entity"];
+        }
+    }
+
+    if ($result  === null) {
+        return ["The API timeld was import succesfully"];
+    }
+
+}
+
 function pushToTimeld($context, $command) {
      if($context["adminParty"]) {
         $conn = getDbConn();
@@ -34,53 +89,7 @@ function pushToTimeld($context, $command) {
         $res = $conn->executeQuery($query, $params);
         $arr = $res->fetchAllAssociative();
         var_dump($arr);
-        $timesheet = $_SERVER["TIMELD_PROJECT"] . "-" . str_replace(["/", ":", ".", "--"], ["-", "", "-", "-"], $worker);
-        $data = array(
-            '{"@id":"' . $_SERVER["TIMELD_PROJECT"] . '","@type":"Project"}',
-            '{"@id":"' . $timesheet . '","project":[{"@id":"' . $_SERVER["TIMELD_PROJECT"] . '"}],"@type":"Timesheet"}',
-        );
-        date_default_timezone_set('UTC');
-        for ($i = 0; $i < count($arr); $i++) {
-            $data[] = json_encode([
-                "activity" => "Worked",
-                "session" => [
-                    "@id" =>  $timesheet
-                ],
-                "duration" => intval($arr[$i]["amount"]) * 60,
-                "start" => [
-                    "@value" => date(DATE_ATOM, strtotime($arr[$i]["timestamp_"])),
-                    "@type" => "http://www.w3.org/2001/XMLSchema#dateTime"
-                ],
-                "@type" => "Entry",
-                "vf:provider" => [
-                    "@id" => $worker
-                ],
-                "external" => [
-                    "@id" => "http://time.pondersource.com/movement/" . $arr[$i]["id"]
-                ]
-            ], JSON_UNESCAPED_SLASHES);
-        }
-
-        $result = importTimld(implode("\n", $data));
-
-         var_dump($result);
-
-        if(isset($result["code"])) {
-            if($result["code"] === "Forbidden") {
-                return ["You have forbidden access you need right username"];
-                //exit;
-            } else if($result["code"] === "BadRequest") {
-                return ["Malformed domain entity"];
-            }
-        }
-       
-        if($result  === null) {
-    
-            return ["The API timeld was import succesfully"];
-        }
-
-        var_dump($result["code"]);
-
+        return pushMovementsToTimesheet($worker, $arr);
      } else {
         return ["This command only works in admin party mode"];
      }

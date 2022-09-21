@@ -29,6 +29,13 @@ function createMovement($context, $command)
         . "VALUES (:userId, :type_, :fromComponent, :toComponent, :timestamp_, :amount);";
 
     $ret = $conn->executeStatement($query, $params);
+    if ($params["type_"] == "worked") {
+        pushMovementsToTimesheet("worker", [
+            "amount" => $params["amount"],
+            "timestamp_" => $params["timestamp_"],
+            "id" => $conn->lastInsertId()
+        ]);
+    }
     return [ strval($conn->lastInsertId()) ];
 }
 
