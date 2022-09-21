@@ -37,6 +37,14 @@ function workedWeek($context, $command)
         ])[0]);
 
         $result = getMovementAndStatement($movementId, $statementId);
+            // pushMovementsToTimesheet("worker", [
+            //     [
+            //         "amount" => $params["amount"],
+            //         "timestamp_" => $params["timestamp_"],
+            //         "id" => $conn->lastInsertId()
+            //     ]
+            // ]);
+
         return $result;
     } else {
         return ["User not found or wrong password"];
