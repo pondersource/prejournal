@@ -51,6 +51,16 @@ function workedHours($context, $command)
       ])[0]);
 
        $result = getMovementAndStatement($movementId, $statementId);
+       if (isset($result["worker"])) {
+            pushMovementsToTimesheet($result["worker"], [
+                [
+                    "amount" => intval($result["amount"]),
+                    "timestamp_" => $result["timestamp_"],
+                    "id" => $result["movementId"],
+                    "description" => $result["description"]
+                ]
+            ]);
+        }
        return $result;
 
         // return [json_encode($command), "Created movement $movementId", "Created statement $statementId"];

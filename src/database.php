@@ -346,12 +346,20 @@ function getDescriptionFromStatement($movementId)
 }
 
 function getMovementAndStatement($movementId) {
-    var_dump("getMovementAndStatement", $movementId);
+    // var_dump("getMovementAndStatement", $movementId);
     $conn  = getDbConn();
     $rows = array();
-    foreach ($conn->iterateAssociativeIndexed("SELECT m.id, w.name as worker, p.name as project, m.timestamp_, m.amount, s.description FROM movements m INNER JOIN components w ON m.fromComponent = w.id
-    INNER JOIN components p ON m.toComponent = p.id INNER JOIN statements s ON m.id = s.movementId WHERE m.id=:id AND s.movementId =:id", ['id' => $movementId]) as $data) {
-      $data["movementId"] = $movementId;
+    $query = "SELECT m.id, s.id as statementId, w.name as worker, p.name as project, m.timestamp_, m.amount, s.description " .
+        "FROM movements m INNER JOIN components w ON m.fromComponent = w.id " .
+        "INNER JOIN components p ON m.toComponent = p.id INNER JOIN statements s ON m.id = s.movementId WHERE m.id=:id";
+    foreach ($conn->iterateAssociativeIndexed($query, ['id' => $movementId]) as $id => $data) {
+        // deal with https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/data-retrieval-and-manipulation.html#fetchallassociativeindexed
+        $data["movementId"] = $id;
+        // deal with postgres lower-case:
+        if (isset($data["statementid"])) {
+            $data["statementId"] = $data["statementid"];
+            unset($data["statementid"]);
+        }
       $rows[] = $data;
    }
    return [json_encode($rows, JSON_PRETTY_PRINT)];
