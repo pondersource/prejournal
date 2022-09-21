@@ -19,12 +19,12 @@ for ($i = 0; $i < count($arr); $i++) {
       $fields["session"] = [
           "@id" => $timesheet
       ];
-      if ($fields["vf:provider"]["@id"] == "http://timeld.org/angus") {
-          $fields["vf:provider"]["@id"] = "http://time.pondersource.com/angus";
-      }
-      if ($fields["vf:provider"]["@id"] == "http://timeld.org/george") {
-          $fields["vf:provider"]["@id"] = "http://time.pondersource.com/george";
-      }
+//      if ($fields["vf:provider"]["@id"] == "http://timeld.org/angus") {
+//          $fields["vf:provider"]["@id"] = "http://time.pondersource.com/angus";
+//      }
+//      if ($fields["vf:provider"]["@id"] == "http://timeld.org/george") {
+//          $fields["vf:provider"]["@id"] = "http://time.pondersource.com/george";
+//      }
       if (!isset($fields["duration"]) || gettype($fields["duration"]) != "integer") {
           $fields["duration"] = 1;
       }
