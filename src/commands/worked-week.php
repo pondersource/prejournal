@@ -37,15 +37,19 @@ function workedWeek($context, $command)
         ])[0]);
 
         $result = getMovementAndStatement($movementId, $statementId);
-        if (isset($result["worker"])) {
-            pushMovementsToTimesheet($result["worker"], [
+        $rows = json_decode($result[0], true);
+        // var_dump($rows);
+        if (isset($rows[0]["worker"])) {
+            pushMovementsToTimesheet($rows[0]["worker"], [
                 [
-                    "amount" => intval($result["amount"]),
-                    "timestamp_" => $result["timestamp_"],
-                    "id" => $result["movementId"],
-                    "description" => $result["description"]
+                    "amount" => intval($rows[0]["amount"]),
+                    "timestamp_" => $rows[0]["timestamp_"],
+                    "id" => $rows[0]["movementId"],
+                    "description" => $rows[0]["description"]
                 ]
             ]);
+        } else {
+            // echo "worker not set!";
         }
         return $result;
     } else {

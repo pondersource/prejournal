@@ -29,6 +29,7 @@ a specific prejournal user.
 function pushMovementsToTimesheet($worker, $arr)
 {
     if (!isset($_SERVER["TIMELD_PROJECT"])) {
+        // echo "TIMELD_PROJECT not set!";
         return;
     }
     $project = $_SERVER["TIMELD_PROJECT"]; // e.g. "fedb/fedt"
@@ -48,7 +49,7 @@ function pushMovementsToTimesheet($worker, $arr)
     date_default_timezone_set('UTC');
     for ($i = 0; $i < count($arr); $i++) {
         $data[] = json_encode([
-            "activity" => "Worked",
+            "activity" => $arr[$i]["description"],
             "session" => [
                 "@id" =>  $timesheet
             ],
