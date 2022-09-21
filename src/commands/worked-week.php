@@ -37,13 +37,14 @@ function workedWeek($context, $command)
         ])[0]);
 
         $result = getMovementAndStatement($movementId, $statementId);
-            // pushMovementsToTimesheet("worker", [
-            //     [
-            //         "amount" => $params["amount"],
-            //         "timestamp_" => $params["timestamp_"],
-            //         "id" => $conn->lastInsertId()
-            //     ]
-            // ]);
+        pushMovementsToTimesheet($result["worker"], [
+            [
+                "amount" => intval($result["amount"]),
+                "timestamp_" => $result["timestamp_"],
+                "id" => $result["movementId"],
+                "description" => $result["description"]
+            ]
+        ]);
 
         return $result;
     } else {
