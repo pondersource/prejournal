@@ -10,6 +10,7 @@ TIMELD_HOST=https://timeld.org/api
 TIMELD_USERNAME=michielbdejong (username at Timeld instance)
 TIMELD_PASSWORD=...
 TIMELD_PROJECT=fedb/fedt
+TIMELD_TIMESHEET=fedb/from-pounder-source-with-love
 PREJOURNAL_ADMIN_PARTY=true
 # PREJOURNAL_USERNAME=michiel (username at Prejournal instance)
 # PREJOURNAL_PASSWORD=...
@@ -27,8 +28,15 @@ a specific prejournal user.
 function pushMovementsToTimesheet($worker, $arr)
 {
     $project = $_SERVER["TIMELD_PROJECT"]; // e.g. "fedb/fedt"
-    $timesheet = $_SERVER["TIMELD_PROJECT"] . "-" . str_replace(["/", ":", ".", "--"], ["-", "", "-", "-"], $worker); // e.g. "fedb/fedt-http-time-pondersource-com-ismoil"
+    $timesheet = $_SERVER["TIMELD_TIMESHEET"]; // e.g. "fedb/from-pounder-source"
 
+    var_dump([
+        "Push movement to timeld!",
+        $worker,
+        $project,
+        $timesheet
+    ]);
+    var_dump($arr);
     $data = array(
         '{"@id":"' . $project . '","@type":"Project"}',
         '{"@id":"' . $timesheet . '","project":[{"@id":"' . $project . '"}],"@type":"Timesheet"}',
