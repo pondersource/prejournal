@@ -63,7 +63,7 @@ function importWikiFile()
         "Accept: application/json",
         "Authorization: Bearer " . $_SERVER['WIKI_TOKEN'],
         "Content-Type: multipart/form-data"
-     );
+    );
     $txt_curlfile = new \CURLFile('tests/fixtures/wiki-suite-JSON.json', 'application/json', 'tests/fixtures/wiki-suite-JSON.json');
     $data = [
       'file' => $txt_curlfile
@@ -78,3 +78,24 @@ function importWikiFile()
     }
     return $resp["feedback"];
 }
+
+function importWiki($data)
+{
+    $result = 6; // fetchTabularId();
+    $url = $_SERVER["WIKI_HOST"] . '/' .$result . '/import';
+    $headers = array(
+        "Accept: application/json",
+        "Authorization: Bearer " . $_SERVER['WIKI_TOKEN'],
+        "Content-Type: multipart/form-data"
+    );
+
+    $resp = callEndpoint($headers, $data, $url);
+    if (isset($resp["code"])) {
+        if ($resp["code"] === 403) {
+            echo $resp["errortitle"] ." ";
+            exit;
+        }
+    }
+    return $resp["feedback"];
+}
+
