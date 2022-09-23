@@ -16,6 +16,16 @@ DB_HOST=localhost
 DB_DRIVER=pdo_pgsql
 ``` 
 
+# Docker
+
+For the [Docker testnet of Federated Timesheets](https://github.com/federatedbookkeeping/timesheets/issues/32) you can do the following:
+```sh
+docker build -t pj -f Dockerfile .
+docker build -t pjdb -f Dockerfile-postgres .
+docker run -d --network=testnet --name=pjdb -e POSTGRES_PASSWORD=mysecretpassword pjdb
+docker run -d --network=testnet --name=pj pj
+docker exec pjdb /bin/bash -c "psql -U postgres < schema.sql"
+```
 
 ### PHP CS fix
 
