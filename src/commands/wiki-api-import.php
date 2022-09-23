@@ -15,7 +15,7 @@ function wikiApiImport($context, $command)
 
         $movements = getAllWorkedMovements();
         if ($remote_system == "wiki") {
-            $remote_id = importWiki();
+            $remote_id = importWikiFile();
             //echo $remote_id;
             foreach ($movements as $movement) {
                 $movement_id = $movement["id"];

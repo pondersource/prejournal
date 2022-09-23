@@ -12,11 +12,3 @@ function getWiki()
 
     return exportWikiFile();
 }
-
-function importWiki()
-{
-    //$movement = getMovement($movement_id);
-    //var_dump($movement);
-
-    return importWikiFile();
-}
