@@ -79,23 +79,47 @@ function importWikiFile()
     return $resp["feedback"];
 }
 
+
+
+
+// curl command that works:
+// curl -X 'POST' '$WIKI_HOST/6/import' \
+//   -H 'accept: application/json' \
+//   -H 'Authorization: Bearer $WIKI_TOKEN' \
+//   -H 'Content-Type: multipart/form-data' \
+//   -F 'file=@test_import.csv;type=text/csv'
+
+// with this test_import.csv file:
+// URI,User,Project,Task,Description,"Start Time","End Time",Date,Duration,"Minutes (Calculated)","Hours (Calculated)"
+// "http://time.pondersource.com/movement/491","michiel","federated-timesheets","","testing milestone 1b","","","2022-09-23T00:00:00+00:00","60 minutes","60","1"
+
+
+
 function importWiki($data)
 {
+
     $result = 6; // fetchTabularId();
     $url = $_SERVER["WIKI_HOST"] . '/' .$result . '/import';
     $headers = array(
         "Accept: application/json",
         "Authorization: Bearer " . $_SERVER['WIKI_TOKEN'],
-        "Content-Type: multipart/form-data"
+        "Content-Type: multipart/form-data; boundary=------------------------4845dba1f62f55ae"
     );
 
-    $resp = callEndpoint($headers, $data, $url);
+    $formData = "--------------------------4845dba1f62f55ae\n" .
+        "Content-Disposition: form-data; name=\"file\"; filename=\"upload.csv\"\n" .
+        "Content-Type: text/csv\n" .
+        "\n" .
+        $data . 
+        "--------------------------4845dba1f62f55ae--\n";
+    
+    $resp = callEndpoint($headers, $formData, $url);
     if (isset($resp["code"])) {
         if ($resp["code"] === 403) {
             echo $resp["errortitle"] ." ";
             exit;
         }
     }
-    return $resp["feedback"];
+    return [ json_encode($resp)];
 }
 

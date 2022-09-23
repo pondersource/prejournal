@@ -3,7 +3,7 @@
 declare(strict_types=1);
 require_once(__DIR__ . '/../platform.php');
 require_once(__DIR__ . '/../database.php');
-require_once(__DIR__ . '/../api/timeld.php');
+require_once(__DIR__ . '/../api/wiki.php');
 /*
 In .env set:
 TIMELD_HOST=https://timeld.org/api
@@ -28,7 +28,6 @@ a specific prejournal user.
 // $arr[$i]["description"] e.g. "Testing diff propagation" 
 
 // URI,User,Project,Task,Description,"Start Time","End Time",Date,Duration,"Minutes (Calculated)","Hours (Calculated)"
-// your-external-uri,victor,federated-timesheets,,"documenting API examples","Friday August 19, 2022 13:30:00 UTC","Friday August 19, 2022 14:00:00 UTC",2022-08-19,"30 minutes",30,0.5
 // your-external-uri,victor,federated-timesheets,,"documenting API examples","Friday August 19, 2022 13:30:00 UTC","Friday August 19, 2022 14:00:00 UTC",2022-08-19,"30 minutes",30,0.5
 
 function pushMovementsToTabular($worker, $arr)
@@ -67,7 +66,7 @@ function pushMovementsToTabular($worker, $arr)
         ]) . '"';
     }
 
-    $result = importWiki(implode("\n", $data));
+    $result = importWiki(implode("\n", $data) . "\n");
 
     var_dump($result);
 

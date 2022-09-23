@@ -40,7 +40,7 @@ function workedWeek($context, $command)
         $rows = json_decode($result[0], true);
         // var_dump($rows);
         if (isset($rows[0]["worker"])) {
-            pushMovementsToTimesheet($rows[0]["worker"], [
+            propagateDiff($rows[0]["worker"], [
                 [
                     "amount" => intval($rows[0]["amount"]),
                     "timestamp_" => $rows[0]["timestamp_"],

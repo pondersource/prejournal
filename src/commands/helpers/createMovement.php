@@ -136,3 +136,11 @@ function createMultipleMovement($userId, $type_, $fromComponent, $toComponent, $
     );
     return [ strval($conn->lastInsertId()) ];
 }
+
+// FIXME: move this into a place of its own
+function propagateDiff($worker, $arr) {
+    // echo "Pusing to Timesheet!";
+    // pushMovementsToTimesheet($worker, $arr);
+    echo "Pusing to Tabular!";
+    pushMovementsToTabular($worker, $arr);
+}

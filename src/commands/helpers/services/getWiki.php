@@ -12,3 +12,4 @@ function getWiki()
 
     return exportWikiFile();
 }
+ 
