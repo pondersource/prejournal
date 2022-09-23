@@ -23,9 +23,29 @@ For the [Docker testnet of Federated Timesheets](https://github.com/federatedboo
 docker build -t pj -f Dockerfile .
 docker build -t pjdb -f Dockerfile-postgres .
 docker run -d --network=testnet --name=pjdb -e POSTGRES_PASSWORD=mysecretpassword pjdb
+docker run -d --network=testnet --name=admin pj
 docker run -d --network=testnet --name=pj pj
-docker exec pjdb /bin/bash -c "psql -U postgres < schema.sql"
+docker ps
+# should show two containers running
+docker exec pjdb /bin/bash -c "echo CREATE DATABASE prejournal\; | psql -U postgres"
+# should output: CREATE DATABASE
+docker exec pjdb /bin/bash -c "psql -U postgres prejournal < schema.sql"
+# should output:
+# DROP TABLE
+# NOTICE:  table "users" does not exist, skipping
+# CREATE TABLE
+# NOTICE:  table "components" does not exist, skipping
+# etc
+
+docker exec -it admin /bin/bash -c "echo PREJOURNAL_ADMIN_PARTY=true >> .env"
+docker exec -it admin /bin/bash -c "curl -d'["alice","alice123"]' http://localhost:80/v1/register"
+docker exec -it admin /bin/bash -c "curl -d'["bob","bob123"]' http://localhost:80/v1/register"
+
+docker exec -it pj /bin/bash -c "curl -d'["alice"]' http://alice:alice123@localhost:80/v1/claim-component"
+docker exec -it pj /bin/bash -c "curl -d'["bob"]' http://bob:bob123@localhost:80/v1/claim-component"
+docker exec -it pj /bin/bash -c "curl -d'[\"23 Sep 2022\",\"nlnet-timesh\",\"Federated Timesheets\", 8, \"hard work\"]' http://bob:bob123@localhost:80/v1/worked-hours"
 ```
+Now you created two users, Alice and Bob, and Alice has one timesheet entry, worked 8 hours on Federated Timesheets for client 'nlnet-timesh, on 23 Sep 2022, with description 'hard work'.
 
 ### PHP CS fix
 
