@@ -1,7 +1,7 @@
 <?php
 
 require_once(__DIR__ . '/../../vendor/autoload.php');
-require_once(__DIR__. '/../../loadenv.php');
+//require_once(__DIR__. '/../../loadenv.php');
 require_once(__DIR__ . '/callEndpoint.php');
 
 //use PonderSource\GoogleApi\Google;
