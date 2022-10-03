@@ -58,7 +58,8 @@ final class ImportInvoiceTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -130,7 +131,8 @@ final class ImportInvoiceTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
             ],
             [
                 'id' => 2,
@@ -142,7 +144,8 @@ final class ImportInvoiceTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
             ],
             [
                 'id' => 3,
@@ -154,7 +157,8 @@ final class ImportInvoiceTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
             ]
         ], getAllStatements());
     }

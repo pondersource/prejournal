@@ -50,7 +50,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -95,7 +96,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -142,7 +144,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -188,7 +191,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -233,7 +237,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -279,7 +284,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -326,7 +332,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -371,7 +378,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -417,7 +425,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -463,7 +472,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -509,7 +519,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -555,7 +566,9 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -601,7 +614,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -647,7 +661,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -693,7 +708,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }
@@ -787,7 +803,8 @@ final class ImportTimesheetTest extends TestCase
                 'description' => null,
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
                 ]
         ], getAllStatements());
     }

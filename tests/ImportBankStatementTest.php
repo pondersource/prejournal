@@ -70,7 +70,8 @@ final class ImportBankStatementTest extends TestCase
                 'description' =>  "inside movement from bank statement: 9802 OVB   'Fictional transaction'",
                 'internal_type' => null,
                 'remote_id' => null,
-                'remote_system' => null
+                'remote_system' => null,
+                'sourcedocumentcontents' => null
             // ],
             // [
             //     'id' => 2,

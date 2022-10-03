@@ -37,7 +37,8 @@ function getTables()
   movementId integer,
   userId integer,
   sourceDocumentFormat varchar, /* could be an invoice, bank statement csv file, API call etc */
-  sourceDocumentFilename varchar, /* TODO: work out how to store files when on Heroku */
+  sourceDocumentFilename varchar, /* makes sourceDocumentContents unnecessary */
+  sourceDocumentContents varchar, /* makes sourceDocumentFilename unnecessary */
   timestamp_ timestamp,
   description varchar,
   internal_type varchar,
