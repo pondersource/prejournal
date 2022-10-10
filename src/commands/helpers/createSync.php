@@ -10,12 +10,13 @@ function createSync($context, $command)
     if (isset($context["user"])) {
         try {
             // process stuff
-            $query = "INSERT INTO statements (internal_type, movementId, remote_id, remote_system) VALUES (:internal_type, :movementId, :remote_id, :remote_system);";
+            $query = "INSERT INTO statements (internal_type, movementId, remote_id, remote_system, sourceDocumentContents) VALUES (:internal_type, :movementId, :remote_id, :remote_system, :sourceDocumentContents);";
             $conn->executeStatement($query, [
             "internal_type" => $command[0],
             "movementId" => intval($command[1]),
             "remote_id" => $command[2],
-            "remote_system" => $command[3]
+            "remote_system" => $command[3],
+            "sourceDocumentContents" => $command[4] ?? null
             ]);
         } catch (\Doctrine\DBAM\Exception\UniqueConstraintViolationException $e) {
             if ($e->getCode() === 7) {

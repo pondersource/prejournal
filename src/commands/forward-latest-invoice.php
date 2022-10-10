@@ -17,13 +17,16 @@ function forwardLatestInvoice($context, $command) {
         $type = 'invoice';
 
         $quickBill = createQuickBooksBill();
+
+      
+        
     
         if (!is_array($quickBill) && str_starts_with($quickBill, 'Token expired')) {
            return ["Token expired you need to refresh token"];
         }
 
 
-        $timestamp = strtotime($quickBill["Bill"]["TxnDate"]) / 3600;
+        $timestamp = strtotime($quickBill["Bill"]["TxnDate"]);
        
         $invoice_hours = (strtotime($quickBill["Bill"]["DueDate"]) - strtotime($quickBill["Bill"]["TxnDate"])) / 3600;
 
@@ -36,14 +39,17 @@ function forwardLatestInvoice($context, $command) {
             $timestamp,
             $invoice_hours
         ])[0]);
-
-        /*$statementId = intval(createSync($context, [
+      
+        $statementId = intval(createSync($context, [
             "movement",
             $movementId,
-            $remote_system
-        ])[0]);*/
-        
-        return ["Movement id ".$movementId];
+            $quickBill["Bill"]["Id"],
+            $remote_system,
+            json_encode($quickBill)
+        ])[0]);
+
+        $result = getMovementAndSync($movementId, $statementId);
+        return $result;
     } else {
         return ["User not found or wrong password"];
     }
