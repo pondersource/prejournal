@@ -17,8 +17,6 @@ function forwardLatestInvoice($context, $command) {
         $type = 'invoice';
 
         $quickBill = createQuickBooksBill();
-
-      
         
     
         if (!is_array($quickBill) && str_starts_with($quickBill, 'Token expired')) {
@@ -28,7 +26,7 @@ function forwardLatestInvoice($context, $command) {
 
         $timestamp = strtotime($quickBill["Bill"]["TxnDate"]);
        
-        $invoice_hours = (strtotime($quickBill["Bill"]["DueDate"]) - strtotime($quickBill["Bill"]["TxnDate"])) / 3600;
+        $invoice_hours = $quickBill["Balance"];
 
         $movementId = intval(createMovement($context, [
             "create-movement",
