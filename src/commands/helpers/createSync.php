@@ -18,7 +18,8 @@ function createSync($context, $command)
             "remote_system" => $command[3],
             "sourceDocumentContents" => $command[4] ?? null
             ]);
-        } catch (\Doctrine\DBAM\Exception\UniqueConstraintViolationException $e) {
+        } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+            //var_dump($e->getCode());
             if ($e->getCode() === 7) {
                 return ["Duplication entry this movement exist in our statements table."];
             }
