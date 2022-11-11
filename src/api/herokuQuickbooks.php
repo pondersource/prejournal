@@ -7,12 +7,6 @@ require_once(__DIR__ . '/callEndpoint.php');
 //use PonderSource\GoogleApi\Google;
 use PonderSource\HerokuApi\HerokuClient;
 
-//HEROKU
-
-
-
-//$result = end($her->getHerokuTeamInvoices());
-
 
 function last($array) {
     if (!is_array($array)) return $array;
@@ -22,14 +16,21 @@ function last($array) {
     } 
 
 function createQuickBooksBill() {
-    $her = new HerokuClient([
-        'apiKey' =>  $_SERVER["HEROKU_API_KEY"],
-    ]);
-    $json  = json_encode(last($her->getHerokuTeamInvoices()));
-    $array = json_decode($json, true);
-    //var_dump($array["created_at"]);
-    //exit;
+        $her = new HerokuClient([
+            'apiKey' =>  $_SERVER["HEROKU_API_KEY"],
+        ]);
+    
 
+        $result = (array)$her->getHerokuTeamInvoices();
+
+        usort($result, function($a, $b) {
+            return strtotime($a->period_start) < strtotime($b->period_end) ? -1 : 1;
+        });
+        
+        $json  = json_encode(last($result));
+        $array = json_decode($json, true);
+
+    
         $url = $_SERVER["QUICKBOOK_API_URL"] . '/bill';
         $quickAccount = createQuickBooksAccount();
         //var_dump($quickAccount);

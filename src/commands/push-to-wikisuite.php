@@ -6,16 +6,13 @@ require_once(__DIR__ . '/../database.php');
 require_once(__DIR__ . '/../api/wiki.php');
 /*
 In .env set:
-TIMELD_HOST=https://timeld.org/api
-TIMELD_USERNAME=michielbdejong (username at Timeld instance)
-TIMELD_PASSWORD=...
-TIMELD_PROJECT=fedb/fedt
-TIMELD_TIMESHEET=fedb/from-pounder-source
+WIKI_HOST=...
+WIKI_TOKEN=...
 PREJOURNAL_ADMIN_PARTY=true
 # PREJOURNAL_USERNAME=michiel (username at Prejournal instance)
 # PREJOURNAL_PASSWORD=...
 
-Then run: php src/cli-single.php push-to-timeld http://time.pondersource.com/michiel
+Then run: php src/cli-single.php push-to-wiki http://time.pondersource.com/michiel
 Note that in admin party you can run this for any worker, doesn't have to match
 a specific prejournal user.
 */

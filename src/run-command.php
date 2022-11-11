@@ -41,6 +41,9 @@ require_once(__DIR__ . '/commands/component-correction.php');
 require_once(__DIR__ . '/commands/push-to-timeld.php');
 require_once(__DIR__ . '/commands/push-to-wikisuite.php');
 require_once(__DIR__ . '/commands/forward-latest-invoice.php');
+require_once(__DIR__ . '/commands/teamwork-api-export.php');
+require_once(__DIR__ . '/commands/teamwork-api-import.php');
+require_once(__DIR__ . '/commands/teamwork-api-projects.php');
 
 function toCamel($str)
 {
@@ -125,7 +128,10 @@ function runCommand($context, $command)
         "component-correction" => 3,
         "push-to-timeld" => 2,
         "push-to-wikisuite" => 2,
-        "forward-latest-invoice" => 2
+        "forward-latest-invoice" => 2,
+        "teamwork-api-export" => 2,
+        "teamwork-api-projects" => 2,
+        "teamwork-api-import" => 2
     ];
     if (isset($commands[$command[0]]) && count($command) >= $commands[$command[0]]) {
         $function = toCamel($command[0]);
