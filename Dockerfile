@@ -4,6 +4,7 @@ RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && docker-php-ex
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 ADD . /app
 WORKDIR /app
+RUN mv testnet.env .env
 ENV LOAD_ENV 1
 RUN composer install
 CMD php -S 0.0.0.0:80 src/server.php
