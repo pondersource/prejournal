@@ -98,7 +98,7 @@ function importWikiFile()
 function importWiki($data)
 {
 
-    $result = 6; // fetchTabularId();
+    $result = $_SERVER["WIKI_TABULAR_ID"]; // fetchTabularId();
     $url = $_SERVER["WIKI_HOST"] . '/' .$result . '/import';
     $headers = array(
         "Accept: application/json",
