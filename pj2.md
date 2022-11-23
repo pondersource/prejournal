@@ -49,6 +49,21 @@ Fields:
 Interpretation:
 All hours the worker did for this organization on `from` or on `to` or on any day inbetween, are compensated by the payment made on `paid`.
 
+### Contract
+Fields:
+* type: "contract"
+* worker: string
+* organization: string
+* hours: number
+* amount: number
+* from: string with three-letter month, e.g. "1 Jan 2022"
+* to: string with three-letter month, e.g. "31 Jan 2022"
+
+The `worker` should work for the `organization` for `hours` hours each week from `from` to `to` inclusive, and receive `amount` salary each month.
+If similar contracts overlap, their hours and amounts add up. Two checks will be performed:
+* for each week, was the correct number of hours logged?
+* for each month, was the correct salary amount paid?
+
 ### Expense
 Fields:
 * type: "expense"
