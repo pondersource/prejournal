@@ -1,5 +1,11 @@
 # PJ2 file format
 
+PJ2 is a new file format, used in the Ponder Source Books (not public).
+We may want to work towards an updated version of Prejournal that uses it too,
+although there are no concrete plans for that yet, so for now Prejournal does
+not support PJ2.
+
+## Motivation
 The .pj format lists commands as lines in a text file.
 The origin of this is that we wanted to have a restful interface to the data that would
 be easily usable from the CLI, but we also wanted to batch these scripts up, into something
