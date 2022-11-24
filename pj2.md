@@ -94,28 +94,6 @@ Like salary, an expense that has a user is amortized proportionately over the pr
 Examples of expenses that have a user are for instance office supplies (laptop, co-working space membership) of a specific team member.
 Examples of expenses that don't have a user are for instance hosting and legal costs.
 
-
-### Project Expense
-Fields:
-* type: "project-expense"
-* payer: string (optional)
-* organization: string
-* supplier: string
-* amount: number
-* paid: string with three-letter month, e.g. "26 Jan 2022"
-* from: string with three-letter month, e.g. "1 Jan 2022"
-* to: string with three-letter month, e.g. "31 Jan 2022"
-* reimbursed: string with three-letter month, e.g. "26 Jan 2022" (optional)
-* description: string (optional)
-
-Interpretation:
-The payer (optional) or the organization paid `amount` for something from `supplier` for the `organization`,
-which is useful to `user` on `from` and on `to` and on any day inbetween.
-Both the user and the payer need to be workers of the organization.
-The organization may have `reimbursed` the expense or not (this field is optional).
-In the meantime, the payer is entitled to 1% interest per month.
-Like salary, a worker expense is amortized proportionately over the project(s) its user worked during its useful period.
-
 ### Loan
 Fields:
 * type: "loan"
