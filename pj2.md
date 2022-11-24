@@ -30,9 +30,9 @@ a "type" field. Depending on that field, we can interpret the entry as follows.
 Fields:
 * type: "worked"
 * worker: string
+* date: string with three-letter month, e.g. "12 Jan 2022"
 * organization: string
 * project: string
-* date: string with three-letter month, e.g. "12 Jan 2022"
 * hours: number
 * description: string (optional)
 
@@ -45,12 +45,12 @@ this case.
 Fields:
 * type: "salary"
 * worker: string
+* paid: string with three-letter month, e.g. "26 Jan 2022"
 * organization: string
 * amount: number
-* paid: string with three-letter month, e.g. "26 Jan 2022"
+* description: string (optional)
 * from: string with three-letter month, e.g. "1 Jan 2022"
 * to: string with three-letter month, e.g. "31 Jan 2022"
-* description: string (optional)
 
 Interpretation:
 All hours the worker did for this organization on `from` or on `to` or on any day inbetween, are compensated by the payment made on `paid`.
@@ -73,16 +73,16 @@ If similar contracts overlap, their hours and amounts add up. Two checks will be
 ### Expense
 Fields:
 * type: "expense"
-* user: string (optional)
-* payer: string (optional)
-* organization: string
 * supplier: string
-* amount: number
 * paid: string with three-letter month, e.g. "26 Jan 2022"
+* organization: string
+* user: string (optional)
+* amount: number
+* description: string (optional)
 * from: string with three-letter month, e.g. "1 Jan 2022"
 * to: string with three-letter month, e.g. "31 Jan 2022"
 * reimbursed: string with three-letter month, e.g. "26 Jan 2022" (optional)
-* description: string (optional)
+* payer: string (optional)
 
 Interpretation:
 The payer (optional) or the organization paid `amount` for something from `supplier` for the `organization`,
@@ -98,11 +98,11 @@ Examples of expenses that don't have a user are for instance hosting and legal c
 Fields:
 * type: "loan"
 * worker: string
+* paid: string with three-letter month, e.g. "26 Jan 2022"
 * organization: string
 * amount: number
-* paid: string with three-letter month, e.g. "26 Jan 2022"
-* reimbursed: string with three-letter month, e.g. "26 Jan 2022" (optional)
 * description: string (optional)
+* reimbursed: string with three-letter month, e.g. "26 Jan 2022" (optional)
 
 Interpretation:
 The worker either transferred money to the organization, or did not receive their salary.
@@ -111,13 +111,13 @@ The organization may have `reimbursed` the loan or not (this field is optional).
 ### Income
 Fields:
 * type: "income"
+* paid: string with three-letter month, e.g. "12 Jan 2022"
 * organization: string
 * project: string
-* paid: string with three-letter month, e.g. "12 Jan 2022"
-* from: string with three-letter month, e.g. "12 Jan 2022"
-* to: string with three-letter month, e.g. "12 Jan 2022"
 * amount: number
 * description: string (optional)
+* from: string with three-letter month, e.g. "12 Jan 2022"
+* to: string with three-letter month, e.g. "12 Jan 2022"
 
 Interpretation:
 All the hours worked and expenses made for the project on `from`, `to`, or any day inbetween, are compensated by the payment made on `paid`.
