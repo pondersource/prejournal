@@ -33,14 +33,11 @@ function pushMovementsToTabular($worker, $arr)
         // echo "TIMELD_PROJECT not set!";
         return;
     }
-    $project = $_SERVER["TIMELD_PROJECT"]; // e.g. "fedb/fedt"
-    $timesheet = $_SERVER["TIMELD_TIMESHEET"]; // e.g. "fedb/from-pounder-source"
+    $hostUrl = $_SERVER["PREJOURNAL_HOST"];
 
     var_dump([
         "Push movement to wikisuite!",
-        $worker,
-        $project,
-        $timesheet
+        $worker
     ]);
     var_dump($arr);
     $data = array(
@@ -49,7 +46,7 @@ function pushMovementsToTabular($worker, $arr)
     date_default_timezone_set('UTC');
     for ($i = 0; $i < count($arr); $i++) {
         $data[] = '"' . implode('","', [
-            "http://time.pondersource.com/movement/" . $arr[$i]["id"], // URI
+            $hostUrl . "/movement/" . $arr[$i]["id"], // URI
             $worker, // User
             "federated-timesheets", // Project
             "", // Task 

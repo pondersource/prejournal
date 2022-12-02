@@ -34,7 +34,8 @@ function pushMovementsToTimesheet($worker, $arr)
     }
     $project = $_SERVER["TIMELD_PROJECT"]; // e.g. "fedb/fedt"
     $timesheet = $_SERVER["TIMELD_TIMESHEET"]; // e.g. "fedb/from-pounder-source"
-
+    $hostUrl = $_SERVER["PREJOURNAL_HOST"];
+    
     var_dump([
         "Push movement to timeld!",
         $worker,
@@ -63,7 +64,7 @@ function pushMovementsToTimesheet($worker, $arr)
                 "@id" => $worker
             ],
             "external" => [
-                "@id" => "http://time.pondersource.com/movement/" . $arr[$i]["id"]
+                "@id" => $hostUrl . "/movement/" . $arr[$i]["id"]
             ]
         ], JSON_UNESCAPED_SLASHES);
     }
