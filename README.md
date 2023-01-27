@@ -3,6 +3,33 @@ An experiment in pre-journal bookkeeping.
 
 Like the [Resources-Events-Agents (REA)](http://mikorizal.org/Fromprivateownershipaccountingtocommonsaccoun.html) model, this is an alternative bookkeeping model. Alternative to dual entry / "generally accepted accounting principles" bookkeeping, that is. It takes a bird's eye view of the economic network, instead of an organisation-centric view.
 
+# 2023 experiments
+
+After using Prejournal as a node in the timesheets project, we have split out its federated bookkeeping functionality
+to [CYB](https://github.com/pondersource/CYB) and are continuing to develop its use for pre-journal bookkeeping, i.e.
+the steps between (PJ2) source documents and (PTA) journals.
+As part of this, we added `charts.html` which is a tool to visualize the equity of the Ponder Source Foundation.
+It requires a `data/books.js` file, containing:
+```js
+'Books = ', JSON.stringify({ seriesLiquid, seriesLiquidCredit, seriesLiquidCreditAssets, step })
+```
+
+Here, `seriesLiquid` is a series of numbers indicating the amount of liquid assets (`assets:bank`) at the dispoal of the foundation, in euros.
+Adding accounts receivable and substracting accounts payable, `seriesLiquidCredit` represents `assets:bank + assets:accounts receivable - liabilities:accounts payable`.
+And finally, `seriesLiquidCreditAssets` adds tangiable assets (e.g. the laptops we own) as well as the value of billable but as yet unbilled hours.
+
+So when working, `seriesLiquidCreditAssets` increases;
+When creating an invoice, `seriesLiquidCredit` catches up.
+When the invoice gets paid to us, `seriesLiquid` catches up.
+
+```
+mkdir data
+php makeBooks.php > data/books.js
+npx serve
+echo Browse to http://localhost:3000/chart
+```
+
+
 # Development
 Note that the `psql` command below will drop and recreate all tables in your `prejournal` database on localhost psql
 or wherever you have pointed the DATABASE_URL in your `.env` file, so be careful
