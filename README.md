@@ -22,9 +22,12 @@ So when working, `seriesLiquidCreditAssets` increases;
 When creating an invoice, `seriesLiquidCredit` catches up.
 When the invoice gets paid to us, `seriesLiquid` catches up.
 
+
+For instance to display salary expenses over the years:
+
 ```
 mkdir data
-php makeBooks.php > data/books.js
+php makeBooks.php ../../pondersource-books/stichting/source-docs/contracts.json > data/books.js
 npx serve
 echo Browse to http://localhost:3000/chart
 ```

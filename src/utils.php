@@ -10,6 +10,7 @@ function timestampToDateTime($timestamp)
 function dateTimeToTimestamp($dateTime)
 {
     $ret = new DateTime($dateTime);
+    // echo "Interpreting '$dateTime' to '" . $ret->format('j M Y') . "' ('" . $ret->format('Y-m-d H:i:s') . "')\n";
     return $ret->getTimestamp();
 }
 
@@ -69,3 +70,4 @@ function reconcileQuotes($x)
 function debug($x) {
     error_log(var_export($x, true));
 }
+
