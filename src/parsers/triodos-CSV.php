@@ -41,13 +41,13 @@ function parseTriodosCSV($text, $owner)
     $records = $csv->getRecords(); //returns all the CSV records as an Iterator object
     $ret = [];
     foreach ($records as $lineNum => $cells) {
-        var_dump($cells[0]);
-        var_dump($cells);
+        // var_dump($cells[0]);
+        // var_dump($cells);
         $obj = [];
         for ($j = 0; $j < count($cells); $j++) {
             $obj[$COLUMN_NAMES[$j]] = $cells[$j];
         }
-        var_dump($obj);
+        // var_dump($obj);
         if ($obj["CreditDebet"] == 'Debet') {
             array_push($ret, [
                 "date" => parseTriodosDate($obj["date"]),
@@ -76,6 +76,6 @@ function parseTriodosCSV($text, $owner)
             throw new Error("CreditDebet not parseable! " . $obj["CreditDebet"]);
         }
     }
-    var_dump($ret);
+    // var_dump($ret);
     return $ret;
 }
