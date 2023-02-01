@@ -100,7 +100,7 @@ function runCommand($context, $command)
         "list-payments" => 1,
         "import-hours" => 4,
         "import-timesheet" => 4,
-        "import-bank-statement" => 4,
+        "import-bank-statement" => 3,
         "import-invoice" => 4,
         "minimal-version" => 2,
         "worked-hours" => 5,

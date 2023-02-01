@@ -9,7 +9,7 @@ require_once(__DIR__ . '/../parsers/ingbank-CSV.php');
 require_once(__DIR__ . '/../parsers/triodos-CSV.php');
 
 // E.g.: php src/cli-single.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"
-//                             0                    1           2             3
+//                                     0                    1           2             3
 
 function importBankStatement($context, $command)
 {
@@ -22,7 +22,7 @@ function importBankStatement($context, $command)
     if (isset($context["user"])) {
         $format = $command[1];
         $fileName = $command[2];
-        $importTime = strtotime($command[3]);
+        $importTime = (count($command) >= 4 ? strtotime($command[3]) : strtotime("now"));
         $entries = $parserFunctions[$format](file_get_contents($fileName), $context["user"]["username"]);
         for ($i = 0; $i < count($entries); $i++) {
             // var_dump($entries[$i]);
