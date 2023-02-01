@@ -14,11 +14,11 @@ function parseTriodosAmount($str)
 
 function parseTriodosDate($str)
 {
-    // e.g. 20220713
-    //      01234567
-    $year = substr($str, 0, 4);
-    $month = substr($str, 4, 2);
-    $day = substr($str, 6, 2);
+    // e.g.  "03-09-2021"
+    //        0123456789
+    $day = substr($str, 0, 2);
+    $month = substr($str, 3, 2);
+    $year = substr($str, 6, 4);
     return strtotime(date("Y/m/d 12:00", mktime(0, 0, 0, $month, $day, $year)));
 }
 
@@ -40,7 +40,7 @@ function parseTriodosCSV($text, $owner)
     $csv->setDelimiter(",");
     $records = $csv->getRecords(); //returns all the CSV records as an Iterator object
     $ret = [];
-    foreach ($records as $cells) {
+    foreach ($records as $lineNum => $cells) {
         var_dump($cells[0]);
         var_dump($cells);
         $obj = [];
@@ -58,6 +58,7 @@ function parseTriodosCSV($text, $owner)
                 "balanceAfter" => parseTriodosAmount($obj["NewBalance"]),
                 "insideFrom" => $owner,
                 "insideTo" => $obj["account"],
+                "lineNum" => $lineNum,
             ]);
         } elseif ($obj["CreditDebet"] == 'Credit') {
             array_push($ret, [
@@ -69,6 +70,7 @@ function parseTriodosCSV($text, $owner)
                 "balanceAfter" => parseTriodosAmount($obj["NewBalance"]),
                 "insideFrom" => $obj["account"],
                 "insideTo" => $owner,
+                "lineNum" => $lineNum,
             ]);
         } else {
             throw new Error("CreditDebet not parseable! " . $obj["CreditDebet"]);
