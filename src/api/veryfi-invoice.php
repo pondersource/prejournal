@@ -47,7 +47,7 @@ $data .= "--" . $mime_boundary . "--" . $eol;
 
 $headers = array(
     "Accept: application/json",
-    "Content-Type: multipart/form-data; boundary=${mime_boundary}",
+    "Content-Type: multipart/form-data; boundary={$mime_boundary}",
     "Content-Length: " . strlen($data),
     "AUTHORIZATION: apikey $username:$api_key",
     "CLIENT-ID: $CLIENT_ID"

@@ -83,7 +83,7 @@ function runCommandWithInlineData($context, $command)
     if ($command[0] == "import-hours") {
         return importHoursInline($context, $command[1], $command[2], "2022-03-31 12:00:00");
     }
-    throw new Error("command ${command[0]} does not support inline data yet!");
+    throw new Error("command {$command[0]} does not support inline data yet!");
 }
 
 function runCommand($context, $command)
