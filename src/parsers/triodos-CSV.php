@@ -40,7 +40,8 @@ function parseTriodosCSV($text, $owner)
     $csv->setDelimiter(",");
     $records = $csv->getRecords(); //returns all the CSV records as an Iterator object
     $ret = [];
-    foreach ($records as $lineNum => $cells) {
+    foreach ($records as $index => $cells) {
+        $lineNum = $index + 1;
         // var_dump($cells[0]);
         // var_dump($cells);
         $obj = [];
