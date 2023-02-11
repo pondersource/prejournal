@@ -1,5 +1,10 @@
 {
     "name": "federatedbookkeeping/prejournal",
+    "config": {
+       "allow-plugins": {
+           "php-http/discovery": true
+       }
+    },
     "description": "Tool for Automated Bookkeeping",
     "type": "project",
     "autoload": {
