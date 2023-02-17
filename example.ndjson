@@ -1,0 +1,3 @@
+{"@type":"Project","@id":"org1/pr1","external":{"@id":"http://ex.org/project/1"}}
+{"@type":"Timesheet","@id":"org1/ts1","project":[{"@id":"org1/pr1"}],"external":{"@id":"http://ex.org/timesheet/1"}}
+{"@type":"Entry","session":{"@id":"org1/ts1"},"activity":"orging","duration":60,"start":{"@value":"2022-06-22T16:40:55.946Z","@type":"http://www.w3.org/2001/XMLSchema#dateTime"},"vf:provider":{"@id":"test"},"external":{"@id":"http://ex.org/timesheet/1/entry/1"}}

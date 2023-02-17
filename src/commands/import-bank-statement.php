@@ -6,6 +6,7 @@ require_once(__DIR__ . '/helpers/createMovement.php');
 require_once(__DIR__ . '/helpers/createStatement.php');
 require_once(__DIR__ . '/../parsers/asnbank-CSV.php');
 require_once(__DIR__ . '/../parsers/ingbank-CSV.php');
+require_once(__DIR__ . '/../parsers/ing-cc-scrape.php');
 require_once(__DIR__ . '/../parsers/triodos-CSV.php');
 
 // E.g.: php src/cli-single.php import-bank-statement asnbank-CSV ./example.csv "2022-03-31 12:00:00"
@@ -16,6 +17,7 @@ function importBankStatement($context, $command)
     $parserFunctions = [
         "asnbank-CSV" => "parseAsnBankCSV",
         "ingbank-CSV" => "parseIngBankCSV",
+        "ing-cc-scrape" => "parseIngCcScrape",
         "triodos-CSV" => "parseTriodosCSV",
     ];
 
