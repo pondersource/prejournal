@@ -8,6 +8,8 @@ Like the [Resources-Events-Agents (REA)](http://mikorizal.org/Fromprivateownersh
 After using Prejournal as a node in the timesheets project, we have split out its federated bookkeeping functionality
 to [CYB](https://github.com/pondersource/CYB) and are continuing to develop its use for pre-journal bookkeeping, i.e.
 the steps between (PJ2) source documents and (PTA) journals.
+
+## charts
 As part of this, we added `charts.html` which is a tool to visualize the equity of the Ponder Source Foundation.
 It requires a `data/books.js` file, containing:
 ```js
@@ -31,6 +33,20 @@ php makeBooks.php ../../pondersource-books/stichting/source-docs/contracts.json 
 npx serve
 echo Browse to http://localhost:3000/chart
 ```
+
+## pj2-based
+
+Since the database approach quickly became very slow (2 minutes to recreate the full database from PJ files),
+we started experimenting with PHP scripts that load data directly from PJ2 files, and produce reports based on that.
+For instance:
+```
+php ./src/pj-based/index.php validate-working-hours ../../pondersource-books/stichting/build/
+```
+This script completely bypass the user management and CLI-and-server architecture.
+Whereas the first/original PJ file format was procedural, in that it grew directly out of the commands of Prejournal,
+This new script has its own list of commands, which is decoupled from the entry types of the PJ2 file format.
+We hope this separation between operations and declarations will lead to cleaner code. Read here next year to see how
+well this worked. ;)
 
 # Filling in your PJ file
 
