@@ -43,7 +43,7 @@ With the `worked-hours` command there is an additional argument: the number of h
 * `worked-day <date> stichting <project>` is equivalent to `worked-hours <date> stichting <project> 8`
 * `worked-week <date> stichting <project>` is equivalent to `worked-hours <date> stichting <project> 40`
 
-They are just used as abbreviations.
+They are just used as abbreviations. The date string needs to be quoted, and use the day number, then three lower-case letters for the month, then 4 digits for the year. All other strings that contain spaces (such as "Public Holiday") also need to appear inside  quotes.
 
 For Ponderers, the options for `<project>` are `ScienceMesh`, `SRAM`, `Peppol`, `SUNET`, ...
 And the types of time off: `Birthday`, `“Public Holiday”`, `Holidays`, and `“Off Sick”`. Example:
