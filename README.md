@@ -34,14 +34,24 @@ echo Browse to http://localhost:3000/chart
 
 # Filling in your PJ file
 
-There are basically 3 commands, ‘worked-week’, ‘worked-day’ and ‘worked-hours’
-The arguments are datestring, then “stichting”, then the project name
-With worked-hours there is an additional argument, the number of hours worked on that day
-`worked-day <date> stichting <project>` is equivalent to `worked-hours <date> stichting <project> 8`
-`worked-week <date> stichting <project>` is equivalent to `worked-hours <date> stichting <project> 40`
+There are basically 3 commands, ‘worked-week’, ‘worked-day’ and ‘worked-hours’.
+
+The arguments are: date string (e.g. "7 jan 2023", then “stichting” as the organization you work for, then the project name.
+
+With the `worked-hours` command there is an additional argument: the number of hours worked on that day.
+
+* `worked-day <date> stichting <project>` is equivalent to `worked-hours <date> stichting <project> 8`
+* `worked-week <date> stichting <project>` is equivalent to `worked-hours <date> stichting <project> 40`
+
 They are just used as abbreviations.
-For Pondereres, the options for `<project>` are `ScienceMesh`, `SRAM`, `Peppol`, `SUNET`, ...
-And the types of time off: `Birthday`, `“Public Holiday”`, `Holidays`, and `“Off Sick”`.
+
+For Ponderers, the options for `<project>` are `ScienceMesh`, `SRAM`, `Peppol`, `SUNET`, ...
+And the types of time off: `Birthday`, `“Public Holiday”`, `Holidays`, and `“Off Sick”`. Example:
+```
+worked-day "20 mar 2023" stichting Holidays
+worked-day "21 mar 2023" stichting "Public Holiday"
+worked-day "22 mar 2023" stichting ScienceMesh
+```
 
 # Development
 Note that the `psql` command below will drop and recreate all tables in your `prejournal` database on localhost psql
