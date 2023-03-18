@@ -2,6 +2,10 @@
 
 require_once(__DIR__ . '/../utils.php');
 
+const ANALYSIS_FIRST_WEEK = "202101";
+const ANALYSIS_LAST_WEEK = "202310";
+const DEFAULT_HOURS_PER_WEEK = 40;
+
 function loadSources($folderPath) {
   $ret = [];
   // ignore the warning, we'll check for return value false below.
@@ -36,34 +40,86 @@ function loadSources($folderPath) {
   return $ret;
 }
 
-function getContractHours($worker, $week) {
-  return 40;
+$workers = [];
+
+function ensureDataStructure($worker, $week) {
+  global $workers;
+  if (!isset($workers[$worker])) {
+    $workers[$worker] = [];
+  }
+  if (!isset($workers[$worker][$week])) {
+    $workers[$worker][$week] = [
+      "hoursWorked" => 0,
+      "hoursContracted" => 0
+    ];
+  }
+}
+function weekExists($week) {
+  $numWeeks = [
+    "2020" => 52,
+    "2021" => 52,
+    "2022" => 52,
+    "2023" => 52,
+    "2024" => 52,
+    "2025" => 52,
+    "2026" => 52
+  ];
+  $year = substr($week, 0, 4);
+  $woy = substr($week, 4, 2);
+  return (intval($woy) <= $numWeeks[$year]);
 }
 
+function setHoursContracted($worker, $fromWeek, $toWeek, $hours) {
+  global $workers;
+  for ($week = $fromWeek; $week <= $toWeek; $week++) {
+    if (weekExists($week)) {
+      ensureDataStructure($worker, $week);
+      $workers[$worker][$week]["hoursContracted"] = $hours;
+    }
+  }
+}
 function checkHoursPerWeek($entries) {
-  $workers = [];
+  global $workers;
   for ($i = 0; $i < count($entries); $i++) {
     if ($entries[$i]["type"] == "worked") {
+      $worker = $entries[$i]["worker"];
       $week = dateTimeToWeekOfYear($entries[$i]["date"]);
-      if (!isset($workers[$entries[$i]["worker"]])) {
-        $workers[$entries[$i]["worker"]] = [];
-      }
-      if (!isset($workers[$entries[$i]["worker"]][$week])) {
-        $workers[$entries[$i]["worker"]][$week] = 0;
-      }
-      $workers[$entries[$i]["worker"]][$week] += $entries[$i]["hours"];
+      ensureDataStructure($worker, $week);
+      $workers[$worker][$week]["hoursWorked"] += $entries[$i]["hours"];
+
       // $fullProjectId = $entries[$i]["organization"] . ":" . $entries[$i]["project"];
       // if (!isset($projects[$fullProjectId])) {
       //   $projects[$fullProjectId] = 0;
       // }
       // $projects[$fullProjectId] += $entries[$i]["hours"];
+    } else if ($entries[$i]["type"] == "contract") {
+      if (isset(($entries[$i]["from"]))) {
+        $fromWeek = dateTimeToWeekOfYear(($entries[$i]["from"]));
+      } else {
+        $fromWeek = ANALYSIS_FIRST_WEEK;
+      }
+      if (isset(($entries[$i]["to"]))) {
+        $toWeek = dateTimeToWeekOfYear(($entries[$i]["to"]));
+      } else {
+        $toWeek = ANALYSIS_LAST_WEEK;
+      }
+      if (isset(($entries[$i]["hours"]))) {
+        $hours = $entries[$i]["hours"];
+      } else {
+        $hours = DEFAULT_HOURS_PER_WEEK;
+      }
+      
+      setHoursContracted($entries[$i]["worker"], $fromWeek, $toWeek, $hours);
     }
   }
   foreach($workers as $worker => $weeks) {
-    foreach ($weeks as $week => $hours) {
-      $contractHours = getContractHours($worker, $week);
+    foreach ($weeks as $week => $data) {
+      $hours = $data["hoursWorked"];
+      $contractHours = $data["hoursContracted"];
       if ($hours != $contractHours) {
         echo "In week $week, $worker wrote $hours hours instead of $contractHours!\n";
+      } else {
+        echo "In week $week, $worker wrote $hours hours which matches $contractHours!\n";
       }
     }
   }
