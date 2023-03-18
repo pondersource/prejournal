@@ -20,6 +20,15 @@ function dateTimeToWeekOfYear($dateTime)
     return $obj->format("YW");
 }
 
+function weekOfYearToDateTime($week) {
+    $dto = new DateTime();
+    $year = substr($week, 0, 4);
+    $woy = substr($week, 4, 2);
+
+    $dto->setISODate(intval($year), intval($woy));
+    return $dto->format('d F Y');
+  }
+  
 function reconcileQuotes($x)
 {
     // var_dump($x);
@@ -77,9 +86,10 @@ function reconcileQuotes($x)
 //     error_log(var_export($x, true));
 // }
 
-
-function debug($str) {
-  if (isset($_SERVER["DEBUG"])) {
+const LEVEL_DEBUG = 0;
+const LEVEL_OUTPUT = 1;
+function debug($str, $level = LEVEL_DEBUG) {
+  if (isset($_SERVER["DEBUG"]) || $level == LEVEL_OUTPUT) {
     echo $str;
   }
 }

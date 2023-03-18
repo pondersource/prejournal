@@ -40,15 +40,18 @@ function loadSources($folderPath) {
   return $ret;
 }
 
-$workers = [];
+$records = [];
 
-function ensureDataStructure($worker, $week) {
-  global $workers;
-  if (!isset($workers[$worker])) {
-    $workers[$worker] = [];
+function ensureDataStructure($organization, $worker, $week) {
+  global $timesheets;
+  if (!isset($timesheets[$organization])) {
+    $timesheets[$organization] = [];
   }
-  if (!isset($workers[$worker][$week])) {
-    $workers[$worker][$week] = [
+  if (!isset($timesheets[$organization][$worker])) {
+    $timesheets[$organization][$worker] = [];
+  }
+  if (!isset($timesheets[$organization][$worker][$week])) {
+    $timesheets[$organization][$worker][$week] = [
       "hoursWorked" => 0,
       "hoursContracted" => 0
     ];
@@ -69,23 +72,25 @@ function weekExists($week) {
   return (intval($woy) <= $numWeeks[$year]);
 }
 
-function setHoursContracted($worker, $fromWeek, $toWeek, $hours) {
-  global $workers;
+function setHoursContracted($organization, $worker, $fromWeek, $toWeek, $hours) {
+  global $timesheets;
   for ($week = $fromWeek; $week <= $toWeek; $week++) {
     if (weekExists($week)) {
-      ensureDataStructure($worker, $week);
-      $workers[$worker][$week]["hoursContracted"] = $hours;
+      ensureDataStructure($organization, $worker, $week);
+      $timesheets[$organization][$worker][$week]["hoursContracted"] = $hours;
+      debug("Organization $organization contracted  $worker for $hours hours in week of " . weekOfYearToDateTime($week) . "\n");
     }
   }
 }
 function checkHoursPerWeek($entries) {
-  global $workers;
+  global $timesheets;
   for ($i = 0; $i < count($entries); $i++) {
     if ($entries[$i]["type"] == "worked") {
+      $organization = $entries[$i]["organization"];
       $worker = $entries[$i]["worker"];
       $week = dateTimeToWeekOfYear($entries[$i]["date"]);
-      ensureDataStructure($worker, $week);
-      $workers[$worker][$week]["hoursWorked"] += $entries[$i]["hours"];
+      ensureDataStructure($organization, $worker, $week);
+      $timesheets[$organization][$worker][$week]["hoursWorked"] += $entries[$i]["hours"];
 
       // $fullProjectId = $entries[$i]["organization"] . ":" . $entries[$i]["project"];
       // if (!isset($projects[$fullProjectId])) {
@@ -109,17 +114,19 @@ function checkHoursPerWeek($entries) {
         $hours = DEFAULT_HOURS_PER_WEEK;
       }
       
-      setHoursContracted($entries[$i]["worker"], $fromWeek, $toWeek, $hours);
+      setHoursContracted($entries[$i]["organization"], $entries[$i]["worker"], $fromWeek, $toWeek, $hours);
     }
   }
-  foreach($workers as $worker => $weeks) {
-    foreach ($weeks as $week => $data) {
-      $hours = $data["hoursWorked"];
-      $contractHours = $data["hoursContracted"];
-      if ($hours != $contractHours) {
-        echo "In week $week, $worker wrote $hours hours instead of $contractHours!\n";
-      } else {
-        echo "In week $week, $worker wrote $hours hours which matches $contractHours!\n";
+  foreach($timesheets as $organization => $workers) {
+    foreach($workers as $worker => $weeks) {
+      foreach ($weeks as $week => $data) {
+        $hours = $data["hoursWorked"];
+        $contractHours = $data["hoursContracted"];
+        if ($hours != $contractHours) {
+          debug("In the week of " . weekOfYearToDateTime($week) . ", $worker wrote $hours hours for $organization instead of $contractHours!\n", LEVEL_OUTPUT);
+        } else {
+          debug("In the week of " . weekOfYearToDateTime($week) . ", $worker wrote $hours hours for $organization which matches $contractHours!\n");
+        }
       }
     }
   }
