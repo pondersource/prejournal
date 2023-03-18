@@ -14,6 +14,12 @@ function dateTimeToTimestamp($dateTime)
     return $ret->getTimestamp();
 }
 
+function dateTimeToWeekOfYear($dateTime)
+{
+    $obj = new DateTime($dateTime);
+    return $obj->format("YW");
+}
+
 function reconcileQuotes($x)
 {
     // var_dump($x);
@@ -67,7 +73,13 @@ function reconcileQuotes($x)
     return $ret;
 }
 
-function debug($x) {
-    error_log(var_export($x, true));
-}
+// function debug($x) {
+//     error_log(var_export($x, true));
+// }
 
+
+function debug($str) {
+  if (isset($_SERVER["DEBUG"])) {
+    echo $str;
+  }
+}

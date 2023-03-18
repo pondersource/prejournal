@@ -1,10 +1,6 @@
 <?php
 
-function debug($str) {
-  if (isset($_SERVER["DEBUG"])) {
-    echo $str;
-  }
-}
+require_once(__DIR__ . '/../utils.php');
 
 function loadSources($folderPath) {
   $ret = [];
@@ -40,24 +36,37 @@ function loadSources($folderPath) {
   return $ret;
 }
 
-function checkHoursPerProject($entries) {
+function getContractHours($worker, $week) {
+  return 40;
+}
+
+function checkHoursPerWeek($entries) {
   $workers = [];
-  $projects = [];
   for ($i = 0; $i < count($entries); $i++) {
     if ($entries[$i]["type"] == "worked") {
+      $week = dateTimeToWeekOfYear($entries[$i]["date"]);
       if (!isset($workers[$entries[$i]["worker"]])) {
-        $workers[$entries[$i]["worker"]] = 0;
+        $workers[$entries[$i]["worker"]] = [];
       }
-      $workers[$entries[$i]["worker"]] += $entries[$i]["hours"];
-      $fullProjectId = $entries[$i]["organization"] . ":" . $entries[$i]["project"];
-      if (!isset($projects[$fullProjectId])) {
-        $projects[$fullProjectId] = 0;
+      if (!isset($workers[$entries[$i]["worker"]][$week])) {
+        $workers[$entries[$i]["worker"]][$week] = 0;
       }
-      $projects[$fullProjectId] += $entries[$i]["hours"];
+      $workers[$entries[$i]["worker"]][$week] += $entries[$i]["hours"];
+      // $fullProjectId = $entries[$i]["organization"] . ":" . $entries[$i]["project"];
+      // if (!isset($projects[$fullProjectId])) {
+      //   $projects[$fullProjectId] = 0;
+      // }
+      // $projects[$fullProjectId] += $entries[$i]["hours"];
     }
-   }
-   var_dump($workers);
-   var_dump($projects);
+  }
+  foreach($workers as $worker => $weeks) {
+    foreach ($weeks as $week => $hours) {
+      $contractHours = getContractHours($worker, $week);
+      if ($hours != $contractHours) {
+        echo "In week $week, $worker wrote $hours hours instead of $contractHours!\n";
+      }
+    }
+  }
 }
 
 if (count($_SERVER['argv']) < 3) {
@@ -74,4 +83,4 @@ if ($cmd !== "validate-working-hours") {
 
 $pj2Entries = loadSources($folderPath);
 
-checkHoursPerProject($pj2Entries);
+checkHoursPerWeek($pj2Entries);
