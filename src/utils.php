@@ -17,7 +17,11 @@ function dateTimeToTimestamp($dateTime)
 function dateTimeToWeekOfYear($dateTime)
 {
     $obj = new DateTime($dateTime);
-    return $obj->format("YW");
+    if ($obj->format("W") == "52" && $obj->format("M") == "Jan") {
+        return $obj->format("Y") . "00";
+    } else {
+        return $obj->format("YW");
+    }
 }
 
 function weekOfYearToDateTime($week) {
@@ -26,7 +30,7 @@ function weekOfYearToDateTime($week) {
     $woy = substr($week, 4, 2);
 
     $dto->setISODate(intval($year), intval($woy));
-    return $dto->format('d F Y');
+    return strtolower($dto->format('d M Y'));
   }
   
 function reconcileQuotes($x)

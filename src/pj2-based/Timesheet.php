@@ -49,6 +49,12 @@ class Timesheet {
   }
 
   function ensureDataStructure($organization, $worker, $week) {
+    if(!$this->weekExists($week)) {
+      throw new Exception("Week $week does not exist! Please use e.g. '202243' as the week id.\n");
+    }
+    if (strlen($week) < 6) {
+      throw new Exception("Why is this week id so short? $week\n");
+    }
     if (!isset($this->structured[$organization])) {
       $this->structured[$organization] = [];
     }
@@ -66,7 +72,7 @@ class Timesheet {
   function weekExists($week) {
     $numWeeks = [
       "2020" => 53,
-      "2021" => 52,
+      "2021" => 53,
       "2022" => 53,
       "2023" => 53,
       "2024" => 53,
@@ -78,22 +84,37 @@ class Timesheet {
     if (intval($year) < 2020 || intval($year) > 2026) {
       return false;
     }
-    return (intval($woy) > 0 && intval($woy) <= $numWeeks[$year]);
+    return (intval($woy) >= 0 && intval($woy) <= $numWeeks[$year]);
   }
   
   function setHoursContracted($organization, $worker, $fromWeek, $toWeek, $hours) {
+    echo "setHoursContracted($organization, $worker, $fromWeek, $toWeek, $hours)\n";
+    if(!$this->weekExists($fromWeek)) {
+      throw new Exception("Week $fromWeek does not exist! Please use e.g. '202243' as the week id.\n");
+    }
+    if(!$this->weekExists($toWeek)) {
+      throw new Exception("Week $toWeek does not exist! Please use e.g. '202243' as the week id.\n");
+    }
     for ($week = $fromWeek; $week <= $toWeek; $week++) {
+      // echo "Considering week $week for contract of $worker with $organization from $fromWeek to $toWeek, for $hours hours per week.\n";
       if ($this->weekExists($week)) {
         $this->ensureDataStructure($organization, $worker, $week);
+        if (strlen($week) < 6) {
+          throw new Exception("Why is this week id so short? $week\n");
+        }
         $this->structured[$organization][$worker][$week]["hoursContracted"] = $hours;
-        debug("Organization $organization contracted  $worker for $hours hours in week of " . weekOfYearToDateTime($week) . "\n");
+        // debug("Organization $organization contracted  $worker for $hours hours in week of " . weekOfYearToDateTime($week) . "\n");
       }
     }
   }
   function checkHoursPerWeek() {
     foreach($this->structured as $organization => $workers) {
       foreach($workers as $worker => $weeks) {
-        sort($weeks);
+        // echo "Unsorted\n";
+        // var_dump($weeks);
+        ksort($weeks);
+        // echo "Sorted\n";
+        // var_dump($weeks);
         foreach ($weeks as $week => $data) {
           $hours = $data["hoursWorked"];
           $contractHours = $data["hoursContracted"];
