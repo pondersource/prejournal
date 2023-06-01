@@ -16,4 +16,4 @@ if ($cmd !== "validate-working-hours") {
 
 $timesheet = new Timesheet();
 $timesheet->loadSources($folderPath);
-$timesheet->checkHoursPerWeek();
+// $timesheet->checkHoursPerWeek();

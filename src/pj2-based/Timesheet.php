@@ -8,6 +8,7 @@ const DEFAULT_HOURS_PER_WEEK = 40;
 
 class Timesheet {
   private $structured = [];
+  private $expense = [];
   function __construct() {
 
   }
@@ -17,10 +18,21 @@ class Timesheet {
         $organization = $newEntries[$i]["organization"];
         $worker = $newEntries[$i]["worker"];
         $week = dateTimeToWeekOfYear($newEntries[$i]["date"]);
+        $project = $newEntries[$i]["project"];
         $this->ensureDataStructure($organization, $worker, $week);
         $this->structured[$organization][$worker][$week]["hoursWorked"] += $newEntries[$i]["hours"];
         $this->structured[$organization][$worker][$week]["details"] .= "" . $newEntries[$i]["date"] . ": " .$newEntries[$i]["hours"] . "\n";
-  
+
+        $this->ensureExpenseStructure($organization, $project);
+        $hours = $newEntries[$i]["hours"];
+        // error_log("Worker $worker, Organisation $organization, Week $week, Project $project, Hours $hours");
+        // error_log(var_export($this->structured[$organization][$worker][$week], true));
+        if ($this->structured[$organization][$worker][$week]["hoursContracted"] != 0) {
+          $rate = $this->structured[$organization][$worker][$week]["hourlyRate"];
+          error_log("Cost for $project: $hours * $rate");
+          $this->expense[$organization][$project] += $hours * $rate;
+        }
+
         // $fullProjectId = $newEntries[$i]["organization"] . ":" . $newEntries[$i]["project"];
         // if (!isset($projects[$fullProjectId])) {
         //   $projects[$fullProjectId] = 0;
@@ -42,8 +54,11 @@ class Timesheet {
         } else {
           $hours = DEFAULT_HOURS_PER_WEEK;
         }
-        
-        $this->setHoursContracted($newEntries[$i]["organization"], $newEntries[$i]["worker"], $fromWeek, $toWeek, $hours);
+        $hoursPerYear = $newEntries[$i]["hours"] * (365/7);
+        $hoursPerMonth = $hoursPerYear / 12;
+        $hourlyRate = $newEntries[$i]["amount"] / $hoursPerMonth;
+        error_log("contract $hoursPerYear, $hoursPerMonth, $hourlyRate");
+        $this->setHoursContracted($newEntries[$i]["organization"], $newEntries[$i]["worker"], $fromWeek, $toWeek, $hours, $hourlyRate);
       }
     }
   }
@@ -65,10 +80,20 @@ class Timesheet {
       $this->structured[$organization][$worker][$week] = [
         "hoursWorked" => 0,
         "hoursContracted" => 0,
+        "hourlyRate" => "help!",
         "details" => ""
       ];
     }
   }
+  function ensureExpenseStructure($organization, $project) {
+    if (!isset($this->expense[$organization])) {
+      $this->expense[$organization] = [];
+    }
+    if (!isset($this->expense[$organization][$project])) {
+      $this->expense[$organization][$project] = 0;
+    }
+  }
+
   function weekExists($week) {
     $numWeeks = [
       "2020" => 53,
@@ -87,7 +112,7 @@ class Timesheet {
     return (intval($woy) >= 0 && intval($woy) <= $numWeeks[$year]);
   }
   
-  function setHoursContracted($organization, $worker, $fromWeek, $toWeek, $hours) {
+  function setHoursContracted($organization, $worker, $fromWeek, $toWeek, $hours, $hourlyRate) {
     echo "setHoursContracted($organization, $worker, $fromWeek, $toWeek, $hours)\n";
     if(!$this->weekExists($fromWeek)) {
       throw new Exception("Week $fromWeek does not exist! Please use e.g. '202243' as the week id.\n");
@@ -103,7 +128,8 @@ class Timesheet {
           throw new Exception("Why is this week id so short? $week\n");
         }
         $this->structured[$organization][$worker][$week]["hoursContracted"] = $hours;
-        // debug("Organization $organization contracted  $worker for $hours hours in week of " . weekOfYearToDateTime($week) . "\n");
+        $this->structured[$organization][$worker][$week]["hourlyRate"] = $hourlyRate;
+        debug("Organization $organization contracted  $worker for $hours hours in week of " . weekOfYearToDateTime($week) . ", hourly rate $hourlyRate\n");
       }
     }
   }
