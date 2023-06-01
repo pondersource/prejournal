@@ -72,7 +72,7 @@ class Timesheet {
   function weekExists($week) {
     $numWeeks = [
       "2020" => 53,
-      "2021" => 53,
+      "2021" => 52,
       "2022" => 53,
       "2023" => 53,
       "2024" => 53,
