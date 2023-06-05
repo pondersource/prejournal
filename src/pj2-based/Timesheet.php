@@ -7,6 +7,7 @@ const ANALYSIS_LAST_WEEK = "202310";
 const DEFAULT_HOURS_PER_WEEK = 40;
 
 class Timesheet {
+  private $entries = [];
   private $structured = [];
   private $expense = [];
   function __construct() {
@@ -14,6 +15,7 @@ class Timesheet {
   }
   function addEntries($newEntries) {
     for ($i = 0; $i < count($newEntries); $i++) {
+      $this->entries[] = $newEntries[$i];
       if ($newEntries[$i]["type"] == "worked") {
         $organization = $newEntries[$i]["organization"];
         $worker = $newEntries[$i]["worker"];
@@ -171,12 +173,14 @@ class Timesheet {
     error_log($totalStr);
   }
   function toPta() {
-    foreach($this->structured as $organization => $workers) {
-      foreach($workers as $worker => $weeks) {
-        ksort($weeks);
-        foreach ($weeks as $week => $data) {
-          echo "$week\n$worker  " . $data["hoursWorked"] . "\n$organization\n\n";
-        }
+    for ($i = 0; $i < count($this->entries); $i++) {
+      if ($this->entries[$i]["type"] == "worked") {
+        $organization = $this->entries[$i]["organization"];
+        $worker = $this->entries[$i]["worker"];
+        $week = dateTimeToWeekOfYear($this->entries[$i]["date"]);
+        $project = $this->entries[$i]["project"];
+        $hours = $this->entries[$i]["hours"];
+        echo "$week\n$worker  $hours\n$organization:$project\n\n";
       }
     }
   }
