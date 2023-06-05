@@ -29,7 +29,7 @@ class Timesheet {
         // error_log(var_export($this->structured[$organization][$worker][$week], true));
         if ($this->structured[$organization][$worker][$week]["hoursContracted"] != 0) {
           $rate = $this->structured[$organization][$worker][$week]["hourlyRate"];
-          error_log("Cost for $project: $hours * $rate");
+          // error_log("Cost for $project: $hours * $rate");
           $this->expense[$organization][$project] += $hours * $rate;
         }
 
@@ -150,6 +150,32 @@ class Timesheet {
           } else {
             debug("In the week $week (starting " . weekOfYearToDateTime($week) . "), $worker wrote $hours hours for $organization which matches $contractHours!\n");
           }
+        }
+      }
+    }
+  }
+  function reportCosts() {
+    $total = 0;
+    $totalStr = "";
+    foreach($this->expense as $organization => $org) {
+      foreach($org as $project => $amount) {
+        $kEUR = floor($amount / 1000);
+        if ($kEUR > 0) {
+          error_log("Cost of $project for $organization: $kEUR kEUR");
+          $totalStr .= " $kEUR +";
+        }
+        $total += $amount;
+      }
+    }
+    error_log("Total salary costs in books: " . $total);
+    error_log($totalStr);
+  }
+  function toPta() {
+    foreach($this->structured as $organization => $workers) {
+      foreach($workers as $worker => $weeks) {
+        ksort($weeks);
+        foreach ($weeks as $week => $data) {
+          echo "$week\n$worker  " . $data["hoursWorked"] . "\n$organization\n\n";
         }
       }
     }

@@ -9,11 +9,16 @@ if (count($_SERVER['argv']) < 3) {
 $cmd = $_SERVER['argv'][1];
 $folderPath = $_SERVER['argv'][2];
 
-if ($cmd !== "validate-working-hours") {
+$timesheet = new Timesheet();
+$timesheet->loadSources($folderPath);
+
+if ($cmd === "validate-working-hours") {
+  $timesheet->checkHoursPerWeek();
+} else if ($cmd === "report-costs") {
+  $timesheet->reportCosts();
+} else if ($cmd === "pta") {
+  $timesheet->toPta();
+} else {
   echo "Unknown command: '$cmd'\n";
   exit();
 }
-
-$timesheet = new Timesheet();
-$timesheet->loadSources($folderPath);
-// $timesheet->checkHoursPerWeek();
