@@ -115,7 +115,7 @@ class Timesheet {
   }
   
   function setHoursContracted($organization, $worker, $fromWeek, $toWeek, $hours, $hourlyRate) {
-    echo "setHoursContracted($organization, $worker, $fromWeek, $toWeek, $hours)\n";
+    // echo "setHoursContracted($organization, $worker, $fromWeek, $toWeek, $hours)\n";
     if(!$this->weekExists($fromWeek)) {
       throw new Exception("Week $fromWeek does not exist! Please use e.g. '202243' as the week id.\n");
     }
@@ -177,10 +177,11 @@ class Timesheet {
       if ($this->entries[$i]["type"] == "worked") {
         $organization = $this->entries[$i]["organization"];
         $worker = $this->entries[$i]["worker"];
-        $week = dateTimeToWeekOfYear($this->entries[$i]["date"]);
+        $obj = new DateTime($this->entries[$i]["date"]);
+        $dateStr = $obj->format("Y-m-d");
         $project = $this->entries[$i]["project"];
         $hours = $this->entries[$i]["hours"];
-        echo "$week\n$worker  $hours\n$organization:$project\n\n";
+        echo "$dateStr worked\n    $worker  $hours\n    $organization:$project\n\n";
       }
     }
   }

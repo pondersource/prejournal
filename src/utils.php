@@ -24,14 +24,14 @@ function dateTimeToWeekOfYear($dateTime)
     }
 }
 
-function weekOfYearToDateTime($week) {
+function weekOfYearToDateTime($week, $format='d M Y') {
     $dto = new DateTime();
     $year = substr($week, 0, 4);
     $woy = substr($week, 4, 2);
 
     $dto->setISODate(intval($year), intval($woy));
-    return strtolower($dto->format('d M Y'));
-  }
+    return strtolower($dto->format($format));
+}
   
 function reconcileQuotes($x)
 {
