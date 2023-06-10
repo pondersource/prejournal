@@ -5,6 +5,8 @@ require_once(__DIR__ . '/../utils.php');
 const ANALYSIS_FIRST_WEEK = "202101";
 const ANALYSIS_LAST_WEEK = "202310";
 const DEFAULT_HOURS_PER_WEEK = 40;
+const BILLABLE_FACTOR = 3;
+const OVERHEAD_FACTOR = 1.25;
 
 class Timesheet {
   private $entries = [];
@@ -25,14 +27,17 @@ class Timesheet {
         $this->structured[$organization][$worker][$week]["hoursWorked"] += $newEntries[$i]["hours"];
         $this->structured[$organization][$worker][$week]["details"] .= "" . $newEntries[$i]["date"] . ": " .$newEntries[$i]["hours"] . "\n";
 
-        $this->ensureExpenseStructure($organization, $project);
+        $this->ensureExpenseStructure($organization, $project, $week);
         $hours = $newEntries[$i]["hours"];
         // error_log("Worker $worker, Organisation $organization, Week $week, Project $project, Hours $hours");
         // error_log(var_export($this->structured[$organization][$worker][$week], true));
         if ($this->structured[$organization][$worker][$week]["hoursContracted"] != 0) {
           $rate = $this->structured[$organization][$worker][$week]["hourlyRate"];
-          // error_log("Cost for $project: $hours * $rate");
-          $this->expense[$organization][$project] += $hours * $rate;
+          if ($organization == "stichting" && $project=="SUNET" && $hours > 0) {
+            error_log("Billable for $worker $week: $hours * $rate * " . BILLABLE_FACTOR . " = " . ($hours * $rate * BILLABLE_FACTOR));
+          }
+          $this->expense[$organization][$project]["totalCost"] += $hours * $rate * BILLABLE_FACTOR;
+          $this->expense[$organization][$project]["weeks"][$week] += $hours * $rate * BILLABLE_FACTOR;
         }
 
         // $fullProjectId = $newEntries[$i]["organization"] . ":" . $newEntries[$i]["project"];
@@ -58,8 +63,9 @@ class Timesheet {
         }
         $hoursPerYear = $newEntries[$i]["hours"] * (365/7);
         $hoursPerMonth = $hoursPerYear / 12;
-        $hourlyRate = $newEntries[$i]["amount"] / $hoursPerMonth;
-        error_log("contract $hoursPerYear, $hoursPerMonth, $hourlyRate");
+        $billableHoursPerMonth = $hoursPerMonth / OVERHEAD_FACTOR;
+        $hourlyRate = $newEntries[$i]["amount"] / $billableHoursPerMonth;
+        error_log("contract {$newEntries[$i]["worker"]} $hoursPerYear, $billableHoursPerMonth, $hourlyRate");
         $this->setHoursContracted($newEntries[$i]["organization"], $newEntries[$i]["worker"], $fromWeek, $toWeek, $hours, $hourlyRate);
       }
     }
@@ -87,12 +93,18 @@ class Timesheet {
       ];
     }
   }
-  function ensureExpenseStructure($organization, $project) {
+  function ensureExpenseStructure($organization, $project, $week) {
     if (!isset($this->expense[$organization])) {
       $this->expense[$organization] = [];
     }
     if (!isset($this->expense[$organization][$project])) {
-      $this->expense[$organization][$project] = 0;
+      $this->expense[$organization][$project] = [
+        "totalCost" => 0, 
+        "weeks" => [],
+      ];
+    }
+    if (!isset($this->expense[$organization][$project]["weeks"][$week])) {
+      $this->expense[$organization][$project]["weeks"][$week] = 0;
     }
   }
 
@@ -160,13 +172,13 @@ class Timesheet {
     $total = 0;
     $totalStr = "";
     foreach($this->expense as $organization => $org) {
-      foreach($org as $project => $amount) {
-        $kEUR = floor($amount / 1000);
+      foreach($org as $project => $details) {
+        $kEUR = floor($details["totalCost"] / 1000);
         if ($kEUR > 0) {
           error_log("Cost of $project for $organization: $kEUR kEUR");
           $totalStr .= " $kEUR +";
         }
-        $total += $amount;
+        $total += $details["totalCost"];
       }
     }
     error_log("Total salary costs in books: " . $total);
