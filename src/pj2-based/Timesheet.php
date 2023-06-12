@@ -2,12 +2,6 @@
 
 require_once(__DIR__ . '/../utils.php');
 
-const ANALYSIS_FIRST_WEEK = "202101";
-const ANALYSIS_LAST_WEEK = "202310";
-const DEFAULT_HOURS_PER_WEEK = 40;
-const BILLABLE_FACTOR = 3;
-const OVERHEAD_FACTOR = 1.25;
-
 class Timesheet {
   private $entries = [];
   private $structured = [];

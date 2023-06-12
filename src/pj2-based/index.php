@@ -1,5 +1,6 @@
 <?php
 
+require_once(__DIR__ . '/Journal.php');
 require_once(__DIR__ . '/Timesheet.php');
 
 if (count($_SERVER['argv']) < 3) {
@@ -9,15 +10,19 @@ if (count($_SERVER['argv']) < 3) {
 $cmd = $_SERVER['argv'][1];
 $folderPath = $_SERVER['argv'][2];
 
-$timesheet = new Timesheet();
-$timesheet->loadSources($folderPath);
 
 if ($cmd === "validate-working-hours") {
+  $timesheet = new Timesheet();
+  $timesheet->loadSources($folderPath);
   $timesheet->checkHoursPerWeek();
 } else if ($cmd === "report-costs") {
+  $timesheet = new Timesheet();
+  $timesheet->loadSources($folderPath);
   $timesheet->reportCosts();
 } else if ($cmd === "pta") {
-  $timesheet->toPta();
+  $journal = new Journal();
+  $journal->loadSources($folderPath);
+  $journal->toPta();
 } else {
   echo "Unknown command: '$cmd'\n";
   exit();
