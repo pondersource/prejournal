@@ -19,6 +19,12 @@ function dateTimeToTimestamp($dateTime)
     return $ret->getTimestamp();
 }
 
+function dateTimeToPta($dateTime)
+{
+    $obj = new DateTime($dateTime);
+    return $obj->format("Y-m-d"); // e.g. 2023-02-15
+}
+
 function dateTimeToWeekOfYear($dateTime)
 {
     $obj = new DateTime($dateTime);

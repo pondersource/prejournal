@@ -2,6 +2,13 @@
 
 require_once(__DIR__ . '/../utils.php');
 
+const DAYS_PER_YEAR = 365.24;
+// echo "DAYS_PER_YEAR days per year\n";
+const WEEKS_PER_YEAR = DAYS_PER_YEAR / 7;
+// echo "WEEKS_PER_YEAR weeks per year\n";
+const WEEKS_PER_MONTH = WEEKS_PER_YEAR / 12;
+// echo "WEEKS_PER_MONTH weeks per month\n";
+
 function dateFromEntry($entry) {
     if (isset($entry["date"])) {
         return $entry["date"];
@@ -38,43 +45,51 @@ abstract class PrejournalEntry {
     $this->fields = $obj;
   }
 
-  abstract function toJournalEntries();
+  abstract function toJournalEntries($contract);
 }
 
 class WorkedPrejournalEntry extends PrejournalEntry {
-  function toJournalEntries() {
+  function toJournalEntries($contract) {
+    $hoursPerWeek = $contract["hours"];
+    // echo "$hoursPerWeek hours per week\n";/
+    $salaryPerMonth = $contract["amount"];
+    // echo "$salaryPerMonth salary per month\n";
+    $salaryPerWeek = $salaryPerMonth / WEEKS_PER_MONTH;
+    // echo "$salaryPerWeek salary per week\n";
+    $salaryPerHour = $salaryPerWeek / $hoursPerWeek;
+    // echo "$salaryPerHour salary per hour\n";
     return [new JournalEntry([
       "date" => $this->fields["date"],
       "account1" => $this->fields["worker"],
-      "account2" => $this->fields["project"],
-      "amount" => $this->fields["hours"],
+      "account2" => $this->fields["organization"] . ":" . $this->fields["project"],
+      "amount" => $this->fields["hours"] * $salaryPerHour,
       "description" => "worked"
     ])];
   }
 }
 
 class SalaryPrejournalEntry extends PrejournalEntry {
-  function toJournalEntries() {
+  function toJournalEntries($contract) {
     return [];
   }
 }
 class ContractPrejournalEntry extends PrejournalEntry {
-  function toJournalEntries() {
+  function toJournalEntries($contract) {
     return [];
   }
 }
 class ExpensePrejournalEntry extends PrejournalEntry {
-  function toJournalEntries() {
+  function toJournalEntries($contract) {
     return [];
   }
 }
 class LoanPrejournalEntry extends PrejournalEntry {
-  function toJournalEntries() {
+  function toJournalEntries($contract) {
     return [];
   }
 }
 class IncomePrejournalEntry extends PrejournalEntry {
-  function toJournalEntries() {
+  function toJournalEntries($contract) {
     return [];
   }
 }
@@ -98,7 +113,7 @@ class JournalEntry {
   public $amount;
   public $description;
   function __construct($obj) {
-    $this->date = $obj["date"];
+    $this->date = dateTimeToPta($obj["date"]);
     $this->account1 = $obj["account1"];
     $this->account2 = $obj["account2"];
     $this->amount = $obj["amount"];
@@ -112,8 +127,8 @@ function formatJournalEntry($entry) {
     . "    $entry->account2\n";
 }
 
-function entryToPta($entry) {
-  $JournalEntries = $entry->toJournalEntries();
+function entryToPta($entry, $contract) {
+  $JournalEntries = $entry->toJournalEntries($contract);
   $arr = array_map("formatJournalEntry", $JournalEntries);
   return implode("\n\n", $arr);
 }
@@ -149,21 +164,34 @@ function entrySortCb($a, $b) {
 class Journal {
 
   private $entries = [];
+  private $knownContracts = [];
+
   function __construct() {
+    $this->knownContracts = [
+      // FIXME: for now you'll have to hard-code contracts here
+    ];
   }
 
   function addEntries($newEntries) {
     for ($i = 0; $i < count($newEntries); $i++) {
         $this->entries[] = $newEntries[$i];
+        if ($newEntries[$i]["type"] == "contract") {
+          echo "Got contract for " . $newEntries[$i]["worker"];
+          if (!isset($this->knownContracts[$newEntries[$i]["worker"]])) {
+            $this->knownContracts[$newEntries[$i]["worker"]] = [];
+          }
+          array_push($this->knownContracts[$newEntries[$i]["worker"]], $newEntries[$i]);
+        }
     }
   }
 
   function toPta() {
     usort($this->entries, 'entrySortCb');
-    $highestDateYet = 0;    
+    $highestDateYet = 0;
+    // FIXME: $contract = $this->knownContracts["some-worker-name"][0];
     for ($i = 0; $i < count($this->entries); $i++) {
         $obj = makePrejournalEntry($this->entries[$i]);
-        echo entryToPta($obj);
+        echo entryToPta($obj, $contract);
         $thisDate = new DateTime(dateFromEntry($this->entries[$i]));
         $thisStamp = $thisDate->getTimestamp();
         if ($thisStamp < $highestDateYet) {
