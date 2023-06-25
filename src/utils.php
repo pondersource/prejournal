@@ -14,9 +14,59 @@ function timestampToDateTime($timestamp)
 
 function dateTimeToTimestamp($dateTime)
 {
-    $ret = new DateTime($dateTime);
+    $parts = explode(' ', $dateTime);
+    if (count($parts) != 3) {
+        throw new Exception("Could not parse date '$dateTime'");
+    }
+    $day = $parts[0];
+    $month = [
+        "jan" => 1,
+        "feb" => 2,
+        "mar" => 3,
+        "apr" => 4,
+        "may" => 5,
+        "jun" => 6,
+        "jul" => 7,
+        "aug" => 8,
+        "sep" => 9,
+        "oct" => 10,
+        "nov" => 11,
+        "dec" => 12
+    ][$parts[1]];
+    $year = $parts[2];
+    $ret = new DateTime("$year-$month-$day");
     // echo "Interpreting '$dateTime' to '" . $ret->format('j M Y') . "' ('" . $ret->format('Y-m-d H:i:s') . "')\n";
     return $ret->getTimestamp();
+}
+
+function dateIsAfter($a, $b) {
+    $dA = new DateTime($a);
+    $dB = new DateTime($b);
+    if ($dA < $dB) {
+        // echo "'$a' = " . $dA->format('Y-m-d') . " is before '$b' = " . $dA->format('Y-m-d') . "\n";
+        return false;
+    } else if ($dA == $dB) {
+        // echo "'$a' = " . $dA->format('Y-m-d') . " is equal to '$b' = " . $dA->format('Y-m-d') . "\n";
+        return false;
+    } else if ($dA == $dB) {
+        // echo "'$a' = " . $dA->format('Y-m-d') . " is after '$b' = " . $dA->format('Y-m-d') . "\n";
+        return true;
+    }
+}
+
+function dateIsBefore($a, $b) {
+    $dA = new DateTime($a);
+    $dB = new DateTime($b);
+    if ($dA < $dB) {
+        // echo "'$a' = " . $dA->format('Y-m-d') . " is before '$b' = " . $dA->format('Y-m-d') . "\n";
+        return true;
+    } else if ($dA == $dB) {
+        // echo "'$a' = " . $dA->format('Y-m-d') . " is equal to '$b' = " . $dA->format('Y-m-d') . "\n";
+        return false;
+    } else if ($dA == $dB) {
+        // echo "'$a' = " . $dA->format('Y-m-d') . " is after '$b' = " . $dA->format('Y-m-d') . "\n";
+        return false;
+    }
 }
 
 function dateTimeToPta($dateTime)

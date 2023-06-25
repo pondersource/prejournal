@@ -44,12 +44,29 @@ abstract class PrejournalEntry {
   function __construct($obj) {
     $this->fields = $obj;
   }
-
-  abstract function toJournalEntries($contract);
+  function getField($name) {
+    if (isset($this->fields[$name])) {
+      return $this->fields[$name];
+    }
+    throw new Exception("Field '$name' not set! Have: " . var_export($this->fields, true));
+  }
+  abstract function toJournalEntries($journal);
 }
 
 class WorkedPrejournalEntry extends PrejournalEntry {
-  function toJournalEntries($contract) {
+  function toJournalEntries($journal) {
+    $contract = $journal->getContract([
+      "organization" => $this->getField("organization"),
+      "worker" => $this->getField("worker"),
+      "date" => $this->getField("date")
+    ]);
+  
+    // $milestone = $journal->getMilestone([
+    //   "organization" => $this->getField("organization"),
+    //   "projectr" => $this->getField("project"),
+    //   "date" => $this->getField("date")
+    // ]);
+
     $hoursPerWeek = $contract["hours"];
     // echo "$hoursPerWeek hours per week\n";/
     $salaryPerMonth = $contract["amount"];
@@ -69,27 +86,27 @@ class WorkedPrejournalEntry extends PrejournalEntry {
 }
 
 class SalaryPrejournalEntry extends PrejournalEntry {
-  function toJournalEntries($contract) {
+  function toJournalEntries($journal) {
     return [];
   }
 }
 class ContractPrejournalEntry extends PrejournalEntry {
-  function toJournalEntries($contract) {
+  function toJournalEntries($journal) {
     return [];
   }
 }
 class ExpensePrejournalEntry extends PrejournalEntry {
-  function toJournalEntries($contract) {
+  function toJournalEntries($journal) {
     return [];
   }
 }
 class LoanPrejournalEntry extends PrejournalEntry {
-  function toJournalEntries($contract) {
+  function toJournalEntries($journal) {
     return [];
   }
 }
 class IncomePrejournalEntry extends PrejournalEntry {
-  function toJournalEntries($contract) {
+  function toJournalEntries($journal) {
     return [];
   }
 }
@@ -127,12 +144,6 @@ function formatJournalEntry($entry) {
     . "    $entry->account2\n";
 }
 
-function entryToPta($entry, $contract) {
-  $JournalEntries = $entry->toJournalEntries($contract);
-  $arr = array_map("formatJournalEntry", $JournalEntries);
-  return implode("\n\n", $arr);
-}
-
 function entrySortCb($a, $b) {
     // echo "comparing " . var_export($a, true) . " to " . var_export($b, true) . "\n";
     $aDateStr = dateFromEntry($a);
@@ -165,18 +176,74 @@ class Journal {
 
   private $entries = [];
   private $knownContracts = [];
+  private $knownMilestones = [];
 
   function __construct() {
-    $this->knownContracts = [
-      // FIXME: for now you'll have to hard-code contracts here
-    ];
+  }
+
+  private function entryToPta($entry) {  
+    $JournalEntries = $entry->toJournalEntries($this);
+    $arr = array_map("formatJournalEntry", $JournalEntries);
+    return implode("\n\n", $arr);
+  }
+  
+
+  public function getContract($query) {
+     foreach($this->knownContracts as $worker => $contracts) {
+      if ($worker !== $query["worker"]) {
+        // echo "Contract worker  " . $worker . " !== " . $query["worker"] . "\n";
+        continue;
+      }
+      foreach($this->knownContracts[$worker] as $contract) {
+        // echo "Checking query '" . var_export($query, true) . "' against contract '" . var_export($contract, true) . "'\n";
+        if ($contract["organization"] !== $query["organization"]) {
+          // echo "Contract organization  " . $contract["organization"] . " !== " . $query["organization"] . "\n";
+          continue;
+        }
+        if (dateIsAfter($contract["from"], $query["date"])) {
+          // echo "Contract started at '" . $contract["from"] . "' which is after '" . $query["date"] . "'\n";
+          continue;
+        }
+        if (isset($contract["to"]) && dateIsBefore($contract["to"], $query["date"])) {
+          // echo "Contract ended at  '" . $contract["to"] . "' which is before '" . $query["date"] . "'\n";
+          continue;
+        }
+        // echo "Contract found! " . var_export($contract) . "\n";
+        return $contract;
+      }
+    }
+    throw new Exception("Contract not found!");
+  }
+
+  public function getMilestone($query) {
+    foreach($this->knownMilestones as $milestone) {
+     if ($milestone["organization"] !== $query["organization"]) {
+      //  echo "milestone organization  " . $milestone["organization"] . " !== " . $query["organization"] . "\n";
+       continue;
+     }
+     if ($milestone["project"] !== $query["project"]) {
+      //  echo "milestone project  " . $milestone["project"] . " !== " . $query["project"] . "\n";
+       continue;
+     }
+     if (dateIsAfter($milestone["from"], $query["date"])) {
+      //  echo "milestone started at  " . $milestone["from"] . " which is after " . $query["date"] . "\n";
+       continue;
+     }
+     if (dateIsBefore($milestone["to"], $query["date"])) {
+      //  echo "milestone ended at  " . $milestone["to"] . " which is before " . $query["date"] . "\n";
+       continue;
+     }
+     echo "milestone found! " . var_export($milestone) . "\n";
+     return $milestone;
+    }
+    throw new Exception("Milestone not found!");
   }
 
   function addEntries($newEntries) {
     for ($i = 0; $i < count($newEntries); $i++) {
         $this->entries[] = $newEntries[$i];
         if ($newEntries[$i]["type"] == "contract") {
-          echo "Got contract for " . $newEntries[$i]["worker"];
+          // echo "Got contract for " . $newEntries[$i]["worker"] . "\n";
           if (!isset($this->knownContracts[$newEntries[$i]["worker"]])) {
             $this->knownContracts[$newEntries[$i]["worker"]] = [];
           }
@@ -188,10 +255,9 @@ class Journal {
   function toPta() {
     usort($this->entries, 'entrySortCb');
     $highestDateYet = 0;
-    // FIXME: $contract = $this->knownContracts["some-worker-name"][0];
     for ($i = 0; $i < count($this->entries); $i++) {
-        $obj = makePrejournalEntry($this->entries[$i]);
-        echo entryToPta($obj, $contract);
+        $obj = makePrejournalEntry($this->entries[$i]);    
+        echo $this->entryToPta($obj);
         $thisDate = new DateTime(dateFromEntry($this->entries[$i]));
         $thisStamp = $thisDate->getTimestamp();
         if ($thisStamp < $highestDateYet) {
