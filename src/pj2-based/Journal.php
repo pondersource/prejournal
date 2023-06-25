@@ -54,19 +54,12 @@ abstract class PrejournalEntry {
 }
 
 class WorkedPrejournalEntry extends PrejournalEntry {
-  function toJournalEntries($journal) {
+  function getAmount($journal) {
     $contract = $journal->getContract([
       "organization" => $this->getField("organization"),
       "worker" => $this->getField("worker"),
       "date" => $this->getField("date")
     ]);
-  
-    // $income = $journal->getIncome([
-    //   "organization" => $this->getField("organization"),
-    //   "project" => $this->getField("project"),
-    //   "date" => $this->getField("date")
-    // ]);
-
     $hoursPerWeek = $contract["hours"];
     // echo "$hoursPerWeek hours per week\n";/
     $salaryPerMonth = $contract["amount"];
@@ -75,19 +68,43 @@ class WorkedPrejournalEntry extends PrejournalEntry {
     // echo "$salaryPerWeek salary per week\n";
     $salaryPerHour = $salaryPerWeek / $hoursPerWeek;
     // echo "$salaryPerHour salary per hour\n";
-    return [new JournalEntry([
-      "date" => $this->fields["date"],
-      "account1" => $this->fields["worker"],
-      "account2" => $this->fields["organization"] . ":" . $this->fields["project"],
-      "amount" => $this->fields["hours"] * $salaryPerHour,
-      "description" => "worked"
-    ])];
+    return $this->fields["hours"] * $salaryPerHour;
+  }
+
+  function getMilestone($journal) {
+    $income = $journal->getIncome([
+      "organization" => $this->getField("organization"),
+      "project" => $this->getField("project"),
+      "date" => $this->getField("date")
+    ]);
+    return $this->fields["organization"] . ":" . $this->fields["project"] . ":" . $income["description"];
+  }
+
+  function toJournalEntries($journal) {
+    return [
+      // one entry for what the project owes the worker (at their salary hourly rate)
+      new JournalEntry([
+        "date" => $this->fields["date"],
+        "account1" => "assets:billable work done:" . $this->getMilestone($journal),
+        "account2" => "liabilities:accounts payable:" . $this->fields["worker"],
+        "amount" => $this->getAmount($journal),
+        "description" => "worked"
+      ])
+    ];
   }
 }
 
 class SalaryPrejournalEntry extends PrejournalEntry {
   function toJournalEntries($journal) {
-    return [];
+    return [
+      new JournalEntry([
+        "date" => $this->getField("paid"),
+        "account1" => "liabilities:accounts payable:" . $this->getField("worker"),
+        "account2" => "assets:bank",
+        "amount" => $this->getField("amount"),
+        "description" => "worked"
+      ]),
+    ];
   }
 }
 class ContractPrejournalEntry extends PrejournalEntry {
@@ -107,7 +124,27 @@ class LoanPrejournalEntry extends PrejournalEntry {
 }
 class IncomePrejournalEntry extends PrejournalEntry {
   function toJournalEntries($journal) {
-    return [];
+    $assigned =  $journal->getAssigned($this);
+    $profit = $this->fields["amount"] - $assigned;
+    // echo "FOUND ASSIGNED $assigned\n";
+    return [
+      // one entry to book away the "ready-product stock" that was built up for this milestone
+      new JournalEntry([
+        "date" => $this->fields["paid"],
+        "account1" => "assets:bank",
+        "account2" => "assets:billable work done:" . $this->fields["organization"] . ":" . $this->fields["project"] . ":" . $this->fields["description"],
+        "amount" => $assigned,
+        "description" => "worked"
+      ]),
+      // one entry for what the customer additionally owes the project (at the agreed billable hourly rate)
+      new JournalEntry([
+        "date" => $this->fields["paid"],
+        "account1" => "assets:bank",
+        "account2" => "income:profit",
+        "amount" => $profit,
+        "description" => "worked"
+      ]),
+    ];
   }
 }
 
@@ -177,6 +214,7 @@ class Journal {
   private $entries = [];
   private $knownContracts = [];
   private $knownIncomes = [];
+  private $assigned = [];
 
   function __construct() {
   }
@@ -187,54 +225,71 @@ class Journal {
     return implode("\n\n", $arr);
   }
   
+  public function getAssigned($incomeEntry) {
+    $incomeId = $this->getIncomeId([
+      "organization" => $incomeEntry->getField("organization"),
+      "project" => $incomeEntry->getField("project"),
+      "description" => $incomeEntry->getField("description"),
+    ]);
+    if (!isset($this->assigned[$incomeId])) {
+      return 0;
+    }
+    return $this->assigned[$incomeId];
+  }
 
   public function getContract($query) {
-     foreach($this->knownContracts as $worker => $contracts) {
-      if ($worker !== $query["worker"]) {
-        // echo "Contract worker  " . $worker . " !== " . $query["worker"] . "\n";
+    if (!isset($this->knownContracts[$query["worker"]])) {
+      throw new Exception("No contracts found at all for worker '$worker'");
+    }
+    foreach($this->knownContracts[$query["worker"]] as $contract) {
+      // echo "Checking query '" . var_export($query, true) . "' against contract '" . var_export($contract, true) . "'\n";
+      if ($contract["organization"] !== $query["organization"]) {
+        // echo "Contract organization  " . $contract["organization"] . " !== " . $query["organization"] . "\n";
         continue;
       }
-      foreach($this->knownContracts[$worker] as $contract) {
-        // echo "Checking query '" . var_export($query, true) . "' against contract '" . var_export($contract, true) . "'\n";
-        if ($contract["organization"] !== $query["organization"]) {
-          // echo "Contract organization  " . $contract["organization"] . " !== " . $query["organization"] . "\n";
-          continue;
-        }
-        if (dateIsAfter($contract["from"], $query["date"])) {
-          // echo "Contract started at '" . $contract["from"] . "' which is after '" . $query["date"] . "'\n";
-          continue;
-        }
-        if (isset($contract["to"]) && dateIsBefore($contract["to"], $query["date"])) {
-          // echo "Contract ended at  '" . $contract["to"] . "' which is before '" . $query["date"] . "'\n";
-          continue;
-        }
-        // echo "Contract found! " . var_export($contract) . "\n";
-        return $contract;
+      if (dateIsAfter($contract["from"], $query["date"])) {
+        // echo "Contract started at '" . $contract["from"] . "' which is after '" . $query["date"] . "'\n";
+        continue;
       }
+      if (isset($contract["to"]) && dateIsBefore($contract["to"], $query["date"])) {
+        // echo "Contract ended at  '" . $contract["to"] . "' which is before '" . $query["date"] . "'\n";
+        continue;
+      }
+      // echo "Contract found! " . var_export($contract, true) . "\n";
+      return $contract;
     }
     throw new Exception("Contract not found!");
   }
 
+  private function getIncomeId($income) {
+    return $income["organization"] . " : " . $income["project"] . " : " . $income["description"];
+  }
+
   public function getIncome($query) {
-    foreach($this->knownIncomes as $income) {
-     if ($income["organization"] !== $query["organization"]) {
-      //  echo "income organization  " . $income["organization"] . " !== " . $query["organization"] . "\n";
-       continue;
-     }
-     if ($income["project"] !== $query["project"]) {
-      //  echo "income project  " . $income["project"] . " !== " . $query["project"] . "\n";
-       continue;
-     }
-     if (dateIsAfter($income["from"], $query["date"])) {
-      //  echo "income started at  " . $income["from"] . " which is after " . $query["date"] . "\n";
-       continue;
-     }
-     if (dateIsBefore($income["to"], $query["date"])) {
-      //  echo "income ended at  " . $income["to"] . " which is before " . $query["date"] . "\n";
-       continue;
-     }
-     echo "income found! " . var_export($income) . "\n";
-     return $income;
+    $fullProject = $query["organization"] . " : " . $query["project"];
+    if (!isset($this->knownIncomes[$fullProject])) {
+      throw new Exception("No incomes found at all for full project '$fullProject'");
+    }
+    foreach($this->knownIncomes[$fullProject] as $income) {
+      // echo "Considering income '" . var_export($income, true) . "'\n";
+      if ($income["organization"] !== $query["organization"]) {
+        // echo "income organization  " . $income["organization"] . " !== " . $query["organization"] . "\n";
+        continue;
+      }
+      if ($income["project"] !== $query["project"]) {
+        // echo "income project  " . $income["project"] . " !== " . $query["project"] . "\n";
+        continue;
+      }
+      if (dateIsAfter($income["from"], $query["date"])) {
+        // echo "income started at  " . $income["from"] . " which is after " . $query["date"] . "\n";
+        continue;
+      }
+      if (dateIsBefore($income["to"], $query["date"])) {
+        // echo "income ended at  " . $income["to"] . " which is before " . $query["date"] . "\n";
+        continue;
+      }
+      // echo "income found! " . var_export($income, true) . "\n";
+      return $income;
     }
     throw new Exception("Income not found!");
   }
@@ -251,12 +306,31 @@ class Journal {
         }
         if ($newEntries[$i]["type"] == "income") {
           $fullProject = $newEntries[$i]["organization"] . " : " . $newEntries[$i]["project"];
-          echo "Got income for '" . $fullProject . "'\n";
-          if (!isset($this->knownContracts[$fullProject])) {
-            $this->knownContracts[$fullProject] = [];
+          // echo "Got income for '" . $fullProject . "'\n";
+          if (!isset($this->knownIncomes[$fullProject])) {
+            $this->knownIncomes[$fullProject] = [];
           }
-          array_push($this->knownContracts[$fullProject], $newEntries[$i]);
+          array_push($this->knownIncomes[$fullProject], $newEntries[$i]);
         }
+    }
+  }
+  
+  function assignWorkedToIncome() {
+    foreach($this->entries as $entry) {
+      if ($entry["type"] == 'worked') {
+        $pjEntry = new WorkedPrejournalEntry($entry);
+        $income = $this->getIncome([
+          "organization" => $pjEntry->getField("organization"),
+          "project" => $pjEntry->getField("project"),
+          "date" => $pjEntry->getField("date")
+        ]);
+        $incomeId = $this->getIncomeId($income);
+        if (!isset($this->assigned[$incomeId])) {
+          $this->assigned[$incomeId] = 0;
+        }
+        $pjEntry = new WorkedPrejournalEntry($entry);
+        $this->assigned[$incomeId] += $pjEntry->getAmount($this);
+      }
     }
   }
 
@@ -304,5 +378,6 @@ class Journal {
       }
       $this->addEntries($pj2Entries);
     }
+    $this->assignWorkedToIncome();
   }
 }
