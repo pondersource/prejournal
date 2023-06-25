@@ -61,9 +61,9 @@ class WorkedPrejournalEntry extends PrejournalEntry {
       "date" => $this->getField("date")
     ]);
   
-    // $milestone = $journal->getMilestone([
+    // $income = $journal->getIncome([
     //   "organization" => $this->getField("organization"),
-    //   "projectr" => $this->getField("project"),
+    //   "project" => $this->getField("project"),
     //   "date" => $this->getField("date")
     // ]);
 
@@ -176,7 +176,7 @@ class Journal {
 
   private $entries = [];
   private $knownContracts = [];
-  private $knownMilestones = [];
+  private $knownIncomes = [];
 
   function __construct() {
   }
@@ -215,28 +215,28 @@ class Journal {
     throw new Exception("Contract not found!");
   }
 
-  public function getMilestone($query) {
-    foreach($this->knownMilestones as $milestone) {
-     if ($milestone["organization"] !== $query["organization"]) {
-      //  echo "milestone organization  " . $milestone["organization"] . " !== " . $query["organization"] . "\n";
+  public function getIncome($query) {
+    foreach($this->knownIncomes as $income) {
+     if ($income["organization"] !== $query["organization"]) {
+      //  echo "income organization  " . $income["organization"] . " !== " . $query["organization"] . "\n";
        continue;
      }
-     if ($milestone["project"] !== $query["project"]) {
-      //  echo "milestone project  " . $milestone["project"] . " !== " . $query["project"] . "\n";
+     if ($income["project"] !== $query["project"]) {
+      //  echo "income project  " . $income["project"] . " !== " . $query["project"] . "\n";
        continue;
      }
-     if (dateIsAfter($milestone["from"], $query["date"])) {
-      //  echo "milestone started at  " . $milestone["from"] . " which is after " . $query["date"] . "\n";
+     if (dateIsAfter($income["from"], $query["date"])) {
+      //  echo "income started at  " . $income["from"] . " which is after " . $query["date"] . "\n";
        continue;
      }
-     if (dateIsBefore($milestone["to"], $query["date"])) {
-      //  echo "milestone ended at  " . $milestone["to"] . " which is before " . $query["date"] . "\n";
+     if (dateIsBefore($income["to"], $query["date"])) {
+      //  echo "income ended at  " . $income["to"] . " which is before " . $query["date"] . "\n";
        continue;
      }
-     echo "milestone found! " . var_export($milestone) . "\n";
-     return $milestone;
+     echo "income found! " . var_export($income) . "\n";
+     return $income;
     }
-    throw new Exception("Milestone not found!");
+    throw new Exception("Income not found!");
   }
 
   function addEntries($newEntries) {
@@ -248,6 +248,14 @@ class Journal {
             $this->knownContracts[$newEntries[$i]["worker"]] = [];
           }
           array_push($this->knownContracts[$newEntries[$i]["worker"]], $newEntries[$i]);
+        }
+        if ($newEntries[$i]["type"] == "income") {
+          $fullProject = $newEntries[$i]["organization"] . " : " . $newEntries[$i]["project"];
+          echo "Got income for '" . $fullProject . "'\n";
+          if (!isset($this->knownContracts[$fullProject])) {
+            $this->knownContracts[$fullProject] = [];
+          }
+          array_push($this->knownContracts[$fullProject], $newEntries[$i]);
         }
     }
   }
