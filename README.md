@@ -163,11 +163,11 @@ NB: In general, you would never put a password in a URL or even in a `.env` file
 we're doing this here to simplify the setup during rapid initial development. See [#9](https://github.com/pondersource/prejournal/issues/9).
 
 # Usage (Heroku)
-The app's main branch is automatically deployed to https://api.prejournal.org/ on each commit
+The app's main branch is automatically deployed to https://api.prejournal..../ on each commit
 You can try for instance:
 ```
-curl -d'["alice","alice123"]' https://admin:secret@api.prejournal.org/v1/register # requires admin permissions
-curl https://alice:alice123@api.prejournal.org/v1/hello
+curl -d'["alice","alice123"]' https://admin:secret@api.prejournal..../v1/register # requires admin permissions
+curl https://alice:alice123@api.prejournal..../v1/hello
 ```
 You can also create a Heroku app yourself and deploy a branch of the code there. Feel free, it's open source!
 
@@ -212,7 +212,7 @@ That's why GAAP journals can not really be considered as a database model, they 
 
 
 
-See [https://prejournal.org/example](https://prejournal.org/example) for some example PHP code.
+See [https://prejournal..../example](https://prejournal..../example) for some example PHP code.
 
 
 #### Why?
