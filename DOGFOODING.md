@@ -1,10 +1,10 @@
-# Instructions for alpha users of https://app.prejournal.org/
+# Instructions for alpha users of https://app.prejournal..../
 
 ## Export your employee data to csv
 You should have received a `<username>` and `<password>` from Michiel via Slack.
 
 ```sh
-curl https://<username>:<password>@api.prejournal.org/v1/list-new
+curl https://<username>:<password>@api.prejournal..../v1/list-new
 ```
 
 ## Import from Ponder Source source documents (instructions for Michiel only)
